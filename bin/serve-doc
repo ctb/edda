@@ -6,6 +6,8 @@ from quixote.util import StaticDirectory, StaticFile
 from quixote.publish import Publisher
 from quixote.directory import Directory
 
+quixote.DEFAULT_CHARSET='UTF-8'         # @CTB set properly?
+
 ###
 
 DOCPATH='../doc/_build/html/'
