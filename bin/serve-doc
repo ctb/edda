@@ -25,14 +25,26 @@ commentary_directory = os.path.abspath(commentary_directory)
 _doc = StaticDirectory(docdir, index_filenames=['index.html'])
 _commentary = StaticDirectory(commentary_directory)
 
+class CommentaryHandler(Directory):
+    _q_exports = ['add', 'edit']
+
+    def add(self):
+        request = quixote.get_request()
+        print 'ADD', request.form
+
+    def edit(self):
+        request = quixote.get_request()
+        print 'EDIT', request.form
+
 class Top(Directory):
-    _q_exports = ['', 'doc', 'c']
+    _q_exports = ['', 'doc', 'c', 'comments']
 
     def __init__(self):
         global _doc, _commentary
         self.doc = _doc
         self.c = _commentary
-
+        self.comments = CommentaryHandler()
+    
     def _q_index(self):
         request = quixote.get_request()
         response = quixote.get_response()
