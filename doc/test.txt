@@ -1,0 +1,4 @@
+Life is Good
+------------
+
+Foo, bar, baz.

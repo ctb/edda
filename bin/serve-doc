@@ -1,0 +1,44 @@
+import sys, os
+
+import quixote
+from quixote.server.simple_server import run
+from quixote.util import StaticDirectory, StaticFile
+from quixote.publish import Publisher
+from quixote.directory import Directory
+
+###
+
+DOCPATH='../doc/_build/html/'
+COMMENTARY_PATH='../commentary-js/'
+
+###
+
+thisdir = os.path.dirname(__file__)
+docdir = os.path.join(thisdir, DOCPATH)
+docdir = os.path.abspath(docdir)
+
+commentary_directory = os.path.join(thisdir, COMMENTARY_PATH)
+commentary_directory = os.path.abspath(commentary_directory)
+
+_doc = StaticDirectory(docdir, index_filenames=['index.html'])
+_commentary = StaticDirectory(commentary_directory)
+
+class Top(Directory):
+    _q_exports = ['', 'doc', 'c']
+
+    def __init__(self):
+        global _doc, _commentary
+        self.doc = _doc
+        self.c = _commentary
+
+    def _q_index(self):
+        request = quixote.get_request()
+        response = quixote.get_response()
+        response.redirect(request.get_url() + './doc/')
+
+def create_publisher():
+    app = Top()
+    return Publisher(app, display_exceptions='plain')
+
+if __name__ == '__main__':
+    run(create_publisher, host='', port=8555)
