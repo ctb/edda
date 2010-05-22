@@ -1,0 +1,45 @@
+{% extends "sphinxdoc/layout.html" %}
+
+{% block extrahead %}
+<LINK HREF="/c/commentary.css" TYPE="text/css" REL="stylesheet">
+<script type="text/javascript">
+  commentary_base = './';
+  commentary_id = 1135057886;
+  commentary_this_page = '/test.html';
+  commentary_edit_uri = "edit_comment";
+  commentary_add_uri = "add_comment";
+</script>
+<script type="text/javascript" src="/c/MochiKit/MochiKit.js">
+</script>
+<script type="text/javascript" src="/c/common.js"></script>
+<script type="text/javascript" src="/c/dumbpath.js"></script>
+
+<script src="/c/scriptaculous/prototype.js" type="text/javascript"></script>
+ <script src="/c/scriptaculous/effects.js" type="text/javascript"></script>
+ <script src="/c/scriptaculous/dragdrop.js" type="text/javascript"></script>
+ <script src="/c/scriptaculous/controls.js" type="text/javascript"></script>
+
+{% endblock %}
+
+{% block header %}
+<div style="display: none">
+
+<form action="add_comment" method="POST" id="commentary-form"
+ onsubmit="return submitCommentForm(this)">
+ <input type="hidden" name="page" value="">
+ <input type="hidden" name="position_id">
+ <input type="text" name="username" style="width: 49%"><input
+  type="text" name="email" style="width: 49%"
+  title="Your email will not be displayed publicly">
+ <br>
+ <textarea name="comment" style="width: 100%" rows="6"
+  cols="60"></textarea>
+
+ <br>
+ <button>Save</button>
+ <button onclick="return cancelSubmitForm(this)">Cancel</button>
+ <input type=hidden name='msg_id' value='5'>
+</form>
+
+</div>
+{% endblock %}
