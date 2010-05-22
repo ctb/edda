@@ -12,6 +12,7 @@ Contents:
    :maxdepth: 2
 
    test.txt
+   sub/foo.txt
 
 Indices and tables
 ==================
