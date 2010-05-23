@@ -3,15 +3,7 @@
 {% block extrahead %}
 <LINK HREF="/c/commentary.css" TYPE="text/css" REL="stylesheet">
 
-<script type="text/javascript" src="/c/MochiKit/MochiKit.js">
-</script>
-<script type="text/javascript" src="/c/common.js"></script>
-<script type="text/javascript" src="/c/dumbpath.js"></script>
-
-<script src="/c/scriptaculous/prototype.js" type="text/javascript"></script>
- <script src="/c/scriptaculous/effects.js" type="text/javascript"></script>
- <script src="/c/scriptaculous/dragdrop.js" type="text/javascript"></script>
- <script src="/c/scriptaculous/controls.js" type="text/javascript"></script>
+<script type="text/javascript" src="/c/divclick.js"></script>
 
 <script type="text/javascript">
   commentary_base = './';
@@ -25,8 +17,9 @@
 {% block header %}
 <div style="display: none">
 
-<form action="/comments/add" method="POST" id="commentary-form"
- onsubmit="return submitCommentForm(this)">
+<form method="POST" id="commentary-form">
+ <input type=hidden name='msg_id' value='5'>
+
  <input type="hidden" name="page" value="">
  <input type="hidden" name="position_id">
  <input type="text" name="username" style="width: 49%">
@@ -36,10 +29,13 @@
  <textarea name="comment" style="width: 100%" rows="6" cols="60"></textarea>
 
  <br>
- <button>Save</button>
- <button onclick="return cancelSubmitForm(this)">Cancel</button>
- <input type=hidden name='msg_id' value='5'>
+ <input type='button' class="commentary-save" id='commentary-save' name='Save' value='Save'>
+ <input type='button' class="commentary-cancel" name='Cancel' value='Cancel'>
 </form>
 
 </div>
+
+<div id='commentary-display' width='100%'>
+</div>
+
 {% endblock %}

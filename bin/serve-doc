@@ -1,4 +1,5 @@
 import sys, os
+import json
 
 import quixote
 from quixote.server.simple_server import run
@@ -26,7 +27,7 @@ _doc = StaticDirectory(docdir, index_filenames=['index.html'])
 _commentary = StaticDirectory(commentary_directory)
 
 class CommentaryHandler(Directory):
-    _q_exports = ['add', 'edit']
+    _q_exports = ['add', 'edit', 'get']
 
     def add(self):
         request = quixote.get_request()
@@ -35,6 +36,31 @@ class CommentaryHandler(Directory):
     def edit(self):
         request = quixote.get_request()
         print 'EDIT', request.form
+
+    def get(self):
+        request = quixote.get_request()
+        response = quixote.get_response()
+
+        print request.form
+
+        data = [dict(num=0,
+                     position='again',
+                     comment='life: again',
+                     author='titus'),
+                dict(num=1,
+                     position='this-is-a-section',
+                     comment='life: this-is-a-section',
+                     author='muika'),
+                dict(num=2,
+                     position='again',
+                     comment='life: again, hello',
+                     author='titus'),
+        ]
+                
+
+        response.set_content_type('application/json')
+        return json.dumps(data)
+                
 
 class Top(Directory):
     _q_exports = ['', 'doc', 'c', 'comments']

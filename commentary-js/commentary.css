@@ -32,7 +32,7 @@
 .commentary-inline { 
     float: right;
     width: 35%;
-    min-width: 350px;
+    min-width: 100px;
 }
 
 .commentary-new-comment { 
