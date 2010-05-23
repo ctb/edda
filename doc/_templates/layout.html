@@ -17,20 +17,20 @@
 {% block header %}
 <div style="display: none">
 
-<form method="POST" id="commentary-form">
+<form method="POST" id="commentary-form" action='/comments/add' onsubmit='function() { return false; }'>
  <input type=hidden name='msg_id' value='5'>
 
  <input type="hidden" name="page" value="">
  <input type="hidden" name="position_id">
- <input type="text" name="username" style="width: 49%">
- <input type="text" name="email" style="width: 49%"
+ <input type="text" name="username" style="width: 49%" id='username'>
+ <input type="text" name="email" style="width: 49%" id='email'
   title="Your email will not be displayed publicly">
  <br>
- <textarea name="comment" style="width: 100%" rows="6" cols="60"></textarea>
+ <textarea name="comment" id='comment' style="width: 100%" rows="6" cols="60"></textarea>
 
  <br>
- <input type='button' class="commentary-save" id='commentary-save' name='Save' value='Save'>
- <input type='button' class="commentary-cancel" name='Cancel' value='Cancel'>
+ <input type='button' id='commentary-save' name='Save' value='Save'>
+ <input type='button' id="commentary-cancel" name='Cancel' value='Cancel'>
 </form>
 
 </div>
