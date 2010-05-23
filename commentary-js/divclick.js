@@ -16,7 +16,7 @@ $(document).ready(function() {
 			$.ajax({ url: '/comments/add',
 				    type: 'POST',
 				    data: {
-				    page: 'commentary_this_page',
+				    page: commentary_this_page,
 					comment: comment,
 					email: email,
 					username: username,
