@@ -3,7 +3,8 @@ Course Schedule (2010)
 ======================
 
 The next-gen sequence analysis course runs June 1 - June 11, 2010, every
-day but Sunday.  Here's an outline of what we have planned for each day.
+day but Sunday.  Here's an outline of what we have planned for each day,
+and by whom.
 
 Daily schedule (roughly):
 =========================
@@ -95,3 +96,28 @@ Day 11 (Fri, June 11) - Departure
 (Half day: leave by noon.)
 
 Concluding day.  Check out, do a post-mortem on the course.
+
+Participants
+============
+
+Faculty:
+--------
+
+C Titus Brown, course director
+
+Greg Wilson, supporting online materials
+
+Ian Dworkin, lecturer on statistics
+
+Jeff Barrick, lecturer on resequencing
+
+Mark Robinson, lecture on ChIP-seq
+
+Teaching Assistants:
+--------------------
+
+Rose Canino-Koning, CS PhD student at MSU
+
+Jason Pell, CS PhD student at MSU
+
+Likit Preeyanon, MMG PhD student at MSU
