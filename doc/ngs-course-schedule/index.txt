@@ -1,0 +1,97 @@
+======================
+Course Schedule (2010)
+======================
+
+The next-gen sequence analysis course runs June 1 - June 11, 2010, every
+day but Sunday.  Here's an outline of what we have planned for each day.
+
+Daily schedule (roughly):
+=========================
+
+For full days, we anticipate a schedule something like this...
+
+Morning:
+
+Lecture (9am-10am)
+Q&A (10-10:30)
+
+Tutorial/demo 1 (11am)
+
+Lunch (12-1pm)
+
+Tutorial/demo 2 (2:30pm)
+
+Dinner (5-6pm?)
+
+Tutorial/demo 3 (8pm)
+
+Day 0 (Mon, May 31) - Arrival
+=============================
+
+Arrive, check in, have dinner, hang out.
+
+Day 1 (Tue, June 1)
+===================
+
+Lecture: Introducing next-gen sequencing; opening up the methods section.
+(Titus Brown)
+
+Day 2 (Wed, June 2)
+===================
+
+Lecture: Computers are dumb, and why you need to care.
+(Titus Brown)
+
+Day 3 (Th, June 3)
+==================
+
+Lecture: Statistical thought for large, messy data sets.
+(Ian Dworkin)
+
+Day 4 (Fri, June 4)
+===================
+
+Lecture: Mapping short reads.
+(Titus Brown)
+
+Day 5 (Sat, June 5)
+===================
+
+Lecture: Assembly.
+(Titus Brown)
+
+Day 6 (Sun, June 6)
+===================
+
+Take a break - day of rest!
+
+Day 7 (Mon, June 7)
+===================
+
+Lecture: mRNAseq analysis.
+(Titus Brown)
+
+Day 8 (Tue, June 8
+==================
+
+Lecture: Resequencing analysis.
+(Jeff Barrick)
+
+Day 9 (Wed, June 9)
+===================
+
+Lecture (tentatively): ChIP-seq analysis.
+(Mark Robinson)
+
+Day 10 (Th, June 10)
+====================
+
+Lecture: TBD.
+(Titus Brown)
+
+Day 11 (Fri, June 11) - Departure
+=================================
+
+(Half day: leave by noon.)
+
+Concluding day.  Check out, do a post-mortem on the course.

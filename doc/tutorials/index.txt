@@ -1,0 +1,7 @@
+=========
+Tutorials
+=========
+
+Standalone tutorials, both for working through & reference purposes.
+
+General topic: how to do basic scientific data analysis on UNIX.

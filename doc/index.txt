@@ -14,6 +14,12 @@ Contents:
    test.txt
    sub/foo.txt
 
+   ngs-course-schedule/index.txt
+
+   tutorials/index.txt
+
+   exercises/index.txt
+
 Indices and tables
 ==================
 
