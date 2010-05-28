@@ -1,0 +1,240 @@
+----------------------
+Running BLASTs on UNIX
+----------------------
+
+Day 2 (wed): run BLAST & estimate time to run; parse files into CSV, and tweak output; do simple homology/orthology analysis; do more complicated hom/orth stuff; put print statements in scripts.
+
+More expert/independent stuff: count numbers of homology/orthology.  protein vs DNA.  modify scripts for three-way or transitive.  Install/use BioPython.  Posting data files on the Web.  Shell scripting.
+
+For later days: histogram graph homology/orthology stuff.
+
+Introduction
+------------
+
+OK, your first introduction to the use and abuse of command line tools
+is... BLAST!  That's right, the Basic Local Alignment Search Tool!
+
+I'm going to assume that all of you have used the NCBI BLAST Web page
+to do individual searches.  Today we'll show you how to go through and
+do batch searches at the command line on your own computer.  This is a
+technique that works well for small-to-medium sized searches, for
+example, one transcriptome against another.  The various database (nr,
+nt) are getting big enough that it's reasonably time consuming to
+search them on your own, although of course you can do it if you want
+-- you might just have to wait a while for things to finish.
+
+Before I forget, let me say that there are a lot of tips and tricks
+for working at the UNIX command line that I'm going to show you, so
+even if you've used command line BLAST before, you should skim along.
+
+First, install BLAST.  XXX
+
+Now, download the databases.  Let's start by doing a BLAST of mouse
+against zebrafish, to detect putative homology.  For this you'll need
+the mouse refseq protein db, here, and the zebrafish refseq protein
+db, here.  Use curl to retrieve them:
+
+ %% curl -O ftp://ftp.ncbi.nih.gov/refseq/M_musculus/mRNA_Prot/mouse.protein.faa.gz
+ %% curl -O ftp://ftp.ncbi.nih.gov/refseq/D_rerio/mRNA_Prot/zebrafish.protein.faa.gz
+
+This downloads the files into the current working directory from the
+given FTP site, naming the files for the last part of the path
+(e.g. 'mouse.protein.faa.gz').  You can do this from any Web or FTP
+address.
+
+Now you've got these files.  How big are they?
+
+ %% ls -l *.faa.gz
+
+About 9.6 mb for the mouse protein set, and 8.8 mb for the zebrafish protein
+set.
+
+Are these files you can work with?  Well, no -- they're actually compressed,
+in the gzip format.  Do
+
+ %% gunzip *.faa.gz
+
+to uncompress them.
+
+Type
+
+  %% less mouse.protein.faa
+
+to display the beginning of the mouse file in a pager (something that
+will let you scroll down through the file).  Type 'q' to exit from the
+pager before the end of the file.
+
+OK, we've got the databases, but BLAST requires that each subject
+database be preformatted for use; this is a way of speeding up certain
+types of searches.  To do this, do
+
+%% formatdb -i zebrafish.protein.faa -o T -p T
+%% formatdb -i mouse.protein.faa -o T -p T
+
+The -i parameter gives the name of the database, the -o parameter says
+"save the results", and the -p parameter says "this is a protein
+database".  For DNA, you'd want to use '-p F', or false.
+
+We couldn't use '*' here as a way to specify both files because
+formatdb's '-i' option takes only one filename, and '*.faa' expands
+into two files (see globbing, @CTB).
+
+Before we do a BLAST of all mouse protein against all zebrafish protein,
+though, let's make sure our blast is working!  To do this, we want to
+start with something small.  Let's take a few sequences off the top of
+the mouse protein set:
+
+  %% head mouse.protein.faa > mm-first.fa
+
+Here, the program 'head' takes the first ten lines from that file, and
+the '>' tells UNIX to put them into another file, 'mm-first.fa'.  A couple
+notes here:
+
+ - UNIX generally doesn't care what the file is called, so '.faa' and '.fa'
+   are all the same to it.
+
+ - UNIX utilities work well with text files, and almost everything you'll
+   encounter is a basic text file.  This is different from Windows and Mac,
+   where more complicated formats are used that can't be as easily dealt with
+   on UNIX.
+
+ - here's a useful command-line tip, by the way: you can use Tab to do
+   filename completion.  For example, if you type 'head mou<Tab>' it will
+   fill out the word after 'mou' by looking in the current directory for
+   files starting with 'mou' and then filling in after it.  In bash (the
+   UNIX shell that you're all using) if there are multiple files that
+   start with mou, it won't fill in but will rather beep -- hit Tab again
+   to see what the options are.
+
+Now try a BLAST:
+
+  %% blastall -i mm-first.fa -d zebrafish.protein.faa -p blastp
+
+...and whoops, it's done!  And it probably scrolled off your screen...
+
+You can do three things at this point.  First, you can scroll up in your
+ssh window to look at the output.  Second, you can save the output to a
+file:
+
+  %% blastall -i mm-first.fa -d zebrafish.protein.faa -p blastp -o out.txt
+
+and then use 'less' to look at it:
+
+  %% less out.txt
+
+and third, you can pipe it directly to less, by which I mean you can send
+all of the output to the 'less' command without saving it to a file:
+
+  %% blastall -i mm-first.fa -d zebrafish.protein.faa -p blastp | less
+
+If you do any or all of these, you'll see that you've done a BLAST!  It's
+got the typical output, it's got a bunch of matches, etc.  And if you scroll
+down enough, you can see that you've actually done TWO BLASTs -- because
+there are *two* sequences in mm-first.fa.
+
+.. @@ different BLAST options, etc.
+
+---
+
+Now let's do a BLAST of all mouse RefSeq proteins against all
+zebrafish RefSeq proteins:
+
+% blastall -i mouse.protein.faa -d zebrafish.protein.faa -o results.txt -p blastp
+
+...and wait.  A loooong time.  (Take a look at your watch and write
+down the time, while you're at it.)
+
+You could get up and take a coffee break, but If you're impatient,
+like me, you don't want to get up every time a computer takes a few
+minutes to do something.  For one thing, you want to know how long
+it's going to take.  For another thing, maybe you want to do more on
+that computer!
+
+There are a couple of things you can do at this point to check on the
+status and estimate how long it's going to take to do the BLAST.
+
+1. Open up another window and log into the computer that way.  Now
+type 'top'.  This will show you what's currently running on the
+computer. 
+
+2. Or, hit CTRL-Z and then type 'bg'.  This will put the BLAST into
+the background, telling to run while you're doing other things at the
+command line.  You can look to see what's running in the background on
+this shell with 'jobs', or type 'fg' to go back to it (and then
+CTRL-Z/bg again to background out of it).  In this case, there's no
+reason to return to it -- it will just exit when it's done running.
+
+OK, now look at the output file.  Try typing 'less results.txt'.  What
+do you see?  That's right, a bunch of BLAST output!  We'll show you
+how to work with it in a bit, but for now, we just want to see how
+many BLAST records there are.  The simplest way to do that is to
+search for something that's unique to each record.  There are at least
+two things that are unique to each BLAST record.  One is the string
+'Query=', and the other is 'BLAST' starting at the beginning of a
+line.
+
+In both situations, you'll want to search for lines containing that
+record, and then count them.  To do the first, you can do
+
+%% grep ^BLAST results.txt
+
+Here the carat is part of something called a "regular expression"
+which lets you specify mismatches or wildcards in strings to find -- ^
+means "find the text BLAST immediately after the beginning of the
+line."
+
+This will spit out a lot of results; hit CTRL-C to stop it.
+
+OK, now, we want to count them.  You can do this by sending (piping)
+the results of the grep to another program, 'wc', which counts lines.
+
+% grep ^BLAST results.txt | wc
+
+This will report three numbers: the number of lines, the number of
+words, and the number of characters.  You're interested in the number
+of lines, which is the first number.
+
+This will tell you how many BLAST comparisons have been done.  But we
+still need to figure out how many total there are to do!  Again, we
+can use grep to do this:
+
+% grep ^'>' mouse.protein.faa | wc
+
+This will tell you how many FASTA header lines there are in the file.
+(There should be 36377, or 36,000 proteins.)
+
+OK, now, if you look at the current time, and how many have been done,
+and how many are left to be done, what do you estimate is the amount
+of time it will take to complete the BLAST?
+
+That's right.  A while.
+
+Yep, time for a cup of coffee!  Still, isn't this easier than doing
+40,000 BLASTs one by one through the Web interface?
+
+Additional: download a nt database and do appropriate BLASTs.
+
+Advanced topics: using screen. shell scripts.
+
+Parsing
+-------
+
+OK, so now we've got these great big honking BLAST files -- do an
+
+%% ls -l results.txt
+
+Pretty big file, huh?  You sure don't want to look through that line
+by line, and you couldn't load it into Word if you tried.  A script,
+to the rescue!
+
+@@ script to pull out BLAST query/subject results
+
+What can we do next?
+
+Dumping into CSV
+
+CSV parsing, putting into data structures, calculating putative orthology.
+
+Why is this all important - a meditation on automation and scripting.
+Debiologifying aspect of scripting.
+
