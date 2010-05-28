@@ -32,7 +32,7 @@ First, install BLAST.  XXX
 Now, download the databases.  Let's start by doing a BLAST of mouse
 against zebrafish, to detect putative homology.  For this you'll need
 the mouse refseq protein db, here, and the zebrafish refseq protein
-db, here.  Use curl to retrieve them:
+db, here.  Use curl to retrieve them::
 
  %% curl -O ftp://ftp.ncbi.nih.gov/refseq/M_musculus/mRNA_Prot/mouse.protein.faa.gz
  %% curl -O ftp://ftp.ncbi.nih.gov/refseq/D_rerio/mRNA_Prot/zebrafish.protein.faa.gz
@@ -42,7 +42,7 @@ given FTP site, naming the files for the last part of the path
 (e.g. 'mouse.protein.faa.gz').  You can do this from any Web or FTP
 address.
 
-Now you've got these files.  How big are they?
+Now you've got these files.  How big are they? ::
 
  %% ls -l *.faa.gz
 
@@ -50,13 +50,13 @@ About 9.6 mb for the mouse protein set, and 8.8 mb for the zebrafish protein
 set.
 
 Are these files you can work with?  Well, no -- they're actually compressed,
-in the gzip format.  Do
+in the gzip format.  Do ::
 
  %% gunzip *.faa.gz
 
 to uncompress them.
 
-Type
+Type ::
 
   %% less mouse.protein.faa
 
@@ -66,7 +66,7 @@ pager before the end of the file.
 
 OK, we've got the databases, but BLAST requires that each subject
 database be preformatted for use; this is a way of speeding up certain
-types of searches.  To do this, do
+types of searches.  To do this, do ::
 
 %% formatdb -i zebrafish.protein.faa -o T -p T
 %% formatdb -i mouse.protein.faa -o T -p T
@@ -82,7 +82,7 @@ into two files (see globbing, @CTB).
 Before we do a BLAST of all mouse protein against all zebrafish protein,
 though, let's make sure our blast is working!  To do this, we want to
 start with something small.  Let's take a few sequences off the top of
-the mouse protein set:
+the mouse protein set::
 
   %% head mouse.protein.faa > mm-first.fa
 
@@ -106,7 +106,7 @@ notes here:
    start with mou, it won't fill in but will rather beep -- hit Tab again
    to see what the options are.
 
-Now try a BLAST:
+Now try a BLAST::
 
   %% blastall -i mm-first.fa -d zebrafish.protein.faa -p blastp
 
@@ -114,16 +114,16 @@ Now try a BLAST:
 
 You can do three things at this point.  First, you can scroll up in your
 ssh window to look at the output.  Second, you can save the output to a
-file:
+file::
 
   %% blastall -i mm-first.fa -d zebrafish.protein.faa -p blastp -o out.txt
 
-and then use 'less' to look at it:
+and then use 'less' to look at it::
 
   %% less out.txt
 
 and third, you can pipe it directly to less, by which I mean you can send
-all of the output to the 'less' command without saving it to a file:
+all of the output to the 'less' command without saving it to a file::
 
   %% blastall -i mm-first.fa -d zebrafish.protein.faa -p blastp | less
 
@@ -134,12 +134,12 @@ there are *two* sequences in mm-first.fa.
 
 .. @@ different BLAST options, etc.
 
----
+-----
 
 Now let's do a BLAST of all mouse RefSeq proteins against all
-zebrafish RefSeq proteins:
+zebrafish RefSeq proteins::
 
-% blastall -i mouse.protein.faa -d zebrafish.protein.faa -o results.txt -p blastp
+%% blastall -i mouse.protein.faa -d zebrafish.protein.faa -o results.txt -p blastp
 
 ...and wait.  A loooong time.  (Take a look at your watch and write
 down the time, while you're at it.)
@@ -174,7 +174,7 @@ two things that are unique to each BLAST record.  One is the string
 line.
 
 In both situations, you'll want to search for lines containing that
-record, and then count them.  To do the first, you can do
+record, and then count them.  To do the first, you can do ::
 
 %% grep ^BLAST results.txt
 
@@ -186,9 +186,9 @@ line."
 This will spit out a lot of results; hit CTRL-C to stop it.
 
 OK, now, we want to count them.  You can do this by sending (piping)
-the results of the grep to another program, 'wc', which counts lines.
+the results of the grep to another program, 'wc', which counts lines. ::
 
-% grep ^BLAST results.txt | wc
+%% grep ^BLAST results.txt | wc
 
 This will report three numbers: the number of lines, the number of
 words, and the number of characters.  You're interested in the number
@@ -196,9 +196,9 @@ of lines, which is the first number.
 
 This will tell you how many BLAST comparisons have been done.  But we
 still need to figure out how many total there are to do!  Again, we
-can use grep to do this:
+can use grep to do this::
 
-% grep ^'>' mouse.protein.faa | wc
+%% grep ^'>' mouse.protein.faa | wc
 
 This will tell you how many FASTA header lines there are in the file.
 (There should be 36377, or 36,000 proteins.)
@@ -219,7 +219,7 @@ Advanced topics: using screen. shell scripts.
 Parsing
 -------
 
-OK, so now we've got these great big honking BLAST files -- do an
+OK, so now we've got these great big honking BLAST files -- do an ::
 
 %% ls -l results.txt
 
@@ -227,14 +227,31 @@ Pretty big file, huh?  You sure don't want to look through that line
 by line, and you couldn't load it into Word if you tried.  A script,
 to the rescue!
 
-@@ script to pull out BLAST query/subject results
+First, get the script::
+
+%% hg clone http://bitbucket.org/ctb/ngs-course
+
+This will create a new directory 'ngs-course' which contains a bunch
+of useful files.  We'll go through a bunch of them.
+
+For now, you just want to use the parse-blast-to-csv.py script::
+
+%% python ngs-course/blast/parse-blast-to-csv.py results.txt > out.csv
+
+Run this, wait a few seconds, and then hit 'CTRL-C' to stop the process.
+Now type 'less out.csv'.  What is this file?
+
+It's a "comma-separated value" file ...
 
 What can we do next?
 
 Dumping into CSV
+
+Not doing the whole thing all at once.
 
 CSV parsing, putting into data structures, calculating putative orthology.
 
 Why is this all important - a meditation on automation and scripting.
 Debiologifying aspect of scripting.
 
+Place to store files for download.
