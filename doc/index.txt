@@ -21,7 +21,16 @@ Contents:
 
    data-sets.txt
 
-   
+License
+-------
+
+This documentation and site content is licensed under the `Creative
+Commons -- Attribution-Share Alike 2.0 license (CC-BY-SA)
+<http://creativecommons.org/licenses/by-sa/2.0/>`__.  Please feel free
+to copy, adapt, distribute, and transmit the content, but be sure to
+attribute the original content to the original authors.  Also, you may
+not release the work under another license than this one (CC-BY-SA)
+without permission from the copyright holder.
 
 Indices and tables
 ==================
