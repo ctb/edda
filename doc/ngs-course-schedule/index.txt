@@ -11,13 +11,9 @@ Daily schedule (roughly):
 
 For full days, we anticipate a schedule something like this...
 
-Morning:
-
 Breakfast (7-8am).
 
-Lecture (9am-10am)
-
-Q&A (10-10:30)
+Lecture (9am)
 
 Tutorial/demo 1 (11am)
 
@@ -25,14 +21,14 @@ Lunch (12-1pm)
 
 Tutorial/demo 2 (2:30pm)
 
-Dinner (6pm?)
+Dinner (6pm)
 
 Tutorial/demo 3 (8pm)
 
 Day 0 (Mon, May 31) - Arrival
 =============================
 
-Arrive, check in, have dinner, hang out.
+Arrive, check in, have dinner, hang out at the bonfire.
 
 Day 1 (Tue, June 1)
 ===================
@@ -40,11 +36,25 @@ Day 1 (Tue, June 1)
 Lecture: Introducing next-gen sequencing; opening up the methods section.
 (Titus Brown)
 
+Tutorial 1: SSH, UNIX, and file transfers.
+
+Tutorial 2: Amazon EC2 and cloud computing.
+
+An Exercise in Reflection (Stage 1)
+
+Tutorial 3: Setting up your computer in the cloud.
+
 Day 2 (Wed, June 2)
 ===================
 
 Lecture: Computers are dumb, and why you need to care.
 (Titus Brown)
+
+Tutorial 1: Installing and running BLAST.
+
+Tutorial 2: BLAST, and managing long-running jobs on UNIX.
+
+Tutorial 3: Working with CSV files and Python.
 
 Day 3 (Th, June 3)
 ==================
@@ -52,11 +62,23 @@ Day 3 (Th, June 3)
 Lecture: Statistical thought for large, messy data sets.
 (Ian Dworkin)
 
+Tutorial 1: Plotting.
+
+Tutorial 2: ??
+
+Tutorial 3: ??
+
 Day 4 (Fri, June 4)
 ===================
 
 Lecture: Mapping short reads.
 (Titus Brown)
+
+Tutorial 1: Installing and running bowtie; mapping parameters.
+
+Tutorial 2: Visualizing mappings with samtools.
+
+Tutorial 3: Comparing mappings/mappers.
 
 Day 5 (Sat, June 5)
 ===================
@@ -64,16 +86,30 @@ Day 5 (Sat, June 5)
 Lecture: Assembly.
 (Titus Brown)
 
+Tutorial 1: Running Velvet and evaluating assemblies.
+
+Tutorial 2: Visualizing mappings and mRNA assemblies using UCSC.
+
+Tutorial 3: Choosing assembly parameters.
+
 Day 6 (Sun, June 6)
 ===================
 
-Take a break - day of rest!
+Take a break - day of rest!  Swim, sleep, make merry.
 
 Day 7 (Mon, June 7)
 ===================
 
 Lecture: mRNAseq analysis.
 (Titus Brown)
+
+Tutorial 1: Mapping reads to gene sets.
+
+Tutorial 2: Quantile normalization.
+
+Tutorial 3: Linking to putative function: GO analysis.
+
+Motivational lecture: why do things the difficult way, anyway? (Greg Wilson)
 
 Day 8 (Tue, June 8
 ==================
@@ -92,6 +128,8 @@ Day 10 (Th, June 10)
 
 Lecture: TBD.
 (Titus Brown)
+
+An Exercise in Reflection (Stage 2)
 
 Day 11 (Fri, June 11) - Departure
 =================================

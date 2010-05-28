@@ -1,0 +1,37 @@
+------------------------------
+Data Sets (for Fun and Profit)
+------------------------------
+
+We have a number of next-gen sequencing data sets available for use in
+the course.  Some of them are public and/or published, while others
+will only be accessible to you while you're at the course (you can ask
+for special permission, afterwards, but it's up to the PI).
+
+Resequencing and Variation Analysis
+-----------------------------------
+
+Campylobacter jejuni data set, Illumina; Mansfield Lab (private)
+
+Drosophila melanogaster data set, Illumina; Dworkin Lab (private)
+
+Lamprey genome data set, Illumina; Lamprey Genome Sequencing Consortium (private)
+
+mRNAseq
+-------
+
+Mouse cell line data set, Illumina; Wold Lab (published)
+
+Lamprey, 50-mer liver and brain RNA; Lamprey Genome Sequencing
+Consortium (private)
+
+Lamprey, 75-mer diverse tissues; Li/Brown Lab (private)
+
+ChIP-seq
+--------
+
+??
+
+Allelotyping
+------------
+
+Chicken allele-specific expression, Cheng Lab (private)

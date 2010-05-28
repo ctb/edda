@@ -9,16 +9,19 @@ Welcome to edda's documentation!
 Contents:
 
 .. toctree::
-   :maxdepth: 2
-
-   test.txt
-   sub/foo.txt
+   :maxdepth: 1
 
    ngs-course-schedule/index.txt
 
    tutorials/index.txt
 
    exercises/index.txt
+
+   tutorials/unix-and-blast.txt
+
+   data-sets.txt
+
+   
 
 Indices and tables
 ==================
