@@ -1,0 +1,57 @@
+==================
+UNIX, ssh, and scp
+==================
+
+The first challenge is going to be to log in to a remote computer.
+This is one of those things that most people simply don't do when
+using Mac OS X or Windows, so it's going to be a bit strange.  Follow
+the cookbook examples and we'll get you through it, though!
+
+Some background
+---------------
+
+This entire course is going to be done on *someone else's computer
+system*, not the laptop in front of you.  This is for a couple of
+reasons: first and foremost, many laptops are not that powerful or
+that fast, compared to server-style computers.  (That's because
+laptops are usually optimized for battery life and form factor rather
+than for speed or computation.)  Second, most research tools are built
+for UNIX operating systems and do not have a graphical itnerface,
+which means they neither run well on Windows nor can be used easily by
+someone that doesn't know UNIX.  Third, UNIX systems are much easier
+to control from other computers; for example, I do almost all my work
+on a computer server iny my lab at Michigan State, but I spend some of
+my time working on a server at Caltech and I also do some work on a
+cluster of computers across campus at MSU.  Apart from network speed
+issues, there's no difference in working on a UNIX computer at Caltech
+or on one at Michigan State.  And fourth, it's easy to *rent* UNIX
+computer systems these days through 'cloud computing', which we'll
+show you in the next tutorial.
+
+So, what this tutorial is going to teach you is how to interact with
+remote computers by first logging into them, and second, by transferring
+files to them.
+
+This will be boring, tricky, and painful.  Bear with.
+
+Install ssh/scp (Mac, Windows)
+Connect to lyorn
+Make a directory there
+Download a file locally
+Edit it
+Copy the file to lyorn into your directory using scp
+Look at the file on lyorn
+Edit the file on lyorn (?)
+
+ls.
+
+Run a hello, world script in python?
+
+Transferring 3rd-party files to your remote system
+--------------------------------------------------
+
+curl
+
+hg clone
+
+(and then repeat, on EC2

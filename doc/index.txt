@@ -17,7 +17,7 @@ Contents:
 
    exercises/index.txt
 
-   tutorials/unix-and-blast.txt
+   tutorials/index.txt
 
    data-sets.txt
 

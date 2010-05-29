@@ -5,3 +5,16 @@ Tutorials
 Standalone tutorials, both for working through & reference purposes.
 
 General topic: how to do basic scientific data analysis on UNIX.
+
+Contents:
+
+.. toctree::
+   :maxdepth: 1
+
+   unix-and-ssh-and-scp.txt
+
+   renting-a-computer-from-amazon.txt
+
+   installing-your-cloud-system.txt
+
+   unix-and-blast.txt

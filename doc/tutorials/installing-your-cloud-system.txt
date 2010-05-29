@@ -1,0 +1,14 @@
+=================================
+Installing your Amazon EC2 system
+=================================
+
+Start with a clean EC2 system (i.e. shut down whatever you've been
+using, and start a new one).
+
+Log in with your ssh identity key.
+
+Now install X, Y, and Z.
+
+(Apache, for serving files; pico...?)
+
+How to make things permanent?
