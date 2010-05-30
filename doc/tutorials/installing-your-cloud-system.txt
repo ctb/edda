@@ -2,13 +2,23 @@
 Installing your Amazon EC2 system
 =================================
 
-Start with a clean EC2 system (i.e. shut down whatever you've been
-using, and start a new one).
+Upgrading and installing basic software
+---------------------------------------
 
-Log in with your ssh identity key.
+Your Amazon EC2 instance starts out with a default set of software, but
+you'll want to update that.  To install security updates and other pieces 
+of software, run the following commands, in order: ::
 
-Now install X, Y, and Z.
+  %% apt-get -y update
+  %% apt-get -y dist-upgrade
+  %% apt-get -y install mercurial
 
-(Apache, for serving files; pico...?)
+Getting the files for this course
+---------------------------------
 
-How to make things permanent?
+Now grab the files for this course::
+
+  %% hg clone http://bitbucket.org/ctb/ngs-course
+
+.. @@ (Apache, for serving files; pico...?)
+.. @@ How to make things permanent?

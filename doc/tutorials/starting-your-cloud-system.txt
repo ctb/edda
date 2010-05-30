@@ -1,0 +1,110 @@
+==========================
+Starting your cloud system
+==========================
+
+@@ setting up payment details through me
+
+Introducing Amazon EC2
+----------------------
+
+Amazon EC2 -- EC2 stands for "Elastic Cloud Computing" -- is a service
+by which Amazon rents you a remote computer on an hourly basis. The
+only access to this computer is over the network (which is why we
+covered `ssh and scp <unix-and-ssh-and-scp>`_ first, because that's
+how you have to interact with EC2 systems).
+
+Log in to Amazon Web Services
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Amazon provides a lot of services through what it calls "Amazon Web
+Services".  To get started, go to http://aws.amazon.com/ and click on
+"Sign in to the AWS Management Console".  (You'll need to sign up for
+an account if you haven't already done so; it's separate from your
+regular Amazon account.)
+
+Enter your username and password.
+
+Ask Amazon to start a new computer up for you
+---------------------------------------------
+
+You should now see the "Amazon EC2 Console Dashboard".  Click on
+"Launch Instance".
+
+Now, you'll see a 'request instances wizard' window next.  This will
+give you the option of selecting what *kind* of operating system you
+want running on the computer.
+
+Select the "Community AMIs" tab.
+
+Next to "Viewing all images", enter "ami-ed16f984" (this might be a
+good place to copy/paste...) and hit "return".  You should see one
+entry, containing the text "alestic/debian-5.0-lenny-base...' under
+"Manifest", with platform "Debian".  Select it (button on the right).
+
+The next screen lets you specify a bunch of stuff -- "Number of instances",
+or, number of computers to start up; "Availability zone", or the region
+where you want this to be started; and "Instance type", the size and
+speed of the computer.  Leave these all as default, and click Continue.
+
+The next screen, "Advanced Instance Options", gives you additional ways
+to customize the computer.  Just leave everything as default and select
+"Continue".
+
+The next screen, "create key pair", lets you tell Amazon who has access
+to your machine.
+
+@@@
+
+Next, you'll have to define security settings.
+
+@@@
+
+Finally, at the Review screen, you can see a summary -- just click
+"Launch".
+
+Now you should see a screen that says "your instances are now launching".
+Click "View your instances on the Instances page".
+
+Logging into your new instance "in the cloud"
+---------------------------------------------
+
+The first thing you'll need is the network name of your new computer.  To
+retrieve this, click on the instance, and find the "Public DNS".  This is
+the public name of your computer on the network.
+
+Copy this name, and connect to that computer with ssh under the username
+'root'.  For example, on
+Mac OS X, you would start Terminal and type::
+
+  %% ssh root@ec2-174-129-122-189.compute-1.amazonaws.com
+
+Assuming all of your authentication etc. is set up properly, you should
+be able to log in and see a prompt that looks like this: ::
+
+  ip-10-243-151-85:~# 
+
+Congrats!  You have your very own cloud computer!
+
+Before doing anything else, you should make sure to go through
+:doc:`installing-your-cloud-system`.
+
+Shutting down your instance
+---------------------------
+
+On the main EC2 instance screen, select the instance you want to turn
+off, and click on "instance actions", and then select "Terminate".
+
+A couple of caveats
+-------------------
+
+The main caveat is this: Amazon is charging you while your instances
+are running!  For now, they're just charging *me* (or this course,
+really) -- but once you're done with this class, they'll be charging
+*you*.  So make sure you shut down your computers when you're done with them!
+
+Another caveat is that each time you start or stop an instance, you lose
+all of the data there.  
+
+@@ mounting disks etc.
+
+@@ selecting different distros

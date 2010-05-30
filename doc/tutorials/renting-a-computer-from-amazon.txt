@@ -2,6 +2,11 @@
 Renting a computer from Amazon
 ==============================
 
+.. toctree::
+   :hidden:
+
+   starting-your-cloud-system.txt
+
 Upsides:
 
 1. The Amazon computer will pretty much always work.
@@ -12,4 +17,8 @@ Downsides:
 
 1. Overhead.  ($$ -- ask your advisor)
 
-2. You have to control the environment.
+2. You have to take control of the environment.
+
+To get started, see :doc:`starting-your-cloud-system`.
+
+Be sure to go to :doc:`installing-your-cloud-system`.

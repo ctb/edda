@@ -27,7 +27,27 @@ Before I forget, let me say that there are a lot of tips and tricks
 for working at the UNIX command line that I'm going to show you, so
 even if you've used command line BLAST before, you should skim along.
 
-First, install BLAST.  XXX
+First, install BLAST.
+
+Installing BLAST
+----------------
+
+To install the BLAST software, you need to download it from NCBI,
+unpack it, and copy it into standard locations: ::
+
+ %% curl -O ftp://ftp.ncbi.nih.gov/blast/executables/release/2.2.23/blast-2.2.23-ia32-linux.tar.gz
+ %% tar xzf blast-2.2.23-ia32-linux.tar.gz
+ %% cp blast-2.2.23/bin/* /usr/local/bin
+ %% cp -r blast-2.2.23/data /usr/local/blast-data
+
+(You can do all of this simply by running ::
+
+  %% ngs-course/aws/install-blast.sh
+
+)
+
+Download the databases
+----------------------
 
 Now, download the databases.  Let's start by doing a BLAST of mouse
 against zebrafish, to detect putative homology.  For this you'll need
@@ -75,8 +95,8 @@ The -i parameter gives the name of the database, the -o parameter says
 "save the results", and the -p parameter says "this is a protein
 database".  For DNA, you'd want to use '-p F', or false.
 
-We couldn't use '*' here as a way to specify both files because
-formatdb's '-i' option takes only one filename, and '*.faa' expands
+We couldn't use `*` here as a way to specify both files because
+formatdb's '-i' option takes only one filename, and `*.faa` expands
 into two files (see globbing, @CTB).
 
 Before we do a BLAST of all mouse protein against all zebrafish protein,
@@ -255,3 +275,5 @@ Why is this all important - a meditation on automation and scripting.
 Debiologifying aspect of scripting.
 
 Place to store files for download.
+
+@@
