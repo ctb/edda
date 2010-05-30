@@ -2,31 +2,46 @@
 UNIX, ssh, and scp
 ==================
 
-The first challenge is going to be to log in to a remote computer.
-This is one of those things that most people simply don't do when
-using Mac OS X or Windows, so it's going to be a bit strange.  Follow
-the cookbook examples and we'll get you through it, though!
+.. toctree::
+   :hidden:
+
+   using-ssh-scp-terminal-macosx
+   installing-ssh-scp-windows
+
+The first challenge is going to be to log in to a remote computer and
+transfer some files around.  This is one of those things that most
+people simply don't do when using Mac OS X or Windows, so it might be
+a bit strange.  Follow the cookbook examples and we'll get you through
+it, though!
 
 Some background
 ---------------
 
-This entire course is going to be done on *someone else's computer
-system*, not the laptop in front of you.  This is for a couple of
-reasons: first and foremost, many laptops are not that powerful or
-that fast, compared to server-style computers.  (That's because
-laptops are usually optimized for battery life and form factor rather
-than for speed or computation.)  Second, most research tools are built
-for UNIX operating systems and do not have a graphical itnerface,
-which means they neither run well on Windows nor can be used easily by
-someone that doesn't know UNIX.  Third, UNIX systems are much easier
-to control from other computers; for example, I do almost all my work
-on a computer server iny my lab at Michigan State, but I spend some of
-my time working on a server at Caltech and I also do some work on a
-cluster of computers across campus at MSU.  Apart from network speed
-issues, there's no difference in working on a UNIX computer at Caltech
-or on one at Michigan State.  And fourth, it's easy to *rent* UNIX
-computer systems these days through 'cloud computing', which we'll
-show you in the next tutorial.
+Most of the computation for this course is going to be done on
+*someone else's computer system*, not the laptop in front of you.
+
+This is for a couple of reasons: first and foremost, many laptops are
+not that powerful or that fast, compared to server-style computers.
+(That's because laptops are usually optimized for battery life and
+size rather than for speed or computation.)
+
+Second, most research tools are built for UNIX operating systems and
+do not have a graphical interface, which means they neither run well
+on Windows nor can be used easily by someone that doesn't know UNIX.
+
+Third, UNIX systems are much easier to control from other computers;
+for example, I do almost all my work on a computer server iny my lab
+at Michigan State, but I spend some of my time working on a server at
+Caltech and I also do some work on a cluster of computers across
+campus at MSU.  Apart from network speed issues, there's no difference
+in working on a UNIX computer at Caltech or on one at Michigan State.
+This is an advantage when you need to use multiple computers to get a
+job done!
+
+And fourth, it's easy to *rent* UNIX computer systems these days
+through 'cloud computing', which we'll show you in the next tutorial.
+
+----
 
 So, what this tutorial is going to teach you is how to interact with
 remote computers by first logging into them, and second, by transferring
@@ -34,24 +49,98 @@ files to them.
 
 This will be boring, tricky, and painful.  Bear with.
 
-Install ssh/scp (Mac, Windows)
-Connect to lyorn
-Make a directory there
-Download a file locally
-Edit it
-Copy the file to lyorn into your directory using scp
-Look at the file on lyorn
-Edit the file on lyorn (?)
+Getting started
+---------------
 
-ls.
+There are different instructions for Mac users and Windows users,
+unfortunately.
 
-Run a hello, world script in python?
+For Windows, see: `Installing SSH/SCP (Putty) on Windows
+<installing-ssh-scp-windows.html>`__
+
+For Mac OS X, see: `Using SSH/SCP on Mac OS X in the Terminal app
+<using-ssh-scp-terminal-macosx.html>`__
+
+Digression: Some shell commands that will come in handy
+-------------------------------------------------------
+
+The UNIX shell is as complete a way to interact with computers and files
+on the computer as the windowing interface (or graphical interface) that
+you're used to on Windows and Macs.  You just have to type a lot more!
+
+Here are a few useful commands for you to try out.
+
+To get a list of files, do::
+
+  %% ls
+
+To make a directory::
+
+  %% mkdir $dirname
+
+where you replace '$dirname' with the name of the directory.
+
+To see your current directory::
+
+  %% pwd
+
+To change directories::
+
+  %% cd $dirname
+
+.. @@ Run a hello, world script in python?
+
+.. @@ path names, etc.
 
 Transferring 3rd-party files to your remote system
 --------------------------------------------------
 
-curl
+One thing we're going to be doing a lot of is transferring files around.
+You can do this in a large variety of ways -- you've already seen 'scp'.
+The problem is that a lot of times we're going to be working on a remote
+machine -- say, lyorn -- and we will want to copy a file from, say, NCBI
+to lyorn, but we *won't* want that file to be downloaded to our own
+computer first, because we don't need it there.  (Think about the situation
+where you're at home, and you need to download the human genome.  Much
+better to directly transfer it to the big computer at work then the laptop
+in front of you!)
 
-hg clone
+Using curl to retrieve files from Web and FTP sites
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-(and then repeat, on EC2
+The simplest way to do this for files from NCBI is to use a program called
+'curl', which grabs files from the Web and saves them to wherever curl
+is running.  For example, to download the mouse protein RefSeq set from
+ftp://ftp.ncbi.nih.gov/refseq/M_musculus/mRNA_Prot/, you would type::
+
+  %% curl -O ftp://ftp.ncbi.nih.gov/refseq/M_musculus/mRNA_Prot/mouse.protein.faa.gz
+
+Try it while logged into lyorn and changed into your directory -- this
+will download a 10 mb file directly to lyorn, without going through
+your laptop! ::
+
+  %% cd $dirname
+  %% curl -O ftp://ftp.ncbi.nih.gov/refseq/M_musculus/mRNA_Prot/mouse.protein.faa.gz
+
+the '-O' option tells curl to guess the filename from the last
+component of the URL -- in this case, 'mouse.protein.faa'.  It will
+save whatever it downloads to that filename.
+
+If you forget to use the '-O', then you'll get a lot of gibberish on
+your screen -- that's actually the contents of the file, dumped to
+your screen.  Hit CTRL-C and start over!
+
+Retrieving scripts and source code for this class
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+We've also made a bunch of files available for this course, through
+bitbucket.  We'll tell you more about this next week, but for now
+try running this command to retrieve them all.  On lyorn, make sure
+you're in the $dirname directory, and type ::
+
+  %% hg clone http://bitbucket.org/ctb/ngs-course
+
+This will now create a directory 'ngs-course' with a bunch of files underneath
+it.  You can see what files there are by doing::
+
+  %% ls -R ngs-course

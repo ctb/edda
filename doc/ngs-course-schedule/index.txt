@@ -64,9 +64,11 @@ Lecture: Statistical thought for large, messy data sets.
 
 Tutorial 1: Plotting.
 
-Tutorial 2: ??
+Tutorial 2: Graphics and X11.
 
 Tutorial 3: ??
+
+Entertainment: **Brewery outing for dinner.**
 
 Day 4 (Fri, June 4)
 ===================
@@ -76,7 +78,7 @@ Lecture: Mapping short reads.
 
 Tutorial 1: Installing and running bowtie; mapping parameters.
 
-Tutorial 2: Visualizing mappings with samtools.
+Tutorial 2: Visualizing mappings with samtools (Rose)
 
 Tutorial 3: Comparing mappings/mappers.
 
@@ -86,9 +88,9 @@ Day 5 (Sat, June 5)
 Lecture: Assembly.
 (Titus Brown)
 
-Tutorial 1: Running Velvet and evaluating assemblies.
+Tutorial 1: Installing and running Velvet; evaluating assemblies (Jason)
 
-Tutorial 2: Visualizing mappings and mRNA assemblies using UCSC.
+Tutorial 2: Visualizing mappings and mRNA assemblies using UCSC (Likit)
 
 Tutorial 3: Choosing assembly parameters.
 
@@ -105,7 +107,7 @@ Lecture: mRNAseq analysis.
 
 Tutorial 1: Mapping reads to gene sets.
 
-Tutorial 2: Quantile normalization.
+Tutorial 2: Quantile normalization; significance (Likit)
 
 Tutorial 3: Linking to putative function: GO analysis.
 

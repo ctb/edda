@@ -1,0 +1,101 @@
+=============================================
+Using SSH/SCP on Mac OS X in the Terminal app
+=============================================
+
+For those of you using Mac laptops, Mac OS X comes with everything you need.
+
+.. _using-ssh-macosx:
+
+Using SSH on Mac OS X in Terminal
+---------------------------------
+
+First, find 'Terminal.app' (you can use Spotlight to search for
+'Terminal app', or you can look in your Applications, Utilities
+folder.)
+
+Double-click on it.
+
+You should now see a window with something like this: ::
+
+   ...-macbook:~ Guest$ 
+
+in it.  This is called 'the shell prompt', or the 'command-line
+interface', and it's a low-level way to interact with the computer.
+You can do all sorts of neat things here (including open applications,
+edit and delete files, write programs, etc.) but mostly we're going to
+use it to connect to the same kind of prompt, but on a remote
+computer.
+
+(Note that you can customize the font size, color, etc. of the
+Terminal window to your liking.  I'm old and hard of eyesight, so I
+like to make the font big: you can do that with command-shift-+.)
+
+**From this point on, everything that follows the '%%' and is in
+teletype font is something for you to type at a command line prompt.**
+
+So, to start, type ::
+
+  %% ssh ngs@lyorn.idyll.org
+
+The first time you do this on any computer, it will say something like
+"the computer lyorn.idyll.org is unknown to us; do you really want to
+connect?" -- say "yes".
+
+Now the computer should ask you for a password.  Type the secret
+password that we told you in class, or ask one of the TAs for it.
+
+Now you should see a login banner followed by the prompt ``ngs@lyorn:~$``,
+which is the command-line prompt on lyorn.
+
+Congratulations!  You are now logged into the remote computer
+'lyorn.idyll.org', which is a computer that in my lab on MSU campus.
+
+One last thing. Type ::
+
+ %% mkdir $directory
+
+where you replace '$directory' with something unique (like your last name).
+(Note: case matters; usually I make everything lowercase by default, so I don't
+have to remember what case I used.)
+
+This will give you a directory (folder) into which you can put things on
+lyorn.  Since you're all using the same account on lyorn, if you don't
+do this you will step on each other's files.
+
+We won't be using lyorn too much, though, so this is just for this tutorial.
+
+Now you can go back to the :doc:`unix-and-ssh-and-scp` tutorial, or
+continue on to :ref:`transferring-files-with-scp`.
+
+.. _transferring-files-with-scp:
+
+Transferring files with SCP
+---------------------------
+
+Create a file on your local computer: in Terminal, at the shell prompt,
+type: ::
+
+ %% echo hello, world > a-file.txt
+
+Now copy this file to the directory on the remote computer: ::
+
+ %% scp a-file.txt ngs@lyorn.idyll.org:$directory/
+
+where you should replace '$directory' with whatever you named the
+directory you created above, in the section on :ref:`using-ssh-macosx`
+-- probably your last name, in all lowercase.
+
+'scp' will ask for a password.  Give the same super-secret password we
+gave you in class.
+
+Using Fugu
+----------
+
+You can also use the Fugu application to transfer files.  It's got a
+graphical interface so it's easier, but underneath it's doing
+everything the same way, so you can choose to use it or not -- it's up
+to you.
+
+You can download Fugu here:
+
+  http://rsug.itd.umich.edu/software/fugu/download.html
