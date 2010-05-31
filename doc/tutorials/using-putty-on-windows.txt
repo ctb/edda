@@ -1,0 +1,117 @@
+========================
+Using SSH/SCP on Windows
+========================
+
+Unlike Mac OS X, Windows doesn't come with the necessary software.
+There are lots of implementations of ssh and ssh-based programs for
+logging in and doing file transfers; if you already know how to use
+one, go ahead and use that.  Below are instructions for installing
+PuTTY (remote login), WinSCP (file transfer), and Notepad++ (file
+editing) on your Windows machine.
+
+Installing software
+===================
+
+Install PuTTY
+-------------
+
+PuTTY is a free program that lets you log into remote computers using
+ssh.
+
+Download putty from here:
+
+http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html
+
+It's a standalone file that doesn't require any installation, so you
+can just put it on your desktop.
+
+Install WinSCP
+---------------
+
+Download WinSCP from here:
+
+http://winscp.net/eng/download.php
+
+You probably want the "Installation package".
+
+(You don't need to install the Bing toolbar...)
+
+Install the Notepad++ text editor
+---------------------------------
+
+Also install Notepad++, available here:
+
+http://sourceforge.net/projects/notepad-plus/files/
+
+You'll probably want to use the Installer (npp.5.6.8.Installer.exe).
+
+Notepad++ is a text editor that lets you edit text files.
+
+Logging in and transferring files
+=================================
+
+Using PuTTY
+-----------
+
+Double-click on the PuTTY application.
+
+Enter 'lyorn.idyll.org' as the host, and leave everything else as a default.
+
+And... now you're logged in! 
+
+One last thing. Type ::
+
+ %% mkdir $directory
+
+where you replace '$directory' with something unique (like your last name).
+(Note: case matters; usually I make everything lowercase by default, so I don't
+have to remember what case I used.)
+
+This will give you a directory (folder) into which you can put things on
+lyorn.  Since you're all using the same account on lyorn, if you don't
+do this you will step on each other's files.
+
+We won't be using lyorn too much, though, so this is just for this tutorial.
+
+Now you can go back to the :doc:`unix-and-ssh-and-scp` tutorial, or
+continue on to :ref:`editing-files-with-notepadpp` and
+:ref:`transferring-files-with-winscp`.
+
+.. _editing-files-with-notepadpp:
+
+Using Notepad++ to create a file
+--------------------------------
+
+Start Notepad++.
+
+In the blank file that comes up by default, enter "hello, world" (or really
+any random set of words).
+
+Save as a file called 'a-file.txt' on your Desktop.
+
+Close Notepad++.
+
+.. _transferring-files-with-winscp:
+
+Using WinSCP
+------------
+
+Start up WinSCP.
+
+Enter 'lyorn.idyll.org' in as the host name, 'ngs' as the user name, and
+the super-secret password as the password.  Leave everything else as 
+default and click 'connect'.
+
+You should now see a window with two panes.  The pane on the left
+shows files and directories on your local hard drive.  The pane on the
+right shows files and directories on the remote computer 'lyorn.idyll.org'.
+
+Create a new directory named with your last name on the right pane, by
+clicking the "new folder" icon.
+
+Navigate to the desktop, and find 'a-file.txt' (the file you created
+with Notepad++).  Select it and drag it to the right pane, into the directory
+you just created.
+
+Congratulations! You've just copied a file from your laptop to the remote
+computer 'lyorn.idyll.org', all the way over at MSU!

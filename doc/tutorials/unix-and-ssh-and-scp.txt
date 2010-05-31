@@ -7,6 +7,7 @@ UNIX, ssh, and scp
 
    using-ssh-scp-terminal-macosx
    installing-ssh-scp-windows
+   using-putty-on-windows
 
 The first challenge is going to be to log in to a remote computer and
 transfer some files around.  This is one of those things that most

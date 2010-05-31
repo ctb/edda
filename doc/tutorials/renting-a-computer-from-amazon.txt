@@ -5,7 +5,8 @@ Renting a computer from Amazon
 .. toctree::
    :hidden:
 
-   starting-your-cloud-system.txt
+   starting-your-cloud-system
+   installing-your-cloud-system
 
 Upsides:
 

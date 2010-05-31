@@ -15,6 +15,4 @@ Contents:
 
    renting-a-computer-from-amazon.txt
 
-   installing-your-cloud-system.txt
-
    unix-and-blast.txt
