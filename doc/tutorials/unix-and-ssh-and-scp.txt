@@ -6,7 +6,6 @@ UNIX, ssh, and scp
    :hidden:
 
    using-ssh-scp-terminal-macosx
-   installing-ssh-scp-windows
    using-putty-on-windows
 
 The first challenge is going to be to log in to a remote computer and
@@ -48,7 +47,9 @@ So, what this tutorial is going to teach you is how to interact with
 remote computers by first logging into them, and second, by transferring
 files to them.
 
-This will be boring, tricky, and painful.  Bear with.
+ssh is a mechanism for logging into other computers over the network.
+
+scp is a file copy program built on top of ssh.
 
 Getting started
 ---------------
@@ -56,11 +57,9 @@ Getting started
 There are different instructions for Mac users and Windows users,
 unfortunately.
 
-For Windows, see: `Installing SSH/SCP (Putty) on Windows
-<installing-ssh-scp-windows.html>`__
+For Windows, see: :doc:`using-putty-on-windows`.
 
-For Mac OS X, see: `Using SSH/SCP on Mac OS X in the Terminal app
-<using-ssh-scp-terminal-macosx.html>`__
+For Mac OS X, see: :doc:`using-ssh-scp-terminal-macosx`.
 
 Digression: Some shell commands that will come in handy
 -------------------------------------------------------
@@ -68,6 +67,9 @@ Digression: Some shell commands that will come in handy
 The UNIX shell is as complete a way to interact with computers and files
 on the computer as the windowing interface (or graphical interface) that
 you're used to on Windows and Macs.  You just have to type a lot more!
+
+(Remember, you can copy and paste from this document into the shell
+window!)
 
 Here are a few useful commands for you to try out.
 
@@ -145,3 +147,19 @@ This will now create a directory 'ngs-course' with a bunch of files underneath
 it.  You can see what files there are by doing::
 
   %% ls -R ngs-course
+
+As we continue to update the scripts and files for this course, you may
+need to update your copy of ngs-course.  To do that, type ::
+
+  %% cd ngs-course
+
+to go into the ngs-course/ directory and then type
+
+  %% hg pull -u
+
+-- this will "pull" the latest changes we've made to the ngs-course from
+our repository into your local copy.
+
+We'll talk more about hg later; it is part of a package called
+Mercurial -- hg, mercury, get it?  hah hah -- for managing and
+collaborating on changes to scripts and files.

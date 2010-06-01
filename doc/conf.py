@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# edda documentation build configuration file, created by
+# angus documentation build configuration file, created by
 # sphinx-quickstart on Sat May 22 11:46:40 2010.
 #
 # This file is execfile()d with the current directory set to its containing dir.
@@ -37,7 +37,7 @@ source_suffix = '.txt'
 master_doc = 'index'
 
 # General information about the project.
-project = u'edda'
+project = u'angus'
 copyright = u'2010, C. Titus Brown'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -158,7 +158,7 @@ html_static_path = ['_static']
 #html_file_suffix = ''
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'eddadoc'
+htmlhelp_basename = 'angusdoc'
 
 
 # -- Options for LaTeX output --------------------------------------------------
@@ -172,7 +172,7 @@ htmlhelp_basename = 'eddadoc'
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'edda.tex', u'edda Documentation',
+  ('index', 'angus.tex', u'angus Documentation',
    u'C. Titus Brown', 'manual'),
 ]
 

@@ -11,8 +11,8 @@ Contents:
 .. toctree::
    :maxdepth: 1
 
-   unix-and-ssh-and-scp.txt
-
-   renting-a-computer-from-amazon.txt
-
-   unix-and-blast.txt
+   unix-and-ssh-and-scp
+   renting-a-computer-from-amazon
+   unix-and-blast
+   unix-blast-and-long-running-jobs
+   csv-files-and-python

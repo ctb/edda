@@ -1,0 +1,18 @@
+=================================
+Working with CSV files and Python
+=================================
+
+@@
+
+Dumping into CSV
+
+Not doing the whole thing all at once.
+
+CSV parsing, putting into data structures, calculating putative orthology.
+
+Why is this all important - a meditation on automation and scripting.
+Debiologifying aspect of scripting.
+
+Place to store files for download.
+
+@@

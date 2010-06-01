@@ -36,13 +36,11 @@ Day 1 (Tue, June 1)
 Lecture: Introducing next-gen sequencing; opening up the methods section.
 (Titus Brown)
 
-Tutorial 1: SSH, UNIX, and file transfers.
+Tutorial 1: :doc:`../tutorials/unix-and-ssh-and-scp`
 
-Tutorial 2: Amazon EC2 and cloud computing.
+Tutorial 2: :doc:`../tutorials/renting-a-computer-from-amazon`
 
 An Exercise in Reflection (Stage 1)
-
-Tutorial 3: Setting up your computer in the cloud.
 
 Day 2 (Wed, June 2)
 ===================
@@ -50,9 +48,9 @@ Day 2 (Wed, June 2)
 Lecture: Computers are dumb, and why you need to care.
 (Titus Brown)
 
-Tutorial 1: Installing and running BLAST.
+Tutorial 1: :doc:`../tutorials/unix-and-blast`
 
-Tutorial 2: BLAST, and managing long-running jobs on UNIX.
+Tutorial 2: :doc:`../tutorials/unix-blast-and-long-running-jobs`
 
 Tutorial 3: Working with CSV files and Python.
 
