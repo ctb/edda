@@ -55,9 +55,18 @@ Using PuTTY
 
 Double-click on the PuTTY application.
 
+.. image:: images/windows-putty-connect.png
+
 Enter 'lyorn.idyll.org' as the host, and leave everything else as a default.
 
-And... now you're logged in! 
+Click 'connect'.  If it's your first time running this, you'll get a security
+warning; click "yes".
+
+.. image:: images/windows-putty-security-alert.png
+
+And... now you're logged in!  Congrats!
+
+.. image:: images/windows-putty-lyorn-login.png
 
 One last thing. Type ::
 
@@ -79,8 +88,11 @@ continue on to :ref:`editing-files-with-notepadpp` and
 
 .. _editing-files-with-notepadpp:
 
-Using Notepad++ to create a file
---------------------------------
+Use Notepad++ to create a file
+------------------------------
+
+Here, we're going to create a file so that we can transfer it over to
+lyorn (just to demo file transfer).
 
 Start Notepad++.
 
@@ -102,16 +114,24 @@ Enter 'lyorn.idyll.org' in as the host name, 'ngs' as the user name, and
 the super-secret password as the password.  Leave everything else as 
 default and click 'connect'.
 
+.. image:: images/windows-winscp-login.png
+
 You should now see a window with two panes.  The pane on the left
 shows files and directories on your local hard drive.  The pane on the
 right shows files and directories on the remote computer 'lyorn.idyll.org'.
 
+.. image:: images/windows-winscp-transfer.png
+
 Create a new directory named with your last name on the right pane, by
 clicking the "new folder" icon.
+
+.. image:: images/windows-winscp-createdir.png
 
 Navigate to the desktop, and find 'a-file.txt' (the file you created
 with Notepad++).  Select it and drag it to the right pane, into the directory
 you just created.
+
+.. image:: images/windows-winscp-desktop.png
 
 Congratulations! You've just copied a file from your laptop to the remote
 computer 'lyorn.idyll.org', all the way over at MSU!
