@@ -91,6 +91,10 @@ To change directories::
 
   %% cd $dirname
 
+There are lots and lots of UNIX tutorials available.  Here is a `UNIX
+tutorial for beginners <http://www.ee.surrey.ac.uk/Teaching/Unix/>`__
+that might come in handy...
+
 .. @@ Run a hello, world script in python?
 
 .. @@ path names, etc.
@@ -153,7 +157,7 @@ need to update your copy of ngs-course.  To do that, type ::
 
   %% cd ngs-course
 
-to go into the ngs-course/ directory and then type
+to go into the ngs-course/ directory and then type ::
 
   %% hg pull -u
 

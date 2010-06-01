@@ -15,10 +15,6 @@ Contents:
 
    tutorials/index.txt
 
-   exercises/index.txt
-
-   tutorials/index.txt
-
    data-sets.txt
 
 License

@@ -8,6 +8,9 @@ Renting a computer from Amazon
    starting-your-cloud-system
    installing-your-cloud-system
 
+So, as we've discussed, we're going to be renting computers from Amazon
+for the remainder of the course.
+
 Upsides:
 
 1. The Amazon computer will pretty much always work.

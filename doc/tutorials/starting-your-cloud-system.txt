@@ -2,8 +2,6 @@
 Starting your cloud system
 ==========================
 
-@@ setting up payment details through me
-
 Introducing Amazon EC2
 ----------------------
 
@@ -13,16 +11,30 @@ only access to this computer is over the network (which is why we
 covered `ssh and scp <unix-and-ssh-and-scp>`_ first, because that's
 how you have to interact with EC2 systems).
 
+Setting up an account
+~~~~~~~~~~~~~~~~~~~~~
+
+Amazon provides a lot of services through what it calls "Amazon Web
+Services".  To get started, go to http://aws.amazon.com/ and sign
+up for an account; it can be linked to your Amazon account.
+
+Once you have an AWS account, sign up for Elastic Cloud Computing (EC2).
+
+You'll need to provide a credit card to pay for your default account
+use, but (if you're doing this as part of the NGS-2010 course) the
+course can pay for your AWS usage during the course itself -- just
+be sure to send your Amazon account information to me.
+
 Log in to Amazon Web Services
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Amazon provides a lot of services through what it calls "Amazon Web
-Services".  To get started, go to http://aws.amazon.com/ and click on
+Go to http://aws.amazon.com/.
+
 "Sign in to the AWS Management Console".  (You'll need to sign up for
 an account if you haven't already done so; it's separate from your
 regular Amazon account.)
 
-Enter your username and password.
+Enter your username and password, etc.
 
 Ask Amazon to start a new computer up for you
 ---------------------------------------------
@@ -53,30 +65,84 @@ to customize the computer.  Just leave everything as default and select
 The next screen, "create key pair", lets you tell Amazon who has access
 to your machine.
 
-@@@
+.. image:: images/ec2-create-new-keypair.png
+   :width: 90%
+
+The private keyfile will be automatically downloaded and placed on your
+machine; this will depend on where your Web browser places files.  We'll
+need it later, so you should track it down :)
+
+.. image:: images/ec2-download-key-pair.png
+   :width: 90%
+
+-----
 
 Next, you'll have to define security settings.
 
-@@@
+.. image:: images/ec2-default-security-group.png
+   :width: 90%
+
+You'll need to allow SSH connections in by "adding a rule" for SSH:
+
+.. image:: images/ec2-ssh-allowed.png
+   :width: 50%
+
+-----
 
 Finally, at the Review screen, you can see a summary -- just click
 "Launch".
 
+.. image:: images/ec2-launch.png
+   :width: 90%
+
 Now you should see a screen that says "your instances are now launching".
 Click "View your instances on the Instances page".
+
+Hooray!
 
 Logging into your new instance "in the cloud"
 ---------------------------------------------
 
-The first thing you'll need is the network name of your new computer.  To
-retrieve this, click on the instance, and find the "Public DNS".  This is
-the public name of your computer on the network.
+OK, so you've created a running computer.  How do get to it?
+
+The first thing you'll need is the network name of your new computer.
+To retrieve this, go to the instance view and click on the instance,
+and find the "Public DNS".  This is the public name of your computer
+on the Internet.
 
 Copy this name, and connect to that computer with ssh under the username
-'root'.  For example, on
+'root'.
+
+On Mac OS X:
+~~~~~~~~~~~~
+
+For example, on
 Mac OS X, you would start Terminal and type::
 
-  %% ssh root@ec2-174-129-122-189.compute-1.amazonaws.com
+  %% ssh -i ~/Desktop/amazon.pem root@ec2-174-129-122-189.compute-1.amazonaws.com
+
+(but you have to replace the stuff after the '@' sign with the name of the host).
+
+Here, you're logging in as user 'root' to the machine
+'ec2-174-129-122-189.compute-1.amazonaws.com' using the authentication
+key located in 'amazon.pem' on your Desktop.  Note, you will have to run ::
+
+  %% chmod og-rwx ~/Desktop/amazon.pem
+
+in order to get ssh to use that private key file.
+
+On Windows:
+~~~~~~~~~~~
+
+For Windows, you'll need to download `PuTTYgen
+<http://the.earth.li/~sgtatham/putty/latest/x86/puttygen.exe>`__, use
+it to open the amazon.pem file, and save the results PuTTY key as
+'amazon.ppk'.  The result file can be used both by PuTTY and by WinSCP
+-- to use it in PuTTY, edit the "Connection... SSH... Auth...  Private
+key file for authentication" setting:
+
+.. image:: images/putty-ssh-key.png
+   :width: 50%
 
 Assuming all of your authentication etc. is set up properly, you should
 be able to log in and see a prompt that looks like this: ::
@@ -94,6 +160,12 @@ Shutting down your instance
 On the main EC2 instance screen, select the instance you want to turn
 off, and click on "instance actions", and then select "Terminate".
 
+A few notes
+-----------
+
+You only need to set up the key file and network groups once; then
+you can reuse them.
+
 A couple of caveats
 -------------------
 
@@ -103,8 +175,9 @@ really) -- but once you're done with this class, they'll be charging
 *you*.  So make sure you shut down your computers when you're done with them!
 
 Another caveat is that each time you start or stop an instance, you lose
-all of the data there.  
+all of the data there.    We'll talk about how to deal with that later;
+for now, accept it as part of the challenge.
 
-@@ mounting disks etc.
+.. @@ mounting disks etc.
 
-@@ selecting different distros
+.. @@ selecting different distros

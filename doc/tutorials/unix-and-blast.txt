@@ -154,5 +154,3 @@ there are *two* sequences in mm-first.fa.
 
 .. @@ different BLAST options, etc.
 
------
-
