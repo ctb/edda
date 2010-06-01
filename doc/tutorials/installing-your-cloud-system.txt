@@ -11,7 +11,7 @@ of software, run the following commands, in order: ::
 
   %% apt-get -y update
   %% apt-get -y dist-upgrade
-  %% apt-get -y install mercurial
+  %% apt-get -y install mercurial less
 
 Getting the files for this course
 ---------------------------------
