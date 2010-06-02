@@ -2,11 +2,11 @@
 Running BLASTs on UNIX
 ----------------------
 
-Day 2 (wed): run BLAST & estimate time to run; parse files into CSV, and tweak output; do simple homology/orthology analysis; do more complicated hom/orth stuff; put print statements in scripts.
+.. Day 2 (wed): run BLAST & estimate time to run; parse files into CSV, and tweak output; do simple homology/orthology analysis; do more complicated hom/orth stuff; put print statements in scripts.
 
-More expert/independent stuff: count numbers of homology/orthology.  protein vs DNA.  modify scripts for three-way or transitive.  Install/use BioPython.  Posting data files on the Web.  Shell scripting.
+.. More expert/independent stuff: count numbers of homology/orthology.  protein vs DNA.  modify scripts for three-way or transitive.  Install/use BioPython.  Posting data files on the Web.  Shell scripting.
 
-For later days: histogram graph homology/orthology stuff.
+.. For later days: histogram graph homology/orthology stuff.
 
 Introduction
 ------------
@@ -152,5 +152,35 @@ got the typical output, it's got a bunch of matches, etc.  And if you scroll
 down enough, you can see that you've actually done TWO BLASTs -- because
 there are *two* sequences in mm-first.fa.
 
-.. @@ different BLAST options, etc.
+Additional things to try
+------------------------
 
+Different BLAST programs
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Try downloading some different types of sequences and doing BLAST between
+them.  You can specify the program with -p, as above; remember,
+
+ - blastn: DNA x DNA
+ - blastp: protein x protein
+ - blastx: DNA x protein
+ - tblastn: DNA vs DNA, translated
+ - tblastx: protein x DNA
+
+and also remember to specify the correct sequence type when running formatdb
+on the database::
+
+   %% formatdb -i $filename -o T -p F
+
+for DNA, and ::
+
+   %% formatdb -i $filename -o T -p T
+
+for protein (the '-p' option is True for protein, False for DNA databases).
+
+Different BLAST options
+~~~~~~~~~~~~~~~~~~~~~~~
+
+BLAST has lots and lots and lots of options.  Run 'blastall' by itself
+to see what they are.  Some of the most useful ones are '-v', '-b',
+and '-e'.

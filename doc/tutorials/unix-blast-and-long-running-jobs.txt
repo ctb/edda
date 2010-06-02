@@ -114,4 +114,8 @@ Now type 'less out.csv'.  What is this file?
 
 It's a "comma-separated value" file ...
 
-What can we do next?
+What can we do next?  For now, try loading it into Excel and looking at it.
+
+.. @@ more?
+
+.. py files are just txt files
