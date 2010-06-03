@@ -1,0 +1,15 @@
+================
+UNIX Cheat Sheet
+================
+
+Working at the command line
+---------------------------
+
+Use Tab for filename completion: start a filename, and then hit <Tab> to
+finish it.
+
+Use arrow keys for command line history and editing: up/down arrows will
+move you through commands you've run, and left/right arrows (plus backspace
+etc.) let you edit those commands.
+
+

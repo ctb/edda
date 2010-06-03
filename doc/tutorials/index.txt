@@ -16,3 +16,5 @@ Contents:
    unix-and-blast
    unix-blast-and-long-running-jobs
    csv-files-and-python
+   plotting-with-matplotlib
+..   reciprocal-blast

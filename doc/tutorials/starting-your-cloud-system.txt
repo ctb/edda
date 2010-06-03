@@ -8,7 +8,7 @@ Introducing Amazon EC2
 Amazon EC2 -- EC2 stands for "Elastic Cloud Computing" -- is a service
 by which Amazon rents you a remote computer on an hourly basis. The
 only access to this computer is over the network (which is why we
-covered `ssh and scp <unix-and-ssh-and-scp>`_ first, because that's
+covered `ssh and scp <unix-and-ssh-and-scp.html>`_ first, because that's
 how you have to interact with EC2 systems).
 
 Setting up an account

@@ -1,0 +1,203 @@
+========================
+Plotting with matplotlib
+========================
+
+Today, we're going to start by showing you how to do some basic plotting
+(in this case, of a histogram of the BLAST bitscores) with Python, without
+leaving the safety and comfort of your cloud machine.
+
+Start up a fresh new EC2 instance, and run the commands in
+:doc:`installing-your-cloud-system` -- there are some new ones, so be
+careful to run them all!
+
+If you look in ngs-course/data/, ::
+
+  %% ls ngs-course/data/
+
+you'll see some data files, 'mouse.x.zebrafish.csv.gz' and
+'zebrafish.x.mouse.csv.gz'.  These are files that should be familiar -
+they're the result of doing BLASTs between the mouse and zebrafish
+proteomes (as in :doc:`unix-blast-and-long-running-jobs`), and then
+running the 'parse-blast-to-csv.py' script on them.
+
+First, note that they have .gz endings -- they're compressed with
+gzip.  So you need to gunzip them::
+
+  %% gunzip ngs-course/data/*.csv.gz
+
+Now, run: ::
+
+  %% python ngs-course/plot/histogram-blast-csv.py ngs-course/data/mouse.x.zebrafish.csv
+
+This will create a file 'ngs-course/data/mouse.x.zebrafish.png'.
+Download this file and take a look at it.  What is this?
+
+.. image:: images/blast-mouse.x.zebrafish.png
+   :width: 80%
+
+This is my *very favorite* kind of plot: it's a distribution plot, or a
+histogram, or (according to Ian?) a "density kernel".
+
+Briefly, on the x axis is the bitscore, and on the y axis is the *number
+of rows* in the CSV file that have that bitscore.  So, for example, there
+are over 140,000 rows that have a bit score of about 200.
+
+There are all sorts of fun things to do with histograms.  Here is one
+question to think about while you're doing them:
+
+**Question:** BLAST bitscores represent the level of identity between
+the protein sequences.  bitscores of 200 are quite low for whole-gene
+sequences -- and as you can see, the graph extends all the way to
+6000, so there *are* some really good bitscores in there.  Why are
+there so many "poor" bitscores, bitscores < 500, on this graph?
+
+(There *will* be a quiz :)
+
+Changing the number of bins
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If you look at the source code (conveniently online here: http://bitbucket.org/ctb/ngs-course/src/tip/plot/histogram-blast-csv.py) you can see that the number of bins (n_bins) is set to 50 by default -- see `line 21 <http://bitbucket.org/ctb/ngs-course/src/tip/plot/histogram-blast-csv.py#cl-21>`__.
+
+You can change this either by editing the file, or by specifying a second number (after the filename) on the command line::
+
+  %% python ngs-course/plot/histogram-blast-csv.py ngs-course/data/mouse.x.zebrafish.csv 100
+
+(**Hint** for the bitscore question: try using 200, 300, 400, 500,
+... 1000 bins and looking at how the graph changes.)
+
+Changing the Python file
+------------------------
+
+There are a number of things to that require changing the Python file,
+'histogram-blast-csv.py'.  How can you do this?
+
+Well, you'll need a text editor, either on the remote system or on
+your local laptop. 
+
+Using a local editor
+~~~~~~~~~~~~~~~~~~~~
+
+To edit files locally, you need to use the following procedure:
+
+ 1. copy the file *from* your EC2 instance *to* your laptop (using scp or WinSCP -- see :doc:`unix-and-ssh-and-scp`.  For example, on Mac OS X you can open a new Terminal window on your laptop and run something like this: ::
+
+    %% scp -i $keyfile root@$amazon_dns_name:ngs-course/plot/histogram-blast-csv.py ~/Desktop/
+
+   which will put the file on your desktop.
+
+ 2. Run a text editor (Textmate on Mac OS X, or Notepad++ on Windows) and load the .py file into that text editor.
+
+ 3. Edit it and make whatever changes you want.
+
+ 4. Save the file.
+
+ 5. Copy it back to the Amazon instance.
+
+Using a remote editor
+~~~~~~~~~~~~~~~~~~~~~
+
+You can also edit the files directly on the EC2 server using a program
+running there.  This is both easier and harder: you have to do less
+file copying (and you have less chance of screwing up) but you also have
+to learn an editor for which you can only use the keyboard!
+
+There's one fairly simple editor, 'pico', that comes pre-installed.  You
+can try running it with ::
+
+  %% pico ngs-course/plot/histogram-blast-csv.py
+
+You can use the arrow keys to move around, and the command keys on the bottom
+can be accessed with CTRL-, i.e. ``^X`` means "type CTRL-X".
+
+Eventually you might want to "graduate" (i.e., ask for more rope) to
+either vim or emacs.  You'll need to install them on your system::
+
+  %% apt-get -y install vim emacs
+
+and read through a tutorial, for example `A Beginners Guide to Vim <http://newbiedoc.sourceforge.net/text_editing/vim.html.en>`__ or `Beginner's Emacs <http://www.ucc.ie/doc/editing/emacs.html>`__.
+
+Changing the axes
+~~~~~~~~~~~~~~~~~
+
+You can use the 'axis' command to change the axis limits.  (See http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.axis for docs.)
+
+At the top of the .py file, add ::
+
+   from pylab import axis
+
+and between the 'hist' and 'savefig' commands, put ::
+
+   axis([0, 3000, 0, 10000])
+
+This will set ``[xmin, xmax, ymin, ymax]`` for the plot.
+
+Now re-run the plotting program and see what you get!
+
+Look at the `axis docs <http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.axis>`__ for more options.
+
+Labelling the axes and putting a title on
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You can label the axes like so: ::
+
+   from pylab import xlabel, ylabel, title
+   xlabel('BLAST bitscore')
+   ylabel('N(bitscore)')
+   title('BLAST bitscore distribution')
+
+Providing a legend
+~~~~~~~~~~~~~~~~~~
+
+You can provide a legend for your plot like this: ::
+
+   from pylab import legend
+   legend(['legend 1'])
+
+If you have multiple data sets on the same plot (see below) you can do ::
+
+   legend(['legend 1', 'legend2'])
+
+Some thoughts on plotting
+-------------------------
+
+As you work with more and larger data sets, you should start to see
+the advantage of "automating" your plotting with scripts.  If you need
+to change only one thing on your plot -- the axes, or the legends, or
+whatever -- you can just change that one line in your script, and
+re-run it.  If you have to generate multiple plots, you can edit the
+scripts that create those plots and then regenerate the plots from
+scratch.
+
+Things to try
+-------------
+
+Here are some additional things for you to try out.
+
+Changing plotting options
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Try changing 'cumulative' and/or 'normed' to 'True'; what does this do?
+
+Adding a histogram
+~~~~~~~~~~~~~~~~~~
+
+You can plot multiple overlapping histograms by adding a 'hist' call.
+For example, if you initialize a new array, ::
+
+   data2 = []
+
+and then fill that up with a different set of data (for example, have
+'data' contain 'mouse.x.zebrafish' data and 'data2' contain
+'zebrafish.x.mouse' data), you can plot overlapping distributions.
+
+Filtering
+~~~~~~~~~
+
+Try modifying the Python script
+'ngs-course/plot/histogram-blast-csv.py' to filter for "good" e-values
+- hint, they're the fourth column, so you can access them as 'row[3]'
+in the data-loading 'for' loop.
+
+You can also create a new variable, 'data2', that contains only these
+"good" e-values, and then add a new 'hist' call at the bottom that plots
+the 'data2' histogram.

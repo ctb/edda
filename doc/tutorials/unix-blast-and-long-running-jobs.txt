@@ -107,14 +107,25 @@ of useful files.  We'll go through a bunch of them.
 
 For now, you just want to use the parse-blast-to-csv.py script::
 
-%% python ngs-course/blast/parse-blast-to-csv.py results.txt > out.csv
+  %% python ngs-course/blast/parse-blast-to-csv.py results.txt > out.csv
 
 Run this, wait a few seconds, and then hit 'CTRL-C' to stop the process.
 Now type 'less out.csv'.  What is this file?
 
 It's a "comma-separated value" file ...
 
-What can we do next?  For now, try loading it into Excel and looking at it.
+What can we do next?  For now, try loading it into Excel and looking
+at it; you can do this by copying it to your local computer, either
+with WinSCP (on Windows) or with 'scp' on the Terminal command line on
+Mac OS X.  To do the latter, start up a new Terminal window or Tab, and
+type)::
+
+ %% scp -i $privatekey root@$amazon:out.csv ~/Desktop/
+
+replacing $privatekey with the location of your private key (what you're
+using with ssh, too), and $amazon with the name of your Amazon EC2 host.
+This will take the file 'out.csv' on your Amazon host and copy it to your
+desktop.
 
 .. @@ more?
 

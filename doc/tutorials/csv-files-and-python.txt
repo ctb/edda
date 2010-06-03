@@ -2,17 +2,125 @@
 Working with CSV files and Python
 =================================
 
-@@
+Another tool in our arsenal for bioinformatics is `Python
+<http://www.python.org/>`__, a general-purpose programming
+language with similar goals to Perl.
 
-Dumping into CSV
+Python is a versatile programming language that can do many things,
+and it's a whole topic unto itself.  Here, we're just going to use
+it to do some simple parsing.
 
-Not doing the whole thing all at once.
+When we left BLAST in the :doc:`unix-blast-and-long-running-jobs`
+tutorial, it was happily chugging away producing lots of output.
+The last thing we did was run a program, 'parse-blast-to-csv.py',
+on the output; this produced a "comma-separated value" file,
+suitable for loading into Excel or a variety of other programs.
 
-CSV parsing, putting into data structures, calculating putative orthology.
+Next we're going to introduce you to the "pipe" model of data
+processing, where you take one file, run it through a filter,
+and produce another file -- which you can then use for the next
+step.
 
-Why is this all important - a meditation on automation and scripting.
-Debiologifying aspect of scripting.
+Before continuing, you'll want to make sure you have the latest set of
+ngs-course files.  This means you should either do ::
 
-Place to store files for download.
+  %% hg clone http://bitbucket.org/ctb/ngs-course
 
-@@
+if you haven't yet, OR ::
+
+  %% cd ngs-course
+  %% hg pull -u
+  %% cd ..
+
+The first command makes a copy of the bitbucket repository, and the second
+updates it to the latest 
+
+Producing the CSV file
+----------------------
+
+Python scripts are real programs that can do pretty much anything, but
+here we're just using Python to read through a BLAST file.  We're using
+a library called 'blastparser' that lets you read in and manipulate
+BLAST results.
+
+Here's the program for 'parse-blast-to-csv.py': ::
+
+    # parse BLAST records
+    for record in blastparser.parse_fp(fp):
+        for hit in record:
+            for match in hit.matches:
+                # output each match as a separate row
+                row = [record.query_name, hit.subject_name, match.score,
+                       match.expect]
+                output.writerow(row)
+
+Here, 'record' represents each individual BLAST query; 'hit' represents each
+query <-> subject match; and 'match' represents each individual alignment.
+So what this script is doing is iterating through all of the alignments,
+and for each alignment, printing out the sequence names as well as the
+match bitscore and match E-value.
+
+This is about the simplest useful program for bioinformatics that you
+can imagine, but it's already quite useful!  Here you're loading in
+BLASTs and doing programmatic things to the result, which opens up
+a whole new world of possibilities.
+
+Let's start with something simple.
+
+Filtering the CSV file
+----------------------
+
+For BLAST, we didn't specify any e-value cutoff.  Oops!  That means lots
+of our hits are garbage... what shall we do?
+
+Let's filter out the bad e-values!  Take a look at the file
+http://bitbucket.org/ctb/ngs-course/src/tip/blast/blast-filter-csv.py
+
+(aka the file 'ngs-course/blast/blast-filter-csv.py').  You can run this
+by doing ::
+
+  python ngs-course/blast/blast-filter-csv.py out.csv > out2.csv
+
+If you look at this file, you can see it's doing the following:
+
+ - loading in a bunch of lines from your CSV file
+ - selecting those that have a good e-value
+ - printing them out in the same CSV format (with the same rows)
+
+You could do this with Excel easily enough -- except it wouldn't
+work so well for many tens of thousands of BLASTs, while this will.
+
+Two more examples of Python and scripts
+---------------------------------------
+
+Here are two more Python scripts for parsing BLAST output, that do
+slightly different things.  The first prints out a status
+every 100 records:
+
+http://bitbucket.org/ctb/ngs-course/src/tip/blast/example-display.py
+
+The second stops after parsing 100 records.
+
+http://bitbucket.org/ctb/ngs-course/src/tip/blast/example-parse-100.py
+
+Both of these need to be run on the 'results.txt' file (the unparsed
+BLAST file) rather than the CSV file, e.g. ::
+
+   %% python ngs-course/blast/example-display.py results.txt > out100.csv
+
+and ::
+
+   %% python ngs-course/blast/example-parse-100.py results.txt > out100.csv
+
+
+More about Python
+-----------------
+
+Two comments: first, Python really is a general purpose programming
+language, and you can do a lot more with it.  We'll be using it for
+graphing tomorrow, and RNAseq analysis on Monday.  This is just to get you
+familiarized with the basic idea.
+
+Second: as you may have noticed, this kind of work can be kind of
+addicting.  Be sure to check back in with the biology every now
+and then!

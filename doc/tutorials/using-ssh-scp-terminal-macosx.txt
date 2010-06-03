@@ -88,14 +88,17 @@ directory you created above, in the section on :ref:`using-ssh-macosx`
 'scp' will ask for a password.  Give the same super-secret password we
 gave you in class.
 
-Using Fugu
-----------
+Note that you can also transfer files from remote machines to your local
+machine::
 
-You can also use the Fugu application to transfer files.  It's got a
-graphical interface so it's easier, but underneath it's doing
-everything the same way, so you can choose to use it or not -- it's up
-to you.
+  %% scp ngs@lyorn.idyll.org:$directory/a-file.txt local-file.txt
 
-You can download Fugu here:
+More generally, the scp command will copy a local file to a remote location::
 
-  http://rsug.itd.umich.edu/software/fugu/download.html
+  %% scp <local file> <remote user>@<remote machine>:<remote path>
+
+or vice versa, a remote file to a local file::
+
+  %% scp <remote user>@<remote machine>:<remote path> <local file> 
+
+..  http://rsug.itd.umich.edu/software/fugu/download.html

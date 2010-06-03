@@ -11,11 +11,13 @@ Contents:
 .. toctree::
    :maxdepth: 1
 
-   ngs-course-schedule/index.txt
+   ngs-course-schedule/index
 
-   tutorials/index.txt
+   tutorials/index
 
-   data-sets.txt
+   data-sets
+
+   unix-cheat-sheet
 
 License
 -------

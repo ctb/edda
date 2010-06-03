@@ -19,7 +19,7 @@ Tutorial/demo 1 (11am)
 
 Lunch (12-1pm)
 
-Tutorial/demo 2 (2:30pm)
+Tutorial/demo 2 (1:30pm)
 
 Dinner (6pm)
 
@@ -52,7 +52,7 @@ Tutorial 1: :doc:`../tutorials/unix-and-blast`
 
 Tutorial 2: :doc:`../tutorials/unix-blast-and-long-running-jobs`
 
-Tutorial 3: Working with CSV files and Python.
+Tutorial 3: :doc:`../tutorials/csv-files-and-python`
 
 Day 3 (Th, June 3)
 ==================
@@ -60,13 +60,13 @@ Day 3 (Th, June 3)
 Lecture: Statistical thought for large, messy data sets.
 (Ian Dworkin)
 
-Tutorial 1: Plotting.
+Tutorial 1: :doc:`../tutorials/plotting-with-matplotlib`
 
-Tutorial 2: Graphics and X11.
-
-Tutorial 3: ??
+Tutorial 2: :doc:`../tutorials/reciprocal-blast`
 
 Entertainment: **Brewery outing for dinner.**
+
+(No tutorial #3.)
 
 Day 4 (Fri, June 4)
 ===================
@@ -80,6 +80,8 @@ Tutorial 2: Visualizing mappings with samtools (Rose)
 
 Tutorial 3: Comparing mappings/mappers.
 
+Bonfire!
+
 Day 5 (Sat, June 5)
 ===================
 
@@ -92,10 +94,14 @@ Tutorial 2: Visualizing mappings and mRNA assemblies using UCSC (Likit)
 
 Tutorial 3: Choosing assembly parameters.
 
+BBQ on windmill island.
+
 Day 6 (Sun, June 6)
 ===================
 
 Take a break - day of rest!  Swim, sleep, make merry.
+
+(Only lunch served.)
 
 Day 7 (Mon, June 7)
 ===================
@@ -117,6 +123,8 @@ Day 8 (Tue, June 8
 Lecture: Resequencing analysis.
 (Jeff Barrick)
 
+Bonfire!
+
 Day 9 (Wed, June 9)
 ===================
 
@@ -130,6 +138,8 @@ Lecture: TBD.
 (Titus Brown)
 
 An Exercise in Reflection (Stage 2)
+
+Bonfire!
 
 Day 11 (Fri, June 11) - Departure
 =================================
