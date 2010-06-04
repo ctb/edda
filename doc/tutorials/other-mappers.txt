@@ -1,0 +1,84 @@
+=============
+Other mappers
+=============
+
+The BWA aligner is available at http://bio-bwa.sourceforge.net/, or
+(for the course) you can download it from here with curl:
+
+   http://angus.ged.msu.edu.s3.amazonaws.com/bwa-0.5.7.tar.bz2
+
+Installation
+------------
+
+Go to your home directory on your EC2 machine, /root::
+
+   %% cd
+
+Grab the source file::
+
+   %% curl -O http://angus.ged.msu.edu.s3.amazonaws.com/bwa-0.5.7.tar.bz2
+
+Unpack it, using 'j' instead of 'z' because it's a .bz2 file::
+
+   %% tar xjf bwa-0.5.7.tar.bz2
+
+Compile it::
+
+   %% cd bwa-0.5.7
+   %% make
+
+Install the new 'bwa' program into /usr/local/bin::
+
+   %% cp bwa /usr/local/bin
+
+Now, go to your data directory.  I'll assume you're using the Campylobacter
+1m read dataset from :doc:`bowtie-mapping`::
+
+   %% cd /mnt/campy
+
+Index the reference genome::
+
+   %% bwa index -a is campy.fa
+
+**Note**: for reference databases bigger than 10mb, you need to use '-a bwtsw';
+for databases smaller than 10mb, you need to use '-a is', as per the 
+`bwa man page <http://bio-bwa.sourceforge.net/bwa.shtml>`__.
+
+And generate a mapping of all the reads::
+
+   %% bwa aln campy.fa campy-pre-1m.fastq > campy-pre-1m.bwa.sai
+
+This may take a few minutes.  You can speed it up on a two-core
+machine by specifying '-t 2' (to use two threads).
+
+This 'sai' file is a binary file that you can't look at with 'less'.  You
+have to convert it to a SAM file::
+
+   %% bwa samse campy.fa campy-pre-1m.bwa.sai campy-pre-1m.fastq > campy-pre-1m.bwa.sam
+
+and finally, this SAM file can be viewed or interrogated using
+samtools (see :doc:`samtools-tutorial`).  To do this, first make sure
+that you've indexed 'campy.fa' with samtools::
+
+  %% samtools faidx campy.fa
+
+Now, convert the .sam file into a .bam file::
+
+  %% samtools import campy.fa.fai campy-pre-1m.bwa.sam campy-pre-1m.bwa.bam
+
+Sort it:
+
+  %% samtools sort campy-pre-1m.bwa.bam campy-pre-1m.bwa.sorted
+
+Index it:
+
+  %% samtools index campy-pre-1m.bwa.sorted.bam 
+
+...and now you can do all the other things that samtools lets you do,
+such as retrieve mappings to specific intervals, ::
+
+  %% samtools view campy-pre-1m.bwa.sorted.bam 'campy_genome:1-25'
+
+or look at it with tview::
+
+  %% samtools tview campy-pre-1m.bwa.sorted.bam

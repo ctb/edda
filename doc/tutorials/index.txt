@@ -20,3 +20,4 @@ Contents:
    reciprocal-blast
    bowtie-mapping
    samtools-tutorial
+   other-mappers

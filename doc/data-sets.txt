@@ -18,17 +18,17 @@ Campylobacter jejuni data set, Illumina; Mansfield Lab (private)
 
 Drosophila melanogaster data set, Illumina; Dworkin Lab (private)
 
-Lamprey genome data set, Illumina; Lamprey Genome Sequencing Consortium (private)
+Lamprey genome data set, Illumina; Lamprey Genome Sequencing Consortium (private) -- **not yet uploaded**
 
 mRNAseq
 -------
 
-Mouse cell line data set, Illumina; Wold Lab (published)
+Mouse cell line data set, Illumina; Wold Lab (published) -- **not yet uploaded**
 
 Lamprey, 50-mer liver and brain RNA; Lamprey Genome Sequencing
-Consortium (private)
+Consortium (private) -- **not yet uploaded**
 
-Lamprey, 75-mer diverse tissues; Li/Brown Lab (private)
+Lamprey, 75-mer diverse tissues; Li/Brown Lab (private) -- **not yet uploaded**
 
 ChIP-seq
 --------
@@ -38,4 +38,4 @@ ChIP-seq
 Allelotyping
 ------------
 
-Chicken allele-specific expression, Cheng Lab (private)
+Chicken allele-specific expression, Cheng Lab (private) -- **not yet uploaded**

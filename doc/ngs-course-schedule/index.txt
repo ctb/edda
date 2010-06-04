@@ -78,7 +78,7 @@ Tutorial 1: :doc:`../tutorials/bowtie-mapping`
 
 Tutorial 2: :doc:`../tutorials/samtools-tutorial` (Rose)
 
-Tutorial 3: Bowtie parameters.
+Tutorial 3: :doc:`../tutorials/other-mappers` and Bowtie parameters
 
 Bonfire!
 
