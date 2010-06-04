@@ -11,7 +11,7 @@ of software, run the following commands, in order: ::
 
   %% apt-get -y update
   %% apt-get -y dist-upgrade
-  %% apt-get -y install mercurial less python-matplotlib
+  %% apt-get -y install mercurial less python-matplotlib unzip
 
 Getting the files for this course
 ---------------------------------
@@ -25,7 +25,7 @@ Configuring your system
 
 Finally, run the configuration script::
 
-  %% bash ngs-course/aws/configure.sh
+  %% . ngs-course/aws/configure.sh
 
 .. @@ (Apache, for serving files; pico...?)
 .. @@ How to make things permanent?

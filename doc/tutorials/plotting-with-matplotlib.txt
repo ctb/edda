@@ -29,14 +29,14 @@ Now, run: ::
 
   %% python ngs-course/plot/histogram-blast-csv.py ngs-course/data/mouse.x.zebrafish.csv
 
-This will create a file 'ngs-course/data/mouse.x.zebrafish.png'.
+This will create a file 'mouse.x.zebrafish.csv.png'.
 Download this file and take a look at it.  What is this?
 
 .. image:: images/blast-mouse.x.zebrafish.png
    :width: 80%
 
 This is my *very favorite* kind of plot: it's a distribution plot, or a
-histogram, or (according to Ian?) a "density kernel".
+histogram.
 
 Briefly, on the x axis is the bitscore, and on the y axis is the *number
 of rows* in the CSV file that have that bitscore.  So, for example, there

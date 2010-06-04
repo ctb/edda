@@ -17,4 +17,6 @@ Contents:
    unix-blast-and-long-running-jobs
    csv-files-and-python
    plotting-with-matplotlib
-..   reciprocal-blast
+   reciprocal-blast
+   bowtie-mapping
+

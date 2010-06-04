@@ -74,11 +74,19 @@ Day 4 (Fri, June 4)
 Lecture: Mapping short reads.
 (Titus Brown)
 
-Tutorial 1: Installing and running bowtie; mapping parameters.
+Tutorial 1: :doc:`../tutorials/bowtie-mapping`
+  %% unzip bowtie-0.12.5-src.zip
 
-Tutorial 2: Visualizing mappings with samtools (Rose)
+This creates a directory 'bowtie-0.12.5',
 
-Tutorial 3: Comparing mappings/mappers.
+  %% cd bowtie-0.12.5
+  %% make
+  %% cp bowtie bowtie-build bowtie-inspect /usr/local/bin
+
+
+Tutorial 2: Visualizing mappings with samtools (Rose).
+
+Tutorial 3: Bowtie parameters.
 
 Bonfire!
 

@@ -1,6 +1,124 @@
-==========================
-Reciprocal Best-Hits BLAST
-==========================
+=========================================================
+Scripts, Reciprocal Best-Hits BLAST, and some more Python
+=========================================================
 
-Hello, world.
+So we've been playing around with scripts of various kinds in the
+course -- the `configure.sh
+<http://bitbucket.org/ctb/ngs-course/src/tip/aws/configure.sh>`__
+script is an example of what's called a 'shell script', and of course
+the Python programs we've been using are also scripts -- 'Python
+scripts'.
 
+Scripts are just programs written in a scripting language (bash, Python,
+Perl, etc.) that you run from the command line to perform some function.
+Shell scripts tend to be "command and control" scripts, scripts that
+tell *other* programs what to do, and how; Python scripts tend to be
+data processing programs, programs that spindle, fold, and mutilate
+data.
+
+The most important thing to realize is that *scripts are just text files*,
+so you can always look at them, and play with them, and modify them to
+do what you want.
+
+A slight digression
+-------------------
+
+One slightly advanced note: we've been ignoring this so far, but you
+may have noticed that most of the Python scripts have ::
+
+  #! /usr/bin/env python
+
+at the top of the file.  This is a "magic" phrase that says, "this file
+is a Python script.  If someone asks you to run it, you can feed it into
+Python."  The only additional trick here is that you need to tell UNIX
+that this file is, in fact, a program -- to do that, you have to set
+executable permissions on it, which you can do with this: ::
+
+   chmod +x $filename
+
+e.g. ::
+
+   chmod +x ngs-course/blast/parse-blast-to-csv.py
+
+You can now run this script like so, ::
+
+   ngs-course/blast/parse-blast-to-csv.py results.txt
+
+instead of specifying Python explicitly::
+
+   python ngs-course/blast/parse-blast-to-csv.py results.txt
+
+Playing more with BLAST
+-----------------------
+
+So, BLAST builds local pairwise alignments between sequences, which
+(among other things) means that you can have multiple matches between
+two sequences, and each sequence can match many other sequences.  If
+you want to calculate putative orthologies between species, you need
+to deal with a confusing situation where there's more than one match
+(due to gene duplication and domain duplication) for any sequence.
+
+What you really want is a situation where a (say) mouse gene and a
+zebrafish gene have a one-to-one relationship, OR the mouse gene has
+no corresponding zebrafish gene.
+
+(Obviously this has already been done for mouse and zebrafish, but the
+technique generalizes).
+
+The typical way to deal with this in an ad-hoc manner (which we'll
+discuss more on Monday) is to use what's called "reciprocal best-hits
+BLAST" approach, where you say:
+
+   "I want the mouse gene to be paired with the zebrafish gene such that
+   when I BLAST the mouse gene against the zebrafish proteome, the zebrafish
+   gene is the best hit; and when I BLAST the zebrafish gene against the
+   mouse proteome, the mouse gene is the best hit."
+
+This is a very restrictive approach that guarantees that you will have
+either a 1-1 relationship between each mouse & zebrafish gene, OR you will
+not have any homolog at all.
+
+(For a better approach to all of this, check out OrthoMCL.  It's not really
+appropriate to use for crappily sequenced genomes, however, and in any case
+it's more complicated than I want to get into here :)
+
+Conveniently, I have written a script that does this for you!  On your
+AWS machine, update ngs-course/ by doing ::
+
+   %% cd ~/ngs-course
+   %% hg pull -u
+   %% cd -
+
+Now run::
+
+   %% python ngs-course/blast/find-reciprocal.py ngs-course/data/mouse.x.zebrafish.csv ngs-course/data/zebrafish.x.mouse.csv > best-hits.csv
+
+(Here's a cute trick to help explode your head, BTW: try running, instead, ::
+
+   %% python ngs-course/blast/find-reciprocal.py ngs-course/data/{mouse.x.zebrafish.csv,zebrafish.x.mouse.csv} > best-hits.csv
+
+'best-hits.csv' will now contain the "reciprocal best hits".  Hooray!
+
+**Question:** Can you verify that the script works?  How?
+
+If you go look at the script,
+http://bitbucket.org/ctb/ngs-course/src/tip/blast/find-reciprocal.py,
+it's a bit more complicated than the previous scripts we've been
+running.  This is partly because of the use of *functions*, which are
+reusable blocks of code; the logic is also more complicated, and we're
+using a new Python data type, `dictionaries
+<http://docs.python.org/tutorial/datastructures.html#dictionaries>`__.
+
+I encourage you to look at the script, but at least for now, I'm more
+interested in you telling me whether or not it works...
+
+Advanced: Modifying the 'find-reciprocal' script to be More Correct
+-------------------------------------------------------------------
+
+One trick that people often forget about with reciprocal best-hits
+BLAST is that there can be several *equivalently good* (i.e. identical
+bit scores, or e-values) BLAST matches for any sequence.  The
+'find-reciprocal' script ignores this detail -- how could you imagine
+changing the script to deal with that?
+
+Warning: it's complicated :)
