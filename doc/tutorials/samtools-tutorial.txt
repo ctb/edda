@@ -20,8 +20,7 @@ the dataset::
 Now, we'll install Samtools, and its supporting libraries::
 
   %% wget http://downloads.sourceforge.net/project/samtools/samtools/0.1.7/samtools-0.1.7a.tar.bz2?use_mirror=voxel
-  %% bunzip2 samtools-0.1.7a.tar.bz2
-  %% tar -xvf samtools-0.1.7a.tar
+  %% tar xjf samtools-0.1.7a.tar.bz2
   %% cd samtools-0.1.7a
   %% make
   %% cp samtools /usr/local/bin/
@@ -31,6 +30,10 @@ Now, we'll install Samtools, and its supporting libraries::
 
 Now that we have everything set up, we'll convert and index our bowtie
 mappings into a format that Samtools can use.
+
+Go to the directory containing your data: ::
+
+  %% cd /mnt/campy
 
 First, we'll index the campylobacter reference genome.::
 
@@ -106,9 +109,7 @@ BONUS
 
 If you feel compelled to do any Python scripting for manipulating the
 mappings directly, Samtools supports a Python interface called
-Pysam. You can install it like so:
-
-Install Pysam.::
+Pysam. You can install it like so::
 
   %% wget http://www.cosc.canterbury.ac.nz/greg.ewing/python/Pyrex/Pyrex-0.9.9.tar.gz
   %% tar -zxvf Pyrex-0.9.9.tar.gz

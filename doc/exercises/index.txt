@@ -1,6 +1,0 @@
-=========
-Exercises
-=========
-
-Semi-canned exercises, on things like mapping, variation detection, RNAseq,
-ChIP-seq, allelotyping, and assembly.

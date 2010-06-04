@@ -1,3 +1,0 @@
-Adapted from:
-
-https://wiki.hpcc.msu.edu/display/hpccdocs/Installing+an+X-server+on+Windows
