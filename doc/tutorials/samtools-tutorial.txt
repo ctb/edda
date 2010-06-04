@@ -12,13 +12,16 @@ Now, log in, and install additional tools.::
 If you terminated your EC2 instance after the bowtie tutorial, re-download
 the dataset::
 
+  %% cd /mnt/campy
   %% curl -O http://teckla.idyll.org/~t/transfer/ngs-data/campy.fa.gz
   %% curl -O http://teckla.idyll.org/~t/transfer/ngs-data/campy-pre-1m.fastq.gz
   %% curl -O http://teckla.idyll.org/~t/transfer/ngs-data/campy-pre-1m.map.gz
   %% gunzip campy*.gz
+  %% cd
 
 Now, we'll install Samtools, and its supporting libraries::
 
+  %% cd ~/
   %% wget http://downloads.sourceforge.net/project/samtools/samtools/0.1.7/samtools-0.1.7a.tar.bz2?use_mirror=voxel
   %% tar xjf samtools-0.1.7a.tar.bz2
   %% cd samtools-0.1.7a
@@ -31,7 +34,7 @@ Now, we'll install Samtools, and its supporting libraries::
 Now that we have everything set up, we'll convert and index our bowtie
 mappings into a format that Samtools can use.
 
-Go to the directory containing your data: ::
+Go back to the directory containing your data: ::
 
   %% cd /mnt/campy
 
@@ -111,6 +114,7 @@ If you feel compelled to do any Python scripting for manipulating the
 mappings directly, Samtools supports a Python interface called
 Pysam. You can install it like so::
 
+  %% cd
   %% wget http://www.cosc.canterbury.ac.nz/greg.ewing/python/Pyrex/Pyrex-0.9.9.tar.gz
   %% tar -zxvf Pyrex-0.9.9.tar.gz
   %% cd Pyrex-0.9.9

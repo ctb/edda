@@ -13,6 +13,8 @@ Contents:
 
    ngs-course-schedule/index
 
+   presentations
+
    tutorials/index
 
    data-sets

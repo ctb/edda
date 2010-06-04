@@ -2,6 +2,11 @@
 Mapping with bowtie
 ===================
 
+bowtie is an open source mapping program that's fast and easy to use.
+
+Using bowtie
+------------
+
 First, set up a new EC2 server as in
 :doc:`renting-a-computer-from-amazon`.  You'll need to use a different
 machine image (AMI) so that we can have more memory and disk space;

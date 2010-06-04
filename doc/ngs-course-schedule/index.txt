@@ -23,7 +23,7 @@ Tutorial/demo 2 (1:30pm)
 
 Dinner (6pm)
 
-Tutorial/demo 3 (8pm)
+Tutorial/demo 3 (7:30pm)
 
 Day 0 (Mon, May 31) - Arrival
 =============================
@@ -33,7 +33,7 @@ Arrive, check in, have dinner, hang out at the bonfire.
 Day 1 (Tue, June 1)
 ===================
 
-Lecture: Introducing next-gen sequencing; opening up the methods section.
+Lecture: `Introduction to the course <files/lecture1-welcome.pdf>`__
 (Titus Brown)
 
 Tutorial 1: :doc:`../tutorials/unix-and-ssh-and-scp`
@@ -45,7 +45,7 @@ An Exercise in Reflection (Stage 1)
 Day 2 (Wed, June 2)
 ===================
 
-Lecture: Computers are dumb, and why you need to care.
+Lecture: `Computational Basics <files/lecture2-computation.pdf>`__
 (Titus Brown)
 
 Tutorial 1: :doc:`../tutorials/unix-and-blast`
@@ -57,7 +57,7 @@ Tutorial 3: :doc:`../tutorials/csv-files-and-python`
 Day 3 (Th, June 3)
 ==================
 
-Lecture: Statistical thought for large, messy data sets.
+Lecture: `Thinking Statistically <lecture3-data-statistics.pdf>`__
 (Ian Dworkin)
 
 Tutorial 1: :doc:`../tutorials/plotting-with-matplotlib`
@@ -71,20 +71,12 @@ Entertainment: **Brewery outing for dinner.**
 Day 4 (Fri, June 4)
 ===================
 
-Lecture: Mapping short reads.
+Lecture: `Mapping Reads to Known Genomes <lecture4-mapping.pdf>`__
 (Titus Brown)
 
 Tutorial 1: :doc:`../tutorials/bowtie-mapping`
-  %% unzip bowtie-0.12.5-src.zip
 
-This creates a directory 'bowtie-0.12.5',
-
-  %% cd bowtie-0.12.5
-  %% make
-  %% cp bowtie bowtie-build bowtie-inspect /usr/local/bin
-
-
-Tutorial 2: :doc:`samtools-tutorial` (Rose)
+Tutorial 2: :doc:`../tutorials/samtools-tutorial` (Rose)
 
 Tutorial 3: Bowtie parameters.
 
@@ -100,9 +92,7 @@ Tutorial 1: Installing and running Velvet; evaluating assemblies (Jason)
 
 Tutorial 2: Visualizing mappings and mRNA assemblies using UCSC (Likit)
 
-Tutorial 3: Choosing assembly parameters.
-
-BBQ on windmill island.
+BBQ on Windmill Island.
 
 Day 6 (Sun, June 6)
 ===================

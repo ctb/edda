@@ -7,6 +7,10 @@ the course.  Some of them are public and/or published, while others
 will only be accessible to you while you're at the course (you can ask
 for special permission, afterwards, but it's up to the PI).
 
+The private data sets can all be downloaded `here
+<http://teckla.idyll.org/~t/angus-private/>`__.  Username 'ngs',
+password is the super-secret one I gave you.
+
 Resequencing and Variation Analysis
 -----------------------------------
 
