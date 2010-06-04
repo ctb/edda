@@ -1,0 +1,125 @@
+==================================
+Visualizing mappings with Samtools
+==================================
+
+First, set up a new EC2 server as in
+:doc:`renting-a-computer-from-amazon`.
+
+Now, log in, and install additional tools.::
+
+  %% apt-get -y install less bzip2 zlib1g-dev ncurses-dev python-dev
+
+If you terminated your EC2 instance after the bowtie tutorial, re-download
+the dataset::
+
+  %% curl -O http://teckla.idyll.org/~t/transfer/ngs-data/campy.fa.gz
+  %% curl -O http://teckla.idyll.org/~t/transfer/ngs-data/campy-pre-1m.fastq.gz
+  %% curl -O http://teckla.idyll.org/~t/transfer/ngs-data/campy-pre-1m.map.gz
+  %% gunzip campy*.gz
+
+Now, we'll install Samtools, and its supporting libraries::
+
+  %% wget http://downloads.sourceforge.net/project/samtools/samtools/0.1.7/samtools-0.1.7a.tar.bz2?use_mirror=voxel
+  %% bunzip2 samtools-0.1.7a.tar.bz2
+  %% tar -xvf samtools-0.1.7a.tar
+  %% cd samtools-0.1.7a
+  %% make
+  %% cp samtools /usr/local/bin/
+  %% cd misc/
+  %% cp *.pl maq2sam-long maq2sam-short md5fa md5sum-lite wgsim /usr/local/bin/
+  %% cd
+
+Now that we have everything set up, we'll convert and index our bowtie
+mappings into a format that Samtools can use.
+
+First, we'll index the campylobacter reference genome.::
+
+  %% samtools faidx campy.fa
+
+Then we'll convert the bowtie-formatted mappings to SAM format. Samtools
+includes scripts to convert several different types of output formats into
+SAM.::
+
+  %% bowtie2sam.pl campy-pre-1m.map > campy-pre-1m.map.sam
+
+Next, we'll convert our newly minted .sam file into the compressed
+binary .BAM format. In order to browse the mappings, the .BAM file
+must also be sorted and indexed.
+
+SAM to BAM::
+
+  %% samtools import campy.fa.fai campy-pre-1m.map.sam campy-pre-1m.map.bam
+
+Sort BAM::
+
+  %% samtools sort campy-pre-1m.map.bam campy-pre-1m.map.sorted
+
+Index BAM::
+
+  %% samtools index campy-pre-1m.map.sorted.bam
+
+Phew! Now we're ready to browse the mappings. There are several different ways
+to view the content. The simplest way is to simply dump out the content of the BAM file.::
+
+  %% samtools view campy-pre-1m.map.sorted.bam
+
+This will produce an endless stack of lines that look like this:::
+
+  HWI-EAS216_0019:4:3:5572:14132#0	16	campy_genome	16176	25	35M	*	0	0	CGATTTGTTCTGAAGAAAAAGCAAGTATGAGATAG	CCCCCCCCCCCBBBCCCCCCCCCCCCCCCCCCCCC	NM:i:0	X0:i:1	MD:Z:35
+  HWI-EAS216_0019:4:4:2099:16781#0	16	campy_genome	16176	25	35M	*	0	0	CGATTTGTTCTGAAGAAAAAGCAAGTATGAGATAG	CCCCCCCCCCBBBBCCCCCCCCCCCCCCCCCCBCC	NM:i:0	X0:i:1	MD:Z:35
+  HWI-EAS216_0019:4:2:8490:8096#0	0	campy_genome	16177	25	35M	*	0	0	GATTTGTTCTGAAGAAAAAGCAAGTATGAGATAGT	CCCCCCCCCCCCCCCCCBBBCCCCACCCCCCCBCB	NM:i:0	X0:i:1	MD:Z:35
+  HWI-EAS216_0019:4:3:9135:19700#0	16	campy_genome	16178	25	35M	*	0	0	ATTTGTTCTGAAGAAAAAGCAAGTATGAGATAGTT	CCCDCCCCDBBBCCCCCCCCCCCCCCCCCCCCCCC	NM:i:0	X0:i:1	MD:Z:35
+
+This is probably not very useful. Instead, we can target particular
+sections of the genome, like so:
+
+To dump out the content of a particular contig, address it directly:::
+
+  %% samtools view campy-pre-1m.map.sorted.bam 'campy_genome'
+
+To dump out the content of a contig, starting at a certain index,
+reference the contig name and the starting index.::
+
+  %% samtools view campy-pre-1m.map.sorted.bam 'campy_genome:1'
+
+And to dump out a particular interval within a contig, reference the
+contig, the starting index, and the ending index in a range.::
+
+  %% samtools view campy-pre-1m.map.sorted.bam 'campy_genome:1-25000'
+  %% samtools view campy-pre-1m.map.sorted.bam 'campy_genome:24000-25000'
+  %% samtools view campy-pre-1m.map.sorted.bam 'campy_genome:24900-25000'
+
+The previous commands give you every field in the bowtie/sam output,
+which might be useful if you are importing into another tool, but they
+aren't particularly good for doing direct visual inspection. For this
+purpose, Samtools provides a tview interface.::
+
+  %% samtools tview campy-pre-1m.map.sorted.bam
+
+You can navigate the mappings using the arrow keys, and view other
+possible commands by typing a '?'.
+
+----
+
+BONUS
+-----
+
+If you feel compelled to do any Python scripting for manipulating the
+mappings directly, Samtools supports a Python interface called
+Pysam. You can install it like so:
+
+Install Pysam.::
+
+  %% wget http://www.cosc.canterbury.ac.nz/greg.ewing/python/Pyrex/Pyrex-0.9.9.tar.gz
+  %% tar -zxvf Pyrex-0.9.9.tar.gz
+  %% cd Pyrex-0.9.9
+  %% python setup.py install
+  %% cd
+
+And then::
+
+  %% wget http://pysam.googlecode.com/files/pysam-0.2.tar.gz
+  %% tar -zxvf pysam-0.2.tar.gz
+  %% cd pysam-0.2
+  %% python setup.py build
+  %% cd

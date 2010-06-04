@@ -19,4 +19,4 @@ Contents:
    plotting-with-matplotlib
    reciprocal-blast
    bowtie-mapping
-
+   samtools-tutorial

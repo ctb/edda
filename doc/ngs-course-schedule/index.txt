@@ -84,7 +84,7 @@ This creates a directory 'bowtie-0.12.5',
   %% cp bowtie bowtie-build bowtie-inspect /usr/local/bin
 
 
-Tutorial 2: Visualizing mappings with samtools (Rose).
+Tutorial 2: :doc:`samtools-tutorial` (Rose)
 
 Tutorial 3: Bowtie parameters.
 
