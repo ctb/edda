@@ -1,0 +1,167 @@
+===================
+Short Read Assembly
+===================
+
+For this tutorial, we will be using the short read de novo assembler ABySS
+to assemble a bacterial genome.
+
+Getting Started
+---------------
+Start or log in to an instance on Amazon EC2.  If you haven't already done 
+so, make sure you get your instance updated.  
+See: :doc:'installing-your-cloud-system'.
+
+Next, we need to obtain some different files.  To obtain ABySS,
+use curl::
+
+  %% curl -O http://www.bcgsc.ca/downloads/abyss/abyss-1.2.0.tar.gz
+
+We also need a library called SparseHash, which was created by Google.  Obtain
+it by running::
+
+  %% curl -O http://google-sparsehash.googlecode.com/files/sparsehash-1.7.tar.gz
+
+Now, we'll grab our datasets::
+
+   %% curl -O ftp://ftp.ncbi.nlm.nih.gov/sra/SeqSamples/SRS000/SRS000537/SRX000430/SRR001666_1.fastq.gz
+   %% curl -O ftp://ftp.ncbi.nlm.nih.gov/sra/SeqSamples/SRS000/SRS000537/SRX000430/SRR001666_2.fastq.gz 
+
+This data is an Illumina run of E. coli with 36bp reads and a 500bp insert
+size.  A similar dataset with an insert size of 200bp is available under
+accession number SRR001665 from NCBI if you are interested in trying to
+assemble them together.
+
+Installing ABySS
+----------------
+Uncompress the tarballs and cd into the SparseHash directory::
+
+  %% tar xvzf sparsehash-1.7.tar.gz
+  %% tar xvzf abyss-1.2.0.tar.gz
+  %% cd sparsehash-1.7
+
+Once you are in the SparseHash directory, run the following to install::
+
+  %% ./configure && make && make install
+
+It should take a little while to finish.  These three commands are pretty 
+standard when you want to compile a UNIX package from source.  The first 
+command tunes the compilation and installation parameters for your particular 
+system.  Then, the package is compiled and installed on your system.  Once it 
+is finished, go to the ABySS directory and do the same thing:
+
+  %% cd ../abyss-1.2.0
+  %% ./configure && make && install
+
+Running ABySS
+--------------
+Go back to your home directory.  The assembly takes a while to run.  To get 
+around this, we'll run the following::
+
+  %% mkdir k30
+  %% cd k30
+  %% time abyss-pe n=10 k=30 in='../SRR001666_*.fastq.gz' name=ecoli > ecoli.out &
+
+Let's look at what is going on here.  The time command simply outputs length
+of time that it took the assembly to run.  The command abyss-pe is the
+paired-end option of the program.  There are now a couple different attributes
+that can be adjusted in order to give different results.  The n parameter is 
+the number of read pairs that must be found between two different contigs 
+before the assembler considers attempting to scoffold or combine them.  The k
+value represents the minimum overlap that is required between two reads for 
+an overlap k-mer to be added to the de Bruijn graph.
+
+The ampersand (&) at the end starts the job in the background so that you can 
+log off and come back to it later.  We are piping the output to ecoli.out so 
+that you can look at the ABySS tool's output on a typical run.  The assembly 
+took me about 47 minutes to complete on the smallest EC2 instance, so you can 
+move on to installing screed and the assembly statistics Python script and 
+take a look at the output later in the day.
+
+Evaluating Assemblies
+---------------------
+Assessing the quality of a de novo assembly where there is no good reference
+is still an open question.  However, there are many statistics that can be 
+useful in comparing assemblies to one another.  We have a Python script that 
+provides many of these statistics.  You can obtain it by running::
+
+  %% curl -O http://lyorn.idyll.org/~jason/assemstats.py
+
+Before you can run it, you must install screed, so we'll run the following 
+the home directory::
+
+  %% apt-get install git-core
+  %% git clone git://github.com/acr/screed.git
+  %% cd screed
+  %% python setup.py install
+
+Screed is a software package that was developed to easily parse and manipulate 
+a large amount of short read sequences.  Once the reads are indexed, you can 
+very quickly retrieve any sequence you need by name.  However, the assembly 
+statistics Python script just uses the provided FASTA parser.
+
+To obtain statistics on the file you just generated, go back to your home 
+your home directory and run::
+
+  %% python assemstats.py 0 k*/ecoli-contigs.fa
+
+Other Stuff To Try
+------------------
+The optimal value for k depends greatly on the dataset.  A lower value for k 
+has greater sensitivity, but can produce more false overlaps.  However, it is 
+the best option when you don't have high coverage.  On the other hand, a high
+value for k will have a more accurate assembly and longer contigs, but you 
+are likely to miss a lot of potential read overlaps, which means you need 
+higher coverage to make up for the difference.
+
+Try varying the value for k by creating a new directory for each value that 
+you would like to test.  Then, run::
+
+  %% python assemstats.py 0 k*/ecoli-contigs.fa
+
+again to see how the assemblies compare to each other.  If you generate a lot of
+assemblies, you can copy and paste the output to a text file and import it 
+into Excel as a space-delimited file.
+
+Finally, if you have your own dataset, you can try to assemble it on your EC2 
+system.  However, you may want to check memory usage with the top command in 
+order to ensure that you are not using too much memory.  If the ABySS memory 
+usage is over 90%, you may be using virtual memory, which means the assembly 
+will take much longer than necessary.  See the next section for details on how
+to make your assemblies run faster with multiple cores.
+
+Running ABySS in Parallel
+-------------------------
+One of the biggest advantages to using ABySS is that most of its different 
+processes can be run in parallel.  This means that you can split the work onto
+several different cores or even machines using OpenMPI.  If you have a larger 
+genome that you are interested in assembling, you will likely need to take 
+advantage of this parallelism.  To try this out, get a larger EC2 instance 
+setup that has more than one core.
+
+Obtain and install OpenMPI as follows::
+
+  %% curl -O http://www.open-mpi.org/software/ompi/v1.4/downloads/openmpi-1.4.2.tar.gz
+  %% tar xvzf openmpi-1.4.2.tar.gz
+  %% cd openmpi-1.4.2
+  %% ./configure && make all install
+  %% ldconfig
+
+Now you will need to reconfigure and recompile the ABySS package to make use 
+of OpenMPI::
+
+  %% cd ../abyss-1.2.0
+  %% ./configure && make && make install
+
+Now you should be all set to take advantage of the multiple cores on the 
+machine.  Assuming that you have 2 cores available locally, we'll make a new
+directory for another assembly and run the parallelized ABySS::
+
+  %% cd ~
+  %% mkdir k32
+  %% time abyss-pe n=10 k=32 in='../SRR001666_*.fastq.gz' name=ecoli np=2
+
+Notice that the only change we made (other than using a different value of k) 
+is the addition of the np=2 parameter that is passed.  This tells OpenMPI that 
+the work can be split up 2 different ways.  You can get a lot more complicated 
+by configuring OpenMPI to run across multiple machines that also have OpenMPI 
+installed, but that is outside the scope of this tutorial.
