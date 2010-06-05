@@ -48,6 +48,7 @@ CREATE_SCHEMA = '''CREATE TABLE comments
 try:
     c = db.cursor()
     c.execute('SELECT * FROM comments LIMIT 1')
+    del c
 except sqlite3.OperationalError:        # db doesn't exit
     print 'creating DB/schema'
     c.execute(CREATE_SCHEMA)
@@ -76,6 +77,7 @@ class CommentaryHandler(Directory):
         email = form['email']
         page = form['page']
 
+        db.rollback()
         c = db.cursor()
         c.execute('INSERT INTO comments (comment, position, page, username, email) VALUES (?, ?, ?, ?, ?)', (comment, position, page, username, email))
         db.commit()
