@@ -1,0 +1,207 @@
+Visualize your data
+===================
+
+:Author: Likit Preeyanon
+:Date: |today|
+:Version: |version|
+
+USCS genome browser allows users to visualuze their custom tracks with many different formats. Together with existing tracks on USCS genome, you can get some useful information about your data. However, UCSC genome browser is not designed to visualize a very large dataset. You may not always be able to visualize the data the way you want. The detail information of all custom track formats can be found `here. <http://genome.ucsc.edu/goldenPath/help/customTrack.html>`_ We are not going to demonstrate all formats and all of their settings in this tutorial. Rather, we will look at how to make use of UCSC genome browser to facilitate NGS data analysis in a very simple way.
+
+Simple BED file format
+----------------------
+This format is useful to visualize every single read mapped to the reference genome.
+
+We will use chrZ.map file for this tutorial. This file is an original bowtie output (not the SAM format) and we will use bowtie-2-bed.py script to convert it to BED format::
+
+    $ python bowtie-2-bed.py chrZ.map > chrZ.bed
+
+Then, you can look at the output file::
+
+    $ head -n 20 chrZ.bed
+
+    chrZ 251260 251296 HWI-EAS216:4:6:1605:767#0/1 0 -
+    chrZ 251484 251520 HWI-EAS216:4:45:1034:1395#0/1 0 -
+    chrZ 251507 251543 HWI-EAS216:4:73:1450:948#0/1 0 -
+    chrZ 251697 251733 HWI-EAS216:4:94:1710:873#0/1 0 -
+    chrZ 251770 251806 HWI-EAS216:4:93:216:2043#0/1 0 -
+    chrZ 252179 252215 HWI-EAS216:4:26:407:1984#0/1 0 -
+    chrZ 252590 252626 HWI-EAS216:4:52:996:1568#0/1 0 +
+    chrZ 252594 252630 HWI-EAS216:4:87:906:894#0/1 0 +
+    chrZ 252595 252631 HWI-EAS216:4:76:82:1624#0/1 0 +
+    chrZ 252598 252634 HWI-EAS216:4:45:737:436#0/1 0 +
+    chrZ 253598 253634 HWI-EAS216:4:51:234:1219#0/1 0 +
+    chrZ 253609 253645 HWI-EAS216:4:95:310:1652#0/1 0 -
+    chrZ 253613 253649 HWI-EAS216:4:43:1329:757#0/1 0 +
+    chrZ 253617 253653 HWI-EAS216:4:50:412:1815#0/1 0 +
+    chrZ 253628 253664 HWI-EAS216:4:98:1444:1619#0/1 0 +
+    chrZ 253629 253665 HWI-EAS216:4:85:748:1363#0/1 0 +
+    chrZ 253643 253679 HWI-EAS216:4:87:1137:1573#0/1 0 -
+    chrZ 253651 253687 HWI-EAS216:4:26:277:1825#0/1 0 +
+    chrZ 253842 253878 HWI-EAS216:4:57:1468:183#0/1 0 -
+    ...
+
+Next, use a text editor to insert these lines at the top of chrZ.bed file::
+
+    browser position chrZ:250,000-265,000
+    track name="chrZ" description="User defined track" color=0,128,0 visibility=4
+
+The specification of the above BED file is:
+    #. reference sequence name
+    #. start
+    #. stop
+    #. read name
+    #. score
+    #. strand
+
+Note:: 
+    For the full spefication of BED file please consult the UCSC genome browser manual.
+    The BED file is 0-based as the bowtie format, so we have nothing to do with the coordinate.
+    However, the coordinate will be 1-based when displayed on UCSC genome browser.
+
+Now, go to `http://genome.ucsc.edu/cgi-bin/hgGateway <http://genome.ucsc.edu/cgi-bin/hgGateway>`_.
+Set clade to vertebrate and genome to chicken, then select manage custom track.
+    
+.. image:: images/ucsc000.png
+
+Then browse your BED file and press submit.
+
+.. image:: images/ucsc001.png
+
+After submit, you will see your custom track:
+
+.. image:: images/ucsc002.png
+
+Click go to genome browser and you will see:
+
+.. image:: images/ucsc003.png
+
+We can change the visibility mode of the custom track in the custom track panel:
+
+.. image:: images/ucsc005.png
+
+Select dense and you will get:
+
+.. image:: images/ucsc006.png
+
+Did you notice the 3'UTR and exon boundaries?
+What are those reads mapped outside the exons?
+Why are there more reads mapped toward the 3' end?
+
+Making a histogram using bedGraph
+---------------------------------
+
+Sometimes we might want to make the histogram of the read coverage. This can be done easily using pysam and bedGraph format.
+You will need both chick001-sorted.bam and chick001-sorted.bam.bai file for this tutorial.
+
+Run make-histogram.py script::
+
+    $ python make-histogram.py chrZ 250000 265000 > chrZ.bedgraph
+
+The script will make a histogram of read coverage of chrosome Z from the location 250000 to 265000.
+
+The output file should look like this::
+
+    $ head -n 20 chrZ.bedgraph
+
+    chrZ 251260 251261 1
+    chrZ 251261 251262 1
+    chrZ 251262 251263 1
+    chrZ 251263 251264 1
+    chrZ 251264 251265 1
+    chrZ 251265 251266 1
+    chrZ 251266 251267 1
+    chrZ 251267 251268 1
+    chrZ 251268 251269 1
+    chrZ 251269 251270 1
+    chrZ 251270 251271 1
+    chrZ 251271 251272 1
+    chrZ 251272 251273 1
+    chrZ 251273 251274 1
+    chrZ 251274 251275 1
+    ...
+
+Again, using your text editor to insert these lines at the top of the output file::
+
+    track type="bedGraph" name="histogram" color=0,128,0 visiblity=2
+    browser position chrZ:250000-265000
+
+Note: You have to specify track type=bedGraph.
+
+
+Then, submit it to UCSC genome browser and you will see:
+
+.. image:: images/ucsc007.png
+
+And if you set the visibility to dense you will see:
+
+.. image:: images/ucsc008.png
+
+Finally, we can compare the graphs from two file formats:
+
+.. image:: images/ucsc009.png
+
+View BAM file on UCSC genome
+----------------------------
+If you have bowtie output in BAM format, you can visualize it directly on UCSC genome borwser. However, you will have to put your BAM file and BAM index file on ftp or http server. 
+
+For this tutorial, we will use sample002.bam and its index file sample002.bam.bai. Both files are on http://lyorn.idyll.org/~preeyano/.
+
+There are two track parameters that you have to set.
+
+    #. db = a reference database.
+
+    #. bigDataUrl = url of your data. It is http://lyorn.idyll.org/~preeyano/sample002.bam in this tutorial.
+
+Go to "add custom track" page, then copy and paste the following texts::
+
+    browser position chr19:212000-250000
+    track type=bam name="BAM Example One" description="Sample" 
+    bamColorMode=gray 
+    maxWindowToDraw=200000 
+    db=galGal3 
+    visibility=squish 
+    bigDataUrl=http://lyorn.idyll.org/~preeyano/sample002.bam 
+
+Set clade=Vertebrate, genome=Chicken and assembly=galGal3.
+
+.. image:: images/ucsc010.png
+
+Press "submit" and "go to the genome browser". You should see:
+
+.. image:: images/ucsc011.png
+
+View Velvet & Oases assembly on UCSC genome
+-------------------------------------------
+Before viewing assembled sequences on UCSC you have to map it on the genome first using GMAP.
+GMAP will give the mapping output in GFF format which can be viewed in UCSC genome directly.
+
+Go to "add custom track". Set clade=Deuterostome genome=S.purpuratus.
+Browse for Scaffold14509.gmap file and click "submit". You will see a custom track table.
+
+.. image:: images/ucsc012.png
+
+Click at "User Track" to edit a track header.
+
+.. image:: images/ucsc013.png
+
+Edit track header like this::
+
+    track name='Scaffold14509 assembly' description='RNA-seq assembly using oases' color=0,128,0 visibility=full
+    browser position Scaffold14509:140000-160000
+
+Then, click "submit" and click "go to genome browser".
+
+.. image:: images/ucsc014.png
+
+For more informative plot, try to run map-2-gff.py script::
+
+    $ python map-2-gff.py Scaffold14509.gmap > Scaffold14509.gff
+
+Then, upload the Scaffold14509.gff file to UCSC genome and edit a track header like this::
+
+    track name='Scaffold14509 assembly 2' description='RNA-seq assembly using oases' color=255,128,0 visibility=full
+    browser position Scaffold14509:140000-160000
+
+You will see:
+
+.. image:: images/ucsc015.png

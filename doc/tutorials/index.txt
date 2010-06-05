@@ -21,3 +21,4 @@ Contents:
    bowtie-mapping
    samtools-tutorial
    other-mappers
+   ucsc-visualization
