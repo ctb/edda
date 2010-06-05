@@ -127,4 +127,4 @@ def create_publisher():
     return Publisher(app, display_exceptions='plain')
 
 if __name__ == '__main__':
-    run(create_publisher, host='', port=8555)
+    run(create_publisher, host='', port=8888)

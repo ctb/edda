@@ -1,11 +1,11 @@
-Visualize your data
-===================
+Visualizing NGS data on UCSC genome browser
+==========================================
 
 :Author: Likit Preeyanon
 :Date: |today|
 :Version: |version|
 
-USCS genome browser allows users to visualuze their custom tracks with many different formats. Together with existing tracks on USCS genome, you can get some useful information about your data. However, UCSC genome browser is not designed to visualize a very large dataset. You may not always be able to visualize the data the way you want. The detail information of all custom track formats can be found `here. <http://genome.ucsc.edu/goldenPath/help/customTrack.html>`_ We are not going to demonstrate all formats and all of their settings in this tutorial. Rather, we will look at how to make use of UCSC genome browser to facilitate NGS data analysis in a very simple way.
+UCSC genome browser allows users to visualize their custom tracks with many different formats. Together with existing tracks on UCSC genome, you can get some useful information about your data. However, UCSC genome browser is not designed to visualize a very large dataset. You may not always be able to visualize the data the way you want. The detail information of all custom track formats can be found `here. <http://genome.ucsc.edu/goldenPath/help/customTrack.html>`_ We are not going to demonstrate all formats and all of their settings in this tutorial. Rather, we will look at how to make use of UCSC genome browser to facilitate NGS data analysis in a very simple way.
 
 Simple BED file format
 ----------------------
@@ -13,7 +13,7 @@ This format is useful to visualize every single read mapped to the reference gen
 
 We will use chrZ.map file for this tutorial. This file is an original bowtie output (not the SAM format) and we will use bowtie-2-bed.py script to convert it to BED format::
 
-    $ python bowtie-2-bed.py chrZ.map > chrZ.bed
+    $ python ~/ngs-course/ucsc/bowtie-2-bed.py ~/ngs-course/data/chrZ.map > chrZ.bed
 
 Then, you can look at the output file::
 
@@ -59,11 +59,11 @@ Note::
     However, the coordinate will be 1-based when displayed on UCSC genome browser.
 
 Now, go to `http://genome.ucsc.edu/cgi-bin/hgGateway <http://genome.ucsc.edu/cgi-bin/hgGateway>`_.
-Set clade to vertebrate and genome to chicken, then select manage custom track.
+Set clade = vertebrate and genome = chicken, then select manage custom track.
     
 .. image:: images/ucsc000.png
 
-Then browse your BED file and press submit.
+Then click "browse" to upload your BED file and press "submit".
 
 .. image:: images/ucsc001.png
 
@@ -71,7 +71,7 @@ After submit, you will see your custom track:
 
 .. image:: images/ucsc002.png
 
-Click go to genome browser and you will see:
+Click "go to genome browser" and you will see:
 
 .. image:: images/ucsc003.png
 
@@ -79,13 +79,9 @@ We can change the visibility mode of the custom track in the custom track panel:
 
 .. image:: images/ucsc005.png
 
-Select dense and you will get:
+Select "dense" and you will get:
 
 .. image:: images/ucsc006.png
-
-Did you notice the 3'UTR and exon boundaries?
-What are those reads mapped outside the exons?
-Why are there more reads mapped toward the 3' end?
 
 Making a histogram using bedGraph
 ---------------------------------
@@ -95,7 +91,7 @@ You will need both chick001-sorted.bam and chick001-sorted.bam.bai file for this
 
 Run make-histogram.py script::
 
-    $ python make-histogram.py chrZ 250000 265000 > chrZ.bedgraph
+    $ python ~/ngs-course/ucsc/make-histogram.py ~/ngs-course/data/chick001-sorted.bam chrZ 250000 265000 > chrZ.bedgraph
 
 The script will make a histogram of read coverage of chrosome Z from the location 250000 to 265000.
 
@@ -122,17 +118,16 @@ The output file should look like this::
 
 Again, using your text editor to insert these lines at the top of the output file::
 
-    track type="bedGraph" name="histogram" color=0,128,0 visiblity=2
+    track type="bedGraph" name="histogram" color=0,128,0 visiblity=full
     browser position chrZ:250000-265000
 
 Note: You have to specify track type=bedGraph.
-
 
 Then, submit it to UCSC genome browser and you will see:
 
 .. image:: images/ucsc007.png
 
-And if you set the visibility to dense you will see:
+And if you set the visibility to "dense" you will see:
 
 .. image:: images/ucsc008.png
 
@@ -155,12 +150,7 @@ There are two track parameters that you have to set.
 Go to "add custom track" page, then copy and paste the following texts::
 
     browser position chr19:212000-250000
-    track type=bam name="BAM Example One" description="Sample" 
-    bamColorMode=gray 
-    maxWindowToDraw=200000 
-    db=galGal3 
-    visibility=squish 
-    bigDataUrl=http://lyorn.idyll.org/~preeyano/sample002.bam 
+    track type=bam name="BAM Example One" db=galGal3 visibility=squish bigDataUrl=http://lyorn.idyll.org/~preeyano/sample002.bam 
 
 Set clade=Vertebrate, genome=Chicken and assembly=galGal3.
 
@@ -195,7 +185,7 @@ Then, click "submit" and click "go to genome browser".
 
 For more informative plot, try to run map-2-gff.py script::
 
-    $ python map-2-gff.py Scaffold14509.gmap > Scaffold14509.gff
+    $ python ~/ngs-course/ucsc/map-2-gff.py ~/ngs-course/data/Scaffold14509.gmap > Scaffold14509.gff
 
 Then, upload the Scaffold14509.gff file to UCSC genome and edit a track header like this::
 
