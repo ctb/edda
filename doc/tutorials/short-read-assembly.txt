@@ -2,6 +2,9 @@
 Short Read Assembly
 ===================
 
+:Author: Jason Pell
+:Date: June 5, 2010
+
 For this tutorial, we will be using the short read de novo assembler ABySS
 to assemble a bacterial genome.
 
@@ -48,7 +51,7 @@ It should take a little while to finish.  These three commands are pretty
 standard when you want to compile a UNIX package from source.  The first 
 command tunes the compilation and installation parameters for your particular 
 system.  Then, the package is compiled and installed on your system.  Once it 
-is finished, go to the ABySS directory and do the same thing:
+is finished, go to the ABySS directory and do the same thing::
 
   %% cd ../abyss-1.2.0
   %% ./configure && make && install

@@ -11,7 +11,7 @@ of software, run the following commands, in order: ::
 
   %% apt-get -y update
   %% apt-get -y dist-upgrade
-  %% apt-get -y install mercurial less python-matplotlib unzip
+  %% apt-get -y install mercurial less python-matplotlib unzip bzip2 zlib1g-dev ncurses-dev python-dev
 
 Getting the files for this course
 ---------------------------------

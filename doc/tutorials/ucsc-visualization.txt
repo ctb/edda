@@ -1,11 +1,19 @@
 Visualizing NGS data on UCSC genome browser
-==========================================
+===========================================
 
 :Author: Likit Preeyanon
-:Date: |today|
-:Version: |version|
+:Date: June 5, 2010
 
-UCSC genome browser allows users to visualize their custom tracks with many different formats. Together with existing tracks on UCSC genome, you can get some useful information about your data. However, UCSC genome browser is not designed to visualize a very large dataset. You may not always be able to visualize the data the way you want. The detail information of all custom track formats can be found `here. <http://genome.ucsc.edu/goldenPath/help/customTrack.html>`_ We are not going to demonstrate all formats and all of their settings in this tutorial. Rather, we will look at how to make use of UCSC genome browser to facilitate NGS data analysis in a very simple way.
+UCSC genome browser allows users to visualize their custom tracks with
+many different formats. Together with existing tracks on UCSC genome,
+you can get some useful information about your data. However, the UCSC
+genome browser is not designed to visualize a very large dataset. You
+may not always be able to visualize the data the way you want.
+detailed information of all the custom track formats can be found
+`here. <http://genome.ucsc.edu/goldenPath/help/customTrack.html>`_ We
+are not going to demonstrate all formats and all of their settings in
+this tutorial. Rather, we will look at how to make use of UCSC genome
+browser to facilitate NGS data analysis in a very simple way.
 
 Simple BED file format
 ----------------------
@@ -89,11 +97,14 @@ Making a histogram using bedGraph
 Sometimes we might want to make the histogram of the read coverage. This can be done easily using pysam and bedGraph format.
 You will need both chick001-sorted.bam and chick001-sorted.bam.bai file for this tutorial.
 
-Run make-histogram.py script::
+Make sure you've installed pysam; see the bottom of the
+:doc:`samtools-tutorial`.
+
+Run the make-histogram.py script::
 
     $ python ~/ngs-course/ucsc/make-histogram.py ~/ngs-course/data/chick001-sorted.bam chrZ 250000 265000 > chrZ.bedgraph
 
-The script will make a histogram of read coverage of chrosome Z from the location 250000 to 265000.
+The script will make a histogram of read coverage of chromosome Z from the location 250000 to 265000.
 
 The output file should look like this::
 

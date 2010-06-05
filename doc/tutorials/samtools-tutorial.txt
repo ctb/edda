@@ -2,12 +2,12 @@
 Visualizing mappings with Samtools
 ==================================
 
+:Author: Rose Canino-Koning
+:Date: June 5, 2010
+
 First, set up a new EC2 server as in
-:doc:`renting-a-computer-from-amazon`.
-
-Now, log in, and install additional tools.::
-
-  %% apt-get -y install less bzip2 zlib1g-dev ncurses-dev python-dev
+:doc:`renting-a-computer-from-amazon`.  Make sure to run all of the
+install commands in :doc:`installing-your-cloud-system`!
 
 If you terminated your EC2 instance after the bowtie tutorial, re-download
 the dataset::
@@ -123,8 +123,11 @@ Pysam. You can install it like so::
 
 And then::
 
-  %% wget http://pysam.googlecode.com/files/pysam-0.2.tar.gz
-  %% tar -zxvf pysam-0.2.tar.gz
-  %% cd pysam-0.2
-  %% python setup.py build
+  %% wget http://angus.ged.msu.edu.s3.amazonaws.com/pysam-0.2-ngs.tar.gz
+  %% tar -zxvf pysam-0.2-ngs.tar.gz
+  %% cd pysam-0.2-ngs
+  %% python setup.py install
   %% cd
+
+Note, here we're using a patched version of pysam that will work under
+the version of Python available on your EC2 machine.
