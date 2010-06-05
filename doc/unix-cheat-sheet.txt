@@ -13,3 +13,28 @@ move you through commands you've run, and left/right arrows (plus backspace
 etc.) let you edit those commands.
 
 
+Enabling access for other people
+--------------------------------
+
+**Warning, this is dangerous; the 'root' account has complete control
+over your machine!**
+
+You can give other people access to your EC2 machine by setting a password
+for the 'root' account::
+
+  %% passwd root
+
+You can also give them access to some or *all* your EC2 machines by
+giving them your private key, but this is a really bad idea.
+
+A less dangerous way to do access control is to have them, or you,
+create a public/private key pair by doing::
+
+  %% ssh-keygen -t dsa -f new_key
+
+Then add 'new_key.pub' to ``/root/.ssh/authorized_keys::
+
+  %% cat new_key.pub >> /root/.ssh/authorized_keys
+
+and give them the 'new_key' file as their private key to log into this
+EC2 machine only.
