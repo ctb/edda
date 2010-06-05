@@ -66,11 +66,11 @@ Now, convert the .sam file into a .bam file::
 
   %% samtools import campy.fa.fai campy-pre-1m.bwa.sam campy-pre-1m.bwa.bam
 
-Sort it:
+Sort it::
 
   %% samtools sort campy-pre-1m.bwa.bam campy-pre-1m.bwa.sorted
 
-Index it:
+Index it::
 
   %% samtools index campy-pre-1m.bwa.sorted.bam 
 
