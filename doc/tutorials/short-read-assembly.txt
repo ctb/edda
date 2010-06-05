@@ -86,13 +86,11 @@ Evaluating Assemblies
 Assessing the quality of a de novo assembly where there is no good
 reference is still an open question.  However, there are many
 statistics that can be useful in comparing assemblies to one another.
-We have a Python script that provides many of these statistics.  You
-can obtain it by running::
-
-  %% curl -O http://lyorn.idyll.org/~jason/assemstats.py
+We have a Python script that provides many of these statistics; it's
+in the ngs-course scripts, under 'ngs-course/assembly/assemstats.py'.
 
 Before you can run it, you must install screed, so we'll run the
-following the home directory::
+following in the home directory::
 
   %% apt-get install git-core
   %% git clone git://github.com/acr/screed.git
@@ -106,9 +104,9 @@ However, the assembly statistics Python script just uses the provided
 FASTA parser.
 
 To obtain statistics on the file you just generated, go back to your
-home your home directory and run::
+home directory and run::
 
-  %% python assemstats.py 0 k*/ecoli-contigs.fa
+  %% python ~/ngs-course/assembly/assemstats.py 0 k*/ecoli-contigs.fa
 
 Other Stuff To Try
 ------------------
