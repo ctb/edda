@@ -54,7 +54,7 @@ system.  Then, the package is compiled and installed on your system.  Once it
 is finished, go to the ABySS directory and do the same thing::
 
   %% cd ../abyss-1.2.0
-  %% ./configure && make && install
+  %% ./configure && make && make install
 
 Running ABySS
 --------------
@@ -125,7 +125,7 @@ difference.
 Try varying the value for k by creating a new directory for each value
 that you would like to test.  Then, run::
 
-  %% python assemstats.py 0 k*/ecoli-contigs.fa
+  %% python ~/ngs-course/assembly/assemstats.py 0 k*/ecoli-contigs.fa
 
 again to see how the assemblies compare to each other.  If you
 generate a lot of assemblies, you can copy and paste the output to a
