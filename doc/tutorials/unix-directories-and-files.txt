@@ -55,6 +55,12 @@ you will see the prompt change to ::
 ...i.e. it will change to indicate what your current directory is.  And
 that's how you can easily remember!
 
+You can also just type ::
+
+  %% pwd
+
+or 'print working directory'.
+
 Your home directory
 -------------------
 
