@@ -45,11 +45,31 @@ When installation is done. Import DEGseq library to R::
 
 You will see a list of required packages.
 
-Now, we will load the expression data into R::
-
-    > geneExpFile = readGeneExp('~/ngs-course/data/expression_data.txt', header=FALSE, sep='')
-
 The data for this tutorials should be in ~/ngs-course/data/expression_data.txt.
+
+Now, we will load the expression data into R::
+	
+	> geneExpMatrix1 = readGeneExp('~/ngs-course/data/expression_data.txt', header=FALSE, sep='', geneCol=1, valCol=2)
+    > geneExpMatrix2 = readGeneExp('~/ngs-course/data/expression_data.txt', header=FALSE, sep='', geneCol=1, valCol=3)
+
+You can explore you data::
+
+	> write.table(geneExpMatrix1[1:10,], row.names = FALSE)
+
+You will see the first ten records of the first dataset::
+
+			"V1" "V2"
+		"SPU_000003" "67"
+		"SPU_000005" "3"
+		"SPU_000007" "5"
+		"SPU_000008" "41"
+		"SPU_000010" "2"
+		"SPU_000011" "15"
+		"SPU_000012" "29"
+		"SPU_000013" "232"
+		"SPU_000014" "2"
+		"SPU_000016" "8"
+		"SPU_000017" "10"
 
 Now, run DEGexp function to analyze gene expression. 
 
