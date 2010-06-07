@@ -11,3 +11,6 @@ Lecture 3: `Thinking Statistically <files/lecture3-data-statistics.pdf>`__
 Lecture 4: `Mapping Reads to Known Genomes <files/lecture4-mapping.pdf>`__
 
 Lecture 5: `Assembly <files/lecture5-assembly.pdf>`__
+
+Lecture 6: `mRNAseq <files/lecture6-mrnaseq.pdf>`__
+

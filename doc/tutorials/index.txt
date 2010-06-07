@@ -24,4 +24,4 @@ Contents:
    short-read-assembly
    ucsc-visualization
    simple-mrnaseq
-
+   DEGseq

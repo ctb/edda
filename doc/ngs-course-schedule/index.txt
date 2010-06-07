@@ -109,7 +109,7 @@ Lecture: mRNAseq analysis.
 
 Tutorial 1 (11:30am): :doc:`../tutorials/simple-mrnaseq`
 
-Tutorial 2 (1:30pm): Significance analysis with DEGseq. (Likit)
+Tutorial 2 (1:30pm): :doc:`../tutorials/DEGseq.txt` (Likit)
 
 Tutorial 3 (3:30pm): Working with & copying files and directories in UNIX.
 
