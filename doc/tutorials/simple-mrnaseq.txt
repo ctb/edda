@@ -1,0 +1,179 @@
+---------------------------------------------------------------------------
+Simple mRNAseq: mapping reads to gene sets and doing quantile normalization
+---------------------------------------------------------------------------
+
+We're going to walk through a real, although simple, mRNAseq analysis
+for lamprey.  This is probably truer-to-life for many of you than
+using something like mouse: lamprey is an "emerging model organism",
+so the genome is not yet available, and we don't have a good gene set
+for lamprey. So we're going to have to do it all from scratch!
+
+So, let's do this!
+
+Start up a new EC2 server according to
+:doc:`renting-a-computer-from-amazon`.  (You can use either a small or
+a large EC2 instance (as in :doc:`short-read-assembly`).  Also install
+the bowtie mapping software based on the instructions at the top of
+:doc:`bowtie-mapping`.
+
+Extracting counts from mRNAseq data
+-----------------------------------
+
+The first step in our simplified mRNAseq analysis is to map all of the
+reads to some set of mRNA sequences.  This can be whatever cDNA set
+you have, even something assembled from your existing mRNAseq; we'll
+show you how to connect it to annotations a bit later.
+
+Downloading the data sets
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Download the mRNA reference set and the first two mRNAseq data sets
+for lamprey from `the private data set page
+<http://teckla.idyll.org/~t/angus-private/#lamprey-petromyzon-marinus-data>`__
+and uncompress them::
+
+  %% mkdir /mnt/lamprey
+  %% cd /mnt/lamprey
+  (put curl commands here)
+
+  %% gunzip *.gz
+
+You should now have three files in /mnt/lamprey::
+
+  %% ls
+
+should give you ::
+
+  lamprey-mrnaseq-a.fa  lamprey-mrnaseq-b.fa  lamprey-rnatigs.fa
+
+Mapping
+~~~~~~~
+
+Now, build the bowtie index for the lamprey mRNAseq reference set::
+
+  %% bowtie-build lamprey-rnatigs.fa lamprey-rnatigs
+
+Run the mapping::
+
+  %% bowtie -p 2 -f lamprey-rnatigs lamprey-mrnaseq-a.fa > lamprey-mrnaseq-a.map 
+  %% bowtie -p 2 -f lamprey-rnatigs lamprey-mrnaseq-b.fa > lamprey-mrnaseq-b.map 
+
+Here the '-p 2' should only be used if you have a large (two-core)
+instance, and '-f' is because these mRNAseq data files are in FASTA
+format rather than FASTQ (bowtie's default assumption).
+
+Counting
+~~~~~~~~
+
+Now we want to count the number of times each contig in the mRNA
+reference set had a gene mapped to it.  To do this, we can use the
+'count-genes' script in the ngs-course scripts; you can look at the
+script `here
+<http://bitbucket.org/ctb/ngs-course/src/tip/mrnaseq/count-genes.py>`__.
+To run it, just feed it the mapping file and redirect the output::
+
+  %% python ~/ngs-course/mrnaseq/count-genes.py lamprey-mrnaseq-a.map > lamprey-mrnaseq-a.count
+  %% python ~/ngs-course/mrnaseq/count-genes.py lamprey-mrnaseq-b.map > lamprey-mrnaseq-b.count
+
+If you look at these files, you will see a bunch of lines like this::
+
+ 2 E90KYJQ01DDEO8
+ 137 CL1Contig379
+ 117 CL1Contig376
+ 2 CL1Contig370
+ 382 CL697Contig1
+
+where the first number in each line represents the number of times the
+contig name (second field) is seen.
+
+Quantile normalization
+----------------------
+
+Our analysis script, above, took the mRNAseq mapping and output a file
+that contained a set of counts for each gene or rnatig.  In order to
+compare gene counts across data sets, we need to normalize them.  This
+eliminates variability due to different amounts of input mRNA,
+different numbers of total reads, etc.
+
+Quantile normalization is a procedure that redistributes the data in
+one data set to match the distribution of another data set.  There's a
+simple script to do this in the ngs-course repository, under
+ngs-course/mrnaseq/, file 'qnormalize.py' (`view online <http://bitbucket.org/ctb/ngs-course/src/tip/mrnaseq/qnormalize.py>`__).  I've
+also included two example data files, `example-data-1.txt <http://bitbucket.org/ctb/ngs-course/src/tip/mrnaseq/example-data-1.txt>`__ and `example-data-2.txt <http://bitbucket.org/ctb/ngs-course/src/tip/mrnaseq/example-data-2.txt>`__.
+
+To run the script on these example data files, type::
+
+  %% python ~/ngs-course/mrnaseq/qnormalize.py ~/ngs-course/mrnaseq/example-data-{1,2}.txt
+
+You should see ::
+
+ 0 d
+ 5 b
+ 10 a
+ 15 f
+ 20 c
+
+which represents the newly normalized second data set.  Here, gene 'd'
+has prevalence 0 because it's not present at all in the second data
+set.  The other genes have been ordered from lowest to highest
+expression level from data set 2, and then reassigned the expression
+numbers from data set 1.
+
+Try running this on your counts from the lamprey mRNAseq, above, and
+plot the new distribution::
+
+  %% python ~/ngs-course/mrnaseq/qnormalize.py lamprey-mrnaseq-{a,b}.count > lamprey-mrnaseq-b.norm.count
+  %% python ~/ngs-course/mrnaseq/plot-counts.py lamprey-mrnaseq-a.count lamprey-mrnaseq-b.norm.count
+
+You should get a file 'counts.png' that looks like this:
+
+.. image:: images/mrnaseq-counts.png
+
+Not terribly informative yet, but a step in the right direction -- now
+you can do some simple expression analysis!
+
+Naive expression analysis
+-------------------------
+
+Likit will show you a better way to do expression analysis, but I
+always like doing a rough cut first.  A simple way to do this is in
+the `plot-ratio-dist.py script
+<http://bitbucket.org/ctb/ngs-course/src/tip/mrnaseq/plot-ratio-dist.py>`__,
+which takes the log ratio of counts adjusted to avoid divide-by-zero
+and low-count problems.  Run it like so::
+
+  %% python ~/ngs-course/mrnaseq/plot-ratio-dist.py lamprey-mrnaseq-a.count lamprey-mrnaseq-b.norm.count
+
+This will create a file 'ratio-dist.png' that looks like this:
+
+.. image:: images/mrnaseq-ratio-dist-1.png
+
+This distribution is the distribution of log2 ratios of gene
+expression counts, so a value of 0 means no change, a value of 1 means
+a ratio of 2, etc.
+
+The challenge now is that of genes with identical expression patterns
+dominate -- hence the massive spike at 0!  If you adjust the axes by
+uncommenting the second-to-last line (the 'axis' line) in the script
+``~/ngs-course/mrnaseq/plot-ratio-dist.py`` you can see the
+distribution of changed expression levels more clearly:
+
+.. image:: images/mrnaseq-ratio-dist-2.png
+
+Et voila!  You can apply your cutoff as you wish, and you have your genes
+for further investigation.
+
+Concluding comments
+-------------------
+
+We'll show you how to examine putative function by connecting genes to
+mouse proteins and to GO in a later tutorial.
+
+A challenge for you
+-------------------
+
+There are four lamprey mRNAseq data sets available `here
+<http://teckla.idyll.org/~t/angus-private/#lamprey-petromyzon-marinus-data>`__
+-- a, b, c, and d.  Two are from one tissue, and two are from a
+different tissue.  Which data sets are from the same tissue?
+

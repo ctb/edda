@@ -88,9 +88,9 @@ Day 5 (Sat, June 5)
 Lecture: Assembly.
 (Titus Brown)
 
-Tutorial 1: :doc:`short-read-assembly` (Jason)
+Tutorial 1: :doc:`../tutorials/short-read-assembly` (Jason)
 
-Tutorial 2: :doc:`ucsc-visualization` (Likit)
+Tutorial 2: :doc:`../tutorials/ucsc-visualization` (Likit)
 
 BBQ on Windmill Island.
 
@@ -107,11 +107,13 @@ Day 7 (Mon, June 7)
 Lecture: mRNAseq analysis.
 (Titus Brown)
 
-Tutorial 1: Mapping reads to gene sets.
+Tutorial 1 (11:30am): :doc:`../tutorials/simple-mrnaseq`
 
-Tutorial 2: Quantile normalization; significance (Likit)
+Tutorial 2 (1:30pm): Significance analysis with DEGseq. (Likit)
 
-Tutorial 3: Linking to putative function: GO analysis.
+Tutorial 3 (3:30pm): Working with & copying files and directories in UNIX.
+
+Tutorial 4 (7:30pm): Linking to putative function: GO analysis.
 
 Motivational lecture: why do things the difficult way, anyway? (Greg Wilson)
 

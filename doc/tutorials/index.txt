@@ -23,3 +23,5 @@ Contents:
    other-mappers
    short-read-assembly
    ucsc-visualization
+   simple-mrnaseq
+

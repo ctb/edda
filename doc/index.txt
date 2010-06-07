@@ -12,14 +12,11 @@ Contents:
    :maxdepth: 1
 
    ngs-course-schedule/index
-
    presentations
-
    tutorials/index
-
    data-sets
-
    unix-cheat-sheet
+   quotes
 
 License
 -------
