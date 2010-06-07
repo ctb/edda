@@ -2,6 +2,15 @@
 UNIX Cheat Sheet
 ================
 
+Contents:
+
+.. toctree::
+   :hidden:
+
+   tutorials/unix-directories-and-files
+
+Also see :doc:`tutorials/unix-directories-and-files`
+
 Working at the command line
 ---------------------------
 
@@ -32,7 +41,7 @@ create a public/private key pair by doing::
 
   %% ssh-keygen -t dsa -f new_key
 
-Then add 'new_key.pub' to ``/root/.ssh/authorized_keys::
+Then add 'new_key.pub' to ``/root/.ssh/authorized_keys``::
 
   %% cat new_key.pub >> /root/.ssh/authorized_keys
 

@@ -41,7 +41,7 @@ It will take about 10 mins to install all dependencies. Go get some coffee and r
 
 When installation is done. Import DEGseq library to R::
 
-    > library('DEGseq')
+   > library('DEGseq')
 
 You will see a list of required packages.
 
@@ -49,12 +49,12 @@ The data for this tutorials should be in ~/ngs-course/data/expression_data.txt.
 
 Now, we will load the expression data into R::
 	
-	> geneExpMatrix1 = readGeneExp('~/ngs-course/data/expression_data.txt', header=FALSE, sep='', geneCol=1, valCol=2)
+    > geneExpMatrix1 = readGeneExp('~/ngs-course/data/expression_data.txt', header=FALSE, sep='', geneCol=1, valCol=2)
     > geneExpMatrix2 = readGeneExp('~/ngs-course/data/expression_data.txt', header=FALSE, sep='', geneCol=1, valCol=3)
 
 You can explore you data::
 
-	> write.table(geneExpMatrix1[1:10,], row.names = FALSE)
+    > write.table(geneExpMatrix1[1:10,], row.names = FALSE)
 
 You will see the first ten records of the first dataset::
 
@@ -108,4 +108,4 @@ Here is what you can do:
 
 Note, to download ~/expData directory to your computer::
 
-	%% tar -cfz expData.tar.gz ~/expData
+	%% tar czf expData.tar.gz ~/expData

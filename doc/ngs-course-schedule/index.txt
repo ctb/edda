@@ -164,10 +164,13 @@ Jeff Barrick, lecturer on resequencing
 
 Mark Robinson, lecture on ChIP-seq
 
-Teaching Assistants:
---------------------
+Cruise Director:
+----------------
 
 Rose Canino-Koning, CS PhD student at MSU
+
+Teaching Assistants:
+--------------------
 
 Jason Pell, CS PhD student at MSU
 

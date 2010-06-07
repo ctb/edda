@@ -1,0 +1,230 @@
+=================================================
+UNIX directories and files - a quick introduction
+=================================================
+
+We've been telling you how to move around within directories and copy
+files without really explaining any of the details.  So, here you go!
+
+The basics
+----------
+
+As in Windows and Mac OS X, Linux has the concepts of folders (but they're
+called directories).  Unlike Windows and Mac OS X (and graphical interfaces
+in general), though, there is the concept of "current working directory"
+that provides a shortcut for you to access files that you're working with
+at the moment.
+
+Directory paths in UNIX always look like this::
+
+   /mnt/data
+
+and sometimes there's a filename on the end::
+
+   /mnt/data/filename.txt
+
+It's generally impossible to look at a path to figure out whether or not
+it's a directory or a file, but you can always try to 'cd' to it (in
+which case it's a directory if it works) or 'less' it (then it's a file).
+
+Changing directories
+--------------------
+
+The command::
+
+   %% cd /mnt
+
+changes to the directory /mnt.
+
+Figuring out your current directory
+-----------------------------------
+
+When you log into your Amazon machine, take a look at your prompt.
+It should look something like this::
+
+  ip-10-196-169-188:~# 
+
+Do you notice the '~'?  That means you're in your home directory.  If you do
+::
+
+  %% cd /mnt/lamprey
+
+you will see the prompt change to ::
+
+  ip-10-196-169-188:/mnt/lamprey# 
+
+...i.e. it will change to indicate what your current directory is.  And
+that's how you can easily remember!
+
+Your home directory
+-------------------
+
+If you type ::
+
+  %% cd
+
+or ::
+
+  %% cd ~/
+
+you'll go to your home directory.  This is a single directory that is
+where you start out when you log in, by default.  In multi-user UNIX
+situations (i.e. not Amazon) this will generally be a location over
+which you have control (read/write/delete permissions).  For Amazon
+EC2 machines, you don't need to worry about this -- you have complete
+control over all files, because you're logged in as the superuser.
+
+Relative paths and absolute paths
+---------------------------------
+
+If you are in /root and you type a path that doesn't start with a '/', e.g. ::
+
+   %% mkdir data
+
+it will automatically prepend /root/ to that path.  That's called a "relative
+path", and it's referred to as "relative" because it's interpreted relative
+to your current working directory.
+
+Until you get more experienced and start to just ... remember your
+current working directory, it might be a good idea to refer to
+things in absolute form as much as possible -- that way you'll avoid
+confusing yourself more.
+
+Copying and moving files
+------------------------
+
+The commands ::
+
+  %% cp $frompath $topath
+
+will copy the file from $frompath to $topath, and ::
+
+  %% mv $frompath $topath
+
+will move (or rename) it.  For example, ::
+
+  %% cp ~/*.gz /mnt
+
+will copy all of the files ending '.gz' from '/root/' to '/mnt', while ::
+
+  %% mv ~/*.gz /mnt
+
+will move all of the files.
+
+Removing files
+--------------
+
+The command ::
+
+   %% rm /mnt/data.tar.gz
+
+will remove the file data.tar.gz in the directory /mnt.
+
+Making and removing directories
+-------------------------------
+
+You can create directories with 'mkdir'::
+
+   %% mkdir /root/new_dir
+
+You can remove *empty* directories with 'rmdir' ::
+
+   %% rmdir /root/new_dir
+
+but if the directory isn't empty, then you can use the *extremely*
+dangerous command ::
+
+   %% rm -r /root/new_dir
+
+to remove that directory and everything under it.
+
+Warning, if you do ::
+
+   %% rm -r /
+
+you may end up removing everything on the computer...
+
+Different disks
+---------------
+
+On UNIX, disks are "mounted" as different directories under '/'.  On EC2
+machines, by default, '/mnt' is a disk that you can use for big data files.
+You can discover which disks are present by doing a ::
+
+   %% df
+
+to produce output like this ::
+
+  Filesystem           1K-blocks      Used Available Use% Mounted on
+  /dev/sda1             10321208   1453628   8343292  15% /
+  tmpfs                  3935948         0   3935948   0% /lib/init/rw
+  udev                   3935948       444   3935504   1% /dev
+  tmpfs                  3935948         0   3935948   0% /dev/shm
+  /dev/sdb             433455904   2770944 408666656   1% /mnt
+
+Ignore the 'tmpfs' and 'udev' file systems -- the /dev/ ones are the
+actual physical disks, and you can see that one is '/' and the other
+is '/mnt'.  That means that everything under '/mnt' is on '/dev/sdb',
+while everything *else* is on '/dev/sda1'.  Note that there's a lot
+more disk space on '/mnt' than on '/'...
+
+Using scp to transfer files on Mac OS X
+---------------------------------------
+
+You've already used 'scp' to transfer files around if you're on Mac OS X;
+this is just a short note to point out that you can use longer paths with
+scp, e.g. ::
+
+   scp root@ec2-204-236-214-10.compute-1.amazonaws.com:/mnt/data/data.tar.gz ~/Desktop/
+
+will copy the file '/mnt/data/data.tar.gz' on the remote machine to your
+local desktop.
+
+Using tar to combine files
+--------------------------
+
+UNIX-heads like to use the 'tar' command for lots of things.  You can use 'tar'
+yourself like so::
+
+  %% tar czf data.tar.gz /root/ngs-course
+
+will put the contents of /root/ngs-course into the file 'data.tar.gz'.
+
+Note that you can put multiple files on the line after the 'data.tar.gz'
+and they will all be stored in the .tar.gz file.
+
+Also note that '.tgz' is a common abbreviation for '.tar.gz'.
+
+You can use ::
+
+   %% tar tzvf data.tar.gz
+
+to view the contents of a tar.gz file (and it will just fail without doing
+any damage if it is not actually a tar.gz file).
+
+You can use ::
+
+   %% tar xzf data.tar.gz
+
+to uncompress/untar the file.
+
+Using zip to combine files
+--------------------------
+
+If you prefer 'zip', you can just use that (after installing 'zip' with
+'apt-get -y install zip'). This will put the entire 'ngs-course' directory
+into 'data.zip'::
+
+  zip -r data.zip /root/ngs-course
+
+Note that you can put multiple files on the line after the 'data.zip' command
+and they will all be stored in the .zip file.
+
+Then ::
+
+  %% unzip -v data.zip
+
+to list the contents and ::
+
+  %% unzip data.zip
+
+to unzip them into the current directory.
