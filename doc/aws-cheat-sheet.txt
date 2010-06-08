@@ -2,8 +2,8 @@
 Amazon Web Services cheat sheet
 -------------------------------
 
-See doc:`renting-a-computer-from-amazon` for a tutorial on starting up an
-Amazon EC2 system.
+See :doc:`tutorials/renting-a-computer-from-amazon` for a tutorial on
+starting up an Amazon EC2 system.
 
 Images
 ------

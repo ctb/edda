@@ -18,7 +18,7 @@ breseq is a bacterial resequencing analysis pipeline initially
 developed in Rich Lenski's lab at MSU for use in analyzing the Long
 Term Evolution Experiment resequencing data.
 
-First, :doc:`breseq-install`.
+First, go through :doc:`breseq-install`.
 
 Now, here are some tutorials for your delectation!
 

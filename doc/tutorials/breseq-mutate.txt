@@ -14,7 +14,12 @@ Go to the tutorial directory::
   %% cd /mnt/breseq_tutorial/02_mutate
 
 Edit the file "mutations.gd". Each line must conform to the
-specifications given above.
+specifications given in :doc:`breseq-test-drive`.  For example, you can
+put::
+
+   SNP     25      8       REL606F 1452    C       G       end=1452        frequency=1     insert_end=0    insert_start=0  start=1452
+
+at the top of the file.
 
 Note that:
 
