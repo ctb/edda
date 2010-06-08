@@ -11,7 +11,7 @@ Contents:
 .. toctree::
    :maxdepth: 1
 
-   ngs-course-schedule/index
+   ngs-course-schedule
    presentations
    tutorials/index
    data-sets

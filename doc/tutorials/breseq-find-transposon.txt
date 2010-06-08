@@ -1,0 +1,43 @@
+-----------------------------------------
+Finding transposon insertions with breseq
+-----------------------------------------
+
+:Author: Jeff Barrick
+:Date: June 8, 2010
+
+This tutorial allows you to use some tools from previous days. 
+
+Imagine that we have a reference sequence (the same one again) that we
+subjected to a transposon screen to recover mutants that had lost of
+your favorite phenotype. Now, you could map these mutations or do
+fancy PCR amplifications, but what if you just choose two different
+mutants, prepped their gDNA and sequenced to a relatively high depth
+with single-end Illumina. We should find reads that overlap the new
+junctions and find out what genes were inactivated by transposon
+insertions, right? One more complication, your collaborator who sent
+you the strains forgot to tell you what transposon they used.
+
+Run _breseq_ on this data set::
+
+  %% breseq -r REL606.20kb_fragment.gbk -o breseq test.fastq
+
+Take a look at the output. We didn't find the transposon? Why?
+
+There is a pile of reads that didn't match the genome stashed away in
+one of the _breseq_ directories at
+"breseq/05_alignment_correction/test.unmatched.fastq". Try assembling
+these reads to find out what else was there besides your reference
+genome in the sample, then BLAST whatever contigs you get against the
+NCBI database to figure out what the transposon sequence was likely to
+be.
+
+Download the GenBank file for the transposon that you found and place
+it in the main directory of this tutorial. Name it
+"transposon.gbk". (Or you can copy it from the answers directory, but
+that's no fun!) Run breseq again, this time with two reference
+sequences and a different output directory. ::
+
+   %% breseq -r REL606.20kb_fragment.gbk -r transposon.gbk -o breseq_transposon test.fastq
+
+Look at these results, and hopefully you can figure out where those
+transposons are!

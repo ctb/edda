@@ -1,0 +1,47 @@
+--------------------------
+Analyzing genome mutations
+--------------------------
+
+:Author: Jeff Barrick
+:Date: June 8, 2010
+
+This tutorial is really just a sandbox where you can make your own
+mutations to a genome, simulate reads data, and run it through
+_breseq_ to see what it can find.
+
+Go to the tutorial directory::
+
+  %% cd /mnt/breseq_tutorial/02_mutate
+
+Edit the file "mutations.gd". Each line must conform to the
+specifications given above.
+
+Note that:
+
+1. You can leave the "ref_seq" field of SNPs as just "." and put in
+whatever bases you want in the "ref_seq" field of SUB mutations
+(though the number does matter).
+
+2. The only "element_name" you have access to for MOB mutations is
+"IS1".
+
+3. If you try to get too clever, and DEL a region containing a SNP,
+for example, you will exceed what the MUTATE program is capable of
+understanding and may get unexpected results.
+
+4. The reference sequence is only 20,000 nt long, so be sure your
+positions and sizes stay within this.
+
+To generate your test data, execute these commands::
+
+   %% genomediff MUTATE -r REL606.20kb_fragment.gbk mutations.gd
+   %% fastq_utils SIMULATE -c 40 output.fna
+
+The -c option is average coverage of reads to generate. You might try
+raising or lowering it and seeing how it affects the results.  Be
+aware that the simulated data is randomly Poisson distributed so it
+will perform better at low coverage than real data.
+
+Finally, test your data with _breseq_:
+
+   %% breseq -r REL606.20kb_fragment.gbk output.fastq

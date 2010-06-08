@@ -36,9 +36,9 @@ Day 1 (Tue, June 1)
 Lecture: `Introduction to the course <files/lecture1-welcome.pdf>`__
 (Titus Brown)
 
-Tutorial 1: :doc:`../tutorials/unix-and-ssh-and-scp`
+Tutorial 1: :doc:`tutorials/unix-and-ssh-and-scp`
 
-Tutorial 2: :doc:`../tutorials/renting-a-computer-from-amazon`
+Tutorial 2: :doc:`tutorials/renting-a-computer-from-amazon`
 
 An Exercise in Reflection (Stage 1)
 
@@ -48,11 +48,11 @@ Day 2 (Wed, June 2)
 Lecture: `Computational Basics <files/lecture2-computation.pdf>`__
 (Titus Brown)
 
-Tutorial 1: :doc:`../tutorials/unix-and-blast`
+Tutorial 1: :doc:`tutorials/unix-and-blast`
 
-Tutorial 2: :doc:`../tutorials/unix-blast-and-long-running-jobs`
+Tutorial 2: :doc:`tutorials/unix-blast-and-long-running-jobs`
 
-Tutorial 3: :doc:`../tutorials/csv-files-and-python`
+Tutorial 3: :doc:`tutorials/csv-files-and-python`
 
 Day 3 (Th, June 3)
 ==================
@@ -60,9 +60,9 @@ Day 3 (Th, June 3)
 Lecture: `Thinking Statistically <lecture3-data-statistics.pdf>`__
 (Ian Dworkin)
 
-Tutorial 1: :doc:`../tutorials/plotting-with-matplotlib`
+Tutorial 1: :doc:`tutorials/plotting-with-matplotlib`
 
-Tutorial 2: :doc:`../tutorials/reciprocal-blast`
+Tutorial 2: :doc:`tutorials/reciprocal-blast`
 
 Entertainment: **Brewery outing for dinner.**
 
@@ -74,11 +74,11 @@ Day 4 (Fri, June 4)
 Lecture: `Mapping Reads to Known Genomes <lecture4-mapping.pdf>`__
 (Titus Brown)
 
-Tutorial 1: :doc:`../tutorials/bowtie-mapping`
+Tutorial 1: :doc:`tutorials/bowtie-mapping`
 
-Tutorial 2: :doc:`../tutorials/samtools-tutorial` (Rose)
+Tutorial 2: :doc:`tutorials/samtools-tutorial` (Rose)
 
-Tutorial 3: :doc:`../tutorials/other-mappers` and Bowtie parameters
+Tutorial 3: :doc:`tutorials/other-mappers` and Bowtie parameters
 
 Bonfire!
 
@@ -88,9 +88,9 @@ Day 5 (Sat, June 5)
 Lecture: Assembly.
 (Titus Brown)
 
-Tutorial 1: :doc:`../tutorials/short-read-assembly` (Jason)
+Tutorial 1: :doc:`tutorials/short-read-assembly` (Jason)
 
-Tutorial 2: :doc:`../tutorials/ucsc-visualization` (Likit)
+Tutorial 2: :doc:`tutorials/ucsc-visualization` (Likit)
 
 BBQ on Windmill Island.
 
@@ -107,21 +107,23 @@ Day 7 (Mon, June 7)
 Lecture: mRNAseq analysis.
 (Titus Brown)
 
-Tutorial 1 (11:30am): :doc:`../tutorials/simple-mrnaseq`
+Tutorial 1 (11:30am): :doc:`tutorials/simple-mrnaseq`
 
-Tutorial 2 (1:30pm): :doc:`../tutorials/DEGseq.txt` (Likit)
+Tutorial 2 (1:30pm): :doc:`tutorials/DEGseq` (Likit)
 
-Tutorial 3 (3:30pm): Working with & copying files and directories in UNIX.
+Tutorial 3 (3:30pm): :doc:`tutorials/unix-directories-and-files`
 
-Tutorial 4 (7:30pm): Linking to putative function: GO analysis.
+.. Tutorial 4 (7:30pm): Linking to putative function: GO analysis.
 
-Motivational lecture: why do things the difficult way, anyway? (Greg Wilson)
+Evening lecture: Doing science on software engineering (Greg Wilson)
 
 Day 8 (Tue, June 8
 ==================
 
 Lecture: Resequencing analysis.
 (Jeff Barrick)
+
+Tutorials: :doc:`tutorials/breseq`
 
 Bonfire!
 

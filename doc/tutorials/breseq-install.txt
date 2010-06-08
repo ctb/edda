@@ -1,0 +1,97 @@
+-----------------
+Installing breseq
+-----------------
+
+:Author: Jeff Barrick
+:Date: June 8, 2010
+
+You have a lot of configuration ahead of you!
+
+First, get a small EC2 instance up and running as in
+:doc:`renting-a-computer-from-amazon`.  Be sure to install it properly
+(:doc:`installing-your-cloud-system`).
+
+Install SSAHA2, R, Boost, and PARI
+----------------------------------
+
+Start by installing SSAHA2::
+
+  %% cd
+  %% curl -O ftp://ftp.sanger.ac.uk/pub4/resources/software/ssaha2/ssaha2_i686.tgz
+  %% tar -xzf ssaha2_i686.tgz
+  %% cp ssaha2_v2.5.2_i686/ssaha2* /usr/local/bin
+
+Install R, the statistical tool, and some other necessary tools::
+
+  %% apt-get -y install r-base zip xdg-utils libxss1 tcl8.5 tk8.5 gfortran
+
+.. @@ Likit, does this conflict with the R needed for DEGseq?
+
+Also grab CRAN, the R equivalent of CPAN::
+
+  %% curl -O http://cran.mtu.edu/bin/linux/debian/lenny-cran/r-base-core_2.11.1-1~lennycran.0_i386.deb
+  %% dpkg -i r-base-core_2.11.1-1~lennycran.0_i386.deb
+  %% curl -O http://cran.mtu.edu/bin/linux/debian/lenny-cran/r-cran-nnet_7.3-1-1~lennycran.2.11.1_i386.deb
+  %% dpkg -i r-cran-nnet_7.3-1-1~lennycran.2.11.1_i386.deb
+
+Get BOOST, a C++ library::
+
+  %% apt-get -y install boost-build libboost-dev
+
+And finally, install PARI, a math package::
+
+  %% curl -O http://pari.math.u-bordeaux.fr/pub/pari/unix/pari-2.3.5.tar.gz
+  %% tar xzf pari-2.3.5.tar.gz
+
+Install Perl and some Perl packages
+-----------------------------------
+
+Run the Perl "CPAN" shell, which lets you download and install packages for
+the Perl programming language.  Just accept the defaults until you get a 
+``cpan> `` prompt::
+
+   %% perl -MCPAN -e shell
+
+Now, at the ``cpan> `` shell prompt, type the following (again, accepting
+the defaults with 'enter')::
+
+   cpan> o conf prerequisites_policy follow
+   cpan> install Statistics::Distributions
+   cpan> install File::Path
+   cpan> install CJFIELDS/BioPerl-1.6.1.tar.gz
+   cpan> o conf makepl_arg paridir=/mnt/pari-2.3.5
+   cpan> install Math::Pari
+   cpan> quit
+
+All right, we're done with the requirements!
+
+Install breseq
+--------------
+
+Download breseq from the Barrick Lab repository::
+
+   %% cd /mnt
+   %% hg clone http://www.barricklab.org/hg/breseq
+
+Configure, build, and install it::
+
+   %% cd breseq
+   %% cp ec2-debian-user-config.jam user-config.jam
+   %% make
+   %% make install
+
+Now add breseq into your path, so that you can run it from anywhere.
+(For less complex software, we've been simply copying files into
+/usr/local/bin for this purpose, but for breseq we want to run it out
+of its own directory.) ::
+
+   %% echo "export PATH=\$PATH:/mnt/breseq/stage/bin" >> ~/.profile
+   %% source ~/.profile
+
+Download tutorial sequences
+---------------------------
+
+And, finally, grab the sequences for use in *this* tutorial::
+
+   %% cd /mnt
+   %% hg clone http://www.barricklab.org/hg/breseq_tutorial

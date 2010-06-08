@@ -1,0 +1,33 @@
+-------------------------------------------------
+Analyzing bacterial resequencing data with breseq
+-------------------------------------------------
+
+:Author: Jeff Barrick
+:Date: June 8, 2010
+
+.. toctree::
+   :hidden:
+
+   breseq-install
+   breseq-test-drive
+   breseq-mutate
+   breseq-find-transposon
+   breseq-mixed-population
+
+breseq is a bacterial resequencing analysis pipeline initially
+developed in Rich Lenski's lab at MSU for use in analyzing the Long
+Term Evolution Experiment resequencing data.
+
+First, :doc:`breseq-install`.
+
+Now, here are some tutorials for your delectation!
+
+Tutorial 1: :doc:`breseq-test-drive`
+
+Tutorial 2: :doc:`breseq-mutate`
+
+Tutorial 3: :doc:`breseq-find-transposon`
+
+Tutorial 4: :doc:`breseq-mixed-population`
+
+   

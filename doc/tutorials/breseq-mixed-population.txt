@@ -1,0 +1,63 @@
+---------------------------------------
+Analyzing mixed populations with breseq
+---------------------------------------
+
+:Author: Jeff Barrick
+:Date: June 8, 2010
+
+Finally, here's some real data. This is 68 different lambda phage
+genomes that were sequenced as a mixture. It illustrates some of the
+data quality issues and difficulties one might encounter trying to
+estimate mutation frequencies in a mixed population. ::
+
+  %% breseq --polymorphism-prediction -r lambda.gbk -o breseq lambda_mixed_population.fastq
+
+The --polymorphism-prediction flag tells _breseq_ to look for
+polymorphisms. The green highlighted lines are predicted mutations
+with a frequency that is statistically distinguishable from 0 and
+100%. Some predictions have been disqualified because they have read
+coverage biased toward one strand. If you click on these, a grey bar
+with this information will appear below the "RA" evidence line.
+
+This small dataset has an average coverage of slightly more than
+100-fold.
+
+If you're feeling ambitious, you can try running the complete data set
+which has an average coverage of ~50,000-fold.  It will probably need
+to run overnight, maybe longer; ask Titus if you want access to this.
+
+Other data sets
+---------------
+
+You can also try entire bacterial genomes, but -- again -- they will
+take a very long time to finish: 12-48 hrs.
+
+1. One suitable data set is an E. coli clone isolated from a
+population that evolved for 20,000 generations in the laboratory.  It
+has >40 mutations relative to its ancestor. You can download the fastq
+from the Short Read Archive here::
+
+   http://www.ncbi.nlm.nih.gov/sra/SRX012992?report=full
+
+The references sequence of the ancestor is here::
+
+   http://www.ncbi.nlm.nih.gov/nuccore/NC_012967.1
+
+Be sure that you download the "complete record"!
+
+2. Another good data set is gDNA isolated from the mixed *population*
+of E. coli that was frozen after 20,000 generations.  The individual
+above was picked from this population, so by comparing the results of
+sequencing the population to the individual, you can find out which
+mutations were present only in the clone's lineage, but at a low
+frequency in the population, or that were present at high frequencies
+in the population, but absent in the clone. You will want to run
+_breseq_ with the --polymorphism-prediction flag.
+
+The data is available here::
+
+   http://www.ncbi.nlm.nih.gov/sra/SRX015044?report=full
+
+3. The Campylobacter data set from an earlier tutorial can also be
+used. It's from a mixed population, so you might try adding
+--polymorphism-prediction to your _breseq_ command for it.
