@@ -1,0 +1,19 @@
+===============
+Tips and Tricks
+===============
+
+Using ssh-agent to log in (Mac OS X)
+------------------------------------
+
+Are you getting tired of using 'ssh -i $some_long_key_path>
+root@$some_long_machine_name' to connect to your Amazon machine?  You
+can do the following::
+
+   %% eval `ssh-agent`
+   %% ssh-add $some_long_key_path
+
+and then, until you exit that shell, you can just do ::
+
+   %% ssh root@$some_long_machine_name
+
+and it will no longer ask you for your key.

@@ -58,7 +58,7 @@ the defaults with 'enter')::
    cpan> o conf prerequisites_policy follow
    cpan> install Statistics::Distributions
    cpan> install File::Path
-   cpan> install CJFIELDS/BioPerl-1.6.1.tar.gz
+   cpan> force install CJFIELDS/BioPerl-1.6.1.tar.gz
    cpan> o conf makepl_arg paridir=/mnt/pari-2.3.5
    cpan> install Math::Pari
    cpan> quit

@@ -2,7 +2,7 @@
 Visualizing mappings with Samtools
 ==================================
 
-:Author: Rose Canino-Koning
+:Author: Rosangela Canino-Koning
 :Date: June 5, 2010
 
 First, set up a new EC2 server as in
@@ -131,3 +131,10 @@ And then::
 
 Note, here we're using a patched version of pysam that will work under
 the version of Python available on your EC2 machine.
+
+Samtools Resources
+------------------
+
+http://samtools.sourceforge.net/samtools.shtml
+
+http://sourceforge.net/apps/mediawiki/samtools/index.php?title=SAM_FAQ
