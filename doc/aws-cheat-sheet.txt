@@ -1,0 +1,17 @@
+-------------------------------
+Amazon Web Services cheat sheet
+-------------------------------
+
+See doc:`renting-a-computer-from-amazon` for a tutorial on starting up an
+Amazon EC2 system.
+
+Images
+------
+
+ami-ed16f984 - small/medium instance, "alestic/debian-5.0-lenny-base-20100319.manifest.xml".
+
+ami-fb16f992 - large+ instance, "alestic-64/debian-5.0-lenny-base-64-20100319.manifest.xml".
+
+Here's a link to the different `instance types
+<http://aws.amazon.com/ec2/#instance>`__, and you should pay attention
+to the `pricing <http://aws.amazon.com/ec2/#pricing>`__, too!

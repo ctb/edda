@@ -16,6 +16,7 @@ Contents:
    tutorials/index
    data-sets
    unix-cheat-sheet
+   aws-cheat-sheet
    quotes
 
 License

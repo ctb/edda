@@ -25,3 +25,4 @@ Contents:
    ucsc-visualization
    simple-mrnaseq
    DEGseq
+   breseq
