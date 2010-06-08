@@ -17,7 +17,11 @@ junctions and find out what genes were inactivated by transposon
 insertions, right? One more complication, your collaborator who sent
 you the strains forgot to tell you what transposon they used.
 
-Run _breseq_ on this data set::
+First, go to the third tutorial directory::
+
+  %% cd /mnt/breseq_tutorial/03_find_transposon
+
+Now, run _breseq_ on this data set::
 
   %% breseq -r REL606.20kb_fragment.gbk -o breseq test.fastq
 

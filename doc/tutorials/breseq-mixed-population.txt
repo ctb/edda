@@ -8,8 +8,11 @@ Analyzing mixed populations with breseq
 Finally, here's some real data. This is 68 different lambda phage
 genomes that were sequenced as a mixture. It illustrates some of the
 data quality issues and difficulties one might encounter trying to
-estimate mutation frequencies in a mixed population. ::
+estimate mutation frequencies in a mixed population.
 
+Go to the 4th tutorial and run breseq::
+
+  %% cd /mnt/breseq_tutorial/04_mixed_population
   %% breseq --polymorphism-prediction -r lambda.gbk -o breseq lambda_mixed_population.fastq
 
 The --polymorphism-prediction flag tells _breseq_ to look for

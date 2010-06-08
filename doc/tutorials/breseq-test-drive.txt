@@ -23,12 +23,75 @@ relative to the current directory.
 
 _breseq_ is a pipeline that has several steps. 
 
-Any line that is preceded by [system] is actually a command that is
-sent to the shell (same as when you type it in).  You might recognize
-that _breseq_ is using SAMTools and invoking R at several points.  If
-_breseq_ is interrupted in the middle of processing, it saves
-checkpoint files and begins as close as it can to where it left
-off. This is a common strategy in @@
+01_sequence_conversion
+~~~~~~~~~~~~~~~~~~~~~~
+
+Converts the reference sequence to a FASTA file and indexes it with
+SAMTools.  Saves some information about the gene annotation in the
+GenBank file in a binary format for easier reloading.
+
+02_reference_alignment
+~~~~~~~~~~~~~~~~~~~~~~
+
+SSAHA2 alignment of reads to the reference genome.
+
+03_candidate_junctions
+~~~~~~~~~~~~~~~~~~~~~~
+
+Looks at mosaic read alignments to come up with a reasonable number of
+candidate junctions that are well-supported. Outputs the sequences of
+these junctions in a FASTA file.
+
+04_candidate_junction_alignment
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+SSAHA2 alignment of reads to the candidate junctions.
+
+05_alignment_correction
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Resolves whether reads map best to a junction candidate or the reference genome
+and trims ambiguously aligned ends at the same time.
+
+06_bam
+~~~~~~
+
+Uses SAMTools to create BAM files for the alignments to the reference
+genome and the candidate junctions. You can manipulate and visualize
+read mappings in these files using "samtools" commands (if you have it
+installed).
+
+07_error_calibration
+~~~~~~~~~~~~~~~~~~~~
+
+Goes through alignment columns in the reference genome and counts up
+how many "C" are observed when the reference is an "A" at a base
+quality score of 35, ...  and all other such combinations. Then, uses
+R to train a base error model from these results. Notice that this
+step is pretty fast because it was rewritten in C++ to access the
+SAMTools library.
+
+Tabulates the unique and redundant coverage at each position in the
+reference genome and fits a negative binomial distribution to this to
+decide on coverage cutoffs for predicting missing coverage.
+
+08_mutation_identification
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Goes through alignment columns to predict base changes, indels, and
+missing coverage. This step is algorithmically similar to the first
+part of 07. It is much slower because it does a little more analysis,
+but mostly because it uses the Perl adaptor to access the SAMTools
+code library instead of being written wholly in C++.
+
+----
+
+In the output, any line that is preceded by [system] is actually a
+command that is sent to the shell (same as when you type it in).  You
+might recognize that _breseq_ is using SAMTools and invoking R at
+several points.  If _breseq_ is interrupted in the middle of
+processing, it saves checkpoint files and begins as close as it can to
+where it left off. This is a common strategy in pipelines.
 
 Now copy one the entire "output" directory that breseq creates within
 the "breseq" directory back to your computer. After copying it back to

@@ -47,6 +47,6 @@ raising or lowering it and seeing how it affects the results.  Be
 aware that the simulated data is randomly Poisson distributed so it
 will perform better at low coverage than real data.
 
-Finally, test your data with _breseq_:
+Finally, test your data with _breseq_::
 
    %% breseq -r REL606.20kb_fragment.gbk output.fastq
