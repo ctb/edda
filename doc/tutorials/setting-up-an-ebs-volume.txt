@@ -1,0 +1,63 @@
+=======================================================
+Setting up an Amazon Elastic Block Storage (EBS) Volume
+=======================================================
+
+Prerequisites
+-------------
+
+This tutorial assumes you've already set up an account on Amazon Web Services, and that you've
+completed the EC2 tutorial to set up an Amazon instances.
+
+Ask Amazon to create a new Elastic Block Storage Volume for you
+---------------------------------------------------------------
+
+At the AWS Management Console, on the left menu bar, click "Volumes".
+
+.. image:: images/ClickVolumes.png
+   :width: 90%
+
+
+Click "Create Volume".
+
+.. image:: images/CreateVolume.png
+   :width: 90%
+
+Enter the desired size, and select the zone in which your instance is running. The volume and
+instance must be in the same zone. Otherwise, the volume cannot be attached to your instance.
+
+Then click "Create".
+
+.. image:: images/CreateVolumeWindow.png
+   :width: 90%
+
+
+Wait for your volume to finish being created, then click "Attach Volume".
+
+.. image:: images/AttachVolume.png
+   :width: 90%
+
+Select the desired running instance. You may leave the Device at the default: /dev/sdf. Click
+"Attach".
+
+.. image:: images/AttachVolumeWindow.png
+   :width: 90%
+
+When attachment is complete, connect to your instances via SSH.
+
+If the volume is newly created, you must format the volume.
+WARNING: ONLY DO THIS ONCE, WHEN YOU FIRST CREATE THE VOLUME. OTHERWISE, YOU WILL LOSE ALL YOUR
+DATA.::
+
+  %% mkfs -t ext2 /dev/sdf
+
+Then, mount the volume. You'll do this every time you attach the volume to an instance.::
+
+  %% mkdir /mnt/ebs
+  %% mount /dev/sdf /mnt/ebs
+
+Your drive is now ready to use.
+
+Shutting down your instance
+---------------------------
+
+Any volumes you have attached will automatically detach when you shut down the instance.
