@@ -128,7 +128,7 @@ Replace the 'if' code inside the for loop with::
 
    line = line.strip()
    cols = line.split('\t')
-   print cols[0], cols[2]
+   print cols[0], cols[3]
 
 and now run that program::
 
@@ -149,13 +149,13 @@ you had a file where the columns were tab separated but one of the
 column values had a space in it, you would be splitting that value
 in two along with all the other things in the file.
 
-The 'cols[0]' and 'cols[2]' commands pull out the first and third
+The 'cols[0]' and 'cols[3]' commands pull out the first and fourth
 column (remember: indexed starting at 0!) from the file.
 
 If you change the last two lines to::
 
     first, second, third, fourth = line.split('\t')
-    print first, third
+    print first, fourth
 
 (see 's5.py') then you will be unpacking the results of the split into
 variables named first, second, third, fourth -- these can be any variable

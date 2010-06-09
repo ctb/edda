@@ -73,5 +73,41 @@ digit number.  You can do::
 (replacing $pid with the number) to stop the jobs.
 
 
+Long running jobs, take 2
+-------------------------
 
+A more complicated (but incredibly awesome, useful, and life-changing) way
+to run jobs is to use 'screen'.
 
+Install screen::
+
+   %% apt-get -y install screen
+
+Run it::
+
+   %% screen
+
+Now you have a "virtual" text window manager in which you can run programs
+and detach from/reattach to the programs.
+
+Run some program, like bowtie or bwa.
+
+Then 'detach' from your screen session: hit 'CTRL-A' followed by 'd'.
+
+Now you can log out and everything in the screen will continue to run.
+
+To reattach, log back in and type 'screen -r'.  You will see the program
+still running and all of the output from it.
+
+If you are running multiple screens, you can do ::
+
+  %% screen -ls
+
+to see how many, and ::
+
+  %% screen -r $num
+
+to reattach to a specific screen session.
+
+Screen also lets you run multiple shells and switch between them, and it
+has its own copy/paste buffer, etc.  So it can get pretty complicated!
