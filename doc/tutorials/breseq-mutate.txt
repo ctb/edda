@@ -17,9 +17,10 @@ Edit the file "mutations.gd". Each line must conform to the
 specifications given in :doc:`breseq-test-drive`.  For example, you can
 put::
 
-   SNP     25      8       REL606F 1452    C       G       end=1452        frequency=1     insert_end=0    insert_start=0  start=1452
+   SNP     25      8       REL606F 1452    C       G
 
-at the top of the file.
+at the top of the file (make sure to separate the fields with TABs rather than
+spaces).
 
 Note that:
 
@@ -49,4 +50,4 @@ will perform better at low coverage than real data.
 
 Finally, test your data with _breseq_::
 
-   %% breseq -r REL606.20kb_fragment.gbk output.fastq
+   %% breseq -r REL606.20kb_fragment.gbk -o breseq output.fastq

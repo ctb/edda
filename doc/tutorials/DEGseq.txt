@@ -1,5 +1,9 @@
+=========================================
 Gene differential expression using DEGseq
 =========================================
+
+:Author: Likit Preeyanon
+:Date: June 7, 2010
 
 First, install R and related programs::
 

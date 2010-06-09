@@ -26,3 +26,5 @@ Contents:
    simple-mrnaseq
    DEGseq
    breseq
+   setting-up-an-ebs-volume
+   programming-scripts

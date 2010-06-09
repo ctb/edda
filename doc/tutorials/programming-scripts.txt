@@ -1,0 +1,247 @@
+------------------------------------
+Writing Python scripts incrementally
+------------------------------------
+
+We've been talking a lot about scripts, and walking through some of them.
+Now we'll show you how to create scripts step by step.
+
+"Scripts" are kind of nebulously defined as "small programs written in
+a scripting language".  They're characterized by the use of languages
+that don't need to be compiled -- that is, they're programs for which
+you don't need to run 'make' or anything.  Therefore they're also
+(almost) always text files, so you can just open them up in any text editor.
+
+Hello, world
+------------
+
+Let's start by creating a small script file::
+
+  #! /usr/bin/env python
+  print 'hello, world'
+
+(This is in ``~/ngs-course/script-tutorial/s1.py`` if you don't want to type
+it yourself.)  You can run this script by typing::
+
+  %% python $scriptfile
+
+e.g. ::
+
+  %% python ~/ngs-course/script-tutorial/s1.py
+
+This script does two things.  First, it has a special comment at the top
+of the file that tells UNIX that it's a Python script.  If you do ::
+
+  %% chmod +x ~/ngs-course/script-tutorial/s1.py
+
+then UNIX will know that this file is a script and will use the
+'python' program to run it::
+
+  %% ~/ngs-course/script-tutorial/s1.py
+
+And secondly, what does this script do?  Yep, prints 'hello, world'.
+
+Reading files, line by line
+---------------------------
+
+Now let's change the script to do something a little bit more interesting.
+Replace the 'print' line with the following::
+
+  import sys
+  print 'reading filename', sys.argv[1]
+
+  for line in open(sys.argv[1]):
+      print line
+
+This script is in the 's2.py' file, and you need to give it a filename
+as the first option on the command line.  Let's give it 'test.txt' in
+the script-tutorial directory::
+
+  %% python ~/ngs-course/script-tutorial/s2.py ~/ngs-course/script-tutorial/test.txt
+
+You should see the output::
+
+   reading filename /Users/t/ngs-course/script-tutorial/test.txt
+   col1    col2    col3    col4
+   
+with a blank line after the line starting with 'col1'.
+
+So, what's going on?  Well, the two new things are the use of 'sys.argv'
+and a 'for' loop.
+
+'sys.argv' is a list that contains all of the arguments on the command
+line.  Lists in python are indexed starting at 0, so sys.argv[0] contains
+name of the script itself, and sys.argv[1] contains the first argument
+to the script.
+
+The 'for' loop is more complicated, in some sense.  Here you're saying
+"run the command 'print line'" on every line in the file; technically,
+'line' is taking on the value of each line in the file, in succession.
+Then for each value of 'line', everything that is indented under the
+'for' command is executed.
+
+You can read more about what the for loop does in
+`the Python tutorial <http://docs.python.org/tutorial/>`__.
+
+One last point -- why do we get that blank line at the end of the
+output?  That's because 'print' automatically puts a newline character
+(represented by '\n' programmatically, but invisible to us) at the end
+of every line it prints out.  But in this case, the file 'test.txt'
+*also* contains a newline character at the end of every line.  So you
+get two newline character as a result.  You can use 'line.rstrip()' to
+get rid of any trailing spaces or newlines or invisible characters
+(whitespace) in 'line'; 'line.strip()' gets rid of both leading and
+trailing whitespace, and 'line.lstrip()' does a 'left' strip and removes
+leading whitespace only.
+
+Using 'if' statements
+---------------------
+
+Now, replace the 'print line' statement with this code::
+
+   if line.startswith('ee'):
+       print line.strip()
+
+You'll have to indent both the 'if' (four spaces) and the 'print' (eight
+spaces).
+
+You can probably guess what this does; it prints out only lines that
+start with the string 'ee'.  Try it out on 'test2.txt'::
+
+    %% python ~/ngs-course/script-tutorial/s3.py ~/ngs-course/script-tutorial/test2.txt
+
+Works!
+
+You can also put in an 'else:' statement that executes whenever the 'if'
+condition is false.
+
+Splitting columns on whitespace
+-------------------------------
+
+We've already gone through several scripts that use the `csv module
+<http://docs.python.org/library/csv.html>`__ to read and write CSV
+files, but many bioinformatics files contain space- or tab-separated
+columns.  How do you deal with those?
+
+Answer: use 'split'.
+
+Replace the 'if' code inside the for loop with::
+
+   line = line.strip()
+   cols = line.split('\t')
+   print cols[0], cols[2]
+
+and now run that program::
+
+   %% python ~/ngs-course/script-tutorial/s4.py ~/ngs-course/script-tutorial/test2.txt
+
+You should see::
+
+  reading filename /Users/t/ngs-course/script-tutorial/test2.txt
+  aa d
+  ee h
+
+So, here the 'line.split()' is *splitting* each line on the tab
+character (that's '\t').  If you put a ',' there you would be
+splitting on commas, if you put a ' ' there, it would be spaces.  By
+default, if you give it nothing at all, it splits on any whitespace;
+that would work for this example (because tabs are whitespace), but if
+you had a file where the columns were tab separated but one of the
+column values had a space in it, you would be splitting that value
+in two along with all the other things in the file.
+
+The 'cols[0]' and 'cols[2]' commands pull out the first and third
+column (remember: indexed starting at 0!) from the file.
+
+If you change the last two lines to::
+
+    first, second, third, fourth = line.split('\t')
+    print first, third
+
+(see 's5.py') then you will be unpacking the results of the split into
+variables named first, second, third, fourth -- these can be any variable
+name, so you could name them 'foo', 'bar', 'baz', and 'bif', too.
+
+Generally if I am interested in more than two or three values I unpack
+into variables; otherwise I use column notation.  But either way works.
+
+Writing data back out
+---------------------
+
+Suppose you wanted to print out a transformation of the data that
+had only the first and third columns, capitalized.  You could do
+that pretty easily.  Change the very first 'print' to ::
+
+  print >>sys.stderr, 'reading filename', sys.argv[1]
+
+and the change the last 'print' to ::
+
+  output = [ first, third ]
+  print '\t'.join(output)
+
+(see s6.py) and now run it::
+
+  python ~/ngs-course/script-tutorial/s6.py ~/ngs-course/script-tutorial/test2.txt > output.txt
+
+You should see 'reading filename...', but everything else will be saved to
+'output.txt'.  Ta-da!
+
+The last two lines say "make a list containing the columns you want to
+print out", and then "put a tab between each elements of the list and
+print it out".  You can put '\n' there to put in newlines, or ':' for
+colons, or ',' for commas, etc.
+
+The 'sys.stderr' change is just a way of telling Python to send the
+debugging output to a different place than the other output.
+
+Debugging your script
+---------------------
+
+I'm a big fan of print statements for debugging.  If a command fails,
+just put a 'print' statement in to see what's going into that 
+command; for example, can you figure out which line is causing
+'s6.py' to bork on 'test3.txt'?
+
+Try running::
+
+  python ~/ngs-course/script-tutorial/s6.py ~/ngs-course/script-tutorial/test3.txt > output.txt
+
+You should see::
+
+  Traceback (most recent call last):
+    File "/Users/t/ngs-course/script-tutorial/s6.py", line 7, in <module>
+      first, second, third, fourth = line.split('\t')
+  ValueError: need more than 3 values to unpack
+
+Once you figure out which line it is, can you figure out what's wrong?
+
+The first thing you should try is just deleting the line.  Does that solve
+the problem?  If so, then you know it's *just* that line, and not something
+above or below it that's causing the problem.  You can also delete other
+lines (above or below).
+
+A really useful tip to figure out what's going wrong is to use ::
+
+  print (line,)
+
+instead of just 'print line'.  This gives you Python's internal representation
+of the string rather than the human-formatted version... what do you see?
+
+Scripts vs programs
+-------------------
+
+You can write "real programs" in scripting languages (programs with
+windows, graphical interfaces, etc.)  The boundary between a script
+and a full program is fuzzy, but if the script is longer than 100 or
+200 lines, I would start to call it a program.  (Not that it matters
+what you call it.)
+
+Once your scripts turn into longer programs, you should think about
+going back through the Python tutorial and starting to use functions,
+multiple files, etc.  Taking an intro CS course might also be useful
+at this point ;).
+
+We'll talk a bit about functions and more complicated data structures
+tomorrow.
+
+.. testing your script
+.. basic data structures

@@ -9,7 +9,9 @@ Contents:
 
    tutorials/unix-directories-and-files
 
-Also see :doc:`tutorials/unix-directories-and-files`
+Also see :doc:`tutorials/unix-directories-and-files`.
+
+Another complete tutorial is online here: http://www.ee.surrey.ac.uk/Teaching/Unix/index.html
 
 Working at the command line
 ---------------------------
@@ -21,6 +23,14 @@ Use arrow keys for command line history and editing: up/down arrows will
 move you through commands you've run, and left/right arrows (plus backspace
 etc.) let you edit those commands.
 
+Looking at text files
+---------------------
+
+'head' and 'tail' will display at the first 10 or last 10 lines of a text
+file, respectively.  'head -20' will display at the top 20 lines.
+
+'less' will let you page through output.  'q' exits from 'less' before
+the end of the file.
 
 Enabling access for other people
 --------------------------------
@@ -47,3 +57,21 @@ Then add 'new_key.pub' to ``/root/.ssh/authorized_keys``::
 
 and give them the 'new_key' file as their private key to log into this
 EC2 machine only.
+
+Long running jobs
+-----------------
+
+Use 'top' to keep track of what jobs are running on your machine, either
+under your current login/connection or from previous ones.  Type 'q' to
+quit out of top.
+
+The first column in top is the process ID, or PID.  It's usually a 3-5
+digit number.  You can do::
+
+   kill -9 $pid
+
+(replacing $pid with the number) to stop the jobs.
+
+
+
+
