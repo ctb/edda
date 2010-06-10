@@ -1,11 +1,29 @@
-apt-get -y install git-core
-git clone http://github.com/jbrowse/jbrowse.git
+Get the latest version of jbrowse:
+
+  %% apt-get -y install git-core
+
+  %% cd /mnt
+  %% git clone http://github.com/jbrowse/jbrowse.git
+
+Install a bunch of prerequisites for Perl:
+
+   %% perl -MCPAN -e shell
+
+   cpan> o conf prerequisites_policy follow
+   cpan> install Bundle::BioPerl
+   cpan> install JSON
+   cpan> install JSON::XS
+
+apt-get -y install apache2
+modify firewall rules
+visit port 80
 
 
-perl -MCPAN -e shell
+ln -fs /mnt/jbrowse /var/www/jbrowse
 
-o conf prerequisites_policy follow
 
-install Bundle::BioPerl
-install JSON
-isntall JSON::XS
+Set up jbrowse to look at Myxo
+------------------------------
+
+  %% cd /mnt/jbrowse
+  %% bin/prepare-refseqs.pl --fasta /mnt/myxo/myxo-genome.fa

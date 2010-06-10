@@ -55,16 +55,21 @@ alignment was the best.
   %% bowtie -p 2 -m 1 myxo MP1_pf.fastq > control.map
   %% bowtie -p 2 -m 1 myxo M2_pf.fastq > chip.map
 
-You should see::
+You should see ::
 
   # reads processed: 12460030
   # reads with at least one reported alignment: 8902883 (71.45%)
   # reads that failed to align: 3245241 (26.05%)
   # reads with alignments suppressed due to -m: 311906 (2.50%)
+  Reported 8902883 alignments to 1 output stream(s)
 
 from the first bowtie, and ::
 
-  ...
+  # reads processed: 12972579
+  # reads with at least one reported alignment: 9625057 (74.20%)
+  # reads that failed to align: 3090348 (23.82%)
+  # reads with alignments suppressed due to -m: 257174 (1.98%)
+  Reported 9625057 alignments to 1 output stream(s)
 
 from the second bowtie.
 
@@ -93,7 +98,7 @@ Running QuEST
 Create a genome table::
 
   %% cd /mnt/myxo
-  %% echo M_xanthus 9139764 > myxo.gt
+  %% echo chr 9139764 > myxo.gt
 
 and run the analysis::
 
@@ -219,20 +224,37 @@ browser.
 
 To view them, find and view the reference genome of interest in the
 genome browser. In this case we'll want to use the archaea and
-bacterial version of the UCSC genome browser
+bacterial version of the UCSC genome browser at
 
-http://archaea.ucsc.edu/cgi-bin/hgTracks?hgsid=326843&clade=bacteria-deltaproteobacteria&org=Myxococcus+xanthus+DK+1622
+   http://archaea.ucsc.edu/cgi-bin/hgTracks?clade=bacteria-deltaproteobacteria&org=Myxococcus+xanthus+DK+1622
+
+First, copy all the files to a common location::
+
+   %% mkdir /mnt/quest-data
+   %% cp QuEST_analysis/tracks/wig_profiles/by_chr/background_unnormalized/chr.wig.gz QuEST_analysis/tracks/data_bed_files/by_chr/RX_noIP/RX_noIP.chr.bed.gz QuEST_analysis/tracks/ChIP_calls.filtered.bed QuEST_analysis/tracks/data_bed_files/by_chr/ChIP/MrpC.chr.bed.gz QuEST_analysis/tracks/bed_graph/MrpC.bedGraph.gz /mnt/quest-data
+
+Now, download all these files to your local computer.
+
+Go to the Web site,
+
+   http://archaea.ucsc.edu/cgi-bin/hgTracks?clade=bacteria-deltaproteobacteria&org=Myxococcus+xanthus+DK+1622
+
+Then:
 
  - click on "manage custom tracks" button underneath the main browser display   
  - click on "add custom tracks" button
 
- - add QuEST calls track "QuEST_analysis/tracks/ChIP_calls.filtered.bed"
+ - add the QuEST calls track::
 
- - add the sequence read data track
-    "QuEST_analysis/tracks/data_bed_files/by_chr/ChIP/MrpC.M_xanthus.bed.gz"   
+       ChIP_calls.filtered.bed
 
- - add the sequence read bedgraph display
-    "QuEST_analysis/tracks/bed_graph/MrpC.bedGraph.gz"
+ - add the sequence read data track::
+
+       ChIP/MrpC.chr.bed.gz
+
+ - add the sequence read bedgraph display::
+
+       MrpC.bedGraph.gz
 
  - you should now see all these tracks being uploaded into the browser:
 
@@ -250,13 +272,20 @@ Add control data to the display
 
   - click on "add custom tracks" button in the "manage custom tracks" display page
 
-  - Upload control data for chr11: select file      
-    "QuEST_analysis/tracks/data_bed_files/by_chr/RX_noIP, click "Open"
-    then "Submit" button (see the screen shot below)
+  - Upload control data for chr11: select file::
+    
+        RX_noIP.chr.bed.gz
+
+    click "Open" then "Submit" button (see the screen shot below)
 
   - Upload control data density track: click on "add custom tracks",  
-    select file
-    "QuEST_analysis/tracks/wig_profiles/by_chr/background_unnormalized/M_xanthus.wig.gz",
+    select file::
+
+        chr.wig.gz
+
     hit "Open" and "Submit" button (see the screen shot below)    
 
 Refresh to see the new tracks displayed.
+
+.. You can also take a look at the data by giving the UCSC genome browser a
+.. direct link to your serve
