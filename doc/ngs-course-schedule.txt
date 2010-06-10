@@ -130,9 +130,9 @@ Bonfire!
 Day 9 (Wed, June 9)
 ===================
 
-Tutorial, 11am: :doc:`setting-up-an-ebs-volume`
+Tutorial, 11am: :doc:`tutorials/setting-up-an-ebs-volume`
 
-Tutorial, 2:30pm: :doc:`programming-scripts`
+Tutorial, 2:30pm: :doc:`tutorials/programming-scripts`
 
 Lecture, 8pm: ChIP-seq analysis.
 (Mark Robinson)
@@ -144,9 +144,9 @@ Tutorial, 9am: ChIP-seq analysis with QUeST
 
 Tutorial, 11am: Motif finding
 
-Tutorial, 1:30pm: JBrowse
+Tutorial, 1:30pm: Python data structures.
 
-Tutorial, 3pm: GO stuff
+Tutorial, 3pm: JBrowse; GO stuff.
 
 An Exercise in Reflection (Stage 2)
 

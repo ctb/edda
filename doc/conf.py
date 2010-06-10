@@ -37,8 +37,8 @@ source_suffix = '.txt'
 master_doc = 'index'
 
 # General information about the project.
-project = u'angus'
-copyright = u'2010, C. Titus Brown'
+project = u'ANGUS'
+copyright = u'2010, C. Titus Brown and others'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the

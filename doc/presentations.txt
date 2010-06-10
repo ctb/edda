@@ -15,3 +15,7 @@ Lecture 5: `Assembly <files/lecture5-assembly.pdf>`__
 Lecture 6: `mRNAseq <files/lecture6-mrnaseq.pdf>`__
 
 Bonus lecture: `Bits of Evidence <http://www.slideshare.net/gvwilson/bits-of-evidence-2338367>`__ (Greg Wilson)
+
+Lecture 7: `Analyzing resequencing data with breseq <files/lecture7-breseq.pdf>`__ (Jeff Barrick)
+
+Lecture 8: `ChIP-seq <files/lecture8-chipseq.pdf>`__ (Mark Robinson)

@@ -3,8 +3,23 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to angus's documentation!
-=================================
+Welcome to ANGUS!
+=================
+
+ANGUS is a site built around the `2010 course on Analyzing
+Next-Generation Sequencing Data
+<http://bioinformatics.msu.edu/ngs-summer-course-2010>`__.  It
+contains a number of detailed tutorials on mapping, assembly, mRNAseq,
+ChIP-seq, and resequencing analysis.  Enjoy!
+
+Major updates and news on future courses (this and others!) will be
+posted to the `ngs-course-announce mailing list
+<http://lists.idyll.org/listinfo/ngs-course-announce>`__; join to keep
+up.
+
+We would like to especially thank the MSU `Gene Expression in Development
+and Disease Focus Group <http://www.bch.msu.edu/GEDD/>`__ for funding
+this course!
 
 Contents:
 
@@ -19,6 +34,12 @@ Contents:
    unix-cheat-sheet
    aws-cheat-sheet
    quotes
+
+External links
+--------------
+
+The `SEQanswers site <http://seqanswers.com/>`__ is a great place to look
+for answers to detailed questions.
 
 License
 -------
