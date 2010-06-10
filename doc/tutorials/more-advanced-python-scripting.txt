@@ -93,20 +93,100 @@ to set the value for the key 'foo' equal to 'bar',
 to retrieve the value associated with the key 'foo' (which will be
 'bar')
 
-for conversion, lookup, etc.
+One really important thing about dictionaries is that there are a lot
+of Python libraries that look like dictionaries (a.k.a. "follow the
+mapping protocol).  Pretty much any data container in Python can be made
+to look like a dictionary.
 
-on disk.
+For example...
 
 More FASTA stuff, with screed
 -----------------------------
 
-using screed to index and then retrieve
+...we can use the screed FASTA/FASTQ parser library to make FASTA and FASTQ
+files look like dictionaries.
+
+Let's start by installing screed::
+
+  %% cd ~/
+  %% apt-get -y install git-core
+  %% git clone http://github.com/acr/screed.git
+  %% cd screed
+  %% python setup.py install
+
+Now let's get some reasonably big FASTA file, like our mRNAseq library
+from lamprey work::
+
+  %% mkdir /mnt/fasta
+  %% cd /mnt/fasta
+  %% curl -O http://angus.ged.msu.edu.s3.amazonaws.com/lamprey-rnatigs.fa.gz
+  %% gunzip lamprey-rnatigs.fa.gz
+
+Now index it::
+
+  %% python ~/screed/screed/fadbm.py lamprey-rnatigs.fa
+
+(Use 'fqdbm.py' for FASTQ files.)
+
+From now on, you can use 'screed' to access sequences from this file as if
+they're in a dictionary.
+
+One more script: RPKM adjustment
+--------------------------------
+
+One reasonably common thing to do with mRNAseq is adjust expression
+levels by the size of the mRNA transcript, e.g. "reads per kilobase of
+mRNA". As we discussed, you still can't numerically compare these
+expression levels within a sample, but it *is* possible to get some
+idea of relative expression levels by normalizing to the transcript
+length.  (You also still need to do quantile normalization to compare
+between samples, too!)
+
+In order to do this adjustment, you need two things: the original count
+per molecule, and the length of the sequence.  However, because the
+data isn't "in order" -- that is, the counts aren't listed in the same order
+as the sequences are in the FASTA file -- you have to be able to look up
+the length of any given FASTA sequence.  So let's use screed to do this!
+
+First, update your 'ngs-course' directory::
+
+   %% cd ~/ngs-course
+   %% hg pull -u
+
+Now, go back to the 'fasta' directory::
+
+   %% cd /mnt/fasta
+
+and grab an mRNAseq 'count' file::
+
+   %% curl -O http://angus.ged.msu.edu.s3.amazonaws.com/lamprey-mrnaseq-a.count.gz
+   %% gunzip lamprey-mrnaseq-a.count.gz
+
+Now, run the 'rpkm.py' script on the database and count file::
+
+   %% python ~/ngs-course/mrnaseq/rpkm.py lamprey-rnatigs.fa lamprey-mrnaseq-a.count
+
+The key part of `the rpkm script
+<http://bitbucket.org/ctb/ngs-course/src/tip/mrnaseq/rpkm.py>`__ is
+the following code::
+
+  seqdb = screed.ScreedDB(sequence_database)
+
+  for line in open(counts_file):
+      count, name = line.strip().split()  # parse lines like '1523 geneX'
+      count = int(count)
+
+      # look up the sequence in the seqdb dictionary-like database.
+      sequence_length = len(seqdb[name].sequence)
+
+where in the last line we look up the sequence record in the database,
+as if it were a dictionary.
 
 Further reading
 ---------------
 
 There's a plethora of good material out there for learning how to
-program in Python.
+program in Python:
 
 Honestly, start with `the Python tutorial <http://docs.python.org/tutorial/>`__.
 

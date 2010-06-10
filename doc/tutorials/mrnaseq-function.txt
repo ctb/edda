@@ -2,23 +2,44 @@
 More mRNAseq analysis: connecting to putative function
 ------------------------------------------------------
 
-Normalization revisited
------------------------
+Here, we're going to show you how to take mRNAseq from an "emerging model
+organism", i.e. one without 
 
-normalizing the input data set => 0s
-rpkm vs normalization
+Make sure you've gone through the :doc:`simple-mrnaseq` tutorial first!
+And be sure to update your 'ngs-course' scripts::
+
+  %% cd ~/ngs-course
+  %% hg pull -u
+
+.. @@
+.. Normalization revisited
+.. -----------------------
+
+.. normalizing the input data set => 0s
+.. rpkm vs normalization
 
 Overexpression vs Over-representation
 -------------------------------------
 
+Note that there are two steps here.  The *first* step is to decide
+which genes are over- (or under-) -expressed, based on some procedure.
+(We're going to use straight expression ratio with a pseudocount, but
+you can use DEGseq or whatever other strategy you want.)
+
 Extracting overexpressed genes
 ------------------------------
+
+...
 
 "Converting" to mouse gene IDs
 ------------------------------
 
+::
+
+  %% blastall -i lamprey-rnatigs.fa -d ../ngs-course-blast/mouse.protein.faa -p blastx -o lamprey.x.mouse -e 1e-6 -a 8
+
 Using DAVID
 -----------
 
-Using GOMiner
--------------
+.. Using GOMiner
+.. -------------

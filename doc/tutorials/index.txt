@@ -30,3 +30,4 @@ Contents:
    programming-scripts
    chipseq-peak-finding
    chipseq-motif-finding
+   more-advanced-python-scripting

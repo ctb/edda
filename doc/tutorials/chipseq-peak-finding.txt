@@ -250,7 +250,7 @@ Then:
 
  - add the sequence read data track::
 
-       ChIP/MrpC.chr.bed.gz
+       MrpC.chr.bed.gz
 
  - add the sequence read bedgraph display::
 
@@ -287,5 +287,6 @@ Add control data to the display
 
 Refresh to see the new tracks displayed.
 
+.. @@
 .. You can also take a look at the data by giving the UCSC genome browser a
 .. direct link to your serve

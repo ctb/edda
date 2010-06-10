@@ -144,7 +144,7 @@ Tutorial, 9am: :doc:`tutorials/chipseq-peak-finding`
 
 Tutorial, 2pm: :doc:`tutorials/chipseq-motif-finding`
 
-.. Tutorial, 1:30pm: Python data structures.
+Tutorial, 1:30pm: :doc:`more-advanced-python-scripting`
 
 .. Tutorial, 3pm: JBrowse; GO stuff.
 

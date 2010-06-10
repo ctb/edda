@@ -84,7 +84,8 @@ it from there.  To do that, type::
    %% apt-get -y install apache2
 
 You will also need to edit your security rules on Amazon AWS to let 
-HTTP through.
+HTTP through; this will take effect immediately so you don't need to
+restart your EC2 machine.
 
 Once you can go to 'http://$amazon-machine-name' and see "it works!", you're
 good -- run the following command::
