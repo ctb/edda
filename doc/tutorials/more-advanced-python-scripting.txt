@@ -1,0 +1,117 @@
+============================================
+Slightly more advanced scripting with Python
+============================================
+
+There are two really useful data types in Python that you should know
+how to use, lists and dictionaries.
+
+Lists
+-----
+
+You already have some experience with lists: they're what we're stuffing
+data points into in :doc:`plotting-with-matplotlib` with 'data.append'.
+A list just contains an ordered list of things, such as numbers and/or
+strings.  Note that lists can contain multiple types; a list doesn't need
+to contains *just* numbers.
+
+Here's some example Python code::
+
+   >>> x = []
+   >>> x.append('foo')
+   >>> x.append(5)
+   >>> print x
+   ['foo', 5]
+
+   >>> for val in x:
+   ...   print val
+   foo
+   5
+
+Lists are great ways to keep track of random stuff, and because they're
+*ordered* you can break rows into multiple lists and still keep track of
+row correlations.  For example, as long as you add things in in a
+consistent order, you can retrieve them in the same order::
+
+   >>> x = []
+   >>> y = []
+   >>> x.append(1)
+   >>> x.append(2)
+
+   >>> y.append(6)
+   >>> y.append(7)
+
+   >>> print x[0], y[0]
+   1 6
+   >>> print x[1], y[1]
+   2 7
+
+You can use for loops to go through multiple lists using zip::
+
+   >>> for xval, yval in zip(x, y):
+   ...   print xval, yval
+   1 6
+   2 7
+
+Think of it as joining the lists with a zipper...
+
+Dictionaries
+------------
+
+Dictionaries are probably the single most useful data structure ever
+for bioinformatics!  Basically dictionaries let you link a unique key
+(name, id, number, whatever) to a Python object -- which can be pretty
+much anything, like a number, string, list, or another dictionary.
+
+This is extremely useful for situations in which you need to correlate
+data from different data sets, where the data sets have a common key.
+If the data rows are in a different order in the different data sets,
+then you'll need to use a dictionary for this purpose.
+
+We've already seen one example of dictionary use in the reciprocal
+BLAST code, `find-reciprocal.py
+<http://bitbucket.org/ctb/ngs-course/src/tip/blast/find-reciprocal.py>`__,
+where we're loading in two data sets -- BLAST of zebrafish v mouse,
+and mouse v zebrafish -- 
+
+The four essential commands are::
+
+  >>> d = {}
+
+to create a new dictionary,
+
+  >>> key = 'foo'
+  >>> value = 'bar'
+
+  >>> d[key] = value
+
+to set the value for the key 'foo' equal to 'bar',
+
+  >>> val = d[key]
+  >>> val
+  'bar'
+
+to retrieve the value associated with the key 'foo' (which will be
+'bar')
+
+for conversion, lookup, etc.
+
+on disk.
+
+More FASTA stuff, with screed
+-----------------------------
+
+using screed to index and then retrieve
+
+Further reading
+---------------
+
+There's a plethora of good material out there for learning how to
+program in Python.
+
+Honestly, start with `the Python tutorial <http://docs.python.org/tutorial/>`__.
+
+`Think Python: How to Think Like a Computer Scientist <http://www.greenteapress.com/thinkpython/thinkpython.html>`__
+
+`Intermediate and Advanced Software Carpentry in Python
+<http://ivory.idyll.org/articles/advanced-swc/>`__ has a few good
+student-oriented tips, although it's out of date.

@@ -48,11 +48,11 @@ Install Perl and some Perl packages
 
 Run the Perl "CPAN" shell, which lets you download and install packages for
 the Perl programming language.  Just accept the defaults until you get a 
-``cpan> `` prompt::
+``cpan\> `` prompt::
 
    %% perl -MCPAN -e shell
 
-Now, at the ``cpan> `` shell prompt, type the following (again, accepting
+Now, at the ``cpan\> `` shell prompt, type the following (again, accepting
 the defaults with 'enter')::
 
    cpan> o conf prerequisites_policy follow

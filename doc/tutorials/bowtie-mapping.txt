@@ -30,6 +30,7 @@ first.
 For the course, I've put it on my own server where you can download it
 directly, so do::
 
+  %% cd
   %% curl -O http://teckla.idyll.org/~t/transfer/bowtie-0.12.5-src.zip
   %% unzip bowtie-0.12.5-src.zip 
 

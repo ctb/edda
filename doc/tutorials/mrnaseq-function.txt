@@ -1,0 +1,24 @@
+------------------------------------------------------
+More mRNAseq analysis: connecting to putative function
+------------------------------------------------------
+
+Normalization revisited
+-----------------------
+
+normalizing the input data set => 0s
+rpkm vs normalization
+
+Overexpression vs Over-representation
+-------------------------------------
+
+Extracting overexpressed genes
+------------------------------
+
+"Converting" to mouse gene IDs
+------------------------------
+
+Using DAVID
+-----------
+
+Using GOMiner
+-------------

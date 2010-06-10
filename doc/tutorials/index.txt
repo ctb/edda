@@ -28,3 +28,4 @@ Contents:
    breseq
    setting-up-an-ebs-volume
    programming-scripts
+   chipseq-peak-finding

@@ -1,0 +1,262 @@
+====================================================
+Aligning ChIP-seq reads and detecting enriched peaks
+====================================================
+
+:Author: Mark Robinson
+:Date: June 10, 2010
+
+Introduction
+------------
+
+In this tutorial we are going to work through the process of taking a
+set of Illumina reads ffrom a ChIP-seq experiment, aligning them to a
+reference genome and then identifying peaks of enrichment for ChIP
+specific reads. We'll be using Myxococcus xanthus as our reference
+genome.  Our ChIP-seq data comes from experiments performed with
+antibodies for a transcription factor known to be developmentally
+important, MrpC.
+
+Download the data files from the `private data collection <http://teckla.idyll.org/~t/angus-private/#m-xanthus-chip-seq>`__ and gunzip them::
+
+   %% mkdir /mnt/myxo
+   %% cd /mnt/myxo
+   <curl commands here>
+   %% gunzip *.gz
+
+You should now have three files::
+
+   % ls
+   M2_pf.fastq  MP1_pf.fastq  myxo-genome.fa
+
+
+Aligning reads to the reference genome
+--------------------------------------
+
+Install bowtie as in :doc:`bowtie-mapping`.
+
+Build your index for the M.xanthus genome::
+
+  %% cd /mnt/myxo
+  %% bowtie-build myxo-genome.fa myxo
+
+You should now be ready to run bowtie for each of the two sets of
+reads. We'll simply use the default bowtie parameters here (-n 2 -l 28
+-e 70) which allows a maximum of 2 mismatches in the first 28 bases of
+the read and requires that the sum of the Phred values for the
+mismatches positions not exceed 70. These are parameters that you
+might want to modify if you find many of your reads are not alignable,
+feel free to play! The '-m' switch being set to one ensures that only
+uniquely alignable reads will be reported; the default setting would
+report one of potentially many, with no guarantee that the reported
+alignment was the best.
+
+::
+
+  %% bowtie -p 2 -m 1 myxo MP1_pf.fastq > control.map
+  %% bowtie -p 2 -m 1 myxo M2_pf.fastq > chip.map
+
+You should see::
+
+  # reads processed: 12460030
+  # reads with at least one reported alignment: 8902883 (71.45%)
+  # reads that failed to align: 3245241 (26.05%)
+  # reads with alignments suppressed due to -m: 311906 (2.50%)
+
+from the first bowtie, and ::
+
+  ...
+
+from the second bowtie.
+
+Peak calling
+------------
+
+It's time to take our aligned reads and try and make some sense of them.
+
+Firstly we'll need to install Quest:
+
+Download and unpack the code::
+
+  %% cd
+  %% curl -O http://www.stanford.edu/%7evalouev/QuEST/QuEST_2.4.tar.gz
+  %% tar -zxf QuEST_2.4.tar.gz
+  %% cd QuEST_2.4
+
+Configure the installation parameters for your platform and compile::
+
+  %% perl configure.pl
+  %% make
+
+Running QuEST
+-------------
+
+Create a genome table::
+
+  %% cd /mnt/myxo
+  %% echo M_xanthus 9139764 > myxo.gt
+
+and run the analysis::
+
+  %% /root/QuEST_2.4/generate_QuEST_parameters.pl -bowtie_align_ChIP chip.map -bowtie_align_RX_noIP control.map -gt ./myxo.gt -ap ./QuEST_analysis -ChIP_name MrpC
+
+You should now see some activity as QuEST validates your input and
+attempts to convert your alignments to its own internal format.
+Eventually you will be prompted with a summary of your data.
+
+Press "y" to continue.
+
+Again, after some further activity you will be prompted to select
+appropriate running parameters. In this case, we will select the
+default parameters suggested for TF data.
+
+Press 1 and Enter
+
+You'll now be asked to select some stringency measures. For our first
+run through we'll select option 1 for the most stringent criteria
+(Note for the record I believe even the relaxed criteria generate high
+quality peak calls, just lots more of them!), again feel free to
+repeat and experiment with the consequences of these choices.
+
+Press 1 and Enter
+
+There will be one final prompt asking if you want to go ahead with
+your selected options...
+
+Press 'y' to continue
+
+In a few moments (thank god for small genomes!) QuEST should have
+completed, leaving you with lots of juicy files full of output.
+
+Exploring the output
+--------------------
+
+To see the summary of the analysis::
+
+  %% less ./QuEST_analysis/module_outputs/QuEST.out
+
+To view individual peak and region summaries complete with genome
+coordinates and associated statistics::
+
+  %% less ./QuEST_analysis/calls/peak_caller.ChIP.out.accepted
+
+These files are information rich and will form the starting point for
+much of your analysis from this point on.
+
+Region fields:
+
+1. R - <region number>
+
+2. chromosome
+
+3. region_begin-region_end (e.g 47556767-47557549)
+
+4. ChIP: maximum ChIP unnormalized score within this region (e.g. 54.5)
+
+5. control: control unnormalized score at the position within the
+   region with the highest ChIP score(e.g. 0.29)
+
+6. max_pos: position within the region with the maximum score (e.g.47557145)
+
+7. ef: Normalized enrichment fold at the maximum position within the
+   region based on the score ratio (e.g. 309.574)
+
+8. ChIP_tags: Number of sequence reads in the ChIP data that fell
+   within this region (e.g. 7071)
+
+9. background tags: Number of sequence tags from the background data
+   that fell within this region ( e.g. 69)
+
+10. tag_ef: Normalized enrichment fold based on the tag counts within
+    the region (e.g. 112.346)
+
+11. ps: Peak shift metric within the region. Expected to be about half
+    the library fragment size (e.g. 61 bp)
+
+12. cor: Correlation between density profiles on + and - strand at the
+    distance given by the region peak shift (e.g. 0.385673)
+
+13. -log10_qv: Negative log base 10 of q-value obtained by Bonferroni
+    correction of tag enrichment p-value (e.g. 3.90558e+06)
+
+14. qv_rank: Rank of q-value of this region compared to other regions (e.g. 3)
+
+Peak fields:
+
+1. P-<region_number>-<peak number within the region> (e.g. P-2-1)
+
+2. chromosome
+
+3. peak coordinate
+
+4. ChIP: Un-normalized ChIP score at the position of the peak (e.g. 54.5)
+
+5. control: Unnormalized background score at the position of the ChIP
+   peak (e.g. 0.19)
+
+6. region: <containing region coordinate begin>-<containing region   
+   coordinate end> (e.g. 47556767-47557549) 
+
+7. ef: normalized enrichment fold calculated from ration of ChIP and
+   control scores (309.574)
+
+8. ps: peak shift metric for the peak. Expected to be about half the
+   library size (e.g. 52 bps)
+
+9. cor: Correlation between opposite strand enrichment profiles at the
+   distance given by the peak shift above (e.g. 0.981378 )
+
+10. -log10_qv: Negative log base 10 of the peak q-value obtained by    
+    Bonferroni correction of peak score p-value (e.g. 3.64579e+06)   
+
+11. qv_rank: q-value based rank of the peak (e.g. 2)
+
+Visualizing ChIP-Seq data with UCSC Genome Browser
+--------------------------------------------------
+
+QuEST also generates a number of pre-formatted tracks that can be
+uploaded and visualised in a genome browser, such as the UCSC genome
+browser.
+
+To view them, find and view the reference genome of interest in the
+genome browser. In this case we'll want to use the archaea and
+bacterial version of the UCSC genome browser
+
+http://archaea.ucsc.edu/cgi-bin/hgTracks?hgsid=326843&clade=bacteria-deltaproteobacteria&org=Myxococcus+xanthus+DK+1622
+
+ - click on "manage custom tracks" button underneath the main browser display   
+ - click on "add custom tracks" button
+
+ - add QuEST calls track "QuEST_analysis/tracks/ChIP_calls.filtered.bed"
+
+ - add the sequence read data track
+    "QuEST_analysis/tracks/data_bed_files/by_chr/ChIP/MrpC.M_xanthus.bed.gz"   
+
+ - add the sequence read bedgraph display
+    "QuEST_analysis/tracks/bed_graph/MrpC.bedGraph.gz"
+
+ - you should now see all these tracks being uploaded into the browser:
+
+ - click on the "go to the genome browser" button and navigate to a
+   locus of interest. Here you can search for specific coordinates, spans
+   of coordinates or gene names.
+
+To see a more condensed view of the data disable the raw data display
+by choosing the "hide" option of the MrpC" track in the section under
+the main browser display area. hit "refresh" button:
+
+Add control data to the display
+
+  - click on "manage custom tracks" button underneath the main browser display
+
+  - click on "add custom tracks" button in the "manage custom tracks" display page
+
+  - Upload control data for chr11: select file      
+    "QuEST_analysis/tracks/data_bed_files/by_chr/RX_noIP, click "Open"
+    then "Submit" button (see the screen shot below)
+
+  - Upload control data density track: click on "add custom tracks",  
+    select file
+    "QuEST_analysis/tracks/wig_profiles/by_chr/background_unnormalized/M_xanthus.wig.gz",
+    hit "Open" and "Submit" button (see the screen shot below)    
+
+Refresh to see the new tracks displayed.

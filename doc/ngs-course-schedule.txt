@@ -140,13 +140,13 @@ Lecture, 8pm: ChIP-seq analysis.
 Day 10 (Th, June 10)
 ====================
 
-Tutorial, 9am: ChIP-seq analysis with QUeST
+Tutorial, 9am: :doc:`tutorials/chipseq-peak-finding`
 
-Tutorial, 11am: Motif finding
+.. Tutorial, 11am: Motif finding
 
-Tutorial, 1:30pm: Python data structures.
+.. Tutorial, 1:30pm: Python data structures.
 
-Tutorial, 3pm: JBrowse; GO stuff.
+.. Tutorial, 3pm: JBrowse; GO stuff.
 
 An Exercise in Reflection (Stage 2)
 
