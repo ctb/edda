@@ -35,6 +35,8 @@ Contents:
    aws-cheat-sheet
    quotes
 
+   beacon/index
+
 External links
 --------------
 

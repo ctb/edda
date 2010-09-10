@@ -1,0 +1,30 @@
+=============
+BEACON Course
+=============
+
+These are materials for the 2010 `BEACON <http://www.beacon.msu.edu>`__ course,
+`CSE 891 s002: Computational Science for Evolutionary Biologists <http://ged.msu.edu/courses/2010-fall-cse-891/>`__.
+
+Rather than developing a whole new site containing a lot of
+overlapping material, we'll be integrating some BEACON material into
+the `ANGUS site <http://ged.msu.edu/angus/>`__.
+
+Lecture Links
+=============
+
+Lecture 2 - Intro to cloud computing and avida
+----------------------------------------------
+
+In class, we've worked through
+:doc:`../tutorials/starting-your-cloud-system` and :doc:`building-and-running-avida`, as well as :doc:`running-avida-first-time`.
+
+You may find the :doc:`../aws-cheat-sheet` useful later on.
+
+All BEACON-specific ANGUS materials
+===================================
+
+.. toctree::
+   :maxdepth: 1
+
+   building-and-running-avida
+   running-avida-first-time

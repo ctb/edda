@@ -1,0 +1,77 @@
+=============================
+Building and installing Avida
+=============================
+
+We'll talk about Avida -- what it is and what it does -- at some
+length in this course, but the first thing we want to do is get it up
+and running.  For now, for more information on Avida you can visit the
+`Avida development site @ the Devolab <http://avida.devosoft.org/>`__.
+
+First, log into the system as detailed in :doc:`../tutorials/unix-and-ssh-and-scp`.  You
+should arrive at a '%' prompt.
+
+At this prompt, type::
+
+  %% apt-get update
+
+This updates the map of available software.  Now install some::
+
+  %% apt-get -y install g++ subversion cmake
+
+We'll talk about what these packages are down the road, but for now --
+just copy and paste.
+
+OK, this is the minimum necessary to run avida -- so let's go get the
+avida source code! ::
+
+  %% svn co https://avida.devosoft.org/svn/development avida
+
+It will ask you a question about a dodgy security certificate -- type
+'p' to accept permanently.
+
+This puts the Avida source code into the directory 'avida'.  Now, change
+into that directory, configure the build system, and build avida::
+
+  %% cd avida
+  %% cmake .
+  %% make
+
+Assuming success, now we want to install avida in a central location::
+
+  %% cp bin/avida /usr/local/bin
+
+Next, make a new directory, change into it, and configure it to be an
+avida working directory by copying ('cp') in a bunch of files::
+
+  %% mkdir beacon
+  %% cd beacon
+  %% cp ../support/config/{avida,environment,instset-heads}.cfg .
+  %% cp ../support/config/default-heads.org .
+
+Finally, retrieve a course-specific config file::
+
+  %% curl -O http://ged.msu.edu/angus/files/events.cfg
+
+This will take a pre-written 'events' configuration file for avida from
+this course Web site and save it into the local directory.
+
+At this point, double check yourself: if things worked, you should be
+able to run 'print working directory', ::
+
+  %% pwd
+
+and see '/root/avida/beacon'.  You can also look at the files present with
+'list files': ::
+
+  %% ls
+
+You should see::
+
+   avida.cfg  default-heads.org  environment.cfg  events.cfg  instset-heads.cfg
+
+You should now be able to run 'avida' and get a bunch of output.
+
+Congrats!  You've successfully installed & configured avida and run it
+once!
+
+(Be sure to shut down your Amazon rental machine...)
