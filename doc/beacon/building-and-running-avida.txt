@@ -69,7 +69,9 @@ You should see::
 
    avida.cfg  default-heads.org  environment.cfg  events.cfg  instset-heads.cfg
 
-You should now be able to run 'avida' and get a bunch of output.
+You should now be able to run 'avida' and get a bunch of output. ::
+
+  %% avida
 
 Congrats!  You've successfully installed & configured avida and run it
 once!

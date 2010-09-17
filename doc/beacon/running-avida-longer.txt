@@ -1,0 +1,39 @@
+====================
+Running Avida longer
+====================
+
+You may want to have these tutorials ready to hand:
+
+ * :doc:`../tutorials/unix-directories-and-files`
+ * :doc:`../tutorials/setting-up-an-ebs-volume`
+ * :doc:`../tutorials/using-the-nano-editor`
+ * Running jobs while you sleep: the 'screen' section of :doc:`../unix-cheat-sheet`
+ * :doc:`../tutorials/using-top`
+
+
+First, go through the installation and configuration stage of
+:doc:`building-and-running-avida`, except you can do it on a permanently
+stored disk if you like.
+
+Now, let's edit 'events.cfg' to run for 5000 updates instead of 500: ::
+
+  %% nano events.cfg
+
+and change the line 'u 500 Exit' to 'u 5000 exit'.
+
+Now, start 'screen'.
+
+Run::
+
+  %% avida
+
+Detach 'screen' with 'CTRL-A d'.  Use top to verify that avida is
+running. Log out.
+
+Go get a cup of coffee.
+
+Log back in and use 'top' to see if avida is still running.  (It is!)
+
+Re-attach to the screen with 'screen -r'.
+
+Hey, look at that!

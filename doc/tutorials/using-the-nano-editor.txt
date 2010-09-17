@@ -1,0 +1,46 @@
+=====================
+Using the Nano editor
+=====================
+
+One thing you'll almost certainly need to do is edit text files -- things
+like scripts and configuration files.
+
+There are a bunch of ways to edit files.  The only *wrong* way is to use
+Microsoft Word... which, if you're not quite careful, will put non-text
+characters in your file and mess everything up.  You Have Been Warned.
+
+The simplest default editor that comes with your EC2 machine is called
+'nano'; it's very similar to 'pico', the editor that pine uses.  You
+can run it like this::
+
+  %% nano $filename
+
+where $filename is any valid UNIX filename (which is pretty much anything).
+It's a *really* good idea to avoid spaces and funny characters -- I'd
+suggest sticking with lowercase, underscores and dashes, and periods, e.g. ::
+
+  thats_some-filename-there.joe.txt
+
+Note, if you make up a long filename, you don't always have to type the
+whole thing out -- you can type 'that' and then hit TAB to do auto-completion.
+
+Once nano is running, you can type stuff into it and move around with
+the arrow keys.  (The mouse won't work, sorry.  That's attached to
+your local computer, which doesn't send mouse information to the
+remote computer -- UNIX was invented before mice.)  Along the bottom of the
+screen, though, are some cryptic instructions: ::
+
+  ^G Get Help  ^O WriteOut  ^R Read File ^Y Prev Page ^K Cut Text  ^C Cur Pos
+  ^X Exit      ^J Justify   ^W Where Is  ^V Next Page ^U UnCut Text^T To Spell
+
+These are all actions that nano will perform for you on command.
+The critical piece of information that you are lacking is this: the ^ means
+"use the control key", i.e. "CTRL-X" exits.  Try typing something, then
+hitting "CTRL-X".  It will ask you if you REALLY want to save... says "yes".
+And now try re-editing the file with nano -- you can use the up arrow at
+the '%' prompt to get to the previous command.  Easy, yeh?
+
+And that's it, you're done!  You've edited your first text file!
+
+Note that what you put *in* the text file will vary with what you're
+trying to do.  More on that later.

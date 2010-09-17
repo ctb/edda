@@ -1,0 +1,75 @@
+===================================
+Using 'top' to monitor running jobs
+===================================
+
+If you use 'screen' (see :doc:`../unix-cheat-sheet`) or multiple login
+windows to run things in other windows, you will want to monitor what
+you're running.  This will come in handy when you need to find out if
+things are still running, how long they've been running, or how much
+memory is being used.
+
+'top' is very simple to run: type ::
+
+   %% top
+
+You'll get a screen that looks like this, and is updated regularly::
+
+  top - 11:52:57 up 10 min,  1 user,  load average: 0.00, 0.01, 0.00
+  Tasks:  31 total,   2 running,  29 sleeping,   0 stopped,   0 zombie
+  Cpu(s):  0.0%us,  0.0%sy,  0.0%ni,100.0%id,  0.0%wa,  0.0%hi,  0.0%si,  0.0%st
+  Mem:   1747660k total,    58472k used,  1689188k free,     2660k buffers
+  Swap:   917496k total,        0k used,   917496k free,    15600k cached
+
+    PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+  COMMAND           
+      1 root      15   0  2116  764  656 S  0.0  0.0   0:00.00 init
+      2 root      RT   0     0    0    0 S  0.0  0.0   0:00.00 migration/0
+
+Simple, right?  Heh.
+
+Let's look at each line independently.
+
+The first line::
+
+  top - 11:52:57 up 10 min,  1 user,  load average: 0.00, 0.01, 0.00
+
+tells you the current time, how long the machine has been up, how many
+users are logged in, and the short/medium/long-term compute load on the
+machine.  If you run something for a long time, you'll see these numbers
+go up.  Right now, the machine is basically just sitting there, so these
+are all close to 0.  ::
+
+  Tasks:  31 total,   2 running,  29 sleeping,   0 stopped,   0 zombie
+
+This line tells you how many processes are running.  For laptops EC2
+machines it's not so interesting because you really are the only one
+using this machine.  Why so many processes?  Lots of things are going
+on behind the scenes on modern computers. ::
+
+  Cpu(s):  0.0%us,  0.0%sy,  0.0%ni,100.0%id,  0.0%wa,  0.0%hi,  0.0%si,  0.0%st
+
+This line contains the CPU load.  The first two numbers are how busy
+the system is doing computation ("us" stands for "user") and how busy
+the system is doing system-y things like accessing disks or network
+("sy" stands for "system").  We'll talk more about this later. ::
+
+  Mem:   1747660k total,    58472k used,  1689188k free,     2660k buffers
+
+This should be easy to understand -- how much memory you're using!  This is
+a "small" instance so it has 1.7gb total.  Of that, 58mb is used by the
+programs that are currently running, and the rest are free.  This will
+become important later. ::
+
+  Swap:   917496k total,        0k used,   917496k free,    15600k cached
+
+Swap is just on-disk memory that can be used to "swap" out programs from main
+memory.  Again, we'll talk about this later.::
+
+    PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+  COMMAND           
+      1 root      15   0  2116  764  656 S  0.0  0.0   0:00.00 init
+      2 root      RT   0     0    0    0 S  0.0  0.0   0:00.00 migration/0
+
+And... finally!  What's actually running!  The two most important numbers
+are the %CPU and %MEM towards the right, as well as the COMMAND.  This
+tells you how compute- and memory-intensive your program is.  Right now,
+nothing's running so the numbers aren't very interesting, but just wait
+until we run something...

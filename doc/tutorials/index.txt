@@ -31,3 +31,7 @@ Contents:
    chipseq-peak-finding
    chipseq-motif-finding
    more-advanced-python-scripting
+
+   using-the-nano-editor
+   using-top
+   setting-a-password

@@ -35,34 +35,16 @@ teletype font is something for you to type at a command line prompt.**
 
 So, to start, type ::
 
-  %% ssh ngs@lyorn.idyll.org
+  %% ssh -i $keyfile root@$amazon
+
+replacing '$keyfile' with the location of your key file, and '$amazon'
+with the hostname of your amazon machine.
 
 The first time you do this on any computer, it will say something like
-"the computer lyorn.idyll.org is unknown to us; do you really want to
+"the computer <some long name> is unknown to us; do you really want to
 connect?" -- say "yes".
 
-Now the computer should ask you for a password.  Type the secret
-password that we told you in class, or ask one of the TAs for it.
-
-Now you should see a login banner followed by the prompt ``ngs@lyorn:~$``,
-which is the command-line prompt on lyorn.
-
-Congratulations!  You are now logged into the remote computer
-'lyorn.idyll.org', which is a computer that in my lab on MSU campus.
-
-One last thing. Type ::
-
- %% mkdir $directory
-
-where you replace '$directory' with something unique (like your last name).
-(Note: case matters; usually I make everything lowercase by default, so I don't
-have to remember what case I used.)
-
-This will give you a directory (folder) into which you can put things on
-lyorn.  Since you're all using the same account on lyorn, if you don't
-do this you will step on each other's files.
-
-We won't be using lyorn too much, though, so this is just for this tutorial.
+Now you should see a login banner followed by the prompt '... # '.
 
 Now you can go back to the :doc:`unix-and-ssh-and-scp` tutorial, or
 continue on to :ref:`transferring-files-with-scp`.
@@ -79,11 +61,10 @@ type: ::
 
 Now copy this file to the directory on the remote computer: ::
 
- %% scp a-file.txt ngs@lyorn.idyll.org:$directory/
+ %% scp -i $keyfile a-file.txt root@$amazon:
 
-where you should replace '$directory' with whatever you named the
-directory you created above, in the section on :ref:`using-ssh-macosx`
--- probably your last name, in all lowercase.
+where you should again replace $keyfile and $amazon with your key filename
+and your amazon machine name, respectively.
 
 'scp' will ask for a password.  Give the same super-secret password we
 gave you in class.
@@ -91,7 +72,7 @@ gave you in class.
 Note that you can also transfer files from remote machines to your local
 machine::
 
-  %% scp ngs@lyorn.idyll.org:$directory/a-file.txt local-file.txt
+  %% scp -i $keyfile root@$amazon:a-file.txt local-file.txt
 
 More generally, the scp command will copy a local file to a remote location::
 

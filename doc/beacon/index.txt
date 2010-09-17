@@ -12,13 +12,46 @@ the `ANGUS site <http://ged.msu.edu/angus/>`__.
 Lecture Links
 =============
 
-Lecture 2 - Intro to cloud computing and avida
-----------------------------------------------
+Lecture 2 -- Intro to cloud computing and avida
+-----------------------------------------------
 
-In class, we've worked through
-:doc:`../tutorials/starting-your-cloud-system` and :doc:`building-and-running-avida`, as well as :doc:`running-avida-first-time`.
+(Sep 10th, 2010)
+
+In class, we worked through
+:doc:`../tutorials/starting-your-cloud-system` and
+:doc:`building-and-running-avida`.
 
 You may find the :doc:`../aws-cheat-sheet` useful later on.
+
+Lecture 4 -- Effective remote computer use (stage 1)
+----------------------------------------------------
+
+(Sep 17th, 2010)
+
+Just a reminder -- you can *always* Google it, and the worst that will
+happen is you lose some data (which you can cleverly save by
+transferring it to your laptop, if it's small enough!)
+
+In class, we'll work through the following tutorials:
+
+ * :doc:`../tutorials/unix-directories-and-files`
+ * :doc:`../tutorials/setting-up-an-ebs-volume`
+ * :doc:`../tutorials/using-the-nano-editor`
+ * Running jobs while you sleep: the 'screen' section of :doc:`../unix-cheat-sheet`
+ * :doc:`../tutorials/using-top`
+ * :doc:`../tutorials/setting-a-password`
+ * Transferring files:
+    - Windows: the Notepad++ and WinSCP sections of :doc:`../tutorials/using-putty-on-windows`
+    - Mac OS X: :doc:`../tutorials/using-ssh-scp-terminal-macosx`
+
+and finally we'll go through :doc:`running-avida-longer`.
+   
+If you're intrigued by UNIX and want to know more, you might want to
+check out this tutorial
+http://www.ee.surrey.ac.uk/Teaching/Unix/ .
+
+Software Carpentry: A detailed video screencast introduction to the UNIX shell
+is available `here <http://software-carpentry.org/blog/shell/>`__.
 
 All BEACON-specific ANGUS materials
 ===================================
@@ -27,4 +60,4 @@ All BEACON-specific ANGUS materials
    :maxdepth: 1
 
    building-and-running-avida
-   running-avida-first-time
+   running-avida-longer

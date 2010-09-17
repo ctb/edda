@@ -95,22 +95,18 @@ There are lots and lots of UNIX tutorials available.  Here is a `UNIX
 tutorial for beginners <http://www.ee.surrey.ac.uk/Teaching/Unix/>`__
 that might come in handy...
 
-.. @@ Run a hello, world script in python?
-
-.. @@ path names, etc.
-
 Transferring 3rd-party files to your remote system
 --------------------------------------------------
 
-One thing we're going to be doing a lot of is transferring files around.
-You can do this in a large variety of ways -- you've already seen 'scp'.
-The problem is that a lot of times we're going to be working on a remote
-machine -- say, lyorn -- and we will want to copy a file from, say, NCBI
-to lyorn, but we *won't* want that file to be downloaded to our own
-computer first, because we don't need it there.  (Think about the situation
-where you're at home, and you need to download the human genome.  Much
-better to directly transfer it to the big computer at work then the laptop
-in front of you!)
+One thing we're going to be doing a lot of is transferring files
+around.  You can do this in a large variety of ways -- you've already
+seen 'scp'.  The problem is that a lot of times we're going to be
+working on a remote machine and we will want to copy a file from, say,
+NCBI to that machine, but we *won't* want that file to be downloaded
+to our own computer first, because we don't need it there.  (Think
+about the situation where you're at home, and you need to download the
+human genome.  Much better to directly transfer it to the big computer
+at work then the laptop in front of you!)
 
 Using curl to retrieve files from Web and FTP sites
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -122,9 +118,9 @@ ftp://ftp.ncbi.nih.gov/refseq/M_musculus/mRNA_Prot/, you would type::
 
   %% curl -O ftp://ftp.ncbi.nih.gov/refseq/M_musculus/mRNA_Prot/mouse.protein.faa.gz
 
-Try it while logged into lyorn and changed into your directory -- this
-will download a 10 mb file directly to lyorn, without going through
-your laptop! ::
+Try it while logged into an EC2 machine and changed into your
+directory -- this will download a 10 mb file directly to it, without
+going through your laptop! ::
 
   %% cd $dirname
   %% curl -O ftp://ftp.ncbi.nih.gov/refseq/M_musculus/mRNA_Prot/mouse.protein.faa.gz
@@ -137,13 +133,13 @@ If you forget to use the '-O', then you'll get a lot of gibberish on
 your screen -- that's actually the contents of the file, dumped to
 your screen.  Hit CTRL-C and start over!
 
-Retrieving scripts and source code for this class
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Retrieving scripts and source code for the NGS class
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-We've also made a bunch of files available for this course, through
-bitbucket.  We'll tell you more about this next week, but for now
-try running this command to retrieve them all.  On lyorn, make sure
-you're in the $dirname directory, and type ::
+We've also made a bunch of files available for the NGS course, through
+bitbucket.  We'll tell you more about this next week, but for now try
+running this command to retrieve them all.  On your EC2 machine, type
+::
 
   %% hg clone http://bitbucket.org/ctb/ngs-course
 

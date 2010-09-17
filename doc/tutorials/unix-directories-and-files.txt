@@ -5,8 +5,42 @@ UNIX directories and files - a quick introduction
 We've been telling you how to move around within directories and copy
 files without really explaining any of the details.  So, here you go!
 
-The basics
-----------
+Revisiting the shell
+--------------------
+
+The UNIX shell is as complete a way to interact with computers and files
+on the computer as the windowing interface (or graphical interface) that
+you're used to on Windows and Macs.  You just have to type a lot more!
+
+(Remember, you can and should copy and paste from this document into the shell
+window!)
+
+Here are a few useful commands for you to try out.
+
+To get a list of files, do::
+
+  %% ls
+
+To make a directory::
+
+  %% mkdir $dirname
+
+where you replace '$dirname' with the name of the directory.
+
+To see your current directory::
+
+  %% pwd
+
+To change directories::
+
+  %% cd $dirname
+
+There are lots and lots of UNIX tutorials available.  Here is a `UNIX
+tutorial for beginners <http://www.ee.surrey.ac.uk/Teaching/Unix/>`__
+that might come in handy...
+
+The basics of directories
+-------------------------
 
 As in Windows and Mac OS X, Linux has the concepts of folders (but they're
 called directories).  Unlike Windows and Mac OS X (and graphical interfaces
