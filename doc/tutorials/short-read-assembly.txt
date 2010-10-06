@@ -4,6 +4,7 @@ Short Read Assembly
 
 :Author: Jason Pell
 :Date: June 5, 2010
+:Last Updated: September 13, 2010
 
 For this tutorial, we will be using the short read de novo assembler ABySS
 to assemble a bacterial genome.
@@ -18,17 +19,17 @@ See: :doc:`installing-your-cloud-system`.
 Next, we need to obtain some different files.  To obtain ABySS,
 use curl::
 
-  %% curl -O http://www.bcgsc.ca/downloads/abyss/abyss-1.2.0.tar.gz
+  %% curl -O http://www.bcgsc.ca/downloads/abyss/abyss-1.2.3.tar.gz
 
 We also need a library called SparseHash, which was created by Google.  Obtain
 it by running::
 
-  %% curl -O http://google-sparsehash.googlecode.com/files/sparsehash-1.7.tar.gz
+  %% curl -O http://google-sparsehash.googlecode.com/files/sparsehash-1.8.1.tar.gz
 
 Now, we'll grab our datasets::
 
-   %% curl -O ftp://ftp.ncbi.nlm.nih.gov/sra/SeqSamples/SRS000/SRS000537/SRX000430/SRR001666_1.fastq.gz
-   %% curl -O ftp://ftp.ncbi.nlm.nih.gov/sra/SeqSamples/SRS000/SRS000537/SRX000430/SRR001666_2.fastq.gz 
+   %% curl -O ftp://ftp.ncbi.nlm.nih.gov/sra/SeqSamples/SRS000/SRS000537/SRX000430/SRR001666_1.fastq.bz2
+   %% curl -O ftp://ftp.ncbi.nlm.nih.gov/sra/SeqSamples/SRS000/SRS000537/SRX000430/SRR001666_2.fastq.bz2
 
 This data is an Illumina run of E. coli with 36bp paired-end reads and
 a 500bp insert size.  A similar dataset with an insert size of 200bp
@@ -39,9 +40,9 @@ Installing ABySS
 ----------------
 Uncompress the tarballs and cd into the SparseHash directory::
 
-  %% tar xvzf sparsehash-1.7.tar.gz
-  %% tar xvzf abyss-1.2.0.tar.gz
-  %% cd sparsehash-1.7
+  %% tar xvzf sparsehash-1.8.1.tar.gz
+  %% tar xvzf abyss-1.2.3.tar.gz
+  %% cd sparsehash-1.8.1
 
 Once you are in the SparseHash directory, run the following to install::
 
@@ -53,8 +54,8 @@ command tunes the compilation and installation parameters for your particular
 system.  Then, the package is compiled and installed on your system.  Once it 
 is finished, go to the ABySS directory and do the same thing::
 
-  %% cd ../abyss-1.2.0
-  %% ./configure && make && make install
+  %% cd ../abyss-1.2.3
+  %% ./configure --disable-openmp && make && make install
 
 Running ABySS
 --------------
@@ -63,7 +64,7 @@ around this, we'll run the following::
 
   %% mkdir k30
   %% cd k30
-  %% time abyss-pe n=10 k=30 in='../SRR001666_*.fastq.gz' name=ecoli > ecoli.out &
+  %% time abyss-pe n=10 k=30 in='../SRR001666_*.fastq.bz2' name=ecoli > ecoli.out &
 
 Let's look at what is going on here.  The time command simply outputs
 length of time that it took the assembly to run.  The command abyss-pe
@@ -87,7 +88,7 @@ Evaluating Assemblies
 ---------------------
 
 Assessing the quality of a de novo assembly where there is no good
-reference is still an open question.  However, there are many
+reference is still an open problem.  However, there are many
 statistics that can be useful in comparing assemblies to one another.
 We have a Python script that provides many of these statistics; it's
 in the ngs-course scripts, under 'ngs-course/assembly/assemstats.py'.
@@ -161,7 +162,7 @@ Obtain and install OpenMPI as follows::
 Now you will need to reconfigure and recompile the ABySS package to make use 
 of OpenMPI::
 
-  %% cd ../abyss-1.2.0
+  %% cd ../abyss-1.2.3
   %% ./configure && make && make install
 
 Now you should be all set to take advantage of the multiple cores on
@@ -171,7 +172,8 @@ ABySS::
 
   %% cd ~
   %% mkdir k32
-  %% time abyss-pe n=10 k=32 in='../SRR001666_*.fastq.gz' name=ecoli np=2
+  %% cd k32
+  %% time abyss-pe n=10 k=32 in='../SRR001666_*.fastq.bz2' name=ecoli np=2
 
 Notice that the only change we made (other than using a different
 value of k) is the addition of the np=2 parameter that is passed.
