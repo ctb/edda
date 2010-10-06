@@ -53,6 +53,11 @@ http://www.ee.surrey.ac.uk/Teaching/Unix/ .
 Software Carpentry: A detailed video screencast introduction to the UNIX shell
 is available `here <http://software-carpentry.org/blog/shell/>`__.
 
+Lecture 7 -- Scripting
+----------------------
+
+:doc:`avida-with-scripts`
+
 All BEACON-specific ANGUS materials
 ===================================
 
@@ -61,3 +66,8 @@ All BEACON-specific ANGUS materials
 
    building-and-running-avida
    running-avida-longer
+
+   measuring-avida-memory-usage
+   retrieving-dominant-organism
+
+   avida-with-scripts

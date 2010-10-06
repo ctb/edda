@@ -21,16 +21,25 @@ Now, let's edit 'events.cfg' to run for 5000 updates instead of 500: ::
 
 and change the line 'u 500 Exit' to 'u 5000 exit'.
 
-Now, start 'screen'.
+Now, start 'screen'::
+
+  %% screen
 
 Run::
 
   %% avida
 
-Detach 'screen' with 'CTRL-A d'.  Use top to verify that avida is
-running. Log out.
+Detach 'screen' with 'CTRL-A d'.
 
-Go get a cup of coffee.
+Use top to verify that avida is running::
+
+  %% top
+
+(Hit 'q' to exit)
+
+Log out (type 'exit').
+
+Go get a cup of coffee -- optional.
 
 Log back in and use 'top' to see if avida is still running.  (It is!)
 

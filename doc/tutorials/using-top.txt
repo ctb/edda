@@ -26,6 +26,8 @@ You'll get a screen that looks like this, and is updated regularly::
 
 Simple, right?  Heh.
 
+First!  Note that you can use 'q' or 'CTRL-C' to exit from 'top'.
+
 Let's look at each line independently.
 
 The first line::

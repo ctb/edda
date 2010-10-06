@@ -1,0 +1,66 @@
+====================================================
+Retrieving the dominant organism at the end of a run
+====================================================
+
+Your homework for next Friday involves running avida for a long time
+and retrieving the dominant organism at the end of the run.  How do
+you do that!?  After setting up your EC2 system
+(:doc:`../tutorials/starting-your-cloud-system`) and getting Avida
+going (:doc:`building-and-running-avida`), here's what you do.
+
+First, you need to edit the 'events.cfg' file, just as you did before
+in order to set the exit time to 500 updates.
+
+So, type::
+
+  %% nano events.cfg
+
+and add a few lines at the bottom::
+
+  u 0:100:end PrintDominantData      # Save info about most abundant genotypes
+  u 50000:50000 SavePopulation       # Save current state of population.
+
+Where 50,000 is the number of updates you want to run things for.  This must
+match the exit line, so change that, too::
+
+  u 50000 exit
+
+Save and exit nano (see :doc:`../tutorials/using-the-nano-editor`).
+
+Now run avida::
+
+  %% avida
+
+Wait a looooong time.  (Did you remember to start screen?  No? Oops!
+Kill avida by typing ^C (CTRL-C), then run 'screen' (see Long Running
+Jobs, Take 2 in :doc:`../unix-cheat-sheet`), and run avida again.
+
+Wait until the run ends.
+
+Now, look at the end of the ``data/dominant.dat`` file, which contains
+all of the dominant organisms for every 100 update::
+
+  %% tail data/dominant.dat
+
+Here, 'tail' just shows you the last few lines of the data file.  The
+last line should look something like this::
+ 
+  5000 89 252 0.353175 0.00396825 94 94 89 8 0 0 117 0 0.373077 526410 094-aabew 
+
+You're looking for the *genotype name* of the dominant organism at
+update 5000, which is the second-to-last field -- 526410, in this
+case.   Write it down (or e-mail it to yourself, or whatever ;).
+
+Now, look for the genotype line in the dominant population file for update
+50000::
+
+  %% grep 526410 data/detail-50000.spop
+
+(Here, 'grep' is a UNIX command that looks for the word '526410' in
+the given file.)
+
+The line should look something like this::
+
+   526410 org:divide  518208 8 16 94 89 252 0.353175 526 4937 -1 117 0 1 wzcalcclctkhcucdocydxsxkcculdgcjtpvcqmosnzrdgcorzrzwscficfnccczqcavbxcpzvcsazhszdccczvfcaxvgab 2673,2733,2734,2792,2853,2913,2914,2973 220,48,48,55,48,48,48,48 0,0,0,0,0,0,0,0 
+
+And that tells you what the dominant genotype is!

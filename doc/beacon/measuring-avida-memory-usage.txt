@@ -1,0 +1,19 @@
+============================
+Measuring avida memory usage
+============================
+
+Follow these easy steps to measure Avida's memory usage.
+
+1. Log into your EC2 machine.
+
+2. Compile and configure Avida.
+
+3. Run Avida
+
+4. Start up a new window and log into the same machine
+
+5. Run 'top' and read off the memory usage of Avida (see :doc:`../tutorials/using-top`)
+
+What we're going to experiment with in class are the WORLD_X and WORLD_Y
+settings, to see how they relate to memory usage.
+

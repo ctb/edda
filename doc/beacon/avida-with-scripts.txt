@@ -1,0 +1,57 @@
+=====================================================
+Revised instructions for running Avida (with scripts)
+=====================================================
+
+Start up your machine as normal.
+
+Instead of running any of the install commands, do this instead::
+
+  %% apt-get update
+  %% apt-get -y install git-core
+
+Now download all of the BEACON scripts from my github account (more on that
+later)::
+
+  %% git clone git://github.com/ctb/beacon.git
+
+This will create a directory 'beacon', with a directory 'avida' under it.
+The 'avida' directory will contain the following (text) files)::
+
+   install-software.sh
+   build-avida.sh
+   run-avida.sh
+   parse-average.py
+   get-dominant.py
+
+We'll go through one by one, but most of the commands in the '.sh'
+files should be pretty recognizable...  Anything ending with 'sh' is a
+bash shell script, and anything ending with '.py' is a Python script
+(by convention, not by requirement!)
+
+First, run 'install-software.sh'.::
+
+   %% bash beacon/avida/install-software.sh
+
+Then, run 'build-avida'::
+
+   %% bash beacon/avida/build-avida.sh
+
+Edit the config file(s) in 'avida/beacon' appropriately using 'nano'::
+
+   %% nano avida/beacon/events.cfg
+
+and/or ::
+
+   %% nano avida/beacon/avida.cfg
+
+Now, go run 'run-avida'::
+
+   %% bash beacon/avida/run-avida.sh
+
+Now you'll have a bunch of data directories named 'data.1' through 'data.10'
+in the 'avida/beacon' subdirectory.  You can run 'parse-average.py' and
+'get-dominant.py' on each one::
+
+   %% python beacon/avida/parse-average.py avida/beacon/data.1
+
+   %% python beacon/avida/get-dominant.py avida/beacon/data.1
