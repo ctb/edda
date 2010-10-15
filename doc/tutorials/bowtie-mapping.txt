@@ -27,19 +27,19 @@ hide the real URL from you, so this might be a situation where
 (outside of this course) you need to download the file to your laptop
 first.
 
-For the course, I've put it on my own server where you can download it
-directly, so do::
+For the course, I've put it on my Amazon files section (in S3) where
+you can download it directly, so do::
 
   %% cd
-  %% curl -O http://teckla.idyll.org/~t/transfer/bowtie-0.12.5-src.zip
-  %% unzip bowtie-0.12.5-src.zip 
+  %% curl -O https://s3.amazonaws.com/angus.ged.msu.edu/bowtie-0.12.7-src.zip
+  %% unzip bowtie-0.12.7-src.zip 
 
 This creates a directory 'bowtie-0.12.5', containing the source code.
 Bowtie is written in C and C++, so unlike Python, you have to go
 through a compilation step where you build the C/C++ source code into
 something that the computer can run.  To do that, ::
 
-  %% cd bowtie-0.12.5
+  %% cd bowtie-0.12.7
   %% make
   %% cp bowtie bowtie-build bowtie-inspect /usr/local/bin
 

@@ -102,9 +102,13 @@ Hooray!
 Logging into your new instance "in the cloud"
 ---------------------------------------------
 
-OK, so you've created a running computer.  How do get to it?
+OK, so you've created a running computer.  How do you get to it?
 
-The first thing you'll need is the network name of your new computer.
+You'll need to install the software from either
+:doc:`using-putty-on-windows` or go through
+:doc:`using-ssh-scp-terminal-macosx` first.
+
+The next thing you'll need is the network name of your new computer.
 To retrieve this, go to the instance view and click on the instance,
 and find the "Public DNS".  This is the public name of your computer
 on the Internet.

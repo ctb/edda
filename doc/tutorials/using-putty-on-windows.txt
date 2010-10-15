@@ -36,17 +36,6 @@ You probably want the "Installation package".
 
 (You don't need to install the Bing toolbar...)
 
-Install the Notepad++ text editor
----------------------------------
-
-Also install Notepad++, available here:
-
-http://sourceforge.net/projects/notepad-plus/files/
-
-You'll probably want to use the Installer (npp.5.6.8.Installer.exe).
-
-Notepad++ is a text editor that lets you edit text files.
-
 Logging in and transferring files
 =================================
 
@@ -90,6 +79,20 @@ continue on to :ref:`editing-files-with-notepadpp` and
 
 Use Notepad++ to create a file
 ------------------------------
+
+Install the Notepad++ text editor
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+First, you'll need to install Notepad++, available here:
+
+http://sourceforge.net/projects/notepad-plus/files/
+
+You'll probably want to use the Installer (npp.5.6.8.Installer.exe).
+
+Notepad++ is a text editor that lets you edit text files.
+
+Actually editing a file
+~~~~~~~~~~~~~~~~~~~~~~~
 
 Here, we're going to create a file so that we can transfer it over to
 lyorn (just to demo file transfer).

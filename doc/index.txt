@@ -21,6 +21,10 @@ We would like to especially thank the MSU `Gene Expression in Development
 and Disease Focus Group <http://www.bch.msu.edu/GEDD/>`__ for funding
 this course!
 
+If this is your first visit, you should probably either look through
+the :doc:`tutorials/index` or jump right into 
+:doc:`workshop/index`.
+
 Contents:
 
 .. toctree::
@@ -36,6 +40,8 @@ Contents:
    quotes
 
    beacon/index
+
+   workshop/index
 
 External links
 --------------

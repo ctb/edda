@@ -35,16 +35,16 @@ Installing BLAST
 To install the BLAST software, you need to download it from NCBI,
 unpack it, and copy it into standard locations: ::
 
- %% curl -O ftp://ftp.ncbi.nih.gov/blast/executables/release/2.2.23/blast-2.2.23-ia32-linux.tar.gz
- %% tar xzf blast-2.2.23-ia32-linux.tar.gz
- %% cp blast-2.2.23/bin/* /usr/local/bin
- %% cp -r blast-2.2.23/data /usr/local/blast-data
+ %% curl -O ftp://ftp.ncbi.nih.gov/blast/executables/release/2.2.24/blast-2.2.24-ia32-linux.tar.gz
+ %% tar xzf blast-2.2.24-ia32-linux.tar.gz
+ %% cp blast-2.2.24/bin/* /usr/local/bin
+ %% cp -r blast-2.2.24/data /usr/local/blast-data
 
-(You can do all of this simply by running ::
-
-  %% ngs-course/aws/install-blast.sh
-
-)
+.. (You can do all of this simply by running ::
+..
+..   %% ngs-course/aws/install-blast.sh
+..
+.. )
 
 Download the databases
 ----------------------

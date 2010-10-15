@@ -22,7 +22,7 @@ the dataset::
 Now, we'll install Samtools, and its supporting libraries::
 
   %% cd ~/
-  %% wget http://downloads.sourceforge.net/project/samtools/samtools/0.1.7/samtools-0.1.7a.tar.bz2?use_mirror=voxel
+  %% curl -O https://s3.amazonaws.com/angus.ged.msu.edu/samtools-0.1.8.tar.bz2
   %% tar xjf samtools-0.1.7a.tar.bz2
   %% cd samtools-0.1.7a
   %% make

@@ -1,0 +1,35 @@
+=======================================================
+A Speedy Introduction to Sequence Analysis in the Cloud
+=======================================================
+
+Outline:
+
+1. Start by :doc:`../tutorials/renting-a-computer-from-amazon`.
+
+   (Be sure to go through :doc:`../tutorials/installing-your-cloud-system`.)
+
+2. Now, go through the instructions in
+   :doc:`../tutorials/unix-and-ssh-and-scp`; you can skip the
+   introduction and go straight to either :doc:`../tutorials/using-putty-on-windows` **or**
+   :doc:`../tutorials/using-ssh-scp-terminal-macosx`.
+
+3. You should now be able to log into your EC2 machine!
+
+4. Now, work through :doc:`../tutorials/unix-and-blast`.
+
+   And voila!  You've done sequence analysis on the cloud!
+
+5. Let's do some next-gen stuff -- try out :doc:`../tutorials/bowtie-mapping`.
+
+6. Once you're done with that, you can also try :doc:`../tutorials/samtools-tutorial`.
+
+7. And, finally, assembly!  See :doc:`../tutorials/short-read-assembly`.
+
+Don't forget to shut down your machine when you're all done...  You
+can do this by typing ::
+
+  %% shutdown -h now
+
+but you will lose all of your data if you don't transfer them off using
+scp (see :doc:`../tutorials/unix-and-ssh-and-scp`).  To see
+about retaining data in an EC2-accessible form, visit :doc:`../tutorials/setting-up-an-ebs-volume`.
