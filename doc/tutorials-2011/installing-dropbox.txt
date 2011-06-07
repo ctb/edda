@@ -18,7 +18,7 @@ Extract the file::
 
 Run dropboxd::
 
-  %% ~/.dropbox-dist/dropboxd
+  %% ~/.dropbox-dist/dropboxd &
 
 ..and you should see a message like this::
 

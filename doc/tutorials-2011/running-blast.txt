@@ -142,7 +142,7 @@ displayed.
 Now let's run a bigger BLAST, all zebrafish proteins against all mouse
 proteins::
 
- %% blastp -query zebrafish.top -db mouse.protein.faa -out xxx.txt &
+ %% blastp -query zebrafish.protein.faa -db mouse.protein.faa -out zebrafish.x.mouse &
 
 This is going to take a while, which is why we told the computer to
 give us back a command prompt while blastp runs (that's what the &
@@ -151,32 +151,32 @@ does).
 So, how long is it going to take?  We can guesstimate by looking at
 how many sequences have been processed since we started.  To do that, run ::
 
- %% grep Query= mouse.x.zebrafish
+ %% grep Query= zebrafish.x.mouse
 
 OK, that gives us all the query lines -- now what?  Let's count them with
 'wc -l'::
 
- %% grep Query= mouse.x.zebrafish | wc -l
+ %% grep Query= zebrafish.x.mouse | wc -l
 
 Here, | is what's known as a 'pipe', telling the command line to take
 the output of 'grep' and send it to the command 'wc', which counts
 words, lines, and paragraphs.  The '-l' tells wc to count the lines
 only.
 
-Compare that number to the number of sequences in the mouse protein database::
+Compare that number to the number of sequences in the zebrafish protein database::
 
- %% grep ^'>' mouse.protein.faa | more
+ %% grep ^'>' zebrafish.protein.faa | more
 
 to see the FASTA headers, and ::
 
- %% grep ^'>' mouse.protein.faa | wc -l
+ %% grep ^'>' zebrafish.protein.faa | wc -l
 
 to count all the sequences.
 
 Last, but not least -- let's run a quick script to convert the file into
 a set of CSV matches::
 
- %% python ~/Dropbox/ngs-scripts/blast/blast-to-csv.py 
+ %% python ~/Dropbox/ngs-scripts/blast/blast-to-csv.py zebrafish.x.mouse > ~/Dropbox/zebrafish-mouse.csv
 
 Take a look at the script and see if you can understand what it does::
 
@@ -185,9 +185,9 @@ Take a look at the script and see if you can understand what it does::
 Before you leave for lunch:
 ---------------------------
 
-Let's start a *second* BLAST, all of zebrafish against all of mouse::
+Let's start a *second* BLAST, all of mouse against all of zebrafish::
 
-  %% blastp -query zebrafish.protein.faa -db mouse.protein.faa -out zebrafish.x.mouse &
+  %% blastp -query mouse.protein.faa -db zebrafish.protein.faa -out mouse.x.zebrafish &
 
 ...now the computer can work while we eat!
 
