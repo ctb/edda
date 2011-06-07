@@ -1,0 +1,29 @@
+======================================
+Installing dropbox on your EC2 machine
+======================================
+
+You should start this tutorial at a prompt that looks something like this::
+
+   root@ip-10-82-233-6:~#
+
+Type 'cd' to go to your home directory on your EC2 machine.
+
+Now, download the dropbox file::
+
+  %% wget -O dropbox.tar.gz "http://www.dropbox.com/download/?plat=lnx.x86_64" 
+
+Extract the file::
+
+  %% tar -xvzf dropbox.tar.gz
+
+Run dropboxd::
+
+  %% ~/.dropbox-dist/dropboxd
+
+..and you should see a message like this::
+
+  This client is not linked to any account... Please visit https://www.dropbox.com/cli_link?host_id=XXXXX to link this machine.
+
+Copy/paste that URL into your Web browser; log into dropbox; and
+voila! The directory ~/Dropbox will be linked into your home
+directory!

@@ -1,3 +1,23 @@
 ==================================================
 Logging into your Amazon machine (Windows version)
 ==================================================
+
+On Windows:
+~~~~~~~~~~~
+
+For Windows, you'll need to download `PuTTYgen
+<http://the.earth.li/~sgtatham/putty/latest/x86/puttygen.exe>`__, use
+it to open the amazon.pem file, and save the results PuTTY key as
+'amazon.ppk'.  The result file can be used both by PuTTY and by WinSCP
+-- to use it in PuTTY, edit the "Connection... SSH... Auth...  Private
+key file for authentication" setting:
+
+.. image:: images/putty-ssh-key.png
+   :width: 50%
+
+Assuming all of your authentication etc. is set up properly, you should
+be able to log in and see a prompt that looks like this: ::
+
+  ip-10-243-151-85:~# 
+
+Congrats!  You have your very own cloud computer!
