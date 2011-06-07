@@ -1,0 +1,139 @@
+==========================
+Starting your cloud system
+==========================
+
+Introducing Amazon EC2
+----------------------
+
+Amazon EC2 -- EC2 stands for "Elastic Cloud Computing" -- is a service
+by which Amazon rents you a remote computer on an hourly basis. The
+only access to this computer is over the network (which is why we
+covered `ssh and scp <unix-and-ssh-and-scp.html>`_ first, because that's
+how you have to interact with EC2 systems).
+
+Setting up an account
+~~~~~~~~~~~~~~~~~~~~~
+
+Amazon provides a lot of services through what it calls "Amazon Web
+Services".  To get started, go to http://aws.amazon.com/ and sign
+up for an account; it can be linked to your Amazon account.
+
+Once you have an AWS account, sign up for Elastic Cloud Computing (EC2).
+
+You'll need to provide a credit card to pay for your default account
+use, but (if you're doing this as part of the NGS or BEACON courses) the
+course can pay for your AWS usage during the course.
+
+Log in to Amazon Web Services
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Go to http://aws.amazon.com/.
+
+"Sign in to the AWS Management Console".  (You'll need to sign up for
+an account if you haven't already done so; it's separate from your
+regular Amazon account.)
+
+Enter your username and password, etc.
+
+Ask Amazon to start a new computer up for you
+---------------------------------------------
+
+You should now see the "Amazon EC2 Console Dashboard".  Click on
+"Launch Instance".
+
+Now, you'll see a 'request instances wizard' window next.  This will
+give you the option of selecting what *kind* of operating system you
+want running on the computer.
+
+Select the "Community AMIs" tab.
+
+Next to "Viewing all images", enter "ami-00cc3569" (this might be a
+good place to copy/paste...) and hit "return".  You should see one
+entry, containing the text 'ged.msu.edu/angus-64bit-2011.06.02-b/image.manifest.xml' with platform "Other Linux".  Select it (button on the right).
+
+The next screen lets you specify a bunch of stuff -- "Number of instances",
+or, number of computers to start up; "Availability zone", or the region
+where you want this to be started; and "Instance type", the size and
+speed of the computer.  Leave these all as default, and click Continue.
+
+The next screen, "Advanced Instance Options", gives you additional ways
+to customize the computer.  Just leave everything as default and select
+"Continue".
+
+The next screen, "create key pair", lets you tell Amazon who has access
+to your machine.
+
+.. image:: images/ec2-create-new-keypair.png
+   :width: 90%
+
+The private keyfile will be automatically downloaded and placed on your
+machine; this will depend on where your Web browser places files.  We'll
+need it later, so you should track it down :)
+
+.. image:: images/ec2-download-key-pair.png
+   :width: 90%
+
+-----
+
+Next, you'll have to define security settings.
+
+.. image:: images/ec2-default-security-group.png
+   :width: 90%
+
+You'll need to allow SSH connections in by "adding a rule" for SSH:
+
+.. image:: images/ec2-ssh-allowed.png
+   :width: 50%
+
+-----
+
+Finally, at the Review screen, you can see a summary -- just click
+"Launch".
+
+.. image:: images/ec2-launch.png
+   :width: 90%
+
+Now you should see a screen that says "your instances are now launching".
+Click "View your instances on the Instances page".
+
+Hooray!
+
+Important note: shutting down your instance
+---------------------------
+
+When you're not using your rented system, you should shut it off.  Amazon
+only charges you for the periods that your system is up.
+
+You can turn it off in *either* of two ways:
+
+First, log in to your system and type 'shutdown -h now'.
+
+Or, second, on the main EC2 instance screen, select the instance you
+want to turn off, and click on "instance actions", and then select
+"Terminate".
+
+**Important!** After shutting down or terminating your instance, you
+should always go refresh the EC2 tab at http://aws.amazon.com/ to make
+sure it's off!
+
+A few notes
+-----------
+
+You only need to set up the key file and network groups once; then
+you can reuse them.
+
+A couple of caveats
+-------------------
+
+The main caveat is this: Amazon is charging you while your instances
+are running!  For now, they're just charging *me* (or this course,
+really) -- but once you're done with this class, they'll be charging
+*you*.  So make sure you shut down your computers when you're done with them!
+
+Another caveat is that each time you start or stop an instance, you lose
+all of the data there.    We'll talk about how to deal with that later;
+for now, accept it as part of the challenge.
+
+.. @@ mounting disks etc.
+
+.. @@ selecting different distros

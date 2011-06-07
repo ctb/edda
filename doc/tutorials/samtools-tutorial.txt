@@ -5,31 +5,46 @@ Visualizing mappings with Samtools
 :Author: Rosangela Canino-Koning
 :Date: June 5, 2010
 
+Installing samtools
+===================
+
+**Note:** You can also use the AMI 'ami-4403f42d', which comes with everything
+installed, instead of running through the install process.
+
 First, set up a new EC2 server as in
 :doc:`renting-a-computer-from-amazon`.  Make sure to run all of the
 install commands in :doc:`installing-your-cloud-system`!
 
-If you terminated your EC2 instance after the bowtie tutorial, re-download
-the dataset::
-
-  %% cd /mnt/campy
-  %% curl -O http://teckla.idyll.org/~t/transfer/ngs-data/campy.fa.gz
-  %% curl -O http://teckla.idyll.org/~t/transfer/ngs-data/campy-pre-1m.fastq.gz
-  %% curl -O http://teckla.idyll.org/~t/transfer/ngs-data/campy-pre-1m.map.gz
-  %% gunzip campy*.gz
-  %% cd
-
 Now, we'll install Samtools, and its supporting libraries::
 
-  %% cd ~/
-  %% curl -O https://s3.amazonaws.com/angus.ged.msu.edu/samtools-0.1.8.tar.bz2
-  %% tar xjf samtools-0.1.7a.tar.bz2
-  %% cd samtools-0.1.7a
+  %% cd
+  %% curl -O https://s3.amazonaws.com/angus.ged.msu.edu/samtools-0.1.9.tar.bz2
+  %% tar xjf samtools-0.1.9.tar.bz2
+  %% cd samtools-0.1.9
   %% make
   %% cp samtools /usr/local/bin/
   %% cd misc/
   %% cp *.pl maq2sam-long maq2sam-short md5fa md5sum-lite wgsim /usr/local/bin/
   %% cd
+
+Downloading data
+================
+
+Download some data to work with; if you've worked through
+:doc:`bowtie-mapping`, you've already either downloaded or generated
+these files. ::
+
+  %% cd /mnt
+  %% mkdir campy
+  %% cd /mnt/campy
+  %% curl -O https://s3.amazonaws.com/angus.ged.msu.edu/campy.fa.gz
+  %% curl -O https://s3.amazonaws.com/angus.ged.msu.edu/campy-pre-1m.fastq.gz
+  %% curl -O https://s3.amazonaws.com/angus.ged.msu.edu/campy-pre-1m.map.gz
+  %% gunzip campy*.gz
+  %% cd
+
+Running samtools
+================
 
 Now that we have everything set up, we'll convert and index our bowtie
 mappings into a format that Samtools can use.
@@ -76,8 +91,9 @@ This will produce an endless stack of lines that look like this:::
   HWI-EAS216_0019:4:2:8490:8096#0	0	campy_genome	16177	25	35M	*	0	0	GATTTGTTCTGAAGAAAAAGCAAGTATGAGATAGT	CCCCCCCCCCCCCCCCCBBBCCCCACCCCCCCBCB	NM:i:0	X0:i:1	MD:Z:35
   HWI-EAS216_0019:4:3:9135:19700#0	16	campy_genome	16178	25	35M	*	0	0	ATTTGTTCTGAAGAAAAAGCAAGTATGAGATAGTT	CCCDCCCCDBBBCCCCCCCCCCCCCCCCCCCCCCC	NM:i:0	X0:i:1	MD:Z:35
 
-This is probably not very useful. Instead, we can target particular
-sections of the genome, like so:
+This is probably not very useful. (Hit CTRL-C to stop the madness!)
+
+Instead, we can target particular sections of the genome.
 
 To dump out the content of a particular contig, address it directly:::
 
@@ -98,9 +114,9 @@ contig, the starting index, and the ending index in a range.::
 The previous commands give you every field in the bowtie/sam output,
 which might be useful if you are importing into another tool, but they
 aren't particularly good for doing direct visual inspection. For this
-purpose, Samtools provides a tview interface.::
+purpose, Samtools provides an interactive interface, 'tview'.::
 
-  %% samtools tview campy-pre-1m.map.sorted.bam
+  %% samtools tview campy-pre-1m.map.sorted.bam campy.fa
 
 You can navigate the mappings using the arrow keys, and view other
 possible commands by typing a '?'.

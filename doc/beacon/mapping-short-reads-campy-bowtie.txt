@@ -1,0 +1,58 @@
+=================================================================================
+Trying out mapping -- using bowtie to map short reads to the Campylobacter genome
+=================================================================================
+
+Outline:
+
+ 1. Learn how to map short reads to a reference sequence using bowtie.
+ 2. Choose your own bowtie parameters (see especially the discussion of
+    `-n alignment <http://bowtie-bio.sourceforge.net/manual.shtml#the--n-alignment-mode>`__ and `-v alignment <http://bowtie-bio.sourceforge.net/manual.shtml#the--v-alignment-mode>`__).  These parameters are specified on the 'bowtie' command line, like '-p 2' in the tutorial below.
+ 3. Evaluate the mapping quality using the samtools viewer and 'calc-positional-variation.py' script.
+
+Introduction
+------------
+
+As part of resequencing analysis, you'll probably need to take your
+sequencing reads and map them back to a or the reference genome.  This
+process is fraught with mild peril, for reasons I've discussed in class
+lectures, including:
+
+ - ambiguous mapping to repetitive regions
+ - bias and error in sequencing
+ - difficulty in detecting large scale genomic variation
+
+Below, we'll go through mapping (with the bowtie software) and two ways
+of examining the mapping.
+
+Mapping and simple visualization
+--------------------------------
+
+Work through the tutorials on bowtie mapping and mapping visualization
+(:doc:`../tutorials/bowtie-mapping` and
+:doc:`../tutorials/samtools-tutorial`).  If you start with the AMI
+ami-4403f42d (search for 'biotools.msu.edu' on the AMI screen), then
+it comes with bowtie and samtools pre-installed -- just skip the
+"Installing..." sections.
+
+Looking at systematic biases in the mapping
+-------------------------------------------
+
+Use the 'calc-positional-variation.py' script to evaluate the quality of
+the mapping. First, you may need to update the 'beacon' repository from
+github: ::
+
+  %% cd ~/beacon
+  %% git pull origin master
+  %% cd /mnt/campy
+
+Now, run the script::
+
+  %% python ~/beacon/mapping/calc-positional-variation.py campy-pre-1m.map > campy-map.var
+
+Plot the contents of the .var file with your favorite program -- you can
+download it to Excel, or you can just generate a plot immediately with ::
+
+  %% python ~/beacon/mapping/plot.py campy-map.var
+
+This is a mapping of variation by position within the read; it should be
+flat if the mapping parameters are accurate.

@@ -4,8 +4,8 @@ Mapping with bowtie
 
 bowtie is an open source mapping program that's fast and easy to use.
 
-Using bowtie
-------------
+Installing bowtie
+-----------------
 
 First, set up a new EC2 server as in
 :doc:`renting-a-computer-from-amazon`.  You'll need to use a different
@@ -34,7 +34,7 @@ you can download it directly, so do::
   %% curl -O https://s3.amazonaws.com/angus.ged.msu.edu/bowtie-0.12.7-src.zip
   %% unzip bowtie-0.12.7-src.zip 
 
-This creates a directory 'bowtie-0.12.5', containing the source code.
+This creates a directory 'bowtie-0.12.7', containing the source code.
 Bowtie is written in C and C++, so unlike Python, you have to go
 through a compilation step where you build the C/C++ source code into
 something that the computer can run.  To do that, ::
@@ -46,6 +46,9 @@ something that the computer can run.  To do that, ::
 (This will take a while.)
 
 Great!  We've installed bowtie!
+
+Running bowtie on a Campylobacter data set
+------------------------------------------
 
 Now, let's go get a data set.  We're going to put it in a directory on
 a different disk::
@@ -67,10 +70,18 @@ shows the disk space left on your current disk.
 
 Now get the files::
 
-  %% curl -O http://teckla.idyll.org/~t/transfer/ngs-data/campy-pre-1m.fastq.gz
-  %% curl -O http://teckla.idyll.org/~t/transfer/ngs-data/campy.fa.gz
+  %% curl -O https://s3.amazonaws.com/angus.ged.msu.edu/campy.fa.gz
+  %% curl -O https://s3.amazonaws.com/angus.ged.msu.edu/campy-pre-1m.fastq.gz
 
-If you do ::
+This uses the program 'curl' to grab the files at those URLs and download
+them to the EC2 computer; it's similar to downloading them to your
+laptop by entering them into your Web browser, then copying them over
+to the EC2 computer with SCP.  The difference is that the files don't
+actually have to travel over your local network connection, which is
+a big advantage -- they go straight from wherever they're hosted (in
+this case, Amazon S3) to the EC2 computer.
+
+Now, if you do ::
 
   %% ls
 
@@ -117,6 +128,3 @@ That's: the name of the read, the orientation, the chromosome, the
 position (starting) of the mapped read, the mapped read, the quality
 scores of the mapped read, something more complicated, and a
 description of where this read contains mismatches with the reference.
-
-After lunch, we'll show you how to look at what reads match to which part
-of the genome.

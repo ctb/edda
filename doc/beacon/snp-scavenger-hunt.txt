@@ -1,0 +1,127 @@
+==================================================================
+A SNP scavenger hunt: finding SNPs in evolved Campylobacter jejuni
+==================================================================
+
+**Brief overview:** JP Jerome in the Mansfield lab performed an
+experimental evolution experiment with the bacterium Campylobacter
+jejuni, an enteric pathogen: he took a freezer strain (11168; see `the
+genbank record <http://www.ncbi.nlm.nih.gov/nuccore/30407139>`__) and
+passaged it through mice three times.  During these passages it
+dramatically increased in virulence.  JP then sequenced the
+pre-passage population and the post-passage population using Illumina
+short-read sequencing.  We would like to provide JP with a set of loci
+that have changed during passage and could underlie the increase in
+virulence.
+
+Note that Campylobacter is haploid.  It also has an extremely high
+mutation rate in which "contingency loci", poly-G tracts, expand and
+contract.  Because of this there is no such thing as a clonal
+population of C. jejuni, but rather only a population "cloud".
+
+Your goal is to identify genomic locations that have changed during
+this passage, i.e. find locations where there is a real difference
+between pre-passage and post-passage genomes.  Note that no structural
+variation (large-scale rearrangements, copy number variation, etc.)
+was detected by gel electrophoresis, so you're only looking for single
+nucleotide changes (SNPs) and insertion-deletion characters (indels).
+
+Be sure to consider how you might detect systematic bias, and whether
+or not a particular SNP is evolutionarily plausible.  You should think
+about how you might systematize the process, too.
+
+Working with the data
+---------------------
+
+We've provided a bunch of mappings with a wide range of parameters
+under '/mnt' on the two computers
+'ec2-75-101-241-129.compute-1.amazonaws.com' and
+'ec2-184-72-194-33.compute-1.amazonaws.com', username 'root', password
+'891'.  Each directory, 'mapping-*', contains a set of 'pre' and
+'post' mapping files; you can use e.g. 'tview' (as in the
+:doc:`../tutorials/samtools-tutorial`) to view them::
+
+   cd /mnt/mapping-n1
+   samtools tview pre.map.sorted.bam ../data/campy.fa
+
+or::
+
+   samtools tview post.map.sorted.bam ../data/campy.fa
+
+At the bottom of this page, I've provided a list of locations for you
+to examine.  There may be other "interesting" locations that you should
+feel free to explore, but these encompass the types of variation in the
+genome.
+
+Looking at the data
+-------------------
+
+The primary way to look at the data is through the use of 'samtools tview'.
+For example, to look at the results of a default parameter mapping of the
+pre-passage reads to the Campy genome, use::
+
+   cd /mnt/default
+   samtools tview pre.map.sorted.bam ../data/campy.fa
+
+To look at the mapping of the post-passage reads, look at post.map.sorted.bam::
+
+   samtools tview post.map.sorted.bam ../data/campy.fa
+
+You can get a list of different mappings by doing::
+
+   ls -1d /mnt/mapping-*
+
+and the individual mapping parameters are in the file 'parameters'.
+
+Navigating inside of 'tview'
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+'.' and ',' represent forward-mapped reads and reverse-mapped reads,
+respectively.
+
+You can use your up and down arrows to scroll along the aligned reads.
+
+Left and right will change the primary nucleotide.
+
+A 'g', followed by '=' and a number, will reset the location of the viewer
+to that location.  So typing 'g=2736' will go to position 2736 (see below
+for a list of positions).
+
+'q' will quit the tview.
+
+'?' will give you a list of other options.
+
+See :doc:`../tutorials/samtools-tutorial` for other options.
+
+A list of locations
+-------------------
+
+Our C. jejuni strain is approximately 1.5 mb in size, with a single
+chromosome named 'campy_genome'.
+
+Please try to classify some or all of the following locations as
+**real SNP difference pre/post**, **real indel**, **sequencing
+error/bias**, **no variation**.
+
+Locations::
+
+   2736
+   3518
+   4155
+   67708
+   180710
+   321185
+   415898
+   420550
+   574625
+   611386
+   654322
+   695943
+   800124
+   990764
+   1181188
+   1250806
+   1355958
+   1404347
+   1425072
+   1572318
+

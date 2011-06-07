@@ -33,6 +33,7 @@ Contents:
    ngs-course-schedule
    presentations
    tutorials/index
+   tutorials-2011
    tips-and-tricks/index
    data-sets
    unix-cheat-sheet

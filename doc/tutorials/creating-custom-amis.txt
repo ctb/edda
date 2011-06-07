@@ -1,0 +1,103 @@
+--------------------
+Creating Custom AMIs
+--------------------
+
+:Author: Alex Nolley
+:Date: October 14, 2010
+
+Introduction
+------------
+On the Amazon servers, there exist many basic installations of
+operating systems for public use. These AMIs (Amazon images) are great
+to start off with, but what if you want to keep the same software
+and data installed between runs? This tutorial shows you how to save
+a customized instance into an AMI that can be uploaded to Amazon's
+servers for later use.
+
+Notes of Importance
+-------------------
+ #. This tutorial assumes you've already completed the
+    :doc:`starting-your-cloud-system` tutorial so that you
+    have a running instance, ready to be turned into an AMI.
+ #. All commands are to be run from inside the Amazon instance unless
+    specified otherwise.
+ #. In this tutorial we will be using a Debian installation; the
+    general commands should work for other Linux operating systems.
+
+Pre-flight Checklist
+--------------------
+Before we can start hacking away at the command line, first make
+sure you have access to the following:
+
+ #. Your private key file and your X.509 certificate file. These are
+    usually named 'pk-<somethingsomethingsomething>.pem'
+    and 'cert-<somethingsomethingsomething>.pem', respectively.
+ #. An S3 bucket to store the image in. If you haven't created one of
+    these yet, go to your
+    `AWS management console <https://console.aws.amazon.com/s3/home>`__
+    and in the 'Amazon S3' tab and create a bucket
+ #. Your access key ID, secret access key and account number. These are
+    used for identifying your account. To find them, or generate new
+    ones, go to
+    `the main AWS page <http://aws.amazon.com/>`__ and select 'Account',
+    then 'Security Credentials'::
+
+.. image:: images/aws_credents.png
+   :width: 90%
+
+Preparation
+-----------
+To bundle your image, your private key and X.509 certificate files need
+to be copied to the instance. From the computer these files reside on,
+issue this command to copy them to the instance::
+
+  %% scp -i ec2-keypair.pem <your-private-key-file>.pem <your-certificate-file>-.pem root@ec2-174-129-57-123.compute-1.amazonaws.com:/mnt
+
+You'll also need to install ruby and Amazon's AMI tools to perform the
+bundling::
+
+  %% apt-get -y install ruby unzip libopenssl-ruby default-jre
+  %% cd /mnt
+  %% curl -O http://s3.amazonaws.com/ec2-downloads/ec2-ami-tools.zip
+  %% curl -O http://s3.amazonaws.com/ec2-downloads/ec2-api-tools.zip
+  %% unzip ec2-ami*.zip
+  %% unzip ec2-api*.zip
+  %% rm *.zip
+  %% mv ec2-ami* ec2-tools/
+  %% mv ec2-api*/bin/* ec2-tools/bin/
+  %% mv ec2-api*/lib/* ec2-tools/lib/
+  %% rm -rf ec2-api*
+
+Finally, set the EC2_HOME, EC2_AMITOOL_HOME and JAVA_HOME
+environment variables which the AWS tools need::
+
+  %% export EC2_HOME=/mnt/ec2-tools
+  %% export EC2_AMITOOL_HOME=/mnt/ec2-tools
+  %% export JAVA_HOME=/usr/
+
+Bundling and Uploading Your Image
+---------------------------------
+
+Now that the necessary software is in place, it's time to create the
+new AMI::
+
+  %% /mnt/ec2-tools/bin/ec2-bundle-vol -d /mnt -k /mnt/<your-private-key-file>.pem -c /mnt/<your-certificate-file>.pem -r x86_64 -u <your-AWS-account-number>
+
+This command will copy the entire hard drive into a series of archives
+and store these in /mnt. Notice that the '-r' argument defines the
+architecture. Here, we are uploading a 64-bit operating system so we
+use 'x86_64'. If you are imaging a 32-bit operating system, use 'i386'.
+
+To upload the archives, issue the command::
+
+  %% /mnt/ec2-tools/bin/ec2-upload-bundle -b <your-bucket> -m /mnt/image.manifest.xml -a <your-aws-access-key-id> -s <your-aws-secret-access-key>
+
+Here "<your bucket>" should be something like 'avida.beacon.msu.edu/mapping-small-2010.11.16' -- that is, a bucket+folder combination.
+
+Now the image exists in your Amazon S3 bucket, but it needs to be
+registered before it can be used::
+
+  %% /mnt/ec2-tools/bin/ec2-register -K /mnt/<your-private-key-file>.pem -C /mnt/<your-certificate-file>.pem <your-bucket>/image.manifest.xml
+
+This command returns the official name of your image which can now be
+launched.
