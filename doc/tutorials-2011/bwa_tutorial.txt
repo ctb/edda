@@ -2,14 +2,12 @@
 Mapping reads with bwa and bowtie
 =================================
 
-In this tutorial, we're going to take a set of Illumina reads from an inbred isofemale Drosophila melanogaster line, and map them back to the reference genome. (After these steps, we could do things like generate a list of SNPs at which this line differs from the reference strain, or generate a genome sequence for this fly strain, but we'll get to that later on in the course.) We are also going to use two different (but popular) mapping tools, bwa and bowtie. Among their differences is that bowtie (while smokin' fast) does not deal with "gapped" alignments, i.e. it does not handle insertion/deletions well. 
+In this tutorial, we're going to take a set of Illumina reads from an inbred Drosophila melanogaster line, and map them back to the reference genome. (After these steps, we could do things like generate a list of SNPs at which this line differs from the reference strain, or generate a genome sequence for this fly strain, but we'll get to that later on in the course.) We are also going to use two different (but popular) mapping tools, bwa and bowtie. Among their differences is that bowtie (while smokin' fast) does not deal with "gapped" alignments, i.e. it does not handle insertion/deletions well. 
 
 Getting the data
 ----------------
 
-First, set up an EC2 server, and mount the EBS volume as /data/ so you can get to the datasets we need.
-
-The data files we'll be working with are in the /data/drosophila/::
+If you just finished the FastQC tutorial, you can keep working on the same machine. Otherwise, launch an EC2 instance, make a volume out of the same snapshot that we did before, and mount it. The data for this tutorial are in /data/drosophila::
 
   %% cd /data/drosophila/
   
@@ -61,7 +59,7 @@ Next, we do the actual mapping. These were paired-end reads, which means that fo
   %% bwa aln dmel-all-chromosome-r5.37.fasta RAL357_1.fastq > RAL357_1.sai
   %% bwa aln dmel-all-chromosome-r5.37.fasta RAL357_2.fastq > RAL357_2.sai
 
-These .sai files aren't very useful to us, so we need to convert them into SAM files. In this step, bwa takes the information from the two separate ends of each sequence and combines everything together. Here's how you'd do it::
+These .sai files aren't very useful to us, so we need to convert them into SAM files. In this step, bwa takes the information from the two separate ends of each sequence and combines everything together. Here's how you do it::
 
   %% bwa sampe dmel-all-chromosome-r5.37.fasta RAL357_1.sai RAL357_2.sai RAL357_1.fastq RAL357_2.fastq > RAL357_bwa.sam
 
@@ -112,7 +110,7 @@ Let's create a new directory, "drosophila_bowtie" where we are going to place al
 
   %% cd ..
   %% mkdir drosophila_bowtie
-  %% cd drosophila_bowtie  
+  %% cd drosophila_bowtie
   
 Now we are going to build an index of the Drosophila genome using bowtie just like we did with bwa. The original Drosophila reference genome is in the same location as we used before. Again, we have already performed the indexing step (it takes about 7 minutes), so if you want to try it yourself, index a copy so you don't over-write the one we've pre-run for you.
 

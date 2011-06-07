@@ -4,16 +4,36 @@ Checking read quality with FastQC
 
 When you get your sequences back from a sequencing facility, it's important to check that they are high quality (garbage in, garbage out). In this tutorial, we'll use software called FastQC which checks whether a set of sequence reads in a .fastq file exhibit any unusual qualities (which might indicate either low sequence quality, or interesting biological features in your sample).
 
+Getting the data
+----------------
+
+The data we're using in this tutorial is stored as a snapshot with Amazon. We need to make an EBS volume out of this snapshot and then mount it on our instance, which will make it very easy to access our data.
+
+Log into Amazon Web Services, and click on "Snapshots" at the left. Where it says "Viewing:", click on the drop-down box and select "All Snapshots". In the search box, paste the name of the snapshot that you want to make a volume from (that's snap-4acb6124 in this case). When the snapshot shows up in the list, select it and then click the "Create Volume" button. In the box that pops up, make sure to take note of which availability zone you are using -- you will need to launch your AMI instance in the same availability zone, or else you won't be able to attach the volume to the instance!
+
+Now go launch your AMI instance. But again, when it asks you which availability zone to launch it in, change the selection from "No preference" to whatever availability zone your volume is in. Now you need to attach your volume. Click on "Volumes" in the bar at the left, and select the one that you just created from the snapshot. Click on the "Attach Volume" button, and then select your instance. In the box that pops up, type "sdf" (minus the quotes).
+
+Now it's time to connect to your instance using ssh. Once you are connected, we'll mount the drive to the /data directory. When you first launch your instance, that directory should be (almost) empty::
+
+  %% cd /data
+  %% ls
+  
+Next, run the following line::
+
+  %% mount /dev/xvdf /data
+
+And compare now::
+
+  %% ls
+
+Now that we've got the drive mounted, the data files we'll be working with are in the /data/fastqc/::
+
+  %% cd /data/fastqc
+
 Running FastQC
 --------------
 
-First, set up an EC2 server and mount the EBS volume that you created from our snapshot.
-
-The dataset we want for this tutorial is in /data/fastqc/::
-
-  %% cd /data/fastqc/
-
-Next, download and set up FastQC::
+Now we need to download and set up FastQC::
 
   %% curl -O http://www.bioinformatics.bbsrc.ac.uk/projects/fastqc/fastqc_v0.9.2.zip
   %% unzip fastqc_v0.9.2.zip
@@ -21,8 +41,13 @@ Next, download and set up FastQC::
   %% chmod +x fastqc
   %% cd ..
 
-Running FastQC is pretty simple. It is written in Java, but our machine should already have Java run-times installed::
+Running FastQC is pretty simple. It is written in Java, but our machine should already have Java run-times installed.
+
   %% ./FastQC/fastqc fastq_data.fastq
+
+Note: If you ever want to check if Java is installed on your machine, one way to do it is just check if there's a 'man' page available for it::
+
+  %% man java
 
 Inspecting the output
 ---------------------
@@ -31,7 +56,7 @@ That's it! FastQC generates its output as an HTML file and associated image file
 
   %% scp -r -i <YOUR_KEYFILE.pem> root@<YOUR_AMAZON_MACHINE>:/fastqc/<SUBFOLDER> .
 
-An easier alternative: you can mount your Dropbox folder on your Amazon instance, copy the output folders there (using the cp command), and then easily view it on your local machine.
+An easier alternative: you can mount your Dropbox folder on your Amazon instance, copy the output folders there (using the cp command), and then easily view it on your local machine (see :doc:`installing-dropbox`).
 
 Your output should look like this:
 
