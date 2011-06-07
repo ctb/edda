@@ -1,0 +1,41 @@
+===================================
+Using the pre-installed Avida image
+===================================
+
+We've built an Avida machine image (AMI), so you don't have to go through
+the whole system update, upgrade, and build process any more.
+
+To use this image, search for 'avida.beacon.msu.edu' under
+'Community AMIs' when launching a new image.  Its current AMI
+ID is 'ami-2ecb3f47' but that will change if we update it.
+
+Updating the version of avida
+-----------------------------
+
+One thing that you might want to do is *update the installed version of
+Avida*.  For example, if you found a bug and got it fixed, or needed to
+use a newly added feature, you'd need to update your instance of the AMI
+to have the newer version.
+
+**You'll need to do this for every new instance!  The AMI is a frozen
+snapshot at a point in time, and it isn't that simple to update.**
+
+It's fairly simple set of commands to update avida.  Immediately after
+login, do::
+
+  %% cd ~/avida
+  %% svn update
+  %% make
+  %% cp bin/avida /usr/local/bin
+
+and that's it!  Briefly, what you're doing here is:
+
+ - updating the Avida source code from its source repository.  This command
+   is very similar to the 'git pull' command that you need to use to update
+   the 'beacon' source repository.
+
+ - re-building Avida from the new source files
+
+ - copying the new version of Avida over the old version (in /usr/local/bin).
+
+tada!
