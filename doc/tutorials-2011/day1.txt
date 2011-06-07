@@ -1,0 +1,14 @@
+===========================
+Day 1: EC2, UNIX, and BLAST
+===========================
+
+.. toctree::
+   :maxdepth: 1
+
+   creating-an-ec2-instance
+   logging-into-ec2-mac
+   logging-into-ec2-windows
+   installing-dropbox
+   running-blast
+   parsing-blast-to-csv
+   reciprocal-blast

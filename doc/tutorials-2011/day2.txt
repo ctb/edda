@@ -1,0 +1,8 @@
+==============
+Day 2: Mapping
+==============
+
+.. toctree::
+   :maxdepth: 1
+
+   basic-mapping
