@@ -58,6 +58,24 @@ Lecture 7 -- Scripting
 
 :doc:`avida-with-scripts`
 
+<<<<<<< Updated upstream:doc/beacon/index.txt
+=======
+Lecture 12 -- Serial transfers of critters
+------------------------------------------
+
+See :doc:`running-serial-transfers` and :doc:`transferring-files`.
+
+Lecture 13 -- Mutation analysis
+-------------------------------
+
+See :doc:`mutation-analysis`.
+
+Lecture 17 -- Mapping short reads
+---------------------------------
+
+See :doc:`mapping-short-reads-campy-bowtie`:
+
+>>>>>>> Stashed changes:doc/beacon/index.txt
 All BEACON-specific ANGUS materials
 ===================================
 
@@ -71,3 +89,17 @@ All BEACON-specific ANGUS materials
    retrieving-dominant-organism
 
    avida-with-scripts
+<<<<<<< Updated upstream:doc/beacon/index.txt
+=======
+
+   running-serial-transfers
+   mutation-analysis
+
+   transferring-files
+
+   avida-image
+
+   mapping-short-reads-campy-bowtie
+
+   snp-scavenger-hunt
+>>>>>>> Stashed changes:doc/beacon/index.txt
