@@ -204,18 +204,18 @@ All done! Now we can use the sorted BAM file in Samtools to visualize our mappin
 Viewing the output with TView
 -----------------------------
 
-Before we can use TView to compare Bowtie and BWA mappings, we need to sort the Bowtie BAM file, and generate an index for it.
+Before we can use TView to compare Bowtie and BWA mappings, we need to sort the Bowtie BAM file, and generate an index for it.::
 
   %% cd drosophyla_bowtie
   %% samtools sort RAL357_full_bowtie.bam RAL357_full_bowtie.sorted
   %% samtools index RAL357_full_bowtie.sorted.bam
 
-Now that we've generated the files, we can view the output with TView. We'll compare two different sorted
+Now that we've generated the files, we can view the output with TView. We'll compare two different sorted::
 
   %% cd ..
   %% samtools tview RAL357_full_bwa.sorted.bam
 
-Now open an additional terminal window, and load the Bowtie mapping file there as well.
+Now open an additional terminal window, and load the Bowtie mapping file there as well.::
   
   %% cd /data/drosophila/drosophila_bowtie
   %% samtools tview RAL357_full_bowtie.sorted.bam
