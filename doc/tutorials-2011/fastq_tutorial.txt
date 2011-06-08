@@ -57,7 +57,9 @@ That's it! FastQC generates its output as an HTML file and associated image file
 
   %% scp -r -i <YOUR_KEYFILE.pem> root@<YOUR_AMAZON_MACHINE>:/fastqc/<SUBFOLDER> .
 
-An easier alternative: you can mount your Dropbox folder on your Amazon instance, copy the output folders there (using the cp command), and then easily view it on your local machine (see :doc:`installing-dropbox`).
+An easier alternative: you can mount your Dropbox folder on your Amazon instance, copy the output folders there (using the cp command), and then easily view it on your local machine (see :doc:`installing-dropbox`)::
+
+  %% cp -r fastq_data_fastqc ~/Dropbox/
 
 Your output should look like this:
 
