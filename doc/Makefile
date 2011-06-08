@@ -16,7 +16,7 @@ ALLSPHINXOPTS   = -d $(BUILDDIR)/doctrees $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) .
 
 all: html
 
-update: html
+update: clean all
 	bash update-angus.sh
 
 help:
