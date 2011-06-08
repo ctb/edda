@@ -5,4 +5,5 @@ Day 2: Mapping
 .. toctree::
    :maxdepth: 1
 
-   basic-mapping
+   fastq_tutorial
+   bwa_tutorial
