@@ -24,6 +24,7 @@ Next, run the following line::
 
 And compare now::
 
+  %% cd /data
   %% ls
 
 Now that we've got the drive mounted, the data files we'll be working with are in the /data/fastqc/::
