@@ -28,16 +28,16 @@ use curl::
 
   %% curl -O http://www.ebi.ac.uk/~zerbino/velvet/velvet_1.1.04.tgz
 
-Now, we'll grab our datasets and uncompress them::
+Now, we'll copy our datasets to /mnt and uncompress them::
 
-   %% curl -O ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR001/SRR001666/SRR001666_1.fastq.gz
-   %% curl -O ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR001/SRR001666/SRR001666_2.fastq.gz
+   %% cp /data/assembly/SRR001666_*.fastq.gz /mnt
    %% gunzip SRR001666_*.fastq.gz
 
 This dataset is an Illumina run of E. coli with 36bp paired-end reads and
 a 500bp insert size.  A similar dataset with an insert size of 200bp
 is available under accession number SRR001665 from NCBI or EBI if you are
-interested in trying to assemble them together.
+interested in trying to assemble them together (though it doesn't improve 
+the quality of the assembly very much).
 
 We will also need some packages installed::
 
@@ -75,11 +75,16 @@ are one paired-end library::
    %% cd ..
    %% velvet_1.1.04/shuffleSequences_fastq.pl SRR001666_1.fastq SRR001666_2.fastq reads.fastq
 
-Go back to your home directory. Assembling with Velvet is a two-step process:
+Assembling with Velvet is a two-step process:
 
   %% mkdir k31
   %% velveth k31 31 -shortPaired -fastq reads.fastq
   %% velvetg k31 -ins_length 500
+
+The 31 is the value that we are selecting for the K parameter. This 
+means that we are using 31-mers to look for overlaps between the 
+reads. There is a tradeoff between "sensitivity" and "specificity" 
+that we will discuss later on in the tutorial.
 
 Evaluating Assemblies
 ---------------------
@@ -130,7 +135,10 @@ text file and import it into Excel as a space-delimited file.
 
 We have another script for you to try called extract-long-sequences.fa. 
 This script acts as a simple filter to get rid of sequences smaller than a 
-certain length. 
+certain length. For example, if you have a file named contigs.fa and you 
+want only contigs of length 200 or greater, you can run::
+
+   %% python ~/ngs-course/assembly/extract-long-sequences.fa 200 contigs.fa > out.fa 
 
 Finally, if you have your own dataset, you can try to assemble it on
 your EC2 system.  However, you may want to check memory usage with the
