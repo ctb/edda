@@ -77,7 +77,7 @@ Oases) has longer contigs than those in contigs.fa (from Velvet only).
 For RNAseq, it is not uncommon that different hashlengths give you
 different results. Some isoforms are only detected using a particular
 hashlength.
-So, you might need to run Velvet and Oases with different hashlength to
+So, you might need to run Velvet and Oases with different hashlengths to
 increase the sensitivity of isoform detection.
 To run Velvet with multiple hashlengths, for example hashlength=21-31, run::
 
