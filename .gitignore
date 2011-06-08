@@ -2,3 +2,4 @@ env
 *~
 doc/_build
 build
+*.swp
