@@ -1,0 +1,104 @@
+==========================
+Running a reciprocal BLAST
+==========================
+
+Following up on the :doc:`running-blast` tutorial, we suggested you run::
+
+ %% python ~/Dropbox/ngs-scripts/blast/blast-to-csv.py zebrafish.x.mouse > ~/Dropbox/zebrafish-mouse.csv
+
+This is a Python script.  Python is a programming language for writing
+(among other things) short scripts to parse and manipulate data.  A
+lot of the scripts we'll show you in this course will be written in
+Python; the rest will probably be in R.  Note that in practice the
+language it's written in doesn't affect how you run it.
+
+You won't actually need to learn Python for this course, but it's completely
+OK to poke around in these scripts and modify them.  **Please** copy them
+into a different place in your Dropbox folder before you edit them!  We'll
+show you various ways to edit them as we progress through the course.
+
+For now, take a look at the script and see if you can understand what
+it does::
+
+ %% more ~/Dropbox/ngs-scripts/blast/blast-to-csv.py
+
+---
+
+We've also created a second script, a script that finds reciprocal best hits.
+It's in
+
+  ~/Dropbox/ngs-scripts/blast/reciprocal-blast.py
+
+and you can use 'more' to look at it::
+
+  more ~/Dropbox/ngs-scripts/blast/reciprocal-blast.py
+
+This script takes two files, one containing the results of a blast of
+database A against B, and one containing the converse results, B
+against A; for example, ::
+
+  %% python ~/Dropbox/ngs-scripts/blast/reciprocal-blast.py zebrafish.x.mouse mouse.x.zebrafish
+
+What this script does is:
+
+ - load in all the BLAST matches from A vs B, storing each individual best match;
+ - load in all the BLAST matches from B vs A, again storing each individual best match;
+ - go over the stored best matches and finding ones that agree with each other
+in both directions.
+
+The real complexity here is hidden in the a_to_b and b_to_a variables.
+These are dictionaries, or associative arrays, that link a 'key' to a
+'value'.  In a_to_b, the keys are the names of the A sequences and the
+values are the names of the B sequences; while in b_to_a, the keys are
+the names of the B sequences and the values are the names of the A
+sequences.  The magic, such as it is, happens here::
+
+   for query in a_to_b:
+      subject = a_to_b[query]
+
+      if subject in b_to_a and b_to_a[subject] == query:
+         # found a real match!
+
+If you try running this script, it's sloooow.  One problem is that it needs
+to load in all the BLAST results.  Another problem is that it doesn't tell
+you what it's doing at all, which leads to a sort of black-box problem:
+you have no idea what's proceeding!
+
+So, we've modified this script so that it reports, like so::
+
+   for n, record in enumerate(blastparser.parse_file(file1)):
+      if n % 100 == 0:
+         print >>sys.stderr, 'loading 1 ...', n
+
+The two changes are the 'enumerate', which keeps track (in 'n') of how
+many records you've visited; and the second is the 'if n %100' component,
+which prints out just how big n is, every 100 increments.
+
+We do have another issue, which is that since the script takes a long time
+to run, we're not actually sure it works!  What's one way to check?
+
+One exceedingly simple way is just to run it on some BLAST output from
+two simple sequences.  We've provided two such in Dropbox; you can just copy
+them like so::
+
+   %% cd /mnt
+   %% ls ~/Dropbox/ngs-scripts/blast/test-data/*.fa
+   %% cp ~/Dropbox/ngs-scripts/blast/test-data/*.fa .
+
+You should now have two files, dr-foxQ2.fa and mm-foxL1.fa.  Let's BLAST
+them against each other.  First make the BLAST databases::
+
+   %% makeblastdb -in dr-foxQ2.fa
+   %% makeblastdb -in mm-foxL1.fa
+
+and now BLAST them against each other::
+
+   %% blastp -query dr-foxQ2.fa -db mm-foxL1.fa -out xxx1.txt
+   %% blastp -query mm-foxL1.fa -db dr-foxQ2.fa -out yyy1.txt
+
+and then run the new script on both of 'em::
+
+   %% python ~/Dropbox/ngs-scripts/blast/reciprocal-blast-2.py xxx1.txt yyy1.txt > ~/Dropbox/matches.csv
+
+Does it return the result you expect?  (Note that you can double-click
+on the CSV file and it should open in Excel.)
