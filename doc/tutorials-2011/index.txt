@@ -7,4 +7,5 @@ Tutorials (2011 version)
 
    day1.txt
    day2.txt
+   day3.txt
 

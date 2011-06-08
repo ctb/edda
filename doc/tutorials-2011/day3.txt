@@ -1,0 +1,9 @@
+==============
+Day 3: Assembly
+==============
+
+.. toctree::
+   :maxdepth: 1
+
+   short-read-assembly-velvet
+   mrnaseq-assembly
