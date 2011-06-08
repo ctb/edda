@@ -1,0 +1,92 @@
+====================================
+mRNAseq Assembly with Velvet & Oases
+====================================
+
+:Author: Likit Preeyanon
+:Date: June 8, 2011
+
+Velvet is designed for DNA assembly. To assemble short reads from RNA, we
+need another program called Oases. In this tutorial, we will try assembling
+the same data with Velvet and with Velvet + Oases to see how Oases improves
+RNA assembly. We will also explore the effect of different
+hashlengths (k-mer) on
+isoform detection. 
+
+Getting Started
+---------------
+
+First, please make sure that you already have Velvet installed on your
+machine.
+See: :doc:`short-read-assembly-velvet`.
+
+To obtain current version of Oases, use wget::
+
+    %% wget http://www.ebi.ac.uk/~zerbino/oases/oases_0.1.21.tgz
+
+Then uncompress the file using tar::
+
+    %% tar xvfz oases_0.1.21.tgz
+    %% cd oases_0.1.21/
+
+You should now be in oases directory. To install Oases you have to specify
+Velvet directory and compilation settings used to install Velvet.
+For example, in the previous tutorial we use MAXKMERLENGTH=49. Therefore,
+we have to use MAXKMERLENGTH=49 to install Oases as well. In addition, we
+also have to specify Velvet directory with 'VELVET_DIR'=/path/to/velvet.
+From the above settings, you can install Oases with make::
+
+    %% make 'VELVET_DIR=/root/velvet_1.1.04' 'MAXKMERLENGTH=49'
+
+Note, use a full path for VELVET_DIR. A relative path might not work.
+In addition, system variable such as $HOME, might not work here either.
+Then copy oases to /usr/bin::
+
+    %% cp oases /usr/bin
+
+Now we should be ready to assemble short reads with both Velvet and Oases.
+Let's move to the /mnt for a larger space.
+
+    %% cd /mnt
+
+To assemble reads with Velvet, run::
+
+    %% velveth transcripts_k31 -short -fastq /data/rnaseq/chicken/reads.fastq
+    %% velvetg transcripts_k31 -read_trkg yes
+
+Note that we have to turn on '-read_trkg yes' option to allow Oases to use assembled
+contigs from Velvet.
+Then run Oases::
+
+    %% oases transcripts_k31
+
+The transcripts.fa will be written in the output directory of Velvet, k31
+in this case.
+We can go look at the output::
+
+    %% cd transcripts_k31
+    %% less transcripts.fa
+
+For RNAseq, it is not uncommon that different hashlengths give you
+different results. Some isoforms are only detected using a particular
+hashlength.
+So, you might need to run Velvet and Oases with different hashlength to
+increase the sensitivity of isoform detection.
+To run Velvet with multiple hashlengths, for example hashlength=21-31, run::
+
+    %% velveth transcripts 21,33,2 -short -fastq /data/rnaseq/chicken/reads.fastq
+
+Then you can run velvetg and oases for each hashlength using::
+
+    %% velvetg transcripts_21 -read_trkg yes
+    %% oases transcripts_21
+
+Or you can use a shell script to run velvetg for hashlength=21-31::
+
+    %% for((n=21; n<=31; n=n+2)); do velvetg transcripts_"$n" -read_trkg yes; done
+
+And you can run Oases the same way::
+
+    %% for((n=21; n<=31; n=n+2)); do oases transcripts_"$n"; done
+
+After the assembly is finished, you can go to each directory to look at the
+result. You should see that there are more than two isoforms in some hashlengths.
