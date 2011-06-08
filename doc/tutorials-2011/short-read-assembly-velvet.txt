@@ -1,0 +1,139 @@
+===============================
+Short Read Assembly with Velvet
+===============================
+
+:Author: Jason Pell
+:Date: June 7, 2011
+:Last Updated: June 8, 2011
+
+For this tutorial, we will be using the short read de novo assembler Velvet
+to assemble a bacterial genome. However, there are plenty of other assemblers out 
+there (e.g. ABySS, ALLPATHS 2, SOAPdenovo, etc.) that may be more appropriate 
+for your particular dataset, and we can help you get them installed if you 
+are interested.
+
+Getting Started
+---------------
+
+Start or log in to an instance on Amazon EC2.  If you haven't already done 
+so, make sure you get your instance updated (including your Dropbox!).  
+See: :doc:`installing-your-cloud-system`.
+
+Go to your /mnt directory where there is more free space::
+
+   %% cd /mnt
+
+Next, we need to obtain some different files.  To obtain Velvet,
+use curl::
+
+  %% curl -O http://www.ebi.ac.uk/~zerbino/velvet/velvet_1.1.04.tgz
+
+Now, we'll grab our datasets and uncompress them::
+
+   %% curl -O ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR001/SRR001666/SRR001666_1.fastq.gz
+   %% curl -O ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR001/SRR001666/SRR001666_2.fastq.gz
+   %% gunzip SRR001666_*.fastq.gz
+
+This dataset is an Illumina run of E. coli with 36bp paired-end reads and
+a 500bp insert size.  A similar dataset with an insert size of 200bp
+is available under accession number SRR001665 from NCBI or EBI if you are
+interested in trying to assemble them together.
+
+We will also need some packages installed::
+
+   %% apt-get install make
+
+Installing Velvet
+-----------------
+Uncompress the tarballs and cd into the Velvet directory::
+
+  %% tar xvzf velvet_1.1.04.tgz
+  %% cd velvet_1.1.04
+
+Once you are in the Velvet directory, run the following to install::
+
+  %% make 'MAXKMERLENGTH=49'
+
+This command will compile the package. The MAXKMERLENGTH parameter is created as a 
+tradeoff between memory efficiency and flexibility with the 'k' parameter. We have it 
+set to be more than enough for our purposes, but you may need to set MAXKMERLENGTH 
+higher depending on your dataset. 
+
+You may get an error that some of the documentation was unable to build, but that's ok.
+
+We will now "install" Velvet onto your instance::
+
+   %% cp velveth /usr/bin
+   %% cp velvetg /usr/bin
+
+Running Velvet
+--------------
+
+Before we actually run Velvet, we need to "interleave" the two FASTQ files since they 
+are one paired-end library::
+
+   %% cd ..
+   %% velvet_1.1.04/shuffleSequences_fastq.pl SRR001666_1.fastq SRR001666_2.fastq reads.fastq
+
+Go back to your home directory. Assembling with Velvet is a two-step process:
+
+  %% mkdir k31
+  %% velveth k31 31 -shortPaired -fastq reads.fastq
+  %% velvetg k31 -ins_length 500
+
+Evaluating Assemblies
+---------------------
+Assessing the quality of a de novo assembly where there is no good
+reference is still an open problem.  However, there are many
+statistics that can be useful in comparing assemblies to one another.
+We have a Python script that provides many of these statistics; it's
+in the ngs-course scripts, under 'ngs-course/assembly/assemstats3.py'.
+
+Before you can run it, you must install screed, so we'll run the
+following in the home directory::
+
+  %% git clone git://github.com/acr/screed.git
+  %% cd screed
+  %% python setup.py install
+
+Screed is a software package that was developed to easily parse and
+manipulate a large amount of short read sequences.  Once the reads are
+indexed, you can very quickly retrieve any sequence you need by name.
+However, the assembly statistics Python script just uses the provided
+FASTA parser.
+
+To obtain statistics on the file you just generated, run::
+
+  %% cd /mnt
+  %% python ~/ngs-course/assembly/assemstats3.py 0 k*/contigs.fa
+
+Other Stuff To Try
+------------------
+The optimal value for k depends greatly on the dataset.  A lower value
+for k has greater sensitivity, but can produce more false overlaps.
+However, it is the best option when you don't have high coverage.  On
+the other hand, a high value for k will have a more accurate assembly
+and longer contigs, but you are likely to miss a lot of potential read
+overlaps, which means you need higher coverage to make up for the
+difference.
+
+Try varying the value for k by creating a new directory for each value
+that you would like to test. With Velvet, you can only choose odd number 
+k-mers. Furthermore, you must choose a k that is smaller than the read length, 
+so in this case k < 36. After you have created all of your assemblies, run::
+
+  %% python ~/ngs-course/assembly/assemstats.py 0 k*/contigs.fa
+
+again to see how the assemblies compare to each other.  If you
+generate a lot of assemblies, you can copy and paste the output to a
+text file and import it into Excel as a space-delimited file.
+
+We have another script for you to try called extract-long-sequences.fa. 
+This script acts as a simple filter to get rid of sequences smaller than a 
+certain length. 
+
+Finally, if you have your own dataset, you can try to assemble it on
+your EC2 system.  However, you may want to check memory usage with the
+top command in order to ensure that you are not using too much memory.
+If the Velvet memory usage is over 90%, you may be using virtual
+memory, which means the assembly will take much longer than necessary.
