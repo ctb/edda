@@ -41,7 +41,7 @@ Now we need to download and set up FastQC::
   %% chmod +x fastqc
   %% cd ..
 
-Running FastQC is pretty simple. It is written in Java, but our machine should already have Java run-times installed.
+Running FastQC is pretty simple. It is written in Java, but our machine should already have Java run-times installed::
 
   %% ./FastQC/fastqc fastq_data.fastq
 
