@@ -200,3 +200,24 @@ And last, we need Samtools to index the BAM file::
   %% samtools index RAL357_bowtie.sorted.bam
   
 All done! Now we can use the sorted BAM file in Samtools to visualize our mappings, generate lists of SNPs, and call consensus sequences. We'll get to all of that later on today and in the rest of the course.
+
+Viewing the output with TView
+-----------------------------
+
+Before we can use TView to compare Bowtie and BWA mappings, we need to sort the Bowtie BAM file, and generate an index for it.
+
+  %% cd drosophyla_bowtie
+  %% samtools sort RAL357_full_bowtie.bam RAL357_full_bowtie.sorted
+  %% samtools index RAL357_full_bowtie.sorted.bam
+
+Now that we've generated the files, we can view the output with TView. We'll compare two different sorted
+
+  %% cd ..
+  %% samtools tview RAL357_full_bwa.sorted.bam
+
+Now open an additional terminal window, and load the Bowtie mapping file there as well.
+  
+  %% cd /data/drosophila/drosophila_bowtie
+  %% samtools tview RAL357_full_bowtie.sorted.bam
+
+To view the tview help, type '?'
