@@ -70,6 +70,10 @@ We can go look at the output::
     %% cd transcripts_k31
     %% less transcripts.fa
 
+You can compare the result from Velvet and Oases by looking at contigs.fa
+and transcripts.fa. You will see that the transcripts.fa (from Velvet +
+Oases) has longer contigs than those in contigs.fa (from Velvet only).
+
 For RNAseq, it is not uncommon that different hashlengths give you
 different results. Some isoforms are only detected using a particular
 hashlength.
