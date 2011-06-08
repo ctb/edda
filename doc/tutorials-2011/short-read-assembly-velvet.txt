@@ -130,7 +130,10 @@ text file and import it into Excel as a space-delimited file.
 
 We have another script for you to try called extract-long-sequences.fa. 
 This script acts as a simple filter to get rid of sequences smaller than a 
-certain length. 
+certain length. For example, if you have a file named contigs.fa and you 
+want only contigs of length 200 or greater, you can run::
+
+   %% python ~/ngs-course/assembly/extract-long-sequences.fa 200 contigs.fa > out.fa 
 
 Finally, if you have your own dataset, you can try to assemble it on
 your EC2 system.  However, you may want to check memory usage with the
