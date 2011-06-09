@@ -1,0 +1,13 @@
+==================================
+Presentations and associated links
+==================================
+
+Lecture 1: `Welcome! <files/lecture1-welcome.pptx.pdf>`__
+
+Lecture 2: `BLAST is a Microcosm of All that is Wrong in Bioinformatics <files/lecture2-blast.pptx.pdf>`__
+
+Lecture 3: `Mapping <files/lecture3-mapping.pptx.pdf>`__
+
+Lecture 4: `Assembly <files/lecture4-assembly.pptx.pdf>`__
+
+Lecture 4 reference paper: `Assembly algorithms for next-generation sequencing data, Miller et al. <http://www.ncbi.nlm.nih.gov/pubmed/20211242>`__.
