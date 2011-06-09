@@ -47,7 +47,7 @@ want running on the computer.
 
 Select the "Community AMIs" tab.
 
-Next to "Viewing all images", enter "ami-00cc3569" (this might be a
+Next to "Viewing all images", enter "ami-3a52ab53" (this might be a
 good place to copy/paste...) and hit "return".  You should see one
 entry, containing the text 'ged.msu.edu/angus-64bit-2011.06.02-b/image.manifest.xml' with platform "Other Linux".  Select it (button on the right).
 
