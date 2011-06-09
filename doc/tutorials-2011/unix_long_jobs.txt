@@ -1,0 +1,169 @@
+===============================
+Handling Long Jobs in Unix
+===============================
+
+:Author: Rosangela Canino-Koning
+:Date: June 9, 2011
+:Last Updated: June 9, 2011
+
+In this tutorial, we will review a series of techniques for managing long jobs 
+on Unix machines.
+
+Screen - Persistent Sessions
+----------------------------
+
+Screen is a window manager for terminal sessions. Screen allows you to run a 
+terminal session, and then disconnect from the computer, and be able to return
+to the session at a later date.
+
+To start screen, you run the screen command with a few options:
+
+  %% screen -S *sessionname*
+ 
+Where *sessionname* is any meaningful or descriptive title for your screen 
+session. This creates an independent terminal session, and connects you to it. 
+
+Most commands within screen are composed of a prefix key-stroke, followed by 
+a command character. By default, the prefix is Ctrl-A. In this tutorial 
+Ctrl-A will represented by "C-a".
+
+Let's try a few screen commands.
+
+To disconnect from the session (while leaving it running!), type: 
+
+  %% C-a d
+
+This session will remain active until you choose to end it, or you reboot 
+the computer. You can at this point safely disconnect from SSH, and the 
+screen session will continue to run. 
+
+To reconnect to the session:
+
+  %% screen -r
+
+To illustrate managing multiple screen session, disconnect from the current 
+session, and create a new session with a second name.
+
+  %% C-a d
+  %% screen -S *secondsessionname*
+ 
+Disconnect from the second session, and then list the available sessions:
+
+  %% C-a d
+  %% screen -list
+
+Note, typing *screen -r* with multiple active screen sessions will display
+the same information.
+
+To reconnect to the first session, include it's name after the -r.
+
+  %% screen -r *sessionname*
+
+You may notice that scrolling back in the session in the usual way is not 
+possible. To enable scrollback mode:
+
+  %% C-a [
+
+This allows you to scroll back in the buffer history. Once in scrollback mode, 
+you can use movement keys to navigate the buffer:
+
+  k: Move the cursor up
+  j: Move the cursor down
+
+  h: Move the cursor left
+  l: Move the cursor right
+
+  0: Move to the beginning of the line
+  $: Move to the end of the line.
+
+  C-u:  Scrolls a half page up.
+  C-d:  Scrolls a half page down.
+
+  C-b:  Scrolls a full page up.
+  C-f:  Scrolls a full page down.
+
+To exit scrollback mode, hit 'esc'
+
+To quit a screen session from within, type:
+
+  %% exit
+
+A more complete list of commands can be found in the screen man page:
+
+  %% man screen
+
+
+Output Redirection and Logging
+------------------------------
+
+Occasionally, you will want to capture the output of a program to a file. 
+To do this, you must append the following magic:
+
+  %% *command* > *filename.txt*
+
+This will clobber the contents of *filename.txt* and fill it with the output 
+of the command. To append to the file instead,
+
+  %% *command* >> *filename.txt*
+
+Neither of these, however, capture error messages. To capture error messages 
+as well regular output, append 2>&1 to the command.
+
+  %% *command* >> *filename.txt* 2>&1
+
+All of these commands hide the output from sight. If you want to see the output
+as well as log it, use *tee*.
+
+  %% *command* | tee *filename.txt*
+
+If you'd also like to put all these together, capturing both errors and 
+regular output to a file, while seeing it all on the screen:
+
+  %% *command* 2>&1 | tee *filename.txt*
+
+Tee clobbers the content of the file by default. To change the behavior, use 
+the -a flag. For example.
+
+  %% *command* 2>&1 | tee -a *filename.txt*
+
+
+Process Management
+------------------
+
+When you run jobs, you may want to run them in the background while you do 
+other work. The easiest way to accomplish this is to append an & to your 
+command
+
+  %% *command* &
+
+Otherwise, if you're already running a job and decide you need access to the
+command line, you can hit Ctrl-Z to pause the job. Once the job is paused, you
+can resume it either in the background with bg (equivalent to retroactively 
+adding an & after the command) or put it back in the foreground with fg.
+
+  %% *command*
+  %% ^Z
+  %% bg
+
+If you want to kill a command running in the background, you must first identify
+the command's PID (Process ID). To do this, use ps, and search for your command's 
+name.
+
+  %% ps -aux | grep *command*
+
+Once you have the PID, you can kill the command.
+
+  %% kill *PID*
+
+Memory Considerations
+---------------------
+
+When you run a program that exhausts all available memory and cache, the 
+operating system will either crash, or kill your process.
+
+To experience this, run this program.
+
+  %% wget -O http://db.tt/Srtu54F
+  %% memory_exhaust
+
+The operating system killed the process when it exhausted all available memory.
