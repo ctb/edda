@@ -30,7 +30,7 @@ use curl::
 
 Now, we'll copy our datasets to /mnt and uncompress them::
 
-   %% cp /data/assembly/SRR001666_*.fastq.gz /mnt
+   %% cp /data/ecoli/SRR001666_*.fastq.gz /mnt
    %% gunzip SRR001666_*.fastq.gz
 
 This dataset is an Illumina run of E. coli with 36bp paired-end reads and
