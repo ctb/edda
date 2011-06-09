@@ -1,0 +1,68 @@
+=================================
+Interval operations with BEDtools
+=================================
+
+.. _BEDTools: http://code.google.com/p/bedtools/
+
+In this tutorial we will familiarize ourselves with `BEDTools`_ a suite of command line tools with which to compare
+large sets of genomic features. You should start this tutorial at a prompt that looks something like this::
+
+   root@ip-10-82-233-6:~#
+
+Our computer will need additional developer tools that allow us to install this and other software 
+directly from sourcecode. We need the `g++` (c++ compiler) and `make` 
+(compiler utility). Modern Linux package managers (`apt-get`, `yum` etc) allow for an easy installation::
+
+  %% apt-get install g++
+  %% apt-get install make
+
+Now, make a directory for the chipseq data::
+
+  %% mkdir chipseq
+  %% cd chipseq/
+
+Download, extract and compile the bedtools source code::
+
+  %% wget http://bedtools.googlecode.com/files/BEDTools.v2.12.0.tar.gz
+  %% tar zxvf BEDTools.v2.12.0.tar.gz
+  %% cd BEDTools-Version-2.12.0
+  %% make 
+
+You should now have all the bedtool utilites in your `bin` directory::
+
+  %% ls bin
+
+The output of the command above should be similar to::
+
+  annotateBed  bedToIgv       cuffToTrans   genomeCoverageBed  mergeBed    shuffleBed   unionBedGraphs
+  bamToBed     closestBed     fastaFromBed  intersectBed       overlap     slopBed      windowBed
+  bed12ToBed6  complementBed  fjoin         linksBed           pairToBed   sortBed
+  bedToBam     coverageBed    flankBed      maskFastaFromBed   pairToPair  subtractBed
+
+For reference download the `BEDTools User manual`_ onto your local computer. BEDTools quite possibly has the
+best documentation of any bioinformatics tool in existence. 
+
+.. note:: If you are reading this document a few months after June 2011 then 
+   the links above may be outdated. Check the `BEDTools`_ site for the most up to date sourcecode and documentation.
+
+.. _BEDTools User manual: http://bedtools.googlecode.com/files/BEDTools-User-Manual.v4.pdf
+
+Now let us continue on, test that the tools run::
+
+  %% bin/closestBed
+
+It should print a detailed help. In this tutorial we will only type the command name.  
+In the most general case to access one of these programs you will need to either type the full path to the the command, like so::
+
+  %% ~/chipseq/BEDTools-Version-2.12.0/bin/closestBed
+
+Or add the `bin` directory above to the search path::
+
+  %% export PATH=$PATH:/~/chipseq/BEDTools-Version-2.12.0/bin
+
+Let's go back to the main chipseq directory:
+
+  %% cd ~/chipseq/
+
+We will now download two datasets, mapped reads (in GFF format)6/9/2011
+
