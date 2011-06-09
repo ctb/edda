@@ -6,7 +6,7 @@ An Introduction to Unix
 :Date: June 9, 2011
 :Last Updated: June 9, 2011
 
-Unix commands can seem a bit cryptic. This tutorial will explore some of the more common ones. For any command, there is typically a man page, which is accessed using man *command*.
+Unix commands can seem a bit cryptic. This tutorial will explore some of the more common ones. For any command, there is typically a man page, which is accessed using man *command*.::
 
   %% man ls
   %% man cp
@@ -98,10 +98,10 @@ To view a file that you can navigate using the up and down arrows, use less::
 Editing Files
 -------------
 
-A common and easy to use text editor is Pico::
+A common and easy to use text editor is nano::
 
   %% touch file2.txt
-  %% pico file2.txt
+  %% nano file2.txt
 
 The commands within pico should be pretty self-explanatory.
 
