@@ -53,7 +53,7 @@ Let's move to the /mnt for a larger space::
 
 To assemble reads with Velvet, run::
 
-    %% velveth transcripts_k31 -short -fastq /data/rnaseq/chicken/reads.fastq
+    %% velveth transcripts_k31 31 -short -fastq /data/rnaseq/chicken/FAM48A.fastq
     %% velvetg transcripts_k31 -read_trkg yes
 
 Note that we have to turn on '-read_trkg yes' option to allow Oases to use assembled
@@ -81,7 +81,7 @@ So, you might need to run Velvet and Oases with different hashlengths to
 increase the sensitivity of isoform detection.
 To run Velvet with multiple hashlengths, for example hashlength=21-31, run::
 
-    %% velveth transcripts 21,33,2 -short -fastq /data/rnaseq/chicken/reads.fastq
+    %% velveth transcripts 21,33,2 -short -fastq /data/rnaseq/chicken/FAM48A.fastq
 
 In the above command, [21,33,2] means we want to run velveth for
 hashlength=21 to 31. We use 33 instead of 31 because the program will stop
