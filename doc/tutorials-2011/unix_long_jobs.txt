@@ -18,7 +18,7 @@ to the session at a later date.
 
 To start screen, you run the screen command with a few options::
 
-  %% screen -S <sessionname.
+  %% screen -S <sessionname>
  
 Where *sessionname* is any meaningful or descriptive title for your screen 
 session. This creates an independent terminal session, and connects you to it. 
