@@ -4,7 +4,7 @@ Short Read Assembly with Velvet
 
 :Author: Jason Pell
 :Date: June 7, 2011
-:Last Updated: June 8, 2011
+:Last Updated: June 9, 2011
 
 For this tutorial, we will be using the short read de novo assembler Velvet
 to assemble a bacterial genome. However, there are plenty of other assemblers out 
