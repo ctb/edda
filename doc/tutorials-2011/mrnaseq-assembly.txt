@@ -102,4 +102,4 @@ And you can run Oases the same way::
     %% for((n=21; n<=31; n=n+2)); do oases transcripts_"$n"; done
 
 After the assembly is finished, you can go to each directory to look at the
-result. You should see that there are more than two isoforms in some hashlengths.
+result.
