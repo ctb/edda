@@ -125,7 +125,7 @@ If the files you want to fetch are on a web server, you can use either wget
 or curl to fetch the file.::
 
   %% curl -O http://www.ebi.ac.uk/~zerbino/velvet/velvet_1.1.04.tgz
-  %% wget -O http://www.ebi.ac.uk/~zerbino/velvet/velvet_1.1.04.tgz
+  %% wget http://www.ebi.ac.uk/~zerbino/velvet/velvet_1.1.04.tgz
 
 
 Connecting to Remote Computers
