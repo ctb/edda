@@ -110,7 +110,7 @@ FASTA parser.
 To obtain statistics on the file you just generated, run::
 
   %% cd /mnt
-  %% python ~/ngs-scripts/assembly/assemstats3.py 0 k*/contigs.fa
+  %% python ~/Dropbox/ngs-scripts/assembly/assemstats3.py 0 k*/contigs.fa
 
 Other Stuff To Try
 ------------------
@@ -127,7 +127,7 @@ that you would like to test. With Velvet, you can only choose odd number
 k-mers. Furthermore, you must choose a k that is smaller than the read length, 
 so in this case k < 36. After you have created all of your assemblies, run::
 
-  %% python ~/ngs-scripts/assembly/assemstats.py 0 k*/contigs.fa
+  %% python ~/Dropbox/ngs-scripts/assembly/assemstats.py 0 k*/contigs.fa
 
 again to see how the assemblies compare to each other.  If you
 generate a lot of assemblies, you can copy and paste the output to a
@@ -138,7 +138,7 @@ This script acts as a simple filter to get rid of sequences smaller than a
 certain length. For example, if you have a file named contigs.fa and you 
 want only contigs of length 200 or greater, you can run::
 
-   %% python ~/ngs-scripts/assembly/extract-long-sequences.fa 200 contigs.fa > out.fa 
+   %% python ~/Dropbox/ngs-scripts/assembly/extract-long-sequences.fa 200 contigs.fa > out.fa 
 
 Finally, if you have your own dataset, you can try to assemble it on
 your EC2 system.  However, you may want to check memory usage with the
