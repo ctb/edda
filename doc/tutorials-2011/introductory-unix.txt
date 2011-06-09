@@ -139,7 +139,7 @@ Then, enter your password.
 
 To log in using a private key, use the -i flag.::
 
-  %% ssh -i *pathtoprivatekey username@remotecomputer.com*
+  %% ssh -i pathtoprivatekey username@remotecomputer.com
 
 
 Pipes & Grep
