@@ -97,7 +97,7 @@ in the ngs-course scripts, under 'ngs-course/assembly/assemstats3.py'.
 Before you can run it, you must install screed, so we'll run the
 following in the home directory::
 
-  %% git clone git://github.com/acr/screed.git
+  %% git clone git://github.com/ctb/screed.git
   %% cd screed
   %% python setup.py install
 
@@ -138,7 +138,7 @@ This script acts as a simple filter to get rid of sequences smaller than a
 certain length. For example, if you have a file named contigs.fa and you 
 want only contigs of length 200 or greater, you can run::
 
-   %% python ~/Dropbox/ngs-scripts/assembly/extract-long-sequences.fa 200 contigs.fa > out.fa 
+   %% python ~/Dropbox/ngs-scripts/assembly/extract-long-sequences.py 200 contigs.fa > out.fa
 
 Finally, if you have your own dataset, you can try to assemble it on
 your EC2 system.  However, you may want to check memory usage with the
