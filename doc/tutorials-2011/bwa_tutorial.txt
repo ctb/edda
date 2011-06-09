@@ -218,6 +218,6 @@ Now that we've generated the files, we can view the output with TView. We'll com
 Now open an additional terminal window, and load the Bowtie mapping file there as well.::
   
   %% cd /data/drosophila/drosophila_bowtie
-  %% samtools tview RAL357_full_bowtie.sorted.bam
+  %% samtools tview RAL357_full_bowtie.sorted.bam dmel ../dmel-all-chromosome-r5.37.fasta
 
 To view the tview help, type '?'
