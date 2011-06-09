@@ -9,3 +9,4 @@ Day 3: Assembly
    mrnaseq-assembly
    introductory-unix
    unix_long_jobs.txt
+   creating-ebs-volume
