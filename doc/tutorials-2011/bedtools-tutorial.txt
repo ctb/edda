@@ -60,9 +60,194 @@ Or add the `bin` directory above to the search path::
 
   %% export PATH=$PATH:/~/chipseq/BEDTools-Version-2.12.0/bin
 
-Let's go back to the main chipseq directory:
+Let's go back to the main chipseq directory::
 
   %% cd ~/chipseq/
 
-We will now download two datasets, mapped reads (in GFF format)6/9/2011
+We will now download our datasets that consist of the following:
 
+  1. a GFF file that contains sequencing mapped sequencing reads (`reads.gff`) obtained from a 
+     SAM file (see the converter: `sam2gff.py`)
+  2. a feature file (`yeast-features.gff`) also in GFF format that contains information on a variety of genomic features
+  3. a *genome* file, a simple tab delimited file that lists the chromosome lenghts for the genome of interest
+  4. the whole yeast genome as a fasta file (`yeast.fasta`)
+
+Use the following commands (we also create a new folder and switch to it)::
+
+  %% mkdir bedtut
+  %% cd bedtut
+  %% wget http://bcc.bx.psu.edu/angus/bedtools-tutorial.zip
+  %% unzip bedtools-tutorial.zip
+  %% ls
+  bedtools-tutorial.zip  reads.gff  yeast-features.gff  yeast.fasta  yeast.genome
+
+Let's try to compute the genome coverage (recall the instructions on running the command). A good
+strategy is to just invoke the command::
+
+  %% genomeCoverage
+
+Since most print detailed usage instructions::
+
+  Program: genomeCoverageBed (v2.12.0)
+  Authors: Aaron Quinlan (aaronquinlan@gmail.com)
+           Assaf Gordon, CSHL
+
+  Summary: Compute the coverage of a feature file among a genome.
+
+  Usage:   genomeCoverageBed [OPTIONS] -i <bed/gff/vcf> -g <genome>
+
+  Options: 
+          -ibam   The input file is in BAM format.
+                  Note: BAM _must_ be sorted by position
+
+          -d      Report the depth at each genome position.
+                  Default behavior is to report a histogram.
+
+          -bg     Report depth in BedGraph format. For details, see:
+                  genome.ucsc.edu/goldenPath/help/bedgraph.html
+
+          -bga    Report depth in BedGraph format, as above (-bg).
+                  However with this option, regions with zero 
+                  coverage are also reported.  This allows one to
+  ... etc ...
+
+.. note:: As you read the instructions you may find important requirements about the input:
+       **The input BED (-i) file must be grouped by chromosome. 
+       A simple "sort -k 1,1 <BED> > <BED>.sorted" will suffice.** 
+       Our file is already sorted but in general you would need to
+       remeber such details.
+
+Some tools expect to read the standard input, these tools will seem to just 'hang', 
+but in fact are waiting for input. In these cases, to get to the help page, break out
+with `CTRL+C` and retype the command with the `-h` flag. Let's run the `genomeCoverage` with
+proper inputs::
+
+  %% genomeCoverageBed -g yeast.genome -i reads.gff | more
+  chrI    0       78247   230208  0.339897
+  chrI    1       47923   230208  0.208173
+  chrI    2       37795   230208  0.164178
+  chrI    3       21893   230208  0.095101
+  chrI    4       16110   230208  0.0699802
+  chrI    5       9625    230208  0.04181
+  chrI    6       7515    230208  0.0326444
+  chrI    7       4465    230208  0.0193955
+
+The default output displays information for each coverage depth. For example
+the first line says that `chrI` has a coverage of `0` for `78247bp` out of 
+`230208bp` and that is a fraction of `0.33`. Usually each tool has options
+to change the output, for example passing the `-d` flag will produce a depth of
+coverage for each base::
+
+  %% genomeCoverageBed -g yeast.genome -i reads.gff -d | more
+  chrI    1       0
+  chrI    2       0
+  chrI    3       0
+  chrI    4       0
+  chrI    5       0
+  chrI    6       0
+  chrI    7       0
+  chrI    8       0
+  chrI    9       0
+  chrI    10      2
+  chrI    11      3
+  chrI    12      3
+  chrI    13      3
+
+The most useful programs in the bedtools suite allow us to find intersecting intervals from two sources.
+Typically we want to find reads that are close to genomic features.
+If we inspect our feature file we see that it contains various features::
+
+  chrI    SGD     telomeric_repeat        1       62      .       -       .      ID=TEL01L-TR;Name=TEL01L-TR;Note=Terminal%20stretch%20of%20telomeric%20repeats%20on%20the%20left%20arm%20of%20Chromosome%20I;dbxref=SGD:S000028864
+  chrI    SGD     telomere        1       801     .       -       .       ID=TEL01L;Name=TEL01L;Note=Telomeric%20region%20on%20the%20left%20arm%20of%20Chromosome%20I%3B%20composed%20of%20an%20X%20element%20core%20sequence%2C%20X%20element%20combinatorial%20repeats%2C%20and%20a%20short%20terminal%20stretch%20of%20telomeric%20repeats;dbxref=SGD:S000028862
+  chrI    SGD     X_element_combinatorial_repeat  63      336     .       -      .ID=TEL01L-XR;Name=TEL01L-XR;Note=Telomeric%20X%20element%20combinatorial%20Repeat%20region%20on%20the%20left%20arm%20of%20Chromosome%20I%3B%20contains%20repeats%20of%20the%20D%2C%20C%2C%20B%20and%20A%20types%2C%20as%20well%20as%20Tbf1p%20binding%20sites%3B%20formerly%20called%20SubTelomeric%20Repeats;dbxref=SGD:S000028866
+  chrI    SGD     gene    335     649     .       +       .       ID=YAL069W;Name=YAL069W;Ontology_term=GO:0003674,GO:0005575,GO:0008150;Note=Dubious%20open%20reading%20frame%20unlikely%20to%20encode%20a%20protein%2C%20based%20on%20available%20experimental%20and%20comparative%20sequence%20data;dbxref=SGD:S000002143;orf_classification=Dubious
+
+Having one big feature file is handy as it allows us to temporarily subselect for various features::
+
+  %% grep gene < yeast-features.gff | more
+  chrI    SGD     gene    335     649     .       +       .       ID=YAL069W;Name=YAL069W;Ontology_term=GO:0003674,GO:0005575,GO:0008150;Note=Dubious%20open%20reading%20frame%20unlikely%20to%20encode%20a%20protein%2C%20based%20on%20available%20experimental%20and%20comparative%20sequence%20data;dbxref=SGD:S000002143;orf_classification=Dubious
+  chrI    SGD     gene    538     792     .       +       .       ID=YAL068W-A;Name=YAL068W-A;Ontology_term=GO:0003674,GO:0005575,GO:0008150;Note=Dubious%20open%20reading%20frame%20unlikely%20to%20encode%20a%20protein%3B%20identified%20by%20gene-trapping%2C%20microarray-based%20expression%20analysis%2C%20and%20genome-wide%20homology%20searching;dbxref=SGD:S000028594;orf_classification=Dubious
+  chrI    SGD     gene    1807    2169    .       -       .       ID=YAL068C;Name=YAL068C;gene=PAU8;Alias=PAU8;Ontology_term=GO:0003674,GO:0005575,GO:0030437,GO:0045944;Note=Protein%20of%20unknown%20function%2C%20member%20of%20the%20seripauperin%20multigene%20family%20encoded%20mainly%20in%20subtelomeric%20regions;dbxref=SGD:S000002142;orf_classification=Verified
+
+Let's subselect for verified genes::
+
+  %% grep gene < yeast-features.gff |  grep Verified > verified.gff
+
+Now we're interested in finding out which reads overlap with our verified genes. Bedtools operates 
+uses the shorthand notation of file *a* and file *b* where file *a* contains the query intervals 
+and file *b* contains the target intervals. The important deatils is  that file *b* is loaded into memory whereas file *a* is processed line by line.
+Thus we need to frame the question such that the smaller file used as the target file *b*.
+
+Let's find which reads (query) overlap with the genes (target)::
+
+  %% intersectBed -a reads.gff -b verified.gff | more
+  chrI    .       .       7235    7348    .       -       .       .
+  chrI    .       .       7235    7348    .       -       .       .
+  chrI    .       .       7235    7402    .       -       .       .
+  chrI    .       .       7619    7819    .       +       .       .
+  chrI    .       .       7973    8173    .       -       .       .
+  chrI    .       .       8322    8522    .       -       .       .
+
+The default output will list the lines in the query that intersect with the genes. Adding the `-wo` flag
+will list both entries side by side (of course this will then not be a valid bed/gff file anymore)::
+
+  %% intersectBed -a reads.gff -b verified.gff -wo | more
+  chrI    .       .       7148    7348    .       -       .       .       chrI   SGD      gene    7235    9016    .       -       .       ID=YAL067C;Name=YAL067C;gene=SEO1;Alias=SEO1;Ontology_term=GO:0005215,GO:0006810,GO:0016020;Note=Putative%20permease%2C%20member%20of%20the%20allantoate%20transporter%20subfamily%20of%20the%20major%20facilitator%20superfamily%3B%20mutation%20confers%20resistance%20to%20ethionine%20sulfoxide;dbxref=SGD:S000000062;orf_classification=Verified  114
+  chrI    .       .       7148    7348    .       -       .       .       chrI   SGD      gene    7235    9016    .       -       .       ID=YAL067C;Name=YAL067C;gene=SEO1;Alias=SEO1;Ontology_term=GO:0005215,GO:0006810,GO:0016020;Note=Putative%20permease%2C%20member%20of%20the%20allantoate%20transporter%20subfamily%20of%20the%20major%20facilitator%20superfamily%3B%20mutation%20confers%20resistance%20to%20ethionine%20sulfoxide;dbxref=SGD:S000000062;orf_classification=Verified  114
+  chrI    .       .       7202    7402    .       -       .       .       chrI   SGD      gene    7235    9016    .       -       .       ID=YAL067C;Name=YAL067C;gene=SEO1;Alias=SEO1;Ontology_term=GO:0005215,GO:0006810,GO:0016020;Note=Putative%20permease%2C%20member%20of%20the%20allantoate%20transporter%20subfamily%20of%20the%20major%20facilitator%20superfamily%3B%20mutation%20confers%20resistance%20to%20ethionine%20sulfoxide;dbxref=SGD:S000000062;orf_classification=Verified  168
+
+Often we are interested in nearby upstream/downstream locations that depend on the strandedness 
+of the feature. The `windowBed` command  allows us to define *windows* within which to search, for example
+`1000bp` upstream and `1000bp` downstream::
+
+  %% windowBed -l 1000 -r 1000 -a reads.gff -b verified.gff | more
+
+.. note:: All tools operate relative to the end points of the intervals. This means for example
+   that the distances are computed between the closest endpoints that could be the start or the end.
+   If you need to compute distances relative to a given location then you will need to create 
+   a new interval file that has intervals of lenght 1 starting at the coordinate of interest. 
+   Depending on the problem that you are solving you may need to replace the reads 
+   with either their 5' location (starts) or midpoints.
+   
+Let's make a file where the start and end are the same, we'll cut and paste together 
+the columns such as to list the start twice while skipping the end column (this is correct 
+for GFF formats only)::
+
+   %% cut -f 1,2,3,4 verified.gff > p1
+   %% cut -f 4,6,7,8,9 < verified.gff > p2
+   %% paste p1 p2 > start.gff
+
+Now we can use this file to operate on gene starts::
+
+  %% windowBed -l 1000 -r 1000 -a reads.gff -b start.gff | more
+  chrI    .       .       822     1022    .       +       .       .       chrI   SGD      gene    1807    1807    .       -       .       ID=YAL068C;Name=YAL068C;gene=PAU8;Alias=PAU8;Ontology_term=GO:0003674,GO:0005575,GO:0030437,GO:0045944;Note=Protein%20of%20unknown%20function%2C%20member%20of%20the%20seripauperin%20multigene%20family%20encoded%20mainly%20in%20subtelomeric%20regions;dbxref=SGD:S000002142;orf_classification=Verified
+  chrI    .       .       822     1022    .       +       .       .       chrI   SGD      gene    1807    1807    .       -       .       ID=YAL068C;Name=YAL068C;gene=PAU8;Alias=PAU8;Ontology_term=GO:0003674,GO:0005575,GO:0030437,GO:0045944;Note=Protein%20of%20unknown%20function%2C%20member%20of%20the%20seripauperin%20multigene%20family%20encoded%20mainly%20in%20subtelomeric%20regions;dbxref=SGD:S000002142;orf_classification=Verified
+  chrI    .       .       1139    1339    .       -       .       .       chrI   SGD      gene    1807    1807    .       -       .       ID=YAL068C;Name=YAL068C;gene=PAU8;Alias=PAU8;Ontology_term=GO:0003674,GO:0005575,GO:0030437,GO:0045944;Note=Protein%20of%20unknown%20function%2C%20member%20of%20the%20seripauperin%20multigene%20family%20encoded%20mainly%20in%20subtelomeric%20regions;dbxref=SGD:S000002142;orf_classification=Verified
+
+The `fastaFromBed` tool allows us to extract the sequence that corresponds to an interval file, for example we can chain it
+to the previous tool to extract the sequences that correspond to reads that map around 1000kb of a gene start::
+
+
+  %% windowBed -l 1000 -r 1000 -a reads.gff -b start.gff | fastaFromBed -fi yeast.fasta -bed stdin -fo stdout | more
+  >chrI:821-1022
+  ATGGTATCACTAACGTAAAAGTTCCTCAATATTGCAATTTGCTTGAACGGATGCTATTTCAGAATATTTCGTACTTACACAGGCCATACATTAGAATAATATGTCACATCACTGTCGTAACACTCTTTATTCACCGAGCAATAATACGGTAGTGGCTCAAACTCATGCGGGTGCTATGATACAATTATATCTTATTTCCAT
+  >chrI:821-1022
+  ATGGTATCACTAACGTAAAAGTTCCTCAATATTGCAATTTGCTTGAACGGATGCTATTTCAGAATATTTCGTACTTACACAGGCCATACATTAGAATAATATGTCACATCACTGTCGTAACACTCTTTATTCACCGAGCAATAATACGGTAGTGGCTCAAACTCATGCGGGTGCTATGATACAATTATATCTTATTTCCAT
+  >chrI:1138-1339
+
+Above we demonstrate that to make the tools read/write to standard input/output we can list the words `stdin` and `stdout`.
+This commands above are equivalent to::
+
+
+  %% windowBed -l 1000 -r 1000 -a reads.gff -b start.gff > out.gff                                                  
+  %% fastaFromBed -fi yeast.fasta -bed out.gff -fo out.fasta
+  %% more out.fasta
+  >chrI:821-1022
+  ATGGTATCACTAACGTAAAAGTTCCTCAATATTGCAATTTGCTTGAACGGATGCTATTTCAGAATATTTCGTACTTACACAGGCCATACATTAGAATAATATGTCACATCACTGTCGTAACACTCTTTATTCACCGAGCAATAATACGGTAGTGGCTCAAACTCATGCGGGTGCTATGATACAATTATATCTTATTTCCAT
+  >chrI:821-1022
+  ATGGTATCACTAACGTAAAAGTTCCTCAATATTGCAATTTGCTTGAACGGATGCTATTTCAGAATATTTCGTACTTACACAGGCCATACATTAGAATAATATGTCACATCACTGTCGTAACACTCTTTATTCACCGAGCAATAATACGGTAGTGGCTCAAACTCATGCGGGTGCTATGATACAATTATATCTTATTTCCAT
+  >chrI:1138-1339
+  TTATTTAATAGGATCTATAACGAAATGTCAAATAATTTTACGGTAATATAACTTATCAGCGGCGTATACTAAAACGGACGTTACGATATTGTCTCACTTCATCTTACCACCCTCTATCTTATTGCTGATAGAACACTAACCCCTCAGCTTTATTTCTAGTTACAGTTACACAAAAAACTATGCCAACCCAGAAATCTTGAT
+  >chrI:2295-2496
+
+BedTools is an amazing collection of powerful tools that can make you feel like a data wizard. Study the manual, it is extremely well written.
