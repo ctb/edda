@@ -79,7 +79,7 @@ It will ask you if you want to use the entire device -- say "y" for "yes.
 Then, mount the volume. You'll do this every time you attach the volume to an instance::
 
   %% mkdir /mnt/ebs
-  %% mount /dev/sdf /mnt/ebs
+  %% mount /dev/xvdf /mnt/ebs
 
 Your drive is now ready to use -- it will be available under /mnt/ebs.
 Files copied into that directory or directories underneath it will
