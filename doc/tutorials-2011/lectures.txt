@@ -6,8 +6,30 @@ Lecture 1: `Welcome! <files/lecture1-welcome.pptx.pdf>`__
 
 Lecture 2: `BLAST is a Microcosm of All that is Wrong in Bioinformatics <files/lecture2-blast.pptx.pdf>`__
 
-Lecture 3: `Mapping <files/lecture3-mapping.pptx.pdf>`__
+Lecture 3: `Mapping <files/lecture3-mapping.pptx.pdf>`__.  References::
 
-Lecture 4: `Assembly <files/lecture4-assembly.pptx.pdf>`__
+   Flicek, P., & Birney, E. (2009). Sense from sequence reads: methods
+   for alignment and assembly. Nature Methods, 6(11 Suppl), S6?S12.
+   doi:10.1038/nmeth.1376
+   http://www.ncbi.nlm.nih.gov/pubmed?term=19844229
+   
+   Glenn, T. C. (2011). Field guide to next-generation DNA sequencers.
+   Molecular Ecology Resources. doi:10.1111/j.1755-0998.2011.03024.x
+   http://www.ncbi.nlm.nih.gov/pubmed/21592312
+   
+   Hudson, M. E. (2008). Sequencing breakthroughs for genomic ecology and
+   evolutionary biology. Molecular Ecology Resources, 8(1), 3?17.
+   doi:10.1111/j.1471-8286.2007.02019.x
+   http://www.ncbi.nlm.nih.gov/pubmed?term=21585713    
+   
+   Li, H., & Homer, N. (2010). A survey of sequence alignment algorithms
+   for next-generation sequencing. Briefings in bioinformatics, 11(5),
+   473?483. doi:10.1093/bib/bbq015
+   http://www.ncbi.nlm.nih.gov/pubmed?term=20460430
+   
+   
+Lecture 4: `Assembly <files/lecture4-assembly.pptx.pdf>`__.  Reference:
 
-Lecture 4 reference paper: `Assembly algorithms for next-generation sequencing data, Miller et al. <http://www.ncbi.nlm.nih.gov/pubmed/20211242>`__.
+    `Assembly algorithms for next-generation sequencing data, Miller et al. <http://www.ncbi.nlm.nih.gov/pubmed/20211242>`__.
+
+    `Scaffolding a Caenorhabditis nematode genome with RNA-seq, Mortazavi et al. <http://www.ncbi.nlm.nih.gov/pubmed/20980554>`__.
