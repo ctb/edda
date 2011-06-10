@@ -32,7 +32,7 @@ Python Example Script: basic-example.py
 
 This example script illustrates many basic features of Python, including file
 parsing, lists, strings, iterators, and conditionals. Either copy and paste
-the script into a file, or download it from http://ged.msu.edu/angus/files/basic_example.py. 
+the script into a file, or download it from https://raw.github.com/ctb/edda/master/doc/files/basic_example.py. 
 We'll go over it line by line.::
 
   ## Reads a CSV file, and output lines with a * in the third column
@@ -83,7 +83,7 @@ We'll go over it line by line.::
           outputfile_writer.writerow( row ) ## write the line to the output file
 
 Here is an example input csv file that will work with the above script.
-You may download it here.::
+You may download it from https://raw.github.com/ctb/edda/master/doc/files/input.csv.::
 
   avalue 1234 * somevalue
   twovalu 2345 N someothervalue
@@ -95,7 +95,7 @@ Python Example Script: functions_calling_functions.py
 -----------------------------------------------------
 
 This example script shows function definition and calling. Either copy and paste
-the script into a file, or download it from http://ged.msu.edu/angus/files/functions_calling_functions.py.:: 
+the script into a file, or download it from https://raw.github.com/ctb/edda/master/doc/files/functions_calling_functions.py.:: 
 
   ## functions calling functions
   ## they say hello!
