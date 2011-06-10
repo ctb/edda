@@ -92,6 +92,7 @@ Any volumes you have attached will automatically detach when you shut
 down the instance.  You can also stop all processes that are using the
 volume, change out of the directory, and type ::
 
+  %% cd
   %% umount /mnt/ebs
 
 and then detach the volume via the AWS Web site.
