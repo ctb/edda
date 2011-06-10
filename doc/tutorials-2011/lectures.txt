@@ -35,3 +35,5 @@ Lecture 4: `Assembly <files/lecture4-assembly.pptx.pdf>`__.  Reference:
     `Scaffolding a Caenorhabditis nematode genome with RNA-seq, Mortazavi et al. <http://www.ncbi.nlm.nih.gov/pubmed/20980554>`__.
 
     `Assemblathon (comparing assemblers) <http://assemblathon.org>`__
+
+Lecture 5: `Computation <files/lecture5-computation.pptx.pdf>`__.
