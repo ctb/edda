@@ -33,3 +33,5 @@ Lecture 4: `Assembly <files/lecture4-assembly.pptx.pdf>`__.  Reference:
     `Assembly algorithms for next-generation sequencing data, Miller et al. <http://www.ncbi.nlm.nih.gov/pubmed/20211242>`__.
 
     `Scaffolding a Caenorhabditis nematode genome with RNA-seq, Mortazavi et al. <http://www.ncbi.nlm.nih.gov/pubmed/20980554>`__.
+
+    `Assemblathon (comparing assemblers) <http://assemblathon.org>`__
