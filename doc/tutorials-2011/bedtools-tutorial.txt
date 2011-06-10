@@ -10,7 +10,7 @@ large sets of genomic features. You should start this tutorial at a prompt that 
    root@ip-10-82-233-6:~#
 
 Our computer will need additional developer tools that allow us to install this and other software 
-directly from sourcecode. We need the `g++` (c++ compiler) and `make` 
+directly from source code. We need the `g++` (c++ compiler) and `make` 
 (compiler utility). Modern Linux package managers (`apt-get`, `yum` etc) allow for an easy installation::
 
   %% apt-get install g++
@@ -28,7 +28,7 @@ Download, extract and compile the bedtools source code::
   %% cd BEDTools-Version-2.12.0
   %% make 
 
-You should now have all the bedtool utilites in your `bin` directory::
+You should now have all the bedtool utilities in your `bin` directory::
 
   %% ls bin
 
@@ -69,7 +69,7 @@ We will now download our datasets that consist of the following:
   1. a GFF file that contains sequencing mapped sequencing reads (`reads.gff`) obtained from a 
      SAM file (see the converter: `sam2gff.py`)
   2. a feature file (`yeast-features.gff`) also in GFF format that contains information on a variety of genomic features
-  3. a *genome* file, a simple tab delimited file that lists the chromosome lenghts for the genome of interest
+  3. a *genome* file, a simple tab delimited file that lists the chromosome lengths for the genome of interest
   4. the whole yeast genome as a fasta file (`yeast.fasta`)
 
 Use the following commands (we also create a new folder and switch to it)::
@@ -115,7 +115,7 @@ Since most print detailed usage instructions::
        **The input BED (-i) file must be grouped by chromosome. 
        A simple "sort -k 1,1 <BED> > <BED>.sorted" will suffice.** 
        Our file is already sorted but in general you would need to
-       remeber such details.
+       remember such details.
 
 Some tools expect to read the standard input, these tools will seem to just 'hang', 
 but in fact are waiting for input. In these cases, to get to the help page, break out
@@ -162,20 +162,20 @@ If we inspect our feature file we see that it contains various features::
   chrI    SGD     X_element_combinatorial_repeat  63      336     .       -      .ID=TEL01L-XR;Name=TEL01L-XR;Note=Telomeric%20X%20element%20combinatorial%20Repeat%20region%20on%20the%20left%20arm%20of%20Chromosome%20I%3B%20contains%20repeats%20of%20the%20D%2C%20C%2C%20B%20and%20A%20types%2C%20as%20well%20as%20Tbf1p%20binding%20sites%3B%20formerly%20called%20SubTelomeric%20Repeats;dbxref=SGD:S000028866
   chrI    SGD     gene    335     649     .       +       .       ID=YAL069W;Name=YAL069W;Ontology_term=GO:0003674,GO:0005575,GO:0008150;Note=Dubious%20open%20reading%20frame%20unlikely%20to%20encode%20a%20protein%2C%20based%20on%20available%20experimental%20and%20comparative%20sequence%20data;dbxref=SGD:S000002143;orf_classification=Dubious
 
-Having one big feature file is handy as it allows us to temporarily subselect for various features::
+Having one big feature file is handy as it allows us to temporarily sub select for various features::
 
   %% grep gene < yeast-features.gff | more
   chrI    SGD     gene    335     649     .       +       .       ID=YAL069W;Name=YAL069W;Ontology_term=GO:0003674,GO:0005575,GO:0008150;Note=Dubious%20open%20reading%20frame%20unlikely%20to%20encode%20a%20protein%2C%20based%20on%20available%20experimental%20and%20comparative%20sequence%20data;dbxref=SGD:S000002143;orf_classification=Dubious
   chrI    SGD     gene    538     792     .       +       .       ID=YAL068W-A;Name=YAL068W-A;Ontology_term=GO:0003674,GO:0005575,GO:0008150;Note=Dubious%20open%20reading%20frame%20unlikely%20to%20encode%20a%20protein%3B%20identified%20by%20gene-trapping%2C%20microarray-based%20expression%20analysis%2C%20and%20genome-wide%20homology%20searching;dbxref=SGD:S000028594;orf_classification=Dubious
   chrI    SGD     gene    1807    2169    .       -       .       ID=YAL068C;Name=YAL068C;gene=PAU8;Alias=PAU8;Ontology_term=GO:0003674,GO:0005575,GO:0030437,GO:0045944;Note=Protein%20of%20unknown%20function%2C%20member%20of%20the%20seripauperin%20multigene%20family%20encoded%20mainly%20in%20subtelomeric%20regions;dbxref=SGD:S000002142;orf_classification=Verified
 
-Let's subselect for verified genes::
+Let's sub select for verified genes::
 
   %% grep gene < yeast-features.gff |  grep Verified > verified.gff
 
-Now we're interested in finding out which reads overlap with our verified genes. Bedtools operates 
+Now we're interested in finding out which reads overlap with our verified genes. BEDTools operates 
 uses the shorthand notation of file *a* and file *b* where file *a* contains the query intervals 
-and file *b* contains the target intervals. The important deatils is  that file *b* is loaded into memory whereas file *a* is processed line by line.
+and file *b* contains the target intervals. The important details is  that file *b* is loaded into memory whereas file *a* is processed line by line.
 Thus we need to frame the question such that the smaller file used as the target file *b*.
 
 Let's find which reads (query) overlap with the genes (target)::
@@ -205,7 +205,7 @@ of the feature. The `windowBed` command  allows us to define *windows* within wh
 .. note:: All tools operate relative to the end points of the intervals. This means for example
    that the distances are computed between the closest endpoints that could be the start or the end.
    If you need to compute distances relative to a given location then you will need to create 
-   a new interval file that has intervals of lenght 1 starting at the coordinate of interest. 
+   a new interval file that has intervals of length 1 starting at the coordinate of interest. 
    Depending on the problem that you are solving you may need to replace the reads 
    with either their 5' location (starts) or midpoints.
    
@@ -250,4 +250,4 @@ This commands above are equivalent to::
   TTATTTAATAGGATCTATAACGAAATGTCAAATAATTTTACGGTAATATAACTTATCAGCGGCGTATACTAAAACGGACGTTACGATATTGTCTCACTTCATCTTACCACCCTCTATCTTATTGCTGATAGAACACTAACCCCTCAGCTTTATTTCTAGTTACAGTTACACAAAAAACTATGCCAACCCAGAAATCTTGAT
   >chrI:2295-2496
 
-BedTools is an amazing collection of powerful tools that can make you feel like a data wizard. Study the manual, it is extremely well written.
+BEDTools is an amazing collection of powerful tools that can make you feel like a data wizard. Study the manual, it is extremely well written.
