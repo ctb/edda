@@ -52,7 +52,7 @@ To do so, in R, execute::
 
 A quick description of where the data come from: we have two fly strains (SAM and ORE) that show interesting phenotypic differences (long vs. short wings). We wanted to try and find which regions of the genome are responsible for these phenotypic differences, so we generated "hybrid" flies. We then back-crossed these flies to the long-winged strain, and repeated this process over several generations -- but each generation, we always selected for short wing phenotypes. After several rounds of this selection/backcrossing process, then, we expect the resulting genomes to look mostly like the long-winged flies (due to the repeated backcrossing to the long-winged strain), except for the regions where there is a SNP associated with the short-winged phenotype (due to artificial selection for short wings). We then re-sequenced pooled populations of the resulting flies, to find out where in the genome these regions are. The data file has a series of SNP positions on each chromosome, and then the number of Illumina reads carrying the two alleles at each position. The first allele column represents the allele carried by the short-winged strain, and the second one represents the allele carried by the long-winged strain.
 
-Let's take a look at the code that loads the data:
+Let's take a look at the code that loads the data::
 
   > column.types <- c("character", "numeric", "numeric", "numeric")
   > all.data <- read.csv("short_bc_snp_data.csv", header=TRUE, colClasses=column.types)
