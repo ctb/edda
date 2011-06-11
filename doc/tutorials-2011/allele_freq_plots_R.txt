@@ -99,7 +99,7 @@ This single line is actually more complex than it looks. Let's dissect it. all.d
 
   > all.data[5,2]
   
-...would print out whatever is in the fifth row and the second column. If you want to get an entire row or column, you can just omit it. For example,::
+...would print out whatever is in the fifth row and the second column. If you want to get an entire row or column, you can just omit the other number. For example,::
 
   > all.data[5,]
   
