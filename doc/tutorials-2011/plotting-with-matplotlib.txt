@@ -1,0 +1,43 @@
+==================================
+Plotting in Python with matplotlib
+==================================
+
+:Author: Jason Pell
+:Date: June 11, 2011
+:Last Updated: June 11, 2011
+
+For this (short) tutorial, we will be creating some basic plots in 
+matplotlib. The primary purpose is to show that Python can produce 
+many of the plots that R can, so some of the plots we will be 
+producing are redundant from the R tutorial(s). 
+
+Getting Started
+---------------
+Start or log in to an instance on Amazon EC2 and get Dropbox 
+(see :doc:`installing-dropbox') set up. 
+We will be using the files in the Dropbox/ngs-scripts/matplotlib 
+directory. Python and matplotlib are already installed, so we 
+don't need to install any new packages.
+
+Simple Histograms
+-----------------
+The first graph that we will produce is a simple histogram with 
+generated data. It is located at ~/Dropbox/ngs-scripts/matplotlib/hist.py. 
+A png file of the histogram will be placed in your Dropbox folder 
+by running::
+
+   %% python ~/Dropbox/ngs-scripts/matplotlib/hist.py
+
+mRNAseq Read Count Comparison
+-----------------------------
+Now, we will create a read count comparison between two different 
+samples in a lamprey dataset. You can generate this plot by 
+executing::
+
+   %% python ~/Dropbox/ngs-scripts/matplotlib/readcounts.py ~/Dropbox/ngs-scripts/matplotlib/mrna.csv
+
+MA-plot
+-------
+Finally, we will create an MA-plot for the same two samples by running::
+
+   %% python ~/Dropbox/ngs-scripts/matplotlib/maplot.py ~/Dropbox/ngs-scripts/matplotlib/mrna.csv
