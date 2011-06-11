@@ -159,7 +159,7 @@ Now we're back outside the for loop. All that's left now is to plot the data. Fi
 
   > plot(x=NULL, y=NULL, xlab=paste("Position on chromosome arm ", chrom), ylab="Frequency of sam allele", xlim=c(1, max(positions.x)), ylim=c(0,1))
   
-And then we plot the points:
+And then we plot the points::
 
   > points(x=positions.x, y=allele.freqs, cex=0.5, col="blue")
 
