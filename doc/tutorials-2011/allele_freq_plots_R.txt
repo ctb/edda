@@ -135,7 +135,7 @@ We then use the built-in seq() function set up a vector, positions.x, which has 
 
   > positions.x <- seq(from=1, to=max(chrom.data$pos), by=bin.size)
   
-And then we make a vector to hold the allele frequencies in each of those bins. This vector has to have the same length as positions.x (one frequency for each bin); and we should initialize it with empty values, which are represented by NA in R. We can use the built-in rep() function (short for repeat) to do that::
+And then we make a vector to hold the allele frequencies in each of those bins. This vector has to have the same length as positions.x (one frequency for each bin); and we should initialize it with empty values, which are represented by NA in R. We can use the built-in rep() function (short for replicate) to do that::
 
   > allele.freqs <- rep(NA, length(positions.x))
   
@@ -171,7 +171,7 @@ Now we have our plot! It looks ok, but we might be able to improve it... instead
 
   > plot.chrom.sliding.window(chrom = "2L", step.size = 10000, window.size = 20000)
   
-Compare it to:
+Compare it to::
 
   > plot.chrom.sliding.window(chrom = "2L", step.size = 10000, window.size = 100000)
   
