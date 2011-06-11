@@ -1,0 +1,148 @@
+===============================
+An Introduction to Scripting 
+===============================
+
+:Author: Rosangela Canino-Koning
+:Date: June 10, 2011
+:Last Updated: June 10, 2011
+
+This tutorial covers some basic scripting techniques, and provides some 
+example scripts to try out.
+
+Getting Started
+---------------
+
+Start or log in to an instance on Amazon EC2.
+
+Python
+------
+
+Python is a scripting language with many advanced features.
+
+To run Python interactively, type::
+
+  %% python
+
+To run a Python script, type::
+
+  %% python <scriptname.py>
+
+Python Example Script: basic-example.py
+---------------------------------------
+
+This example script illustrates many basic features of Python, including file
+parsing, lists, strings, iterators, and conditionals. Either copy and paste
+the script into a file, or download it from https://raw.github.com/ctb/edda/master/doc/files/basic_example.py. 
+We'll go over it line by line.::
+
+  ## Reads a CSV file, and output lines with a * in the third column
+  ## 
+  ## Python 2.7
+  ## Created: RCK - 7/10/11
+  ## Last Update: RCK - 7/10/11
+
+  ## import modules
+  from optparse import OptionParser
+  import csv
+
+  ################### set up parameters ##################
+  ## program usage
+  usage = """usage: %prog <infile.csv> <outputfile.csv>
+  """
+
+  ### init the options parser
+  parser = OptionParser( usage )
+
+  ## fetch the args
+  ( options, args ) = parser.parse_args()
+
+  ## parameter error
+  if len(args) < 2:
+      parser.error("incorrect number of arguments")
+
+  inputfile = args[0] ## the first argument
+  outputfile = args[1] ## the second argument
+
+  ################### iterate over the files and extract the content ############
+
+  ## use the Sniffer class to automatically identify the format of the file
+  inputfile_handle = open( inputfile, "rb" ) ## r: read; b: a file
+  dialect = csv.Sniffer().sniff( inputfile_handle.read( 1024 ) )
+  inputfile_handle.seek( 0 ) ## reset the read head to the beginning of the file
+
+  ## create a CSV reader based on the dialect we deduced
+  inputfile_reader = csv.reader( inputfile_handle, dialect ) ## open the file using the deduced dialect
+
+  ## create a CSV writer based on the style of the reader
+  outputfile_handle = open( outputfile, "wb" ) ## w: write; b: a file
+  outputfile_writer = csv.writer( outputfile_handle, dialect ) ## use the detected dialect 
+
+  ### loop through every row in the file and output the proper lines
+  for row in inputfile_reader: ## row is a list of items (fields)
+      if len(row) > 0 and row[2] == '*': ## if the row has a * in the third column
+          outputfile_writer.writerow( row ) ## write the line to the output file
+
+Here is an example input csv file that will work with the above script.
+You may download it from https://raw.github.com/ctb/edda/master/doc/files/input.csv.::
+
+  avalue 1234 * somevalue
+  twovalu 2345 N someothervalue
+  threvalu 3456 N anohterthing
+  fourva 4567 * thing
+  fifthv 6789 * thinthing
+
+Python Example Script: functions_calling_functions.py
+-----------------------------------------------------
+
+This example script shows function definition and calling. Either copy and paste
+the script into a file, or download it from https://raw.github.com/ctb/edda/master/doc/files/functions_calling_functions.py.:: 
+
+  ## functions calling functions
+  ## they say hello!
+  ## 
+  ## Python 2.7
+  ## Created: RCK - 7/10/11
+  ## Last Update: RCK - 7/10/11
+
+  ## import modules
+  from optparse import OptionParser
+  
+  
+  ################## functions! #########################
+  def print_hello( from_name, to_name ):
+      print from_name + ": Hello " + to_name + "!"
+
+  def print_hello_to_each_other( name1, name2 ):
+      print_hello( name1, name2 )
+      print_hello( name2, name1 )
+  
+  ################### set up parameters ##################
+  ## program usage
+  usage = """usage: %prog <greeter> <greetee>
+  """
+  
+  ### init the options parser
+  parser = OptionParser( usage ) 
+  
+  ## fetch the args
+  ( options, args ) = parser.parse_args()
+  
+  ## parameter error
+  if len(args) < 2:
+      parser.error("incorrect number of arguments")
+
+  name1 = args[0] ## the first argument
+  name2 = args[1] ## the second argument
+
+  ################### say hello #########################
+  print_hello_to_each_other( name1, name2 )
+
+Other Scripts
+-------------
+
+FASTQ to FASTA Converter: https://raw.github.com/ctb/khmer/master/scripts/fastq-to-fasta.py
+Strip and Split for Assembly: https://raw.github.com/ctb/khmer/master/scripts/strip-and-split-for-assembly.py
+Quality Trimming: https://raw.github.com/ctb/khmer/master/scripts/quality-trim.py
+
+
+

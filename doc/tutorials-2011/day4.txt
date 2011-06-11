@@ -1,0 +1,8 @@
+========================
+Day 4: Scripting & Stuff
+========================
+
+.. toctree::
+   :maxdepth: 1
+
+   intro-scripting

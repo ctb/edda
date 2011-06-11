@@ -1,0 +1,8 @@
+============================
+Day 5: Statistics & Plotting
+============================
+
+.. toctree::
+   :maxdepth: 1
+
+   allele_freq_plots_R.txt

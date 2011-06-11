@@ -1,0 +1,169 @@
+===============================
+An Introduction to Unix
+===============================
+
+:Author: Rosangela Canino-Koning
+:Date: June 9, 2011
+:Last Updated: June 9, 2011
+
+Unix commands can seem a bit cryptic. This tutorial will explore some of the more common ones. For any command, there is typically a man page, which is accessed using man *command*.::
+
+  %% man ls
+  %% man cp
+  %% man rm
+
+Getting Started
+---------------
+
+Start or log in to an instance on Amazon EC2.
+
+Directories and Navigation
+--------------------------
+
+In Unix-based operating systems, directory paths come in two flavors: Absolute 
+paths, which are prefixed with a "/", and relative paths, which are not.
+
+There are also special codes to denote specific directories, like your home 
+directory, which is represented by a "~" in a path. The ~ acts as an absolute 
+path. Others are "." which denotes your current directory, and ".." is the 
+parent directory. These commands demonstrate different ways of going in and 
+out of a directory you have created in your home directory.::
+
+  %% mkdir a_directory
+  %% cd ~/a_directory
+  %% cd ..
+  %% cd a_directory
+  %% cd ~
+  %% cd ./a_directory
+
+To see where you are in the filesystem, use pwd.::
+
+  %% pwd
+
+To remove a directory you've created, use rmdir.::
+
+  %% rmdir a_directory
+
+To create an empty file, use touch::
+
+  %% touch file.txt
+
+To view the files in a directory, use ls::
+
+  %% ls 
+  %% ls /
+  %% ls ./
+  %% ls ../
+
+ls can also use wildcards, for example to show only the text files in a directory.::
+
+  %% ls *.txt
+
+To copy a file, use cp::
+
+  %% cp file.txt file_copy.txt
+
+To move or rename a file, use mv::
+
+  %% mv file_copy.txt file_thing.txt
+
+You can also use paths in any of these commands::
+
+  %% cp file.txt /mnt/file.txt
+  %% mv /mnt/file.txt ~/acopy.txt
+
+To remove a file, use rm::
+
+  %% rm acopy.txt
+  %% ls
+
+To output the content of a file, use cat.::
+
+  %% cat /etc/passwd
+
+To output only the first few lines of a file, use head::
+
+  %% head -5 /etc/passwd
+
+Similarly, to output only the last few lines of a file, use tail::
+
+  %% tail -5 /etc/passwd
+
+The -5 is the number of lines to output.
+
+To view a file that you can navigate using the up and down arrows, use less::
+
+  %% less /etc/passwd
+
+Editing Files
+-------------
+
+A common and easy to use text editor is nano::
+
+  %% touch file2.txt
+  %% nano file2.txt
+
+The commands within pico should be pretty self-explanatory.
+
+
+Copying Files Over the Network
+------------------------------
+
+To copy files from one computer to another, both of which have ssh access, 
+use scp. To copy a local file from your computer to a remote computer::
+
+  %% scp file.txt username@othercomputer.com:~/
+
+To copy a set of remote files that end with .txt to your local computer::
+ 
+  %% scp username@othercomputer.com:~/*.txt ./
+
+All of the paths also work with wildcards, in general. I encourage you to 
+experiment.
+
+If the files you want to fetch are on a web server, you can use either wget 
+or curl to fetch the file.::
+
+  %% curl -O http://www.ebi.ac.uk/~zerbino/velvet/velvet_1.1.04.tgz
+  %% wget http://www.ebi.ac.uk/~zerbino/velvet/velvet_1.1.04.tgz
+
+
+Connecting to Remote Computers
+------------------------------
+
+To connect to a remote computer that you have ssh access to, use ssh.::
+
+  %% ssh username@remotecomputer.com
+
+Then, enter your password.
+
+To log in using a private key, use the -i flag.::
+
+  %% ssh -i <pathtoprivatekey> <username@remotecomputer.com>
+
+
+Pipes & Grep
+------------
+
+To connect the output of one program into the input of another, use pipes.
+
+For example, we can list the content of a directory, and search it for a
+particular pattern using grep.::
+
+  %% ls | grep txt
+
+Grep searches what is input to it for the text that is defined.
+
+Compression and Decompression
+-----------------------------
+
+Often, files you download will be compressed with .tar.gz
+
+To compress your own files, use tar in compression mode::
+
+  %% tar -zvcf compressed.tar.gz file.txt
+
+To decompress them, use tar in decompression mode::
+
+  %% tar -zxvf compressed.tar.gz
+

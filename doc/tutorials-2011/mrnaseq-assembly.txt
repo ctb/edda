@@ -53,7 +53,7 @@ Let's move to the /mnt for a larger space::
 
 To assemble reads with Velvet, run::
 
-    %% velveth transcripts_k31 -short -fastq /data/rnaseq/chicken/reads.fastq
+    %% velveth transcripts_k31 31 -short -fastq /data/rnaseq/chicken/FAM48A.fastq
     %% velvetg transcripts_k31 -read_trkg yes
 
 Note that we have to turn on '-read_trkg yes' option to allow Oases to use assembled
@@ -70,14 +70,18 @@ We can go look at the output::
     %% cd transcripts_k31
     %% less transcripts.fa
 
+You can compare the result from Velvet and Oases by looking at contigs.fa
+and transcripts.fa. You will see that the transcripts.fa (from Velvet +
+Oases) has longer contigs than those in contigs.fa (from Velvet only).
+
 For RNAseq, it is not uncommon that different hashlengths give you
 different results. Some isoforms are only detected using a particular
 hashlength.
-So, you might need to run Velvet and Oases with different hashlength to
+So, you might need to run Velvet and Oases with different hashlengths to
 increase the sensitivity of isoform detection.
 To run Velvet with multiple hashlengths, for example hashlength=21-31, run::
 
-    %% velveth transcripts 21,33,2 -short -fastq /data/rnaseq/chicken/reads.fastq
+    %% velveth transcripts 21,33,2 -short -fastq /data/rnaseq/chicken/FAM48A.fastq
 
 In the above command, [21,33,2] means we want to run velveth for
 hashlength=21 to 31. We use 33 instead of 31 because the program will stop
@@ -98,4 +102,4 @@ And you can run Oases the same way::
     %% for((n=21; n<=31; n=n+2)); do oases transcripts_"$n"; done
 
 After the assembly is finished, you can go to each directory to look at the
-result. You should see that there are more than two isoforms in some hashlengths.
+result.
