@@ -1,0 +1,192 @@
+==================================
+Plotting Allele Frequencies with R
+==================================
+
+In this tutorial, we'll use an existing genomic dataset to make some simple figures of allele frequencies of SNPs along the length of a chromosome.
+
+Installing and running R
+------------------------
+
+You'll need an EC2 instance with Dropbox installed and configured. First, install on your Amazon machine if you haven't already::
+
+  %% apt-get install r-base
+  
+(Enter y if it asks you for any confirmation.) The dataset we're using right now is actually not huge (we've already done all the processing of the reads and everything and distilled it all down to SNP frequencies), so we're storing it on Dropbox. Let's make a new working directory and a local copy we can work with so that we don't over-write things::
+
+  %% cd /mnt
+  %% mkdir Rplots
+  %% cd Rplots
+  %% cp ~/Dropbox/ngs-scripts/Rplots/* .
+
+Now, start R::
+
+  %% R
+  
+You should see something that looks like this::
+
+  R version 2.11.1 (2010-05-31)
+  Copyright (C) 2010 The R Foundation for Statistical Computing
+  ISBN 3-900051-07-0
+  
+  R is free software and comes with ABSOLUTELY NO WARRANTY.
+  You are welcome to redistribute it under certain conditions.
+  Type 'license()' or 'licence()' for distribution details.
+  
+  Natural language support but running in an English locale
+  
+  R is a collaborative project with many contributors.
+  Type 'contributors()' for more information and
+  'citation()' on how to cite R or R packages in publications.
+
+  Type 'demo()' for some demos, 'help()' for on-line help, or
+  'help.start()' for an HTML browser interface to help.
+  Type 'q()' to quit R.
+
+Now you're inside R. There are two ways to run R from the command line. Right now we're running it interactively, meaning we enter commands one at a time at a prompt (note: R uses its own language which is different from the UNIX shell). You can also write an entire script, have R run it non-interactively, and send the output to a file or files.
+
+For this tutorial, we've pre-written some functions that we'll use. First, let's 'source' the script. This particular script doesn't actually run anything -- instead, all it does is load a dataset and two pre-written functions that will allow us to generate the plots we want to produce. Feel free to take a look at the script's source code (it's just a text file) -- it has comments in it explaining what each piece of code does. (Note: we could have told R to execute this script from the command line and send the output to a file, but there wouldn't have been much point -- this script doesn't generate any output, all it does is load the data and functions.)
+
+To do so, in R, execute::
+
+  > source('plot_allele_freq_data.R')
+
+A quick description of where the data come from: we have two fly strains (SAM and ORE) that show interesting phenotypic differences (long vs. short wings). We wanted to try and find which regions of the genome are responsible for these phenotypic differences, so we generated "hybrid" flies. We then back-crossed these flies to the long-winged strain, and repeated this process over several generations -- but each generation, we always selected for short wing phenotypes. After several rounds of this selection/backcrossing process, then, we expect the resulting genomes to look mostly like the long-winged flies (due to the repeated backcrossing to the long-winged strain), except for the regions where there is a SNP associated with the short-winged phenotype (due to artificial selection for short wings). We then re-sequenced pooled populations of the resulting flies, to find out where in the genome these regions are. The data file has a series of SNP positions on each chromosome, and then the number of Illumina reads carrying the two alleles at each position. The first allele column represents the allele carried by the short-winged strain, and the second one represents the allele carried by the long-winged strain.
+
+Let's take a look at the code that loads the data:
+
+  > column.types <- c("character", "numeric", "numeric", "numeric")
+  > all.data <- read.csv("short_bc_snp_data.csv", header=TRUE, colClasses=column.types)
+
+The first line sets up a vector that tells R what kinds of data are in each column of the data file, when we pass that vector as the colClasses argument in the read.csv() function. Being explicit about the data types isn't strictly required, but it helps because sometimes R doesn't always figure things out the way we want it to.
+
+Let's see what the data frame looks like::
+
+  > head(all.data)
+
+You should see this::
+
+    chrom   pos ore sam
+  1    2L 34345   3   0
+  2    2L 36062   3   0
+  3    2L 36696   3   0
+  4    2L 39993   7   0
+  5    2L 40067   6   0
+  6    2L 40556   4   0
+
+So at position 34345 on chromosome arm 2L, we saw three reads that had an 'ore' allele and no reads that had a 'sam' allele; same thing at position 36062; and so on.
+
+Now, let's use the first function, plot.chrom.bins(). This will divide each chromosome up into a series of equally-sized bins or chunks, count the number of 'long' and 'short' alleles of all the SNPs in each bin, and plot the relative frequency of the 'short' allele on the y-axis (with the x-axis representing the position along the chromosome). We need to specify which chromosome we want to look at (in this case, let's start with 2L), and, optionally, the size of the bins (if we don't specify the bin size, it will use 10000 bp by default)::
+
+  > plot.chrom.bins(chrom = "2L")
+  
+How do we view the output? If you're running R on Mac or Windows, you can have it display plots in a new pop-up window, but we're running it from a terminal window. Instead, we're having R save the plot as a PDF file. In this case, it's set to save that PDF in our Dropbox folder so that we can  get to it quickly and easily. So, back on your local computer, open your Dropbox folder and open the "genome_plots.pdf" file.
+
+Now what if we wanted a bigger bin size?::
+
+  > plot.chrom.bins(chrom = "2L", bin.size = 100000)
+  
+You can tell that it runs faster, and generally the output looks "smoother", but there are also fewer data points, since our bin size is bigger and therefore there are fewer of them.
+
+How does this function work? The first thing it does is tell R that we want our graphical output to go to a PDF file and where to put that file::
+
+  > pdf(file="~/Dropbox/genome_plots.pdf")
+
+It then starts the real work by making a temporary copy of the dataset that only holds the SNP data on the chromosome we're interested in::
+
+  > chrom.data <- all.data[all.data$chrom==chrom,]
+
+This single line is actually more complex than it looks. Let's dissect it. all.data is a data frame -- it essentially consists of several columns of data stuck together side-by-side. You can refer to any particular "cell" in a data frame using [row,column]. For example,::
+
+  > all.data[5,2]
+  
+...would print out whatever is in the fifth row and the second column. If you want to get an entire row or column, you can just omit it. For example,::
+
+  > all.data[5,]
+  
+...would print out everything in the fifth row. And ::
+
+  > all.data[,2]
+  
+...would print out the entire second column of the data frame. You can also refer to columns by their name. For example::
+
+  > all.data$chrom
+  
+...prints out everything in the "chrom" column. You can also get multiple rows or columns. For example::
+
+  > all.data[c(2,6),]
+  
+...would pull out the second and sixth rows. Likewise::
+
+  > all.data[2:6,]
+  
+...would pull out rows 2-6. So what would this do::
+
+  > all.data[all.data$chrom=="X",]
+  
+We haven't specified a column, so it's going to give us the entire contents of a row or rows. Which rows is it going to give back? Every row in which the value of the chrom column is equal to the value "X". So, if we have a variable called chrom, if we do this::
+
+  > all.data[all.data$chrom==chrom,]
+  
+...we will extract all the rows in which the chrom column has the same value as our variable chrom. Now that we understand how we extract particular rows or columns, we want to save those results in a new data frame. To do that, we use the <- operator, giving us the final line::
+
+  > chrom.data <- all.data[all.data$chrom==chrom,]
+
+We then use the built-in seq() function set up a vector, positions.x, which has the x-coordinate of every bin we're going to examine::
+
+  > positions.x <- seq(from=1, to=max(chrom.data$pos), by=bin.size)
+  
+And then we make a vector to hold the allele frequencies in each of those bins. This vector has to have the same length as positions.x (one frequency for each bin); and we should initialize it with empty values, which are represented by NA in R. We can use the built-in rep() function (short for repeat) to do that::
+
+  > allele.freqs <- rep(NA, length(positions.x))
+  
+Next we have a for loop that cycles through every bin. For each bin, we figure out the x-coordinates of the left- and right-hand edges::
+
+  > bin.min.x <- positions.x[cur.bin]
+  > bin.max.x <- bin.min.x + bin.size
+  
+And then extract (using the same technique we did before) a new subset data frame that contains only the SNPs within that bin::
+
+  > cur.data <- chrom.data[(chrom.data$pos >= bin.min.x) & (chrom.data$pos < bin.max.x),]
+  
+Then it's a simple matter of adding up the total number of 'sam' and 'ore' alleles we saw inside that bin, calculating the relative frequency, and storing the result::
+
+  > sam.count <- sum(cur.data$sam)
+  > ore.count <- sum(cur.data$ore)
+  > sam.freq <- sam.count / (sam.count + ore.count)
+  > allele.freqs[cur.bin] <- sam.freq
+  
+Now we're back outside the for loop. All that's left now is to plot the data. First, we set up a plot window::
+
+  > plot(x=NULL, y=NULL, xlab=paste("Position on chromosome arm ", chrom), ylab="Frequency of sam allele", xlim=c(1, max(positions.x)), ylim=c(0,1))
+  
+And then we plot the points:
+
+  > points(x=positions.x, y=allele.freqs, cex=0.5, col="blue")
+
+And last, we tell R that we're done making our PDF::
+
+  > dev.off()
+
+Now we have our plot! It looks ok, but we might be able to improve it... instead of making a set of non-overlapping "bins", we could use a "sliding-window" approach. This approach is similar in that it divides the chromosome into equal-sized chunks, but now it allows those chunks to overlap. So we can have a wider window, and thus get a smoother curve because we are averaging over a wider area. But because those windows can now overlap, we don't lose data points like we did when we made the bins wider before. The function we wrote for that is plot.chrom.sliding.window(). It allows us to specify the width of the sliding window, as well as how far along the genome we should slide before constructing the next window::
+
+  > plot.chrom.sliding.window(chrom = "2L", step.size = 10000, window.size = 20000)
+  
+Compare it to:
+
+  > plot.chrom.sliding.window(chrom = "2L", step.size = 10000, window.size = 100000)
+  
+  
+The second plot is clearly smoother due to the larger window size, but also has the advantage that we didn't reduce the number of points on our plot when we enlarged the window. When you're making these sorts of plots with your own data, it's important to think about how big you want your step size and window size to be.
+
+This function works in a similar way. The only difference is that we allow the step size to differ from the window width, which means we must figure out where the edges of each 'window' are slightly differently::
+
+  > positions.x <- seq(from=1, to=max(chrom.data$pos), by=step.size)
+  
+And within the for loop::
+
+  > window.min.x <- positions.x[cur.pos] - (window.size / 2)
+  > window.max.x <- positions.x[cur.pos] + (window.size / 2)
+  
+But otherwise, the rest is the same!
+
+Now play around with the window and step sizes and see how they affect your plots. You can also look at different chromosomes (in Drosophila melanogaster, the important ones are X, 2L, 2R, 3L, and 3R).
