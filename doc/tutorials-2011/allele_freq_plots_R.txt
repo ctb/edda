@@ -7,7 +7,7 @@ In this tutorial, we'll use an existing genomic dataset to make some simple figu
 Installing and running R
 ------------------------
 
-You'll need an EC2 instance with Dropbox installed and configured. First, install on your Amazon machine if you haven't already::
+You'll need an EC2 instance with Dropbox installed and configured. First, install R on your Amazon machine if you haven't already::
 
   %% apt-get install r-base
   
