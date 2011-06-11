@@ -1,0 +1,157 @@
+=======================================================
+Peak Predictions and Cis-regulatory Element Annotations
+=======================================================
+
+.. _CEAS: http://liulab.dfci.harvard.edu/CEAS/
+.. _MACS: http://liulab.dfci.harvard.edu/MACS/
+
+In this tutorial we run `MACS`_ and the `CEAS`_ tools that allow users to predict enriched regions
+then visualize the average ChIP enrichment signals over specific genomic features. 
+You should start this tutorial at a prompt that looks something like this::
+
+   root@ip-10-82-233-6:~#
+
+Our computer will need additional developer tools that allow us to install this and other software 
+directly from source code. We need the `g++` (c++ compiler) and `make` 
+(compiler utility). Modern Linux package managers (`apt-get`, `yum` etc) allow 
+for an easy installation::
+
+  %% apt-get install g++
+  %% apt-get install make
+
+Our tools may need to connect to remote databases therefore it is recommended to install the Mysql drivers::
+
+  %% apt-get install python-mysqldb
+  
+You will also need to R package that may or may not be installed at this point, if it is not then use::
+
+  %% apt-get install r-base
+
+Now, lets make a directory for the chipseq data::
+
+  %% mkdir chipseq
+  %% cd chipseq/
+
+Download, extract and compile the MACS source code written by Yong Zhang and Tao Liu from Xiaole Shirley Liu's Lab.::
+
+  %% wget http://bcc.bx.psu.edu/angus/MACS-1.4.0rc2.tar.gz
+  %% tar zxvf MACS-1.4.0rc2.tar.gz
+  %% cd MACS-1.4.0rc2
+  %% python setup.py install
+
+Test that the `macs14` program runs::
+
+  %% macs14
+
+should print a detailed usage information::
+
+  %% macs14
+  Usage: macs14 <-t tfile> [-n name] [-g genomesize] [options]
+
+  Example: macs14 -t ChIP.bam -c Control.bam -f BAM -g h -n test -w --call-subpeaks
+
+  macs14 -- Model-based Analysis for ChIP-Sequencing
+
+  Options:
+    --version             show program's version number and exit
+    -h, --help            show this help message and exit.
+    -t TFILE, --treatment=TFILE
+                          ChIP-seq treatment files. REQUIRED. When ELANDMULTIPET
+                          is selected, you must provide two files separated by
+                          comma, e.g.
+                          s_1_1_eland_multi.txt,s_1_2_eland_multi.txt
+  ... etc ...
+
+We now download the data that we will use, this consist of one data set, 
+the irony being that even related tools require different representations of what is 
+essentially the same information. The `sam2bed` file included with MACS can convert your data to BED format.
+Use the advice on this page `Bam2Wig`_ to convert a sorted BAM file to WIG format.
+
+.. _Bam2Wig: http://biostar.stackexchange.com/questions/2704/how-can-i-convert-bam-sam-to-wiggle
+
+Now lets make a separate folder to hold the data sets::
+
+  %% mkdir peakpred
+  %% cd peakpred
+  %% wget http://bcc.bx.psu.edu/angus/nucleosomes.zip
+  %% unzip nucleosomes.zip
+
+The data contains information on the sequenced fragments representing bound H2AZ nucleosomes in the yeast genome.
+Let's run the `macs` peak predictor::
+
+  %% macs14 -t nucs.bed --name NUC
+
+Lots of output fly by, make sure to read it to understand the decisions that the system made, tweaking and 
+exploring the various parameters is often necessary. The peak predictor has generated three output files,
+one of which is  a bedfile called **NUC_peaks.bed**. This contains the peak locations aboce a certain significance.
+There is a publication associated with this tool that explains its operating principles.
+
+We now go onto interpreting the position of these peaks relative to known genomic features. For that we install the
+the `CEAS`_ another Python package by Hyunjin Shin and Tao Liu from Xiaole Shirley Liu's Lab. To install the 
+CEAS package go down one level::
+
+  %% cd ..
+  %% wget http://bcc.bx.psu.edu/angus/CEAS-Package-1.0.2.tar.gz
+  %% tar zxvf CEAS-Package-1.0.2.tar.gz
+  %% cd CEAS-Package-1.0.2
+  %% python setup.py install 
+
+You should now have the `ceas` python tool installed in your path::
+
+  %% ceas
+
+The output of the command above should be similar to::
+
+  %%  ceas
+  Usage: ceas < input files > [options]
+
+  CEAS (Cis-regulatory Element Annotation System)
+
+  Options:
+    --version             show program's version number and exit
+    -h, --help            Show this help message and exit.
+    -b BED, --bed=BED     BED file of ChIP regions.
+    -w WIG, --wig=WIG     WIG file for either wig profiling or genome background
+                          annotation. WARNING: --bg flag must be set for genome
+                          background re-annotation.
+
+This program requires the peaks to be specified in the BED format, whereas the signal is to presented in a WIG file (this file
+contains the same information as BED file used for peak predictions. The `ceas` program operates on 
+a SQLITE database that contains the information on the annotated regions of the genome. There are 
+several such prebuilt databases for human, mouse and c.elegans. Our samples are yeast samples so
+we need to first build the database ourselves (this database is also included in the download in case 
+we are unable to connect to the UCSC genome browser).
+
+The program to build this database is called ::
+
+  %% build_genomeBG
+
+The tools uses the terminology and naming scheme used at UCSC and can automatically connect and download the
+correct data. Using the UCSC Table Browser http://genome.ucsc.edu/cgi-bin/hgTables?command=start find the
+name of the yeast genome assembly (sacCer2) and find name of the table that you want to annotate with (sgdGene). 
+Finally the program requires a wiggle file that describes the genomic location
+that are valid for data selection. For example a tiling array may only cover some parts of the genome.
+In our case we simply generate a wiggle file that covers the full chromosomes::
+
+  %% more sacCer2.wig 
+  track type=wiggle_0
+  fixedStep chrom=chrI start=1 step=230208
+  1
+  fixedStep chrom=chrII start=1 step=813178
+  1
+  fixedStep chrom=chrIV start=1 step=1531918
+  1
+  
+  ... etc ...
+
+To build the annotation database run:
+
+  %% build_genomeBG -d sacCer2 -g sgdGene -w sacCer2.wig -o sg7.db
+
+We now have a custom database that can be used to generate reports with CEAS. It uses 
+the peaks `NUC_peaks.bed` predicted with `MACS`, the wiggle file `nucs.wig` with the ChIP-Seq signal and the custom built database `sg7.db`::
+
+  %% ceas -g sg7.db -b NUC_peaks.bed -w nucs.wig
+
+The reports are generated into the file `NUC_peaks.pdf` and contain a multitudes of graphs and plots.
+
