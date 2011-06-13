@@ -22,7 +22,7 @@ Download the binary file and untar it::
 
     %% wget http://sourceforge.net/projects/bowtie-bio/files/bowtie/0.12.7/bowtie-0.12.7-linux-x86_64.zip
     %% unzip bowtie-0.12.7-linux-x86_64.zip
-    %% cd bowtie-0.12.7-linux-x86_64
+    %% cd bowtie-0.12.7
 
 Then, copy executable files to /usr/bin::
 
@@ -35,6 +35,7 @@ Install Tophat
 
 Download the binary file and untar it::
 
+    %% cd ~/
     %% wget http://tophat.cbcb.umd.edu/downloads/tophat-1.3.0.Linux_x86_64.tar.gz
     %% tar xvfz tophat-1.3.0.Linux_x86_64.tar.gz
     %% cd tophat-1.3.0.Linux_x86_64
@@ -48,6 +49,7 @@ Install Samtools
 
 Download the source file and untar it::
 
+    %% cd ~/
     %% wget http://sourceforge.net/projects/samtools/files/samtools/0.1.16/samtools-0.1.16.tar.bz2
     %% tar xvfj samtools-0.1.16.tar.bz2
 
@@ -57,7 +59,6 @@ xvfz" instead to uncompress file in gzip format.
 Complie samtools::
 
     %% cd samtools-0.1.16
-    %% ./configure
     %% make
 
 Lastly, add samtools in PATH environment variable::
