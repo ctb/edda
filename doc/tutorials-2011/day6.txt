@@ -1,0 +1,10 @@
+============================
+Day 6: RNAseq Visualization
+============================
+
+.. toctree::
+    :maxdepth: 1
+
+    mrnaseq-tophat-mapping.txt
+    cufflinks.txt
+    mrnaseq-visualization.txt
