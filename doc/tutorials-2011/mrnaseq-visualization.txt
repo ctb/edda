@@ -101,7 +101,7 @@ Go to cufflinks output directory::
     %% cd /mnt/chr25.cufflinks
 
 Use text editor of your choice and add this line at the first line of the
-file::
+file transcripts.gtf::
 
     %% track name='chr25 Cufflinks Gene Models' visibility=full
 
