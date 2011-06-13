@@ -8,3 +8,4 @@ Day 6: RNAseq Visualization
     mrnaseq-tophat-mapping.txt
     cufflinks.txt
     mrnaseq-visualization.txt
+    DEGseq.txt
