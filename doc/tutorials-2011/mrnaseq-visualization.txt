@@ -1,0 +1,114 @@
+=====================================
+Visualising RNAseq data & gene models
+=====================================
+
+:Author: Likit Preeyanon
+:Date: June 12, 2011
+
+UCSC genome browser
+-------------------
+
+UCSC genome browser is a web-based program that provides visualization and
+sequence alignment tools. The genome browser supports many different file formats.
+For more information please go to http://genome.ucsc.edu.
+
+Setup Apache web server
+-----------------------
+
+In order create and view the custom track of our data, you can either
+upload your file to UCSC web server. However, if you file is big, it will
+take a long time to upload. In this tutorial, we will set up Apache
+webserver and let UCSC genome browser download data from the amazon machine
+via HTTP.
+
+First, install Apache using apt-get::
+
+    %% apt-get -y install apache2
+
+Then use your internet browser to go to http://$amazon-machine-name, for example::
+
+    %% http://ec2-184-72-90-214.compute-1.amazonaws.com
+
+You should see "It works!!". That means it works.
+
+Visualize Tophat output
+-----------------------
+
+We will first look at the mapping result from Tophat. The mapping result is
+saved in BAM format. We have to sort and index the file before visualize it
+on UCSC genome browser.
+Suppose we have Tophat output in /mnt/chr25.tophat
+
+To sort and index BAM file, execute::
+
+    %% cd /mnt/chr25.tophat
+    %% samtools sort accepted_hits.bam accepted_hits.sorted
+    %% samtools index accepted_hits.sorted.bam
+
+Next, create links of our files to /var/www/::
+
+    %% ln -fs $PWD/accepted_hits.sorted.bam /var/www/
+    %% ln -fs $PWD/accepted_hits.sorted.bam.bai /var/www/
+
+Create a custom track on UCSC genome browser
+--------------------------------------------
+
+Using your internet browser to go to http://genome.ucsc.edu.
+
+At the home page, click "Genomes" on the left corner.
+
+.. image:: images/ucsc000.png
+
+On the genomes page, select an organism of your chioce. In this case, select
+"chicken".  Then click "manage custom track".
+
+.. image:: images/ucsc001.png
+
+Copy and paste this in the "Paste URLs or data:" box::
+
+    %% track name='chr25 tophat mapping' type=bam db=galGal3 visibility=squish bigDataUrl=http://$amazon-machine-name/accepted_hits.sorted.bam
+
+Don't forget to change "$amazon-machine-name" to your amazon machine DNA.
+
+.. image:: images/ucsc002.png
+
+Then click submit and click "Go to genome browser".
+If you go to gene RHBG, for example, you should see something like this.
+
+.. image:: images/ucsc003.png
+
+Viewing Splice Junctions
+------------------------
+
+Splice junctions are saved in junctions.bed in Tophat output directory.
+This file already has a track header for UCSC genome browser, so we just
+need to enter the URL to create a track on UCSC genome.
+
+First, create a link to /var/www::
+
+    %% cd /mnt/chr25.tophat/
+    %% ln -fs $PWD/junctions.bed /var/www
+
+Go to UCSC genome browser and click "manage custom track" and enter::
+
+    %% http://$amazon-machine-number/junctions.bed
+
+Viewing Cufflinks Gene models
+-----------------------------
+
+Go to cufflinks output directory::
+
+    %% cd /mnt/chr25.cufflinks
+
+Use text editor of your choice and add this line at the first line of the
+file::
+
+    %% track name='chr25 Cufflinks Gene Models' visibility=full
+
+Then save and quite. Create a link to /var/www::
+
+    %% ln -fs $PWD/transcripts.gtf /var/www
+
+Then go to UCSC genome browser and add this line in add custom track::
+
+    %% http://$amazon-machine-number/transcripts.gtf
