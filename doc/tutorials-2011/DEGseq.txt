@@ -1,0 +1,115 @@
+=========================================
+Gene differential expression using DEGseq
+=========================================
+
+:Author: Likit Preeyanon
+:Date: June 7, 2010
+
+First, install R and related programs::
+
+    %% apt-get -y install zip xdg-utils libxss1 tcl8.5 tk8.5
+    %% curl -O http://cran.mtu.edu/bin/linux/debian/lenny-cran/r-base-core_2.11.1-1~lennycran.0_i386.deb
+    %% dpkg -i r-base-core_2.11.1-1~lennycran.0_i386.deb
+    %% apt-get install gfortran
+
+Then, run R on your machine::
+
+    %% R
+
+You should see this (if not, scream loudly)::
+
+    R version 2.11.1 (2010-05-31)
+    Copyright (C) 2010 The R Foundation for Statistical Computing
+    ISBN 3-900051-07-0
+
+    R is free software and comes with ABSOLUTELY NO WARRANTY.
+    You are welcome to redistribute it under certain conditions.
+    Type 'license()' or 'licence()' for distribution details.
+
+    R is a collaborative project with many contributors.
+    Type 'contributors()' for more information and
+    'citation()' on how to cite R or R packages in publications.
+
+    Type 'demo()' for some demos, 'help()' for on-line help, or
+    'help.start()' for an HTML browser interface to help.
+    Type 'q()' to quit R.
+
+    >
+
+Then within R, install DEGseq package::
+
+    > source("http://bioconductor.org/biocLite.R")
+    > biocLite('DEGseq')
+
+It will take about 10 mins to install all dependencies. Go get some coffee and relax.
+
+When installation is done. Import DEGseq library to R::
+
+   > library('DEGseq')
+
+You will see a list of required packages.
+
+The data for this tutorials should be in ~/ngs-course/data/expression_data.txt.
+
+Now, we will load the expression data into R::
+	
+    > geneExpMatrix1 = readGeneExp('~/Dropbox/DEGseq-data/expression_data.txt', header=FALSE, sep='', geneCol=1, valCol=2)
+    > geneExpMatrix2 = readGeneExp('~/Dropbox/DEGseq-data/expression_data.txt', header=FALSE, sep='', geneCol=1, valCol=3)
+
+You can explore you data::
+
+    > write.table(geneExpMatrix1[1:10,], row.names = FALSE)
+
+You will see the first ten records of the first dataset::
+
+			"V1" "V2"
+		"SPU_000003" "67"
+		"SPU_000005" "3"
+		"SPU_000007" "5"
+		"SPU_000008" "41"
+		"SPU_000010" "2"
+		"SPU_000011" "15"
+		"SPU_000012" "29"
+		"SPU_000013" "232"
+		"SPU_000014" "2"
+		"SPU_000016" "8"
+		"SPU_000017" "10"
+
+Now, run DEGexp function to analyze gene expression. 
+
+We will use method "MARS" and save all output to ~/expData::
+
+	> DEGexp(geneExpMatrix1 = geneExpMatrix1, geneCol1 = 1, expCol1 = 2, groupLabel1 = 'unfed', geneExpMatrix2 = geneExpMatrix2, geneCol2 = 1, expCol2 = 2, groupLabel2 = 'fed', method = 'MARS', outputDir='~/expData')
+
+and wait patiently...until you see::
+
+	Done ...
+	The results can be observed in directory:  ~/expData 
+	>
+
+Hooray!! Now you can quit R::
+
+	> q()
+
+It will ask you if you want to save your data, press yes if you want to use your data again in R.
+
+Then you go to ~/expData/::
+
+	> cd ~/expData/
+	> ls -l
+
+You will see two files and 1 directory::
+
+	drwxr-xr-x 2 root root    4096 Jun  7 16:04 output
+	-rw-r--r-- 1 root root    4565 Jun  7 16:05 output.html
+	-rw-r--r-- 1 root root 2200620 Jun  7 16:05 output_score.txt
+
+Here is what you can do:
+
+	#. Open output.html on Firefox and you'll see a nice report.
+	#. Import output_score.txt to Excel.
+	#. You can find all plots in output directory.
+
+Note, to download ~/expData directory to your computer::
+
+	%% tar czf expData.tar.gz ~/expData
