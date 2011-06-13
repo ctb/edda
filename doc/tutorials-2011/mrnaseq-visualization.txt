@@ -15,7 +15,7 @@ For more information please go to http://genome.ucsc.edu.
 Setup Apache web server
 -----------------------
 
-In order create and view the custom track of our data, you can either
+In order create and view the custom track of our data, you can
 upload your file to UCSC web server. However, if you file is big, it will
 take a long time to upload. In this tutorial, we will set up Apache
 webserver and let UCSC genome browser download data from the amazon machine
