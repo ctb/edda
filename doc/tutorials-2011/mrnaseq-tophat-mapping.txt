@@ -1,0 +1,109 @@
+==========================
+RNAseq mapping with Tophat
+==========================
+
+:Author: Likit Preeyanon
+:Date: June 12, 2011
+
+Tophat is developed to map reads from RNAseq to a reference sequence and to detect splice junctions.
+Please go to http://tophat.cbcb.umd.edu/index.html for more information
+about Tophat.
+Tophat uses Bowtie to map reads to the reference sequence, therefore we
+have to install Bowtie first.
+
+Install Bowtie
+--------------
+
+First, go to your home directory::
+
+    %% cd ~/
+
+Download the binary file and untar it::
+
+    %% wget http://sourceforge.net/projects/bowtie-bio/files/bowtie/0.12.7/bowtie-0.12.7-linux-x86_64.zip
+    %% unzip bowtie-0.12.7-linux-x86_64.zip
+    %% cd bowtie-0.12.7-linux-x86_64
+
+Then, copy executable files to /usr/bin::
+
+    %% cp bowtie /usr/bin
+    %% cp bowtie-build /usr/bin
+    %% cp bowtie-inspect /usr/bin
+
+Install Tophat
+--------------
+
+Download the binary file and untar it::
+
+    %% wget http://tophat.cbcb.umd.edu/downloads/tophat-1.3.0.Linux_x86_64.tar.gz
+    %% tar xvfz tophat-1.3.0.Linux_x86_64.tar.gz
+    %% cd tophat-1.3.0.Linux_x86_64
+
+Then include Tophat in PATH environment variable::
+
+    %% export PATH=$PATH:$PWD
+
+Install Samtools
+----------------
+
+Download the source file and untar it::
+
+    %% wget http://sourceforge.net/projects/samtools/files/samtools/0.1.16/samtools-0.1.16.tar.bz2
+    %% tar xvfj samtools-0.1.16.tar.bz2
+
+Note "tar xvfj" command is used to uncompress file in bz2 format. Use "tar
+xvfz" instead to uncompress file in gzip format. 
+
+Complie samtools::
+
+    %% cd samtools-0.1.16
+    %% ./configure
+    %% make
+
+Lastly, add samtools in PATH environment variable::
+
+    %% export PATH=$PATH:$PWD
+
+Get data
+--------
+In this tutorial, we will map sigle-end reads from chicken to the reference
+genome. For demonstration purpose, I have selected reads that mapped to
+chromosome 25.
+You can copy reads and a reference files from Dropbox::
+
+    %% cd /mnt
+    %% cp ~/Dropbox/ngs-scripts/tophat/chr25.fa .
+    %% cp ~/Dropbox/ngs-scripts/tophat/chr25.fastq .
+
+Build Bowtie index
+------------------
+Before running Tophat we need to build the index for the reference
+sequence::
+
+    %% bowtie-build chr25.fa chr25
+
+Run Tophat
+----------
+To run tophat execute this command::
+
+    %% tophat -o chr25.tophat chr25 chr25.fastq
+
+Output files will be in the output directory. We specify the output
+directory using "-o <directory>" option. 
+To explore the output go to chr25.tophat directory::
+
+    %% cd chr25.tophat
+    %% ls
+
+You will see all files as listed below::
+
+    %% accepted_hits.bam  deletions.bed  insertions.bed  junctions.bed  left_kept_reads.info  logs
+
+The mapping result is saved in BAM format in accepted_hits.bam.
+Splice junctions are saved in BED format in junctions.bed.
+Deletions and insertions are also in BED format in deletions.bed and
+insertions.bed. You can take a look at junctions.bed using "less" command.
+However, you cannot look at accepted_hits.bam because it is in binary
+format.
+Please save all the output. We will visualize them using UCSC genome
+browser in the afternoon.
