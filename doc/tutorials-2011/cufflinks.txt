@@ -1,0 +1,51 @@
+====================================
+Building gene models using Cufflinks
+====================================
+
+:Author: Likit Preeyanon
+:Date: June 12, 2011
+
+Cufflinks uses mapping result from Tophat to build gene models.
+Please go to http://cufflinks.cbcb.umd.edu/ for more information.
+
+Install Cufflinks
+-----------------
+
+First go to your home directory::
+
+    %% cd ~/
+
+Copy the binary file from cufflinks website and uncompress the tarball file::
+
+    %% wget http://cufflinks.cbcb.umd.edu/downloads/cufflinks-1.0.3.Linux_x86_64.tar.gz
+    %% tar xvfz cufflinks-1.0.3.Linux_x86_64.tar.gz
+    %% cd cufflinks-1.0.3.Linux_x86_64
+
+Add cufflinks directory to PATH enviroment variable::
+
+    %% export PATH=$PATH:$PWD
+
+Run cufflinks
+-------------
+
+If you already have the output from Tophat, you can run Cufflinks with it
+right away. If you don't have Tophat output yet, please see
+:doc:mrnaseq-tophat-mapping for how to run Tophat.
+
+Suppose we have Tophat output in /mnt/chr25.tophat, run cufflinks with this
+command::
+    
+    %% cd /mnt
+    %% cufflinks -o chr25.cufflinks chr25.tophat/accepted_hits.bam
+
+To explore the output, go to the output directory::
+
+    %% cd chr25.cufflinks
+    %% ls
+
+You should see all the files as listed below::
+
+    %% genes.fpkm_tracking  isoforms.fpkm_tracking  transcripts.gtf
+
+Gene models are saved in GTF format and can be visualized in UCSC genome.
+Please save the output for the visualization tutorial in the afternoon.
