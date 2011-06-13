@@ -53,8 +53,8 @@ The data for this tutorials should be in ~/ngs-course/data/expression_data.txt.
 
 Now, we will load the expression data into R::
 	
-    > geneExpMatrix1 = readGeneExp('~/Dropbox/DEGseq-data/expression_data.txt', header=FALSE, sep='', geneCol=1, valCol=2)
-    > geneExpMatrix2 = readGeneExp('~/Dropbox/DEGseq-data/expression_data.txt', header=FALSE, sep='', geneCol=1, valCol=3)
+    > geneExpMatrix1 = readGeneExp('~/Dropbox/ngs-scripts/DEGseq-data/expression_data.txt', header=FALSE, sep='', geneCol=1, valCol=2)
+    > geneExpMatrix2 = readGeneExp('~/Dropbox/ngs-scripts/DEGseq-data/expression_data.txt', header=FALSE, sep='', geneCol=1, valCol=3)
 
 You can explore you data::
 
