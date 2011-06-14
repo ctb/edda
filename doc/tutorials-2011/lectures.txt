@@ -37,3 +37,12 @@ Lecture 4: `Assembly <files/lecture4-assembly.pptx.pdf>`__.  Reference:
     `Assemblathon (comparing assemblers) <http://assemblathon.org>`__
 
 Lecture 5: `Computation <files/lecture5-computation.pptx.pdf>`__.
+
+Lecture 6: Designing experiments and thinking about statistics
+
+Lecture 7: mRNAseq
+
+Lecture 8: ChIP-seq
+
+Lecture 9: Resequencing analysis
+
