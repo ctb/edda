@@ -14,3 +14,4 @@ Tutorials (2011 version)
    day5.txt
    day6.txt
    day7.txt
+   day8.txt

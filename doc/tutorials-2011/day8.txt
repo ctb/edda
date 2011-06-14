@@ -1,0 +1,8 @@
+===============
+Day 8: SNPs
+===============
+
+.. toctree::
+    :maxdepth: 1
+
+    snp_tutorial.txt
