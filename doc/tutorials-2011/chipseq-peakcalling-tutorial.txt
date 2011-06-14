@@ -11,6 +11,11 @@ You should start this tutorial at a prompt that looks something like this::
 
    root@ip-10-82-233-6:~#
 
+There is a quickstart script available that will install most of the tools that you will
+need for this tutorial. From your login prompt run the script located in::
+
+  ~/Dropbox/ngs-scripts/ialbert/quick-chip.sh
+  
 Our computer will need additional developer tools that allow us to install this and other software 
 directly from source code. We need the `g++` (c++ compiler) and `make` 
 (compiler utility). Modern Linux package managers (`apt-get`, `yum` etc) allow 
