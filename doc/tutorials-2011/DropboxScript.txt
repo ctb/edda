@@ -1,0 +1,115 @@
+===================================================
+Some simple shell scripts to make your life easier
+===================================================
+
+
+In addition to be able to interactively run commands at the shell, we can also compose shell scripts which  string together several commands and run them all together essentially as a short "program". Shell scripts are extremely useful, in particular for sets of commands that you use repetitively. In particular it beats point and click, even for simple things!
+
+
+The first shell script we are going to write is just going to automate the commands to install and run Dropbox on your EC2 instance. As you will see, we are just going to copy and paste the lines we have run previously into a text file, and PREceed this with a single line to let our shell program (bash) know that it we want to run it as a shell script (as a small program).
+
+First let us open up a text editor. We will use nano::
+
+  %% mkdir ~/scripts
+  %% cd ~/scripts
+  %% nano
+
+
+This will open up the nano text editor. The first line for a bash shell script needs to always start with the line::
+  
+  #! /bin/bash
+
+
+The #!  is known as a sh-bang (haSH!). The above line just tells the script to go to the /bin (binaries) folder and call the bash shell program.
+
+Now we literally copy and paste the whole rest of the Dropbox tutorial. You can keep comments in the script using the #::
+
+  cd /.
+
+  #go get dropbox
+  wget -O dropbox.tar.gz "http://www.dropbox.com/download/$plat=lnx.x86_64
+
+  #extract
+  tar -xvf dropbox.tar.gz
+
+  #Run dropbox
+  ~/.dropbox-dist/dropboxd &
+
+
+So the whole script (excluding comments) should look like::
+
+  #! /bin/bash
+  cd /.
+  wget -O dropbox.tar.gz "http://www.dropbox.com/download/$plat=lnx.x86_64
+  tar -xvf dropbox.tar.gz
+  ~/.dropbox-dist/dropboxd &
+
+Press control-X, and you will be prompted to save and name this file. Please name it Dropbox.sh  
+The .sh lets it know that it is a shell script (and if you re-open it in nano, it will probably show syntax highlighting now that nano knows it is a shell script).
+
+Once it is saved and you are back at the command prompt type the following::
+
+  %% ls -la
+
+You will see a line like::
+
+  -rw-r--r--    1 ian   ian           6 Jun 14 13:52 Dropbox.sh
+  
+If you remember from our discussion on file permissions that we the (u)ser only have read & write, but not e(x)ecutable access to this file. So we have to change the permissions::
+
+  %% chmod u+x Dropbox.sh
+  %% ls -la
+
+And you will see a line like::
+
+  -rwxr--r--    1 ian   ian           6 Jun 14 13:52 Dropbox.sh
+
+
+Now you can run this file from its directory to install and run Dropbox anytime::
+
+  %% ./Dropbox.sh
+  
+Yeah for us!!!!
+
+However the astute will recognize that we have generated this on our EC2 instance, and that as soon as we stop the instance the script disappears. So you should probably copy it to your local machine using scp or Dropbox!
+
+
+More importantly, given that the current image that we are using to build or EC2 instance each time comes without a bunch of software (such as bowtie, samtools, etc..) it will probably help you a lot to add additional commands that you want to use. Of course on your own local machine, or a cluster you use, once you install the software once it is fine (and same goes if you make your own image for the EC2 machines).
+
+What I have personally found the most annoying is having to log in and copy things (such as simple shell scripts) over to the EC2 machine instance from my local laptop each time. Therefore I wrote another simple shell script to perform this. However since we have a new public DNS for the Amazon EC2 machine each time we have to find some way to incorporate this. In this case we can use a basic user defined variable which we will provide as an argument along with our shell script, and will be passed along to the shell script as $1.
+
+So in this case our shell script will be (you can do this in nano, textwrangler, notepad, notepad++, etc..)::
+
+  #! /bin/bash
+
+  # the goal of this script is to automate your remote login to Amazon EC2 instance, and then install dropbox.
+
+  #the secure shell command. Notice the $1, which is a user defined variable that we will use for the EC2 instance.
+  
+  scp  -o StrictHostKeyChecking=no -i ~/.ssh/publickey.pem ./shellscriptDropBoxEC2.sh root@$1:~/
+  ssh -i ~/.ssh/publickey.pem root@$1
+
+Now exit out of the texteditor and save it as EC2login.sh 
+In this shell script I have hardcoded my public key file (publickey.pem) since it does not change on my machine. However if you are changing machines alot or change your keys a lot, then you could simple replace the key name and location with $2, and it would be the second argument when you run the shell script.
+
+Now change your permissions on EC2login.sh as we did before::
+
+  %% chmod u+x ./EC2login.sh
+
+And when you want to run it::
+
+  %% ./EC2login.sh publicDNS
+
+where the public DNS is from Amazon EC2.
+
+If you had added a second user defined variable for your script for the you would instead run::
+
+  %% ./EC2login.sh publicDNS  key
+
+(Remember to include locations).
+
+
+
+
+
+  

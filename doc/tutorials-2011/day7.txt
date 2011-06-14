@@ -1,0 +1,9 @@
+===============
+Day 7: ChIP-seq
+===============
+
+.. toctree::
+    :maxdepth: 1
+
+    chipseq-peakcalling-tutorial.txt
+    bedtools-tutorial.txt                   
