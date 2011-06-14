@@ -103,6 +103,7 @@ And when you want to run it::
 where the public DNS is from Amazon EC2.
 
 If you had added a second user defined variable for your script for the you would instead run::
+
   %% ./EC2login.sh publicDNS  key
 
 (Remember to include locations).
