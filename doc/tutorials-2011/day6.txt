@@ -9,3 +9,5 @@ Day 6: RNAseq Visualization
     cufflinks.txt
     mrnaseq-visualization.txt
     DEGseq.txt
+
+    mrnaseq-combined.txt

@@ -1,0 +1,58 @@
+==================================
+A simple mRNAseq analysis pipeline
+==================================
+
+Start up an instance (ami-ea837b83).  If you want to run your own
+assembly, you'll need at least 30 GB of RAM, so a high-memory
+double-extra large instance.  If not, you only need the basic "large"
+instance.
+
+Create a data volume from the data snapshot (snapshot snap-e6148988),
+attach it as /dev/sdf.
+
+Log in.
+
+You'll need to install BLAST (see :doc:`running-blast`), bowtie (see
+:doc:`bwa_tutorial`) and Velvet/Oases (see :doc:`mrnaseq-assembly`).
+
+Mount the data disk under /data::
+
+   %% mkdir /data
+   %% mount /dev/xvdf /data
+
+We'll want to work with the files in the /data/lamprey-rnaseq directory.
+The simplest way to do this is to copy the files over to /mnt::
+
+   %% rsync -av /data/lamprey-rnaseq /mnt
+
+(rsync is an awesome utility that you can use to transfer stuff between
+machines, within machines, etc; you can run it multiple times and it will
+only transfer things that have changed, or not been transferred.)
+
+This will take a few minutes.
+
+Now, go to /mnt/lamprey-mrnaseq.  The script 'scripts/run-all.sh' will
+run everything BUT the assembly; you'll need to edit it (e.g. with nano)
+if you want to run the assembly. ::
+
+   %% cd /mnt/lamprey-rnaseq
+   %% more scripts/run-all.sh
+
+Now, run 'run-all.sh'.
+
+This will:
+
+ - generate the assembly (either by running oases or copying the transcripts
+    file around)
+
+ - build a bowtie index for the lamprey transcripts
+
+ - map the various files to the transcriptome
+
+ - count the reads that map to each transcript
+
+ - normalize the read count across all of the samples
+
+ - leave the results in summary.csv.
+
+More tonight.
