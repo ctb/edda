@@ -57,4 +57,16 @@ This will:
 
  - leave the results in summary.csv.
 
-More tonight.
+Adding gene names
+=================
+
+Run::
+
+   %% python scripts/merge-blast-and-descr.py  generated/transcripts-500.x.mouse data/mouse.protein.faa
+
+and then::
+
+   %% python scripts/reannotate-summary.py summary.csv transcripts-500.x.mouse.pickle summary.new.csv
+
+Now look in summary.new.csv.
+
