@@ -14,6 +14,7 @@ Log in.
 
 You'll need to install BLAST (see :doc:`running-blast`), bowtie (see
 :doc:`bwa_tutorial`) and Velvet/Oases (see :doc:`mrnaseq-assembly`).
+You'll also need screed (see :doc:`short-read-assembly-velvet`).
 
 Mount the data disk under /data::
 
@@ -60,13 +61,97 @@ This will:
 Adding gene names
 =================
 
+I've provided some BLAST files in 'generated'; take a look at
+'transcripts-500.x.mouse'.  That's the result of a BLASTX of
+all the transcripts against the mouse proteome.
+
+The first thing to do is to take all of the BLAST results and find the
+corresponding mouse sequence, taken from the top BLAST hit.  The script
+'merge-blast-and-descr.py' does this and saves the results into a
+so-called "pickle", which is just an internal database format used by
+Python.
+
 Run::
 
    %% python scripts/merge-blast-and-descr.py  generated/transcripts-500.x.mouse data/mouse.protein.faa
 
-and then::
+Now the results will be in 'transcripts-500.x.mouse.pickle'.
+
+Next, let's run through the summary.csv file that you produced, above, and
+"transfer" the names appropriately.  If a name stays the same, it means there
+was no significant BLAST result for that name.  ::
 
    %% python scripts/reannotate-summary.py summary.csv transcripts-500.x.mouse.pickle summary.new.csv
 
-Now look in summary.new.csv.
+Now look in summary.new.csv to see the new names!
 
+Addendum -- useful tricks
+=========================
+
+Retrieving individual sequences
+-------------------------------
+
+Suppose you want a particular transcript sequence -- what can you do?
+Well, you can always open the FASTA file in Word, or vi, or some other
+editor, and then select the sequence.  This is slow, and error prone,
+and really problematic for extremely big files!
+
+Another thing you can do is run the following Python commands::
+
+   import screed
+   for record in screed.open('filename'):
+      if record.name == 'desired name':
+         print record.sequence
+         break
+
+...where you replace 'desired name' and 'filename' with the appropriate
+information.
+
+This will iterate over the records in the file until it finds the record
+you want, and then print out the sequence and exit.  This is a bit slow
+but will work and is easy to debug.
+
+Finally, you can use screed to create a full database, which you can
+then randomly index.  This is slower than the above if you need to
+only retrieve one sequence, because the initial database creation step
+is slow; but if you need to retrieve multiple sequences, it's WAY
+faster!
+
+At the command line, type ::
+
+  %% python -m screed.fadbm <fasta filename>
+
+to create the database indices from a FASTA file.  (You can use 'fqdbm'
+if it's a FASTQ file.)
+
+Then, in Python, do ::
+
+   import screed
+   db = screed.ScreedDB('<fasta filename>')
+   
+and then use ::
+
+   record = db['sequence name']
+   print record.sequence
+
+to retrieve the sequence.
+
+BLAST parsing
+-------------
+
+You can do a lot of fairly simple things with the blastparser module.
+It's not the best blastparser module in the world (I would recommend
+looking at BioPython if you want to do this more seriously) but it
+seems to work well enough for a few things.  Try the following::
+
+   for record in blastparser.parse_file('blastfile'):
+      print record.query_name
+      for hit in record.hits:
+         print hit.subject_name
+         for match in hit:
+            print match.query_start, match.query_end
+            print match.query_sequence
+            print match.subject_start, match.subject_end
+            print match.subject_sequence
+
+Neat, eh?
