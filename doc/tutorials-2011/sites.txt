@@ -1,0 +1,32 @@
+================
+Useful Web Sites
+================
+
+Our goal with this course is to "teach you to fish", not to give you fish.
+Part of learning to fish is to figure out *where to fish*.  So here goes.
+
+First rule of the Web: Use Google to search for keywords and you'll
+generally find what you want, if it's available online!  That having
+been said, here are some specific sites that you might find interesting
+and useful.
+
+Bioinformatics sites
+====================
+
+I think these two sites are probably the most useful bioinformatics specific
+sites:
+
+    http://seqanswers.com/ - SEQanswers, all about next-gen sequencing
+
+    http://biostars.org/ - BioStar, a Q&A site where you can find answers, and
+    ask questions.
+
+Programming sites for scientists
+================================
+
+Software Carpentry is a concept and set of materials dedicated to
+"computational scientist" education.
+
+    http://software-carpentry.org/
+
+    http://ivory.idyll.org/articles/advanced-swc/

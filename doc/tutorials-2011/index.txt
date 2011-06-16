@@ -6,6 +6,8 @@ Tutorials (2011 version)
    :maxdepth: 2
 
    lectures.txt
+   
+   sites.txt
 
    day1.txt
    day2.txt

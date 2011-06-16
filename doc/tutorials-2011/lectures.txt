@@ -38,7 +38,17 @@ Lecture 4: `Assembly <files/lecture4-assembly.pptx.pdf>`__.  Reference:
 
 Lecture 5: `Computation <files/lecture5-computation.pptx.pdf>`__.
 
-Lecture 6: `Designing experiments and thinking about statistics <files/statistics-and-design.pptx.pdf>`__
+Lecture 6: `Designing experiments and thinking about statistics <files/statistics-and-design.pptx.pdf>`__::
+
+    Paul L. Auer and R.W. Doerge 2010. Statistical Design and Analysis of
+    RNA-Seq Data. Genetics. 10.1534/genetics.110.114983
+    PMID: 20439781
+
+    Bullard, J. H., Purdom, E., Hansen, K. D., & Dudoit, S. (2010).
+    Evaluation of statistical methods for normalization and differential
+    expression in mRNA-Seq experiments. BMC Bioinformatics, 11, 94.
+    doi:10.1186/1471-2105-11-94
+
 
 Lecture 7: `mRNAseq <files/lecture7-mrnaseq.pptx.pdf>`__
 

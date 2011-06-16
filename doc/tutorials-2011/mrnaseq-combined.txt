@@ -38,12 +38,14 @@ if you want to run the assembly. ::
    %% cd /mnt/lamprey-rnaseq
    %% more scripts/run-all.sh
 
-Now, run 'run-all.sh'.
+Now do::
+
+   %% bash scripts/run-all.sh
 
 This will:
 
  - generate the assembly (either by running oases or copying the transcripts
-    file around)
+    file from the 'generated' directory into the current directory.)
 
  - build a bowtie index for the lamprey transcripts
 
