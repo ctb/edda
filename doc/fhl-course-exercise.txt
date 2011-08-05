@@ -1,0 +1,163 @@
+================================================
+FHL Course Exercise: mRNAseq expression analysis
+================================================
+
+In this exercise, we're going to:
+
+ - rent a computer from Amazon
+ - install a bunch of software on it
+ - grab some saved data
+ - run an mRNAseq expression analysis on three stages of molgula data
+ - annotate the molgula data with gene names from mouse
+
+Note that this is part of a much larger course so we won't be going into
+much detail about what we're doing; follow the exercises and ask questions
+as you go!
+
+Create virtual machine and install necessary software
+-----------------------------------------------------
+
+Start up new instance (use ami-ea837b83) and log in, as per
+:doc:`tutorials-2011/creating-an-ec2-instance` and
+either :doc:`tutorials-2011/logging-into-ec2-mac` or
+:doc:`tutorials-2011/logging-into-ec2-windows`.
+
+Also install Dropbox as per :doc:`tutorials-2011/installing-dropbox`.
+
+Now install bowtie, BLAST, and screed, as below.
+
+Install bowtie::
+
+ %% cd
+ %% curl -O -L http://sourceforge.net/projects/bowtie-bio/files/bowtie/0.12.7/bowtie-0.12.7-linux-x86_64.zip
+ %% unzip bowtie-0.12.7-linux-x86_64.zip
+ %% cd bowtie-0.12.7
+ %% cp bowtie bowtie-build bowtie-inspect /usr/local/bin
+
+(Bowtie is a tool for mapping reads to reference; it's how we're going to
+count mRNA molecules.)
+
+Install command-line NCBI BLAST::
+
+ %% cd
+ %% curl -O ftp://ftp.ncbi.nlm.nih.gov/blast/executables/LATEST/ncbi-blast-2.2.25+-x64-linux.tar.gz
+ %% tar xzf ncbi-*.tar.gz
+ %% cp ncbi-blast-2.2.25+/bin/* /usr/local/bin
+
+Finally, install screed::
+
+ %% git clone git://github.com/ctb/screed.git
+ %% cd screed
+ %% python setup.py install
+
+screed is a tool from my lab that reads in sequences from FASTA and FASTQ
+files.
+
+Load the Molgula data
+---------------------
+
+The data we're using in this tutorial is stored as a snapshot with
+Amazon. We need to make an EBS volume out of this snapshot and then
+mount it on our instance, which will make it very easy to access our
+data.
+
+Log into Amazon Web Services, and click on "Snapshots" at the
+left. Where it says "Viewing:", click on the drop-down box and select
+"All Snapshots". In the search box, paste the name of the snapshot
+that you want to make a volume from (that's snap-59567238 in this
+case). When the snapshot shows up in the list, select it and then
+click the "Create Volume" button. In the box that pops up, make sure
+to take note of which availability zone you are using -- you will need
+to launch your AMI instance in the same availability zone, or else you
+won't be able to attach the volume to the instance!
+
+Now go launch your AMI instance. But again, when it asks you which
+availability zone to launch it in, change the selection from "No
+preference" to whatever availability zone your volume is in. Now you
+need to attach your volume. Click on "Volumes" in the bar at the left,
+and select the one that you just created from the snapshot. Click on
+the "Attach Volume" button, and then select your instance. In the box
+that pops up, type "sdf" (minus the quotes).
+
+Now, log into your EC2 machine and mount your newly created/attached
+volume on /molgula::
+
+ %% mkdir /molgula
+ %% mount /dev/xvdf /molgula
+
+The snapshot is just for storing the data, not working with it.  To work
+with it, you'll need to copy the data over to a working directory.  So,
+next, copy the data from the /molgula disk into /mnt/work::
+
+ %% rsync -av /molgula/ /mnt/work
+ %% cd /mnt/work
+
+If you ask for a directory listing, you'll see a bunch of files::
+
+ %% ls -FC
+ data/       oculata-blastula-5m-pe.fa  oculata-genes.fa          scripts/
+ generated/  oculata-gastrula-5m-pe.fa  oculata-neurula-5m-pe.fa
+
+The blastula, gastrula, and neurula files are all short read files,
+while the oculata-genes.fa file is a reference gene set.  Below, we're
+going to count the number of times a read from any given gene shows up
+in the short read data set.
+
+Getting started with the analysis
+---------------------------------
+
+Let's start by building bowtie indices for reference transcriptome.
+This is necessary for mapping::
+
+ %% bowtie-build oculata-genes.fa oculata-genes
+
+Map each set of reads::
+
+ %% bowtie -p 4 oculata-genes -m 1 -f oculata-blastula-5m-pe.fa > blastula.map
+ %% bowtie -p 4 oculata-genes -m 1 -f oculata-gastrula-5m-pe.fa > gastrula.map
+ %% bowtie -p 4 oculata-genes -m 1 -f oculata-neurula-5m-pe.fa > neurula.map
+
+Count the number of reads that map to each transcript::
+
+ %% bash scripts/do-count.sh
+
+This will create a bunch of '.counts' files that you can look at with
+'more'.
+
+Now, normalize counts across all of the counts files, so that you can
+compare the counts to each other::
+
+ %% python scripts/qnormalize.py *.counts
+
+Results will be placed in 'summary.csv'.  Copy it to your Dropbox, or
+otherwise get it to your local system, and open it with Excel.
+
+Annotating the genes
+--------------------
+
+One thing you might notice is that the gene names are not very helpful,
+to put it mildly.  To fix this, let's annotate them with their best
+mouse BLAST matches.  Start by doing a BLAST::
+
+ %% makeblastdb -in data/mouse.protein.faa -dbtype prot
+ %% blastx -query oculata-genes.fa -db data/mouse.protein.faa -out oculata.x.mouse
+
+OR (because this will take a few hours...) use one I generated::
+
+ %% cp generated/oculata.x.mouse .
+
+Then make a database linking oculata sequences to mouse sequences::
+
+ %% python scripts/merge-blast-and-descr.py oculata.x.mouse data/mouse.protein.faa
+
+and transfer those names on to the sequences::
+
+ %% python scripts/reannotate-summary.py summary.csv oculata.x.mouse.pickle named.csv
+
+And you're done!
+
+Cleanup
+-------
+
+**IMPORTANT:** Before you go away for the day, log into your EC2 console, stop
+your instance, and delete your volumes!

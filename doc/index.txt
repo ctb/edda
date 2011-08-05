@@ -44,6 +44,8 @@ Contents:
 
    workshop/index
 
+   fhl-course-exercise
+
 External links
 --------------
 
