@@ -83,16 +83,16 @@ Now let's run GATK's Unified Genotyper. The GATK people recommend a few quality 
   
 Read 1 looks fine, but read 2 is probably mis-aligned; rather than counting the C as an insertion, which is probably better, the aligner has placed it after the indel, making it look like there is a SNP there. In GATK we can account for this problem by doing local re-alignment around potential indel sites, in which we incorporate information about all the reads in that region simultaneously, rather than mapping each read individually. First, GATK needs to figure out which regions are in need of re-alignment::
 
-  %% java -Xmx1g -jar GenomeAnalysisTK-1.0.5974/GenomeAnalysisTK.jar -T RealignerTargetCreator -R /data/drosophila/dmel-all-chromosome-r5.37.fasta -I ../RAL357_full_bwa.sorted.bam -o RAL357.realign.intervals -L 2L:100000-150000
+  %% java -Xmx1g -jar GenomeAnalysisTK-1.1-23-g8072bd9/GenomeAnalysisTK.jar -T RealignerTargetCreator -R /data/drosophila/dmel-all-chromosome-r5.37.fasta -I ../RAL357_full_bwa.sorted.bam -o RAL357.realign.intervals -L 2L:100000-150000
   
 And then it needs to actually do the re-alignment (this step is slow, taking ~10 min, even for our small region)::
 
-  %% java -Xmx4g -jar GenomeAnalysisTK-1.0.5974/GenomeAnalysisTK.jar -I ../RAL357_full_bwa.sorted.bam -R /data/drosophila/dmel-all-chromosome-r5.37.fasta -T IndelRealigner -targetIntervals RAL357.realign.intervals -o ../RAL357_full_bwa.realigned.bam
+  %% java -Xmx4g -jar GenomeAnalysisTK-1.1-23-g8072bd9/GenomeAnalysisTK.jar -I ../RAL357_full_bwa.sorted.bam -R /data/drosophila/dmel-all-chromosome-r5.37.fasta -T IndelRealigner -targetIntervals RAL357.realign.intervals -o ../RAL357_full_bwa.realigned.bam
 
 Now we need to do this re-alignment again with the other fly strain that we genotyped (if you were running a large number of samples, this is where a shell script would come in handy). You might want to run this in the background or in a new session while you're re-aligning the first one::
 
-  %% java -Xmx1g -jar GenomeAnalysisTK-1.0.5974/GenomeAnalysisTK.jar -T RealignerTargetCreator -R /data/drosophila/dmel-all-chromosome-r5.37.fasta -I ../RAL391_full_bwa.sorted.bam -o RAL391.realign.intervals -L 2L:100000-150000
-  %% java -Xmx4g -jar GenomeAnalysisTK-1.0.5974/GenomeAnalysisTK.jar -I ../RAL391_full_bwa.sorted.bam -R /data/drosophila/dmel-all-chromosome-r5.37.fasta -T IndelRealigner -targetIntervals RAL391.realign.intervals -o ../RAL391_full_bwa.realigned.bam
+  %% java -Xmx1g -jar GenomeAnalysisTK-1.1-23-g8072bd9/GenomeAnalysisTK.jar -T RealignerTargetCreator -R /data/drosophila/dmel-all-chromosome-r5.37.fasta -I ../RAL391_full_bwa.sorted.bam -o RAL391.realign.intervals -L 2L:100000-150000
+  %% java -Xmx4g -jar GenomeAnalysisTK-1.1-23-g8072bd9/GenomeAnalysisTK.jar -I ../RAL391_full_bwa.sorted.bam -R /data/drosophila/dmel-all-chromosome-r5.37.fasta -T IndelRealigner -targetIntervals RAL391.realign.intervals -o ../RAL391_full_bwa.realigned.bam
   
 Now we would like to run the SNP caller, but we first need to use a package called Picard to fix a minor formatting problem in the re-aligned BAM files before GATK's Unified Genotyper will accept them (these steps take a few minutes each as well)::
 
@@ -105,7 +105,7 @@ Now we would like to run the SNP caller, but we first need to use a package call
 And finally we can run GATK's SNP caller::  
 
   %% cd /data/snp_calling/GATK_snps
-  %% java -jar GenomeAnalysisTK-1.0.5974/GenomeAnalysisTK.jar -R /data/drosophila/dmel-all-chromosome-r5.37.fasta -T UnifiedGenotyper -I ../RAL357_full_bwa.realigned.fixed.bam -I ../RAL391_full_bwa.realigned.fixed.bam -o RAL_GATK.vcf -stand_call_conf 50.0 -stand_emit_conf 10.0 -dcov 500 -L  2L:100000-150000
+  %% java -jar GenomeAnalysisTK-1.1-23-g8072bd9/GenomeAnalysisTK.jar -R /data/drosophila/dmel-all-chromosome-r5.37.fasta -T UnifiedGenotyper -I ../RAL357_full_bwa.realigned.fixed.bam -I ../RAL391_full_bwa.realigned.fixed.bam -o RAL_GATK.vcf -stand_call_conf 50.0 -stand_emit_conf 10.0 -dcov 500 -L  2L:100000-150000
 
 These parameters are similar, but not identical, to those in Samtools. -stand_emit_conf 10.0 means that it won't report any potential SNPs with a quality below 10.0; but unless they meet the quality threshold set by -stand_call_conf (50.0, in this case), they will be listed as failing the quality filter. -dcov 500 means that any site that has more than 500x coverage, the genotype caller will only use 500 randomly selected reads (for computational efficiency).
 
