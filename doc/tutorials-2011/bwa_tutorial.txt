@@ -25,7 +25,7 @@ First we are going to grab the source files for bwa from sourceforge, using curl
 
   %% curl -O -L http://sourceforge.net/projects/bio-bwa/files/bwa-0.5.9.tar.bz2
 
-Now we want to uncompress the tarball file using "tar". x extracts, v is verbose (telling you what it is doing), f skips prompting for each individual file, and j tells it to unzip .bz2 files.::
+Now we want to uncompress the tarball file using "tar". x extracts, v is verbose (telling you what it is doing), f specifies the archive file (otherwise tar will assume it's the default Tape ARchive device node), and j tells it to unzip .bz2 files.::
 
   %% tar xvfj bwa-0.5.9.tar.bz2
   %% cd bwa-0.5.9
