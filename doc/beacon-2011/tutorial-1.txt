@@ -1,6 +1,90 @@
 The tutorial itself!
 ====================
 
-In Python, 
+.. contents::
 
-  >>> print 'hello, world'
+Python is a programming language that we'll be using throughout the term.
+Before we can really get started, we need to make sure that Crunchy is
+installed and working.  Let's do that by welcoming you to Python in the
+traditional way: writing a 'Hello, world' program.  However you loaded
+this tutorial into Crunchy, you should see a line with a Python prompt ('>>>')
+and ``print 'Hello, world'`` after it.  Below that is a big '?' sign and
+a text entry box.   Type the 'print' text (full line) into the text box
+and hit return.
+
+   >>> print 'Hello, world'
+
+You should see 'Hello, world' emerge!  This is your first Python command:
+you've just told the Python language interpreter to output 'Hello, world'
+to the screen.  Congrats, you're now a programmer, and you can add
+'Python programming' to your resume!
+
+We'll spend a fair amount of time over the next few weeks on Python syntax,
+but for now let's introduce two concepts: running functions, and doing math.
+
+Running functions
+-----------------
+
+You pretty much always want to do something to something else when
+you're programming.  For starters, suppose you want to get the length
+of some text.  How can we do this?
+
+In Python, text is always stored as a *string of characters*, or
+*string* for short.  In the above example, 'Hello, world' is a string
+-- it's enclosed in quotes.  You can use single quotes or double
+quotes ("Hello, world") -- Python doesn't care which as long as you
+remember to close the string with the same type of quote as you opened
+it with.  Internal quotes are ignored -- so, for example, "Hello,
+'friend'" represents the string ``Hello, 'friend'``, which can be
+quite handy for printouts.
+
+Once you have your string figured out, to get the length you want to
+apply the function len() to it.  You do this by writing
+``len(<string>)``, replacing <string> with an actual string -- try it!
+
+  >>> print len('Hello, world')
+
+You should see '12', which is how many characters are in the string 'Hello,
+world'.  What you're doing here is running the function "len" on the
+string 'Hello, world'.
+
+**Homework problem 1:** Ask Python to calculate the number of characters
+in the string::
+
+   The quick brown fox jumped over the 'lazy' dog.
+
+Copy the Python command you write for this into the homework form for
+HW 1, Problem 1.  Here's a prompt to work at:
+
+  >>>
+
+*Hint: the length is longer than 40 and less than 50...*
+
+Doing math
+----------
+
+The Python interpreter is also a great way to do some quick math.
+You can do addition with +, subtraction with -, multiplication with ``*``,
+division with /, and grouping with '(' and ')'.  Try running these
+commands:
+
+   >>> print 9 + 1
+   >>> print 11 - 1
+   >>> print 5 * 2
+   >>> print 20 / 2
+   >>> print 19. / 2.
+   >>> print 5 + 10/2
+   >>> print (10 + 10) / 2
+
+(Note: if you click on the little notepad on the right, it will copy all
+of these commands into the Python interpreter for you.)
+
+**Homework problem 2:** Ask Python to calculate the sum of 199438510 and
+664642161, divided by 4.  Copy the Python command you write for this into
+the homework form HW1, Problem 2.  Here's a prompt!
+
+   >>>
+
+And... you're done with the programming part of HW 1!
+
+
