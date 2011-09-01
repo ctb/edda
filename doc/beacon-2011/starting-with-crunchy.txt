@@ -1,0 +1,11 @@
+Getting started with Crunchy and Python
+=======================================
+
+This tutorial should be loaded into Crunchy.  There are several ways of
+doing so, all of them confusing!
+
+
+
+In Python, 
+
+  >>> print 'hello, world'

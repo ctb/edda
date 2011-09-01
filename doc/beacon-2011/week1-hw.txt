@@ -1,0 +1,9 @@
+Homework, week 1
+================
+
+Programming Homework
+--------------------
+
+Go through the Crunchy beginning tutorial (:doc:`starting-with-crunchy`),
+and copy and paste your three solutions into
+`this form <foo>`__.

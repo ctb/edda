@@ -1,0 +1,13 @@
+Welcome to the 2011 BEACON computation class!
+=============================================
+
+These are course materials for `CSE 891 -- Computational Science for
+Evolutionary Biologists <http://ged.msu.edu/courses/2011-fall-cse-891/>`__.
+
+Contents:
+
+.. toctree::
+   :maxdepth: 1
+
+   starting-with-crunchy
+   week1-hw

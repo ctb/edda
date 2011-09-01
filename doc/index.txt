@@ -30,10 +30,11 @@ Contents:
 .. toctree::
    :maxdepth: 1
 
+   tutorials-2011
+
    ngs-course-schedule
    presentations
    tutorials/index
-   tutorials-2011
    tips-and-tricks/index
    data-sets
    unix-cheat-sheet
@@ -45,6 +46,8 @@ Contents:
    workshop/index
 
    fhl-course-exercise
+
+   beacon-2011
 
 External links
 --------------

@@ -10,7 +10,7 @@ and find the "Public DNS".  This is the public name of your computer
 on the Internet.
 
 Copy this name, and connect to that computer with ssh under the username
-'root', like so:
+'root', as follows.
 
 Start Terminal and type::
 
