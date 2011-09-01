@@ -3,6 +3,9 @@ The tutorial itself!
 
 .. contents::
 
+(Note -- this needs to be loaded into Crunchy to be interactive!
+See :doc:`starting-with-crunchy`.)
+
 Python is a programming language that we'll be using throughout the term.
 Before we can really get started, we need to make sure that Crunchy is
 installed and working.  Let's do that by welcoming you to Python in the

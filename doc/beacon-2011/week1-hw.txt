@@ -1,10 +1,49 @@
 Homework, week 1
 ================
 
-Programming Homework
---------------------
+Papers to read
+--------------
+
+Read the following papers for Tuesday:
+
+   Jasny and Roberts,
+   http://www.sciencemag.org/content/300/5617/277.short
+
+   Collins et al.,
+   http://www.nature.com/nature/journal/v422/n6934/full/nature01626.html
+
+and for Thursday:
+
+   Carroll,
+   http://www.nature.com/nature/journal/v422/n6934/full/nature01495.html
+
+   Arnold & Hilton,
+   http://www.nature.com/nature/journal/v422/n6934/full/422821a.html
+
+   Claverie et al.,
+   http://www.sciencemag.org/content/291/5507/1255.full
+   
+
+Programming Homework (due Monday, midnight Pacific time)
+--------------------------------------------------------
 
 Go through the Crunchy installation (:doc:`starting-with-crunchy`),
 load the first tutorial into Crunchy (:doc:`tutorial-1`), work through
-it, and then copy and paste your three solutions into `this form
-<foo>`__.
+it, and then copy and paste your two solutions into `this form
+<https://docs.google.com/spreadsheet/viewform?formkey=dGlNUjBsWFNBNjlVT0Q2ZVc4ejc0ZVE6MQ>`__ by midnight PST.
+
+Reading homework (due Wednesday, midnight Pacific time)
+-------------------------------------------------------
+
+Answer the questions in ~short paragraph form:
+
+ 1. What are the (your) top three reasons for sequencing the human genome?
+
+ 2. Based on the assigned reading as well as your own knowledge, what
+    is one novel aspect of the human genome from a genomics standpoint?
+
+ 3. Give three reasons why the statement "the human genome contains less
+    than 30,000 genes, which means humans aren't even twice as complex as
+    nematodes" is inane.
+
+Submit these answers to `this form <https://docs.google.com/spreadsheet/viewform?formkey=dFlfazlDM0JTbXdMTjViNjZqYU1oVGc6MQ>`__ by midnight PST.

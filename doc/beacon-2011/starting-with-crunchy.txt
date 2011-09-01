@@ -36,7 +36,7 @@ downloads site <http://www.python.org/download/>`__; the latest
 version right now is `Python 2.7.2
 <http://www.python.org/ftp/python/2.7.2/python-2.7.2.msi>`__.  Install
 it!  Now, go and download Crunchy, unpack it, open 'crunchy.py', and
-run it.
+run it as above with Mac OS X.
 
 **Ignore this:** If you're a command line aficionado: download crunchy
 and just run 'python crunchy.py' at the command line, from within the
@@ -45,9 +45,9 @@ crunchy folder.
 Playing with Crunchy
 --------------------
 
-If you want to, go ahead and read through the Crunchy tutorial.  It's not
-necessary, though; you can just go ahead and run through the tutorial
-(next step!)
+If you want to, go ahead and read through the Crunchy tutorial.  It's
+not necessary, though; you can just go ahead and run through our own
+(much shorter) tutorial (next step!)
 
 Running the tutorial
 --------------------
