@@ -10,4 +10,5 @@ Contents:
    :maxdepth: 1
 
    starting-with-crunchy
+   tutorial-1
    week1-hw

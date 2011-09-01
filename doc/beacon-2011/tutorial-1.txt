@@ -1,0 +1,6 @@
+The tutorial itself!
+====================
+
+In Python, 
+
+  >>> print 'hello, world'

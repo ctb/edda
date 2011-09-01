@@ -4,6 +4,7 @@ Homework, week 1
 Programming Homework
 --------------------
 
-Go through the Crunchy beginning tutorial (:doc:`starting-with-crunchy`),
-and copy and paste your three solutions into
-`this form <foo>`__.
+Go through the Crunchy installation (:doc:`starting-with-crunchy`),
+load the first tutorial into Crunchy (:doc:`tutorial-1`), work through
+it, and then copy and paste your three solutions into `this form
+<foo>`__.

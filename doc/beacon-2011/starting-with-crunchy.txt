@@ -1,11 +1,94 @@
+=======================================
 Getting started with Crunchy and Python
 =======================================
 
-This tutorial should be loaded into Crunchy.  There are several ways of
-doing so, all of them confusing!
+.. contents::
 
+In this tutorial, we're going to start by installing and running Crunchy,
+which is an application that ties the Python programming language into
+a nice Web page system.
 
+Getting started
+===============
 
-In Python, 
+First, you'll need to install Crunchy!
 
-  >>> print 'hello, world'
+Installing Crunchy
+------------------
+
+Go and download the Crunchy zip file from the `Crunchy download site
+<http://code.google.com/p/crunchy/downloads/list>`__.  The latest
+version as of September 2011 is `crunchy v1.1.2
+<http://code.google.com/p/crunchy/downloads/detail?name=crunchy1.1.2.zip&can=2&q=>`__.
+
+Save & unpack the zip file somewhere; on your desktop is fine.  It should
+create a folder 'crunchy' alongside the zip file.
+
+**On Mac OS X:** find the 'crunchy' folder.  In the crunchy folder,
+double click on 'crunchy.py'.  Wait for the IDLE application start.
+Once you see a window named 'crunchy.py' open up, click on it (to
+bring it into focus) and then go to the 'Run...' menu, and select 'Run
+module'.  Your Web browser should now automagically open up into the
+Crunchy page -- congrats, if so!  *You do not need to install Python
+first; Macs come with Python already installed.*
+
+**On Windows:** you'll need to install Python 2.x from the `Python
+downloads site <http://www.python.org/download/>`__; the latest
+version right now is `Python 2.7.2
+<http://www.python.org/ftp/python/2.7.2/python-2.7.2.msi>`__.  Install
+it!  Now, go and download Crunchy, unpack it, open 'crunchy.py', and
+run it.
+
+**Ignore this:** If you're a command line aficionado: download crunchy
+and just run 'python crunchy.py' at the command line, from within the
+crunchy folder.
+
+Running the tutorial
+--------------------
+
+OK, now this tutorial should be loaded into Crunchy.  There are
+several ways of doing so, all of them mildly confusing!
+
+*Important:* After you load the tutorial, it will look like you're
+right back at this page -- that's correct!  
+
+METHOD 1
+~~~~~~~~
+
+At any Crunchy prompt, type::
+
+   crunchy._set_site_security('ged.msu.edu', 'trusted')
+
+You should see the response::
+
+   site security set to: trusted
+
+Now, click on `this link
+<http://127.0.0.1:8001/remote?url=http%3A%2F%2Fged.msu.edu%2Fangus%2Fbeacon-2011%2Ftutorial-1.html>`__.
+If it doesn't work, either play with the URL (next paragraph) or move
+on to Method 2.
+
+If your Crunchy Web site is *not* running on port 8001, then you can put this
+URL into your menu bar after the third slash (http://127.0.0.1:NNNN/) of
+your Crunchy site:
+
+   remote?url=http%3A%2F%2Fged.msu.edu%2Fangus%2Fbeacon-2011%2Ftutorial-1.html
+
+METHOD 2
+~~~~~~~~
+
+Go to this link:
+
+https://raw.github.com/ctb/edda/master/doc/beacon-2011/tutorial-1.txt.
+
+Save this file to your computer somewhere (File... Save As...).  Now,
+go back to the Crunchy Web page.  On the dropdown menu on the left
+side of the screen, select 'Basic Crunchy Tutorial', 'Browsing' (all
+the way at the bottom of the menu).  Find the prompt that says 'Load
+local reStructuredText file', and go find the file you downloaded
+('tutorial-1.txt'.).  Load it & you're done!
+
+(Shortcut: after downloading the .txt file above, just click on `this
+link <http://127.0.0.1:8001/docs/basic_tutorial/browsing.html#rst>`__
+to get to the file browsing form.)
+
