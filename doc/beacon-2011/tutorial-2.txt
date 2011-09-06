@@ -381,8 +381,8 @@ Hint: try it!
 
 ---
 
-HW 2.  Help Penny count the total *number* and *types* of fish she's eaten
-in the last week.
+This is the Homework part
+=========================
 
 Let's introduce our protoganist, Penny. Penny is a porpoise, and she needs
 your help.
@@ -400,7 +400,8 @@ the calculation for lots of data.  She's already hired an undergrad to
 do the data entry into a list for your test data set, so all you have
 to do is start from a list full o' fish, below.
 
-(Note: You might also suspect from this list that Penny is a tad overweight.)
+(Note: You might also suspect from the below list that Penny is a tad
+overweight. Shh, she's sensitive.)
 
 Problem 2.1: how many different types of fish are there in this list!?
 Write some Python code (using set() is probably easiest, but you can use
