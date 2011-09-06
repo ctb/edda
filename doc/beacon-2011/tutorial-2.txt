@@ -2,12 +2,10 @@
 Python tutorial 2: let's do some Python!
 ========================================
 
-.. @CTB todo: .get
-
 .. contents::
 
 As with the first tutorial, this needs to be loaded into Crunchy to be
-interactive!  See :doc:`starting-with-crunchy`.  @CTB You might be able to
+interactive!  See :doc:`starting-with-crunchy`.  You might be able to
 just load it by starting up Crunchy and then clicking on `this link
 <http://127.0.0.1:8001/remote?url=http%3A%2F%2Fged.msu.edu%2Fangus%2Fbeacon-2011%2Ftutorial-2.html>`__.
 (You can also just run through the examples in IDLE or at any other
@@ -17,7 +15,7 @@ others later.)
 This is going to be a reasonably lightweight introduction to Python;
 we'll skip lightly over some topics, and only refer in passing to
 others.  Why?  Well, for a couple of reasons -- first, there are a
-bunch of good tutorials out there (@CTB), and also a few good, free
+bunch of good tutorials out there (see :doc:`learning-python-links`), and also a few good, free
 books.  Second, this is an inductive introduction to Python, and
 you're going to learn by doing, not by reading or listening to a
 lecture!  Third, you can go almost arbitrarily deep into Python and
@@ -461,7 +459,7 @@ overweight. Shh, she's sensitive.)
 Problem 2.1: how many different types of fish are there in this list!?
 Write some Python code (using set() is probably easiest, but you can use
 dict()s too, quite easily) to calculate the number of different types of
-fish.  Submit your Python code `here <@CTB>`__.
+fish.
 
 Problem 2.2: Use a dictionary to calculate the number of times Penny has
 eaten each *type* of fish, and print out the results.  Be sure to divide
@@ -472,6 +470,8 @@ standard calculation, but never mind; what you need to know is that
 salmon and ahi are high-fat and have a Fatty Index (FI) of 2; cod and
 sole are really lean, and have a FI of 0.5; and all the other fish
 have FIs of 1.  What is the average FI/day of Penny's diet?
+
+Submit your Python code `here <https://docs.google.com/spreadsheet/viewform?formkey=dGpvQjJUUXJTRUZvaFFadG1fMDdQelE6MQ>`__.
 
    >>> menu = ['mackerel', 'salmon', 'halibut', 'mackerel', 'mackerel',
    ... 'plaice', 'halibut', 'halibut', 'salmon', 'halibut', 'tilapia',

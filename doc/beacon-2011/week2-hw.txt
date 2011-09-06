@@ -1,0 +1,47 @@
+Homework, week 2
+================
+
+Papers to read
+--------------
+
+Everyone should read the following paper for Thursday:
+
+    Hanada et al., 2007
+    http://genome.cshlp.org/content/17/5/632.long
+
+The assigned group should read & present these two papers in addition to the
+first:
+   
+    Pickrell et al., 2010 (a)
+    http://www.nature.com/nature/journal/v464/n7289/full/nature08872.html
+
+    Pickrell et al., 2010 (b)
+    http://www.plosgenetics.org/article/info%3Adoi%2F10.1371%2Fjournal.pgen.1001236
+
+Group members should consider addressing these questions:
+
+ 1. How complete is the current human gene set, based on the Pickrell
+ et al, 2010 (a), paper?  And why?
+
+ 2. What role, if any, does evolution play in "noisy splicing"?
+
+Programming Homework (due Monday, midnight Pacific time)
+--------------------------------------------------------
+
+Work through :doc:`tutorial-2` and copy/paste your three solutions
+into `this form <https://docs.google.com/spreadsheet/viewform?formkey=dGpvQjJUUXJTRUZvaFFadG1fMDdQelE6MQ>`__ by midnight Pacific.
+
+Reading homework (due Wednesday, midnight Pacific time)
+-------------------------------------------------------
+
+Answer the questions in ~short paragraph form:
+
+  1. Name three pieces of evidence that suggest that some of Hanada et
+  al's "sORFs" are functional genes.  What's the strongest of the three,
+  and why?  What's the weakest of the three, and why?
+
+  2. Should you be more concerned with false positives or false
+  negatives with the described approach?  Explain what you mean by
+  "false positive" and "false negative" here, too.
+
+Submit these answers to `this form <https://docs.google.com/spreadsheet/viewform?formkey=dElkdGpNSEFERVluYk5PaUFlOGRNNWc6MQ>`__ by midnight PST.

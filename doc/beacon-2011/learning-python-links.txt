@@ -4,8 +4,16 @@ Miscellaneous links on Python programming
 
 .. contents::
 
+A complete list is `here
+<http://wiki.python.org/moin/BeginnersGuide/Programmers>`__.  The
+below list is slightly curated.
+
 Introductory links
 ------------------
+
+Practical Computing for Biologists (Haddock and Dunn_:
+
+   http://practicalcomputing.org/
 
 The Software Carpentry Introduction to Python:
 
