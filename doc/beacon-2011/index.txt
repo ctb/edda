@@ -12,3 +12,5 @@ Contents:
    starting-with-crunchy
    tutorial-1
    week1-hw
+
+   tutorial-2

@@ -1,0 +1,455 @@
+========================================
+Python tutorial 2: let's do some Python!
+========================================
+
+.. contents::
+
+As with the first tutorial, this needs to be loaded into Crunchy to be
+interactive!  See :doc:`starting-with-crunchy`.  @CTB You might be able to
+just load it by starting up Crunchy and then clicking on `this link
+<http://127.0.0.1:8001/remote?url=http%3A%2F%2Fged.msu.edu%2Fangus%2Fbeacon-2011%2Ftutorial-2.html>`__.
+(You can also just run through the examples in IDLE or at any other
+Python prompt; Crunchy is just one way to do Python.  We'll talk about
+others later.)
+
+This is going to be a reasonably lightweight introduction to Python;
+we'll skip lightly over some topics, and only refer in passing to
+others.  Why?  Well, for a couple of reasons -- first, there are a
+bunch of good tutorials out there (@CTB), and also a few good, free
+books.  Second, this is an inductive introduction to Python, and
+you're going to learn by doing, not by reading or listening to a
+lecture!  Third, you can go almost arbitrarily deep into Python and
+programming, and a lot of it will only be interesting after you have
+a lot of experience.
+
+So let's get started!
+
+Python vs other programming languages (syntactically)
+=====================================================
+
+Almost everyone has some experience with one programming language or
+another -- C, Perl, Matlab, R... and Python has really one major difference
+in syntax with those languages.  The difference is: Python uses indentation
+to mean something.
+
+That is, the following statement:
+
+  >>> if False:
+  ...    print 'hello, world'
+  ...
+  ... print 'goodbye'
+
+returns *different output* from :
+
+  >>> if False:
+  ...    print 'hello, world'
+  ...    print 'goodbye'
+
+In the first case, the 'if' statement applies only to the first print
+statement after the 'if'; in the second, it contains both print
+statements.  (These are known as "code blocks".  Yeah, never mind.)
+
+So you'll have to keep track of your indentations.  Let's not argue
+about whether or not this is a good thing (it is!); just get it fixed
+in your head that you open and close chunks of code with indentations
+and de-indentations.
+
+Note that you can use either spaces or tabs, as long as you use them
+consistently.  You'll get syntax errors if you don't:
+
+  >>> if False:
+  ...    print 'hello, world'
+  >>>  print 'goodbye'
+
+if, elif, else
+==============
+
+Since you're smart and on the ball, I'm guessing you've figured out
+what 'if' does.  'else' does the obvious, too:
+
+  >>> if False:
+  ...    print 'foo!'
+  ... else:
+  ...    print 'bar!'
+
+Note that you can assign values to placeholders, or variables, and use
+them in your code, too:
+
+  >>> a = False
+  >>> if a:
+  ...    print 'foo!'
+  ... else:
+  ...    print 'bar!'
+  ...
+  >>> a = True
+  >>> if a:
+  ...    print 'foo!'
+  ... else:
+  ...    print 'bar!'
+
+True and False are what are known as boolean values, but you can
+really put any statement in there that you want, and it will be
+evaluated as True or False in a fairly obvious way: if the value is
+empty or 0-valued, then it's false, otherwise it's true.  So, for
+example,
+
+  >>> if 0:
+  ...    print 'this statement is not printed!'
+  ...
+  ... if 42:
+  ...    print 'this statement is most definitely printed!'
+
+and that holds for variables too:
+
+  >>> a = 84
+  >>> if a:
+  ...    print 'this one will be printed, too'
+
+You can stick comparisons in there as well: ==, >, <, and != are the
+various (in)equality operators, and you can play around with them to
+see what they do; for example, try changing the value of 'a' below
+to a bunch of different values and seeing what happens.
+
+  >>> a = 32
+  >>> if a == 32:
+  ...    print "you didn't change a"
+  ... elif a > 32:
+  ...    print "You increased a!"
+  ... elif a < 32:
+  ...    print "You decreased it!"
+  ... elif a != 32:
+  ...    print 'wait, how did you print this statement out!?'
+
+You may have noticed that we snuck in 'elif', which is short for
+'else if'.
+
+.. iteration
+.. for
+.. lists, dictionaries
+.. sets
+
+Variable types; lists of values
+===============================
+
+Variables serve as placeholders that can be filled with values.
+Unlike nasty languages like C, you don't have to tell Python in
+advance what kind of value, and you can even change it on the fly.
+**Don't do this kind of thing! It'll be a major source of bugs in your
+code, guaranteed.** But for demonstration purposes...
+
+  >>> a = 5
+  >>> print a
+  >>> a = "hello, world"
+  >>> print a
+
+See?  Python doesn't bat an eye!  It doesn't care what 'a' is until
+you try to do something to it - and 'print' can handle pretty much any
+Python data type.  (This general carefree behavior about types is
+called "duck typing", from "if it looks like a duck, and quacks like a
+duck, it's a duck" - we'll talk more about it later.  Never mind.)
+
+There are a bunch of *boring* data types in Python.  These include
+int(egers), float(ing point numbers), str(ings), and probably a few
+others that I don't use much.  Then there are more *interesting* ones
+that are really at the heart of Python.  We'll introduce two of them
+next.  One of them is a list (the other is a dict(ionary).)
+
+Lists are, simply put, ordered lists of other data types.  You can put
+*anything* in a list, and you can add or remove items as you want.  To
+create an empty list, just use []; to make a list containing values,
+fill in the [] with comma-separated values.
+
+   >>> x = []
+   >>> z = [5, 10, 15, 'foo', 3.141592]
+   >>> zz = [x, z]
+   >>> print x
+   >>> print z
+   >>> print zz
+
+Hint: the last 'print' statement should tell you how you can create
+lists containing lists.
+
+You can modify lists in all sorts of ways with 'append', 'insert', 'remove',
+and other functions -- will talk about them later.  For now, let's talk
+about dictionaries, which (together with lists) are most awesome data types.
+
+Experimental programming: an important consideration before moving forward
+==========================================================================
+
+Want to know if you can put lists in lists?  Or what happens if you
+use double-quoted and single-quoted strings in the same list?  I'm not
+going to bother telling you, because there's a nigh-infinite amount of
+information to be passed on in this way.  Instead, I suggest
+you simply *try it*.  Python is happy to tell you when you're doing
+something wrong, and if you persist it won't break or crash or die
+horribly or seek out your house and leave a bag of flaming poop on
+your doorstep and ring your doorbell and run away.  It will be very
+patient with you.
+
+So whatever you were wondering? Give it a try!  Here's a prompt:
+
+   >>>
+
+If you run across something that really *should* work, but doesn't,
+then jot it down and send it to me in an e-mail.  I'll talk about it
+in class (or incorporate it into a homework assignment, if I'm feeling
+evil).
+
+Dictionaries
+============
+
+If you've programmed before, you've probably run across dictionaries
+(or 'dicts', in short).  They're associative arrays, or maps, or
+hashes.  They underlie lots and lots of stuff in Python, and they're
+extraordinarily superlatively useful.
+
+If you skipped that paragraph, just think of dictionaries as ways to
+associated values with other values, where one of the values -- the
+'key' value -- is unique.
+
+Oh, forget it, it's easier to show it... let's create an empty dictionary
+and fill it with Stuff.
+
+   >>> d = {}
+   >>> d['msu'] = 'spartans'
+   >>> d['uw'] = 'huskies'
+   >>> d['ut'] = 'steers'
+   >>> d['ui'] = 'vandals'
+
+Now we can 'ask' the dictionary (here named 'd') questions about what it
+contains.  For example,
+
+   >>> print d['msu']
+
+should print out 'spartans'.  We can also overwrite (or 'assign over')
+values by their key:
+
+   >>> d['ut'] = 'longhorns'
+
+in which case
+
+   >>> print d['ut']
+
+will return 'longhorns' instead of 'steers'.  This is one of the defining
+features of dictionaries: keys are *unique*, so if you assign two values
+to a particular key in a dictionary, you'll only keep the later one.
+(Just like variables, in fact -- see the reassignment of 'a' to 'hello,
+world', above.  Hint: Python actually stores variables in a dictionary...
+but never mind that.)  This is not true for values; a dictionary will
+hold any number of identical values, as long as they're associated with
+different *keys*.
+
+You can get a list of keys and values in a dictionary by using 'keys()'
+and 'values()' -- I know, it's not very intuitive.
+
+   >>> x = d.keys()
+   >>> print x
+   >>> z = d.values()
+   >>> print z
+
+And yeah, you might have guessed it -- those are actually *lists* themselves...
+
+*Technical note:* You cannot use lists for key values in Python.  So,
+
+   >>> d = {}
+   >>> d[ [5,6,7] ] = 'yo man'
+
+will give you an error (try it!)  There are technical reasons for this;
+the basic logic is that since lists can be changed with append, insert,
+etc., there's no way to reliably associate a value with a list.  Whatever.
+Just remember that you can't do it, or be prepared to face an error.
+
+Retrieving values by indexing
+=============================
+
+Technically, the use of [...] to retrieve values is known as
+*indexing*.  Dictionaries are indexed by whatever their key value is
+-- so, for example, you can retrieve both 'five' and 6 by indexing
+with 5 and 'six', respectively.
+
+   >>> d = {}
+   >>> d[5] = 'five'
+   >>> d['six'] = 6
+
+   >>> print d[5], d['six']
+
+You can even assign the key values to variables, and then ask for the
+value associated with a particular variable;
+
+   >>> key = 5
+   >>> print d[key]
+
+(Try changing 'key' to 'six' and rerunning, I double-dare you!)
+
+You can also index lists, but here there's a restriction: lists can
+only be indexed by integer numbers, and those numbers must refer to
+a specific item in the list by number.  So, for example,
+
+   >>> x = ['foo', 'bar', 'baz']
+   >>> print x[0]
+
+will give you 'foo', while
+
+   >>> print x[2]
+
+will give you 'baz'.  Why is it x[0] and not x[1] to get the first element?
+There's actually a very good reason, but it's steeped in both C mysticism and
+good ol' common sense that you'll only appreciate when you've been programming
+for, like, decades. So (repeat after me -- this will be a common refrain)
+**just remember it for now**.
+
+Iterating over things in lists and dictionaries
+===============================================
+
+One of the most basic operations you can do with a list or a dictionary
+is *iterate* over it.  This literally means "go over every item in it,
+one by one."  You can do this with a 'for' loop.  For example,
+
+   >>> x = ['foo', 'bar', 'baz']
+   >>> for value in x:
+   ...    print value
+
+Here, the variable 'value' takes on 'foo', 'bar', and 'baz', taken from
+the list 'x' in the order that they appear in x.
+
+You can also iterate over a dictionary:
+
+   >>> d = {}
+   >>> d['msu'] = 'spartans'
+   >>> d['uw'] = 'huskies'
+   >>> d['ut'] = 'steers'
+   >>> d['ui'] = 'vandals'
+   >>> for school in d:
+   ...    print school, d[school]
+
+which implicitly iterates over the *keys* in the dictionary.  You can do this
+explicitly, too:
+
+   >>> for school in d.keys():
+   ...    print school, d[school]
+
+You can also iterate over the values in a dictionary:
+
+   >>> for mascot in d.values():
+   ...    print mascot
+
+although here you no longer have access to the keys associated with those
+values, note!
+
+Hey, what order does 'for' choose the keys in, when it iterates over a
+dictionary?  Hint, it's not unrandom.  (And, more importantly, it's
+not *guaranteed* -- unlike with lists, you cannot rely on the order
+with which the keys are stored in a dictionary.  So don't.  Just
+Remember That.)
+
+sets
+====
+
+Lists can contain multiple identical items.  Sometimes you don't want this.
+So you can convert lists into sets (and vice versa) like so:
+
+   >>> x = ['foo', 'bar', 'duplicate', 'baz', 'duplicate']
+   >>> z = set(x)
+   >>> print z
+   >>> x = list(z)
+   >>> print x
+
+A short note on combining stuff
+===============================
+
+We haven't really put all this stuff together in a single example, but
+it works about a well as you'd hope: you can put if statements inside
+of for loops, and so on.
+
+   >>> x = ['foo', 'bar', 'duplicate', 'baz', 'duplicate']
+   >>> for name in x:
+   ...    if name == 'foo':
+   ...        print 'found foo!'
+   ...    else:
+   ...        print '...nope :('
+
+Question of the day
+===================
+
+Hey!  I wonder what happens if you ask for the len() of a dictionary,
+list, or set?  Does it behave sensibly like with strings?
+Hmmmmmm... if only there was a way to find out...
+
+Hint: try it!
+
+   >>> 
+
+---
+
+HW 2.  Help Penny count the total *number* and *types* of fish she's eaten
+in the last week.
+
+Let's introduce our protoganist, Penny. Penny is a porpoise, and she needs
+your help.
+
+Penny has a serious problem: her doctor has told her that she has high
+cholesterol, and wants to know about her diet.  He's guessing that
+that she needs to eat less ahi and more maguro (she does love her
+tuna!), but needs to know *how many* fish she eats each day on
+average, as well as the different *kinds* of fish she eats each day.
+Penny, not having any hands (she's a porpoise, folks!), needs your
+help to run the calculation.  She's given you a small data set from
+the last two weeks of her diet, below; but the doctor wants the
+numbers going back a year, so Penny wants you to write a program to do
+the calculation for lots of data.  She's already hired an undergrad to
+do the data entry into a list for your test data set, so all you have
+to do is start from a list full o' fish, below.
+
+(Note: You might also suspect from this list that Penny is a tad overweight.)
+
+Problem 2.1: how many different types of fish are there in this list!?
+Write some Python code (using set() is probably easiest, but you can use
+dict()s too, quite easily) to calculate the number of different types of
+fish.  Submit your Python code `here <@CTB>`__.
+
+Problem 2.2: Use a dictionary to calculate the number of times Penny has
+eaten each *type* of fish, and print out the results.  Be sure to divide
+by 14 to get the daily average for the entire two weeks.
+
+Problem 2.3: Calculate a fat-weighted fish index.  This is a NIST
+standard calculation, but never mind; what you need to know is that
+salmon and ahi are high-fat and have a Fatty Index (FI) of 2; cod and
+sole are really lean, and have a FI of 0.5; and all the other fish
+have FIs of 1.  What is the average FI/day of Penny's diet?
+
+   >>> menu = ['mackerel', 'salmon', 'halibut', 'mackerel', 'mackerel',
+   ... 'plaice', 'halibut', 'halibut', 'salmon', 'halibut', 'tilapia',
+   ... 'cod', 'halibut', 'mackerel', 'cod', 'salmon', 'cod', 'sole',
+   ... 'plaice', 'tilapia', 'mackerel', 'salmon', 'mackerel', 'cod',
+   ... 'mackerel', 'salmon', 'salmon', 'halibut', 'salmon', 'plaice',
+   ... 'sole', 'sole', 'ahi', 'mackerel', 'halibut', 'tilapia', 'ahi',
+   ... 'halibut', 'salmon', 'sole', 'sole', 'ahi', 'salmon',
+   ... 'halibut', 'plaice', 'char', 'sole', 'char', 'char', 'sole',
+   ... 'sole', 'sole', 'halibut', 'char', 'plaice', 'mackerel',
+   ... 'tilapia', 'halibut', 'maguro', 'maguro', 'plaice', 'maguro',
+   ... 'char', 'mackerel', 'halibut', 'maguro', 'plaice', 'maguro',
+   ... 'tilapia', 'salmon', 'mackerel', 'maguro', 'cod', 'sole',
+   ... 'mackerel', 'salmon', 'maguro', 'mackerel', 'salmon', 'ahi',
+   ... 'cod', 'maguro', 'mackerel', 'plaice', 'tilapia', 'tilapia',
+   ... 'sole', 'maguro', 'salmon', 'plaice', 'halibut', 'sole',
+   ... 'tilapia', 'salmon', 'salmon', 'sole', 'halibut', 'plaice',
+   ... 'salmon', 'cod', 'tilapia', 'ahi', 'mackerel', 'mackerel',
+   ... 'ahi', 'char', 'ahi', 'maguro', 'mackerel', 'sole', 'maguro',
+   ... 'cod', 'mackerel', 'halibut', 'sole', 'plaice', 'sole', 'cod',
+   ... 'ahi', 'halibut', 'char', 'halibut', 'cod', 'sole', 'mackerel',
+   ... 'plaice', 'sole', 'mackerel', 'tilapia', 'char', 'sole',
+   ... 'maguro', 'cod']
+
+Some concluding thoughts
+========================
+
+By now, even if you've never programmed before and are completely
+shell shocked by all the syntax and ideas, you should begin to see a
+glimmer of a glimpse of just how awesome programming can be for
+scientists.  Why, all scientists do is deal with lists of numbers and
+names!  Being able to process them in clever ways with computers has
+to be a win!  When you consider that computers can work with really
+massive amounts of data, it starts to get ... interesting.  And that's
+what we'll begin exploring over the next few weeks.
+
+Plus, Penny is really thankful for your help.
