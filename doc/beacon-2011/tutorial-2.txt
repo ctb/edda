@@ -2,6 +2,8 @@
 Python tutorial 2: let's do some Python!
 ========================================
 
+.. @CTB todo: .get
+
 .. contents::
 
 As with the first tutorial, this needs to be loaded into Crunchy to be
@@ -297,6 +299,59 @@ There's actually a very good reason, but it's steeped in both C mysticism and
 good ol' common sense that you'll only appreciate when you've been programming
 for, like, decades. So (repeat after me -- this will be a common refrain)
 **just remember it for now**.
+
+Dealing with new keys in dictionaries
+=====================================
+
+If you ask for a key that doesn't yet exist, e.g.
+
+   >>> d = {}
+   >>> print d['i am not here yet']
+
+you will get a KeyError response, which basically says what you think:
+"I don't have anything associated with that key!"
+
+So what do you do?
+
+One way to deal with new keys is simply to fill in default values for
+them yourself.  For example, if I know I'm going to be counting
+cats and dogs, I can do:
+
+   >>> d = {}
+   >>> d['cats'] = 0
+   >>> d['dogs'] = 0
+
+this initializes the dictionary values to 0, so that when I ask for 'cats'
+and 'dogs' there is always a value there.  I can add to the value, subtract,
+etc. For example,
+
+   >>> d['cats'] = d['cats'] + 1
+   >>> print d['cats']
+
+If you have a longer list, use a for loop:
+
+   >>> x = ['cats', 'dogs', 'hamsters', 'hyenas']
+   >>> d = {}
+   >>> for name in x:
+   ...   d[name] = 0
+
+...but this is kind of messy and (gasp!) un-Pythonic.   Is there a neater
+way?  Sure!  Read on.
+
+If you don't know whether or not a value exists, but you have a default
+value in mind, use the 'get' function on dictionaries.  The first argument
+to 'get' is the key for which you want to retrieve a value, and the second
+argument is the value to retrieve if the key isn't yet in the dictionary.
+
+   >>> d = {}
+   >>> num_cats = d.get('cats', 0)
+   >>> d['cats'] = num_cats + 1
+   >>> num_cats = d.get('cats', 0)
+   >>> d['cats'] = num_cats + 1
+   >>> print d['cats']
+
+What value do you get at the end?  That's right, 2.  See if you can trace
+out the logic...
 
 Iterating over things in lists and dictionaries
 ===============================================
