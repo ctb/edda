@@ -14,3 +14,10 @@ Contents:
    week1-hw
 
    tutorial-2
+
+Reference material
+------------------
+
+.. toctree::
+
+   learning-python-links

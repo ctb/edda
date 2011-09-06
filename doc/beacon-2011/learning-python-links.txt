@@ -1,0 +1,48 @@
+==========================================
+Miscellaneous links on how to learn Python
+==========================================
+
+.. contents::
+
+Introductory links
+------------------
+
+Learning Python (Mark Lutz):
+
+   http://oreilly.com/catalog/9781565924642
+
+How to Think like a Computer Scientist (Allen B. Downey):
+
+   http://greenteapress.com/thinkpython/thinkpython.html
+
+Dive Into Python (Mark Pilgrim):
+
+   http://diveintopython.org/
+
+
+Slightly more advanced
+----------------------
+
+Learn Python the Hard Way (Zed Shaw):
+
+   http://learnpythonthehardway.org/
+
+Intermediate and Advanced Software Carpentry in Python (C. Titus Brown):
+
+   http://ivory.idyll.org/articles/advanced-swc/ 
+
+Great reference material
+------------------------
+
+The official Python documentation (for 2.x):
+
+   http://docs.python.org/
+
+   (especially the `tutorial
+   <http://docs.python.org/tutorial/index.html>`__ and `standard
+   library reference <http://docs.python.org/library/index.html>`__)
+    
+
+Python Cookbook:
+
+   http://code.activestate.com/recipes/langs/python/
