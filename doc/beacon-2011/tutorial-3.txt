@@ -1,0 +1,131 @@
+Tutorial 3
+==========
+
+Using 'count'
+-------------
+
+From looking at your homeworks, Penny is a bit concerned that maybe she
+knows Python better than the person teaching you.  In particular, she'd
+like to point out that lists have a 'count' function that does
+*exactly* what you need for problems 2.2 and 2.3.
+
+For example, if 'x' is a list, then "x.count('a')" will return the
+number of times 'a' is present in 'x':
+
+  >>> x = ['a', 'b', 'c', 'a', 'b', 'a']
+  >>> x.count('a')
+  3
+
+Homework 3.1
+~~~~~~~~~~~~
+
+Rewrite your solution to 2.2 (fish counting) using the 'count' function.
+(Some of you already did this, that's ok, just paste it in again ;)
+
+Penny makes a wager
+-------------------
+
+Penny is a playful porpoise, and would like to challenge you to a game
+of heads and tails.  Since she doesn't actually have fingers, and flippers
+aren't great for flipping coins (despite the name), she'd like you to
+*simulate* coin tosses instead, using Python.
+
+To simulate coin flips, you need a random number generator.  (No,
+`not this kind <http://xkcd.com/221/>`__.)  Luckily, Python provides
+one in the 'random' module!
+
+Wait, what's a module!?  A module is a collection of Python code that
+(usually) works together; modules are convenient ways to group
+together related bits of code.  There are `many, many, many
+<http://docs.python.org/library/index.html>`__ modules that come with
+Python -- Python's motto is "batteries included" -- but for now we're
+just going to try out 'random'.
+
+To use random, just type
+
+  >>> import random
+
+Now you can use the function 'randint', which returns a random integer
+in a certain range.  For example,
+
+  >>> random.randint(1, 100)
+
+returns a number from 1 to 100 -- randomly.  If you run it a few different
+times, you'll get different numbers each time.
+
+Penny gives you the following code to simulate coin flips:
+
+  >>> flips = []
+  >>> for i in range(10):
+  ...   if random.randint(1, 100) >= 50:
+  ...      flips.append('heads')
+  ...   else:
+  ...      flips.append('tails')
+
+
+Now Penny wants to make the following wager: for every heads, you give
+her $1; for every tails, you get $1 from her.  Is this fair?  Would
+you want to play this game, if you were a gamblin' (wo)man?
+
+One way to tell is to look at the average number of heads for a given
+number of flips:
+
+  >>> flips.count('heads') / float(len(flips))
+
+Note, here, that if you just divided by 'len(flips)', you'd be dividing
+by an *integer* value, and Python would helpfully truncate the resulting
+number to an integer, which would generally be 0 in this case.  So you
+need to tell Python explicitly that you want to do a 'floating point'
+division, and keep any fractional results.
+
+Homework 3.2
+~~~~~~~~~~~~
+
+Try changing the number in the range(...) statement to something much
+larger -- 100, or 1000.  how does the average number of heads change?
+Why shouldn't you wager against Penny?  Change the program so it's
+fair (and prove it to yourself -- pretend money's on the line!).
+Submit your final (changed) program.
+
+---
+
+It might be interesting, BTW, to look at the 'random.choice' function
+and the 'random.shuffle' functions.  Neat, eh??
+
+String finding/matching
+-----------------------
+
+On to a different topic!  Suppose you have a string 'foo bar bif baz bar',
+and you want to know the location of the substring 'bar'.  How do you
+do this?
+
+Easy!  Use the 'find' function:
+
+  >>> silly = 'foo bar bif baz bar'
+  >>> silly.find('bar')
+
+If you want to find the second one, you have to give 'find' a starting point
+in the string:
+
+  >>> first = silly.find('bar')
+  >>> second = silly.find('bar', first + 1)
+  >>> print first, second
+
+Note that 'find' is a bit unusual for a Python function in that if it
+DOESN'T find something, it will return '-1'.  Weird, I know.  You can
+use 'index' if you want more ... emphatic notification of missing
+substrings, in the usual Pythonic way (using something called
+'exceptions').  We'll talk about that more later.
+
+Homework 3.3
+~~~~~~~~~~~~
+
+Write a for loop to find and print out the location of all 'ACGA'
+substrings in the following strings:
+
+  >>> dna = 'CAAACAAATTGCGCGTAATCTTTGCTAGCACGACGAAGCTCTTGGCACTACGAAGCGAGGTCTAGCTGTCGGAGTCGACACT'
+  >>> dna = 'TAGCACGTCGAAGCTCTTGGCACTAGGAAGCGAGGTCTAGCTGTCGGAGTCGACACTCAAACAAATTGCGCGTAATCTTTGC'
+
+Submit!  The same code should work for both, note.
+
+(No, don't worry about reverse complements, just forward matches, thanks...)

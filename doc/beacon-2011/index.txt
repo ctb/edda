@@ -9,12 +9,19 @@ Contents:
 .. toctree::
    :maxdepth: 1
 
+   class-links
+
    starting-with-crunchy
    tutorial-1
    week1-hw
 
    tutorial-2
    week2-hw
+
+   in-class-python-1
+
+   tutorial-3
+   week3-hw
 
 Reference material
 ------------------

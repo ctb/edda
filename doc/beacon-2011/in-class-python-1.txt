@@ -1,0 +1,126 @@
+In-class Python material
+========================
+
+So, let's go back and (re)introduce a few concepts.
+
+The first thing to realize about programming languages is that, while
+they do have *internal* logic, and adhere to a kind of external logic
+(literally, "logic"... from math...) it's a logic that many people are
+not familiar with.  That's completely OK; programming is not something
+that many people get naturally!
+
+The second thing is this: there are a lot of rules, and some of those
+come with exceptions.  Some languages, like Python, have only a
+relatively small number of rules and a few exceptions; others, like C++,
+have many of both.  That's life.  You will have to remember the rules,
+and note the exceptions as you come across them.  It's just part of
+programming.
+
+The third thing is that "information processing" is one way (and my
+preferred way) to think about scientific programming, especially.
+Your programs are going to be designed to push information around, and
+transform it in various ways (selecting some values, changing other
+values, summarizing yet more).
+
+In that vein, here are a few one-liners.
+
+Variables
+---------
+
+Put the integer '5' in the bin named 'a':
+
+  >>> a = 5
+
+Put the string 'five' in the bin named 'a':
+
+  >>> a = 'five'
+
+Note that '5.0' is different in important ways from '5':
+
+  >>> a = 5.0
+
+You can always print 'a' to find out what's in there:
+
+  >>> print a
+
+and Python will make a best-effort guess to printing it out.  You're fine
+with strings, integers, floats, etc.  What happens when you print 5.0 vs
+5?
+
+A quick note on Crunchy: variable assignments and stuff are shared
+within a single Crunchy session.  So you can put 'a = 5' in at one prompt,
+and then at another prompt say 'print a' and get '5' as a result.
+
+Crunchy also has some annoying tendencies.  You may have noticed that this
+doesn't work...
+
+ >>> for a in range(10):
+ ...    print a
+ >>> print 'foo bar baz'
+
+You need to separate these statements out into separate blocks, e.g.
+
+ >>> for a in range(10):
+ ...    print a
+
+and
+
+ >>> print 'foo bar baz'
+
+Lists
+-----
+
+Lists are just (named) collections of (unnamed) bins or variables -- 
+
+ >>> x = [ 5, 6, 7, 8, "foo", 'biz', 2.0 ]
+
+None of the values in 'x' has a name, but you can access them with a
+for loop:
+
+ >>> for v in x:
+ ...   print v
+
+or by position within 'x':
+
+ >>> print x[3]
+
+And 'len' gives you the number of items in the list:
+
+ >>> print len(x)
+
+Dictionaries (dicts)
+--------------------
+
+Dictionaries are (named) collections of (named) bins or variables --
+
+ >>> d = {}
+ >>> d[1] = 'one'
+ >>> d[2] = 'two'
+ >>> d[3] = 'four'
+
+Now you can access the name '1' in the dictionary 'd':
+
+ >>> print d[1]
+
+etc.
+
+You can also iterate across the names of the bins (not the values, as in
+lists):
+
+ >>> for k in d:
+ ...    print k, d[k]
+
+If you want the values, you have to ask for a list of them explicitly:
+
+ >>> for v in d.values():
+ ...    print v
+
+If you ask for the name of something that's not yet in the dictionary, you'll
+get an error:
+
+ >>> print d[5]
+
+If you want Python to give you a *default* value instead of complaining, use
+'get' instead:
+
+ >>> print d.get(5, 'not here!')

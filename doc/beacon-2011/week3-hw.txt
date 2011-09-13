@@ -1,0 +1,55 @@
+Homework, week 3
+================
+
+Papers to read
+--------------
+
+Everyone should read the following paper for Thursday, Sep 22nd:
+
+    Brown and Callan, 2004
+    http://www.pnas.org/content/101/8/2404.long
+
+This may be a useful background paper to skim, too:
+
+    Stormo, 2000
+    http://bioinformatics.oxfordjournals.org/content/16/1/16.long
+
+The assigned group should read & present these two papers in addition to the
+first:
+   
+    Cameron et al., 2005
+    http://www.pnas.org/content/102/33/11769.long
+
+    Peterson et al., 2009
+    http://www.plosone.org/article/info%3Adoi%2F10.1371%2Fjournal.pone.0004688
+    
+Group members should consider addressing these questions:
+
+ 1. What, if anything, can be inferred about the difference in *mechanism*
+ behind sequence change in E. coli and S. purpuratus from the Brown/Callan
+ paper and the Cameron paper?
+
+ 2. What, if anything, can be inferred about the difference in *mechanism*
+ behind sequence change in flies and S. purpuratus from the Peterson
+ paper and the Cameron paper?
+
+Programming Homework (due Monday, midnight Pacific time)
+--------------------------------------------------------
+
+Work through :doc:`tutorial-3` and copy/paste your three solutions
+into `this form <https://docs.google.com/spreadsheet/viewform?formkey=dGtzdmRuZ290Qzl6S21MU2JwcUF0cWc6MQ>`__ by midnight Pacific.
+
+Reading homework (due Wednesday, midnight Pacific time)
+-------------------------------------------------------
+
+Answer the questions in ~short paragraph form:
+
+  1. In the Brown/Callan paper, a large number of unknown crp
+  binding sites are predicted in the E. coli genome.  Do you
+  believe these predictions?  If so, or if not, why?  Justify.
+
+  2. What is the most compelling piece of (computational) evidence in
+  the Brown/Callan paper that supports these predictions?  (Even if
+  you don't believe any of it ;)
+
+Submit these answers to `this form <https://docs.google.com/spreadsheet/viewform?formkey=dEIxelQ1aF9CN2U5bGlNZ3I5T05VMEE6MQ>`__ by midnight PST.
