@@ -1,6 +1,20 @@
 Class Links
 ===========
 
+Thursday, September 15, 2011
+----------------------------
+
+   Answers to reading question 1:
+   http://lyorn.idyll.org/~t/transfer/cse891/hw2-reading.html
+
+Presentations:
+
+   http://lyorn.idyll.org/~t/transfer/cse891/cheng-intro.pdf
+
+   http://lyorn.idyll.org/~t/transfer/cse891/hanada-pres.pdf
+
+   http://lyorn.idyll.org/~t/transfer/cse891/pickrella-pres.pdf   
+
 Thursday, September 8, 2011
 ---------------------------
 
@@ -9,6 +23,8 @@ Presentations:
    http://lyorn.idyll.org/~t/transfer/cse891/gene_number.pdf
 
    http://lyorn.idyll.org/~t/transfer/cse891/humans.pdf
+
+   http://lyorn.idyll.org/~t/transfer/cse891/bread%20mould.pdf
 
 HW answers for discussion:
 

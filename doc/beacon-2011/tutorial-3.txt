@@ -129,3 +129,9 @@ substrings in the following strings:
 Submit!  The same code should work for both, note.
 
 (No, don't worry about reverse complements, just forward matches, thanks...)
+
+Here's a free Python prompt for y'all:
+
+  >>>
+
+Enjoy!
