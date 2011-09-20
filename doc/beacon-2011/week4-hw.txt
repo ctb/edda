@@ -33,7 +33,7 @@ Programming Homework (due Monday, midnight Pacific time)
 
 Work through :doc:`tutorial-4` and copy/paste your solutions into
 `this form
-<>`__
+<https://docs.google.com/spreadsheet/viewform?formkey=dC1CaDhOUjNjWTl2ZVJwNTdvbzVfdWc6MQ>`__
 by midnight Pacific.
 
 Reading homework (due Wednesday, midnight Pacific time)
@@ -46,4 +46,4 @@ Answer the questions in ~short paragraph form:
   2. Why would highly expressed genes, in particular, be under stronger
   selection than other genes for translational robustness?
 
-Submit these answers to `this form <>`__ by midnight PST.
+Submit these answers to `this form <https://docs.google.com/spreadsheet/viewform?formkey=dGpSaTFGR3dFQlpIMnVmNl9LRUI1clE6MQ>`__ by midnight PST.

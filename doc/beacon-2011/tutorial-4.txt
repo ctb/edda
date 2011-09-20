@@ -20,22 +20,27 @@ The Monty Hall problem, simply put, is this:
    He then asks you a question: do you switch your choice of doors to the
    other, non-opened one? Or do you stay with your first choice?
 
-While it's obvious that whether or not you switch, you get the same
-answer, you wonder why Monty is asking.  So maybe there's more to the
-problem!  Rather than analyzing it, you, being a computational
+   After you make your decision (to switch, or not), he opens the door
+   you have chosen, and either gives you NOTHING or A MILLIONG BUCKS!!!!
+   (Hint: you WANT a MILLION BUCKS!!!!)
+
+While it's obvious that there is no particular advantage to switching,
+you wonder why Monty is asking.  So maybe there's more to the
+problem!?  Rather than analyzing it, you, being a computational
 scientist (and hence not that great at really analyzing things) decide
 to simply simulate the problem.
 
 I, being awesome, have written a 100%-guaranteed-to-be-correct piece
 of code to do just that!
 
-The following code (available for download `here <@@>`__) can be
-loaded into IDLE as a '.py' file and run.  In the function
+The following code (`available for text-file download here
+<https://raw.github.com/ctb/edda/master/doc/beacon-2011/monty.py>`__)
+can be loaded into IDLE as a '.py' file and run.  In the function
 'monty_hall', it implements a Monty Hall-style game show, with the
 only parameter being whether or not the player switches.  In the
 function 'monte_carlo', it implements a Monte Carlo/random number
 simulation that runs the monty_hall function a bunch of times and
-returns the average number of times a "win" was observed.
+returns the average number of times a "win" was observed. ::
 
    import random
    
@@ -92,8 +97,11 @@ offing!
 Homework 4.1 - Monty Hall/Monte Carlo refactoring
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-For the below, edit the 'monty.py' file and then copy/paste the *final*
-version (after #3) into the HW form.
+For the below, edit the 'monty.py' file and then copy/paste the
+*final* version (after #3) into the HW form.  I **strongly** recommend
+doing the refactoring in the following three chunks (a, b, and c);
+otherwise you will get confused, and lost, and your code will suck,
+and you will cry.  (Or we will, looking at your code.)
 
 **HW 4.1 (a)**:
 
