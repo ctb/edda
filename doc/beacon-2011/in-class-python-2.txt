@@ -1,0 +1,33 @@
+# discuss:
+#   monte carlo
+#   functions
+#   refactoring
+#   assert statements
+#   averages/stddev.
+# and:
+#   using google
+
+#  do a simple version in class/for class?  yes, for coins.
+#   FUNCTIONS. REFACTOR.  is there a place for an assert??
+
+In-class Python material (#2)
+=============================
+
+while loops
+-----------
+
+Making random (DNA) sequences
+-----------------------------
+
+Simulation with random numbers ("Monte Carlo" simulations)
+----------------------------------------------------------
+
+Functions
+---------
+
+Refactoring
+-----------
+
+Assert statements
+-----------------
+

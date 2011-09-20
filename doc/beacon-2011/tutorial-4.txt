@@ -1,0 +1,128 @@
+Tutorial 4
+==========
+
+Functions!
+----------
+
+The Monty Hall Problem
+----------------------
+
+The Monty Hall problem, simply put, is this:
+
+   You are a contest in a game show run by the famous Monty Hall.  The game
+   show is set up like so: there are three doors, and behind one of the doors
+   is A MILLION BUCKS!!!  The other two doors are empty.
+   
+   You choose a door, but it remains closed.
+   
+   Monty then opens a different door for you, and shows you that it is empty.
+   
+   He then asks you a question: do you switch your choice of doors to the
+   other, non-opened one? Or do you stay with your first choice?
+
+While it's obvious that whether or not you switch, you get the same
+answer, you wonder why Monty is asking.  So maybe there's more to the
+problem!  Rather than analyzing it, you, being a computational
+scientist (and hence not that great at really analyzing things) decide
+to simply simulate the problem.
+
+I, being awesome, have written a 100%-guaranteed-to-be-correct piece
+of code to do just that!
+
+The following code (available for download `here <@@>`__) can be
+loaded into IDLE as a '.py' file and run.  In the function
+'monty_hall', it implements a Monty Hall-style game show, with the
+only parameter being whether or not the player switches.  In the
+function 'monte_carlo', it implements a Monte Carlo/random number
+simulation that runs the monty_hall function a bunch of times and
+returns the average number of times a "win" was observed.
+
+   import random
+   
+   def monty_hall(switch):
+       # first, set up the doors to be empty.  use a dictionary, so that
+       # we don't have to worry about list indices or anything.
+       doors = {}
+   
+       doors[1] = doors[2] = doors[3] = 'empty'
+   
+       # now, pick one (at random) to contain a million bucks.
+       full_num = random.randint(1, 3)
+       doors[full_num] = 'a million bucks!'
+   
+       # ok!  set up is done.  now, pretend we're the contestant.  pick one
+       # of the doors at random.
+       your_choice = random.randint(1, 3)
+   
+       # monty is now going to reveal one of the other doors to you.
+       while True:
+           monty_choice = random.randint(1, 3)
+           if monty_choice != your_choice and doors[monty_choice] == 'empty':
+               break
+   
+       # ok, now - do you switch to the other door?
+       if switch:
+           door_list = [1,2,3]
+           door_list.remove(your_choice)
+           door_list.remove(monty_choice)
+           assert len(door_list) == 1
+           your_choice = door_list[0]      # we'll only have one left!
+   
+       # now, what'd you get? 'empty' or 'a million bucks!'?
+       return doors[your_choice]
+   
+   ###
+
+   # run a monte carlo simulation of the monty hall problem   
+   def monte_carlo(do_switch):
+       results = []
+       for i in range(100):
+           results.append(monty_hall(do_switch))
+   
+       return (100 - results.count('empty'))/float(100.)
+   
+   # try running it with 'always switch' on.
+   print monte_carlo(False)
+
+When you run this code, do you find that it's better to always switch,
+or to never switch?   Does it make a difference?  Heck, is the code
+correct?  These are important questions -- a MILLION BUCKS!!! is in the
+offing!
+
+Homework 4.1 - Monty Hall/Monte Carlo refactoring
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+For the below, edit the 'monty.py' file and then copy/paste the *final*
+version (after #3) into the HW form.
+
+**HW 4.1 (a)**:
+
+In monty.py, add a variable 'n_doors' at the top of the monty_hall
+function, and have the entire monty_hall function use n_doors
+throughout the function.  That is, if n_doors is 3, the function
+should work exactly as it does now; if n_doors is 5, then the function
+should work for 5 doors.
+
+Hint: this will involve a new 'for' loop, to initialize the 'doors'
+dictionary.  You will also need to modify some parts of the 'if switch:'
+code block.
+
+**HW 4.1 (b)**:
+
+Modify the monty_hall function so that n_doors is passed in as a
+parameter.  That is, after your changes, 'monty_hall(True, 3)' should
+behave exactly the same as 'monty_hall(True)' does now -- but
+'monty_hall(True, 5)' should work with 5 doors instead.
+
+**HW 4.1 (c)**:
+
+Modify the monte_carlo function so that it takes n_doors as a
+parameter, just like the monty_hall function.  So, 'monte_carlo(True,
+3)' would do exactly what 'monte_carlo(True)' does now, but 'monte_carlo(True,
+5)' would work with five doors.
+   
+.. in class: identify the line or lines where the even probability
+.. becomes biased.
+
+.. in class: diagram out all possible paths
+.. how does this explode with number of doors?

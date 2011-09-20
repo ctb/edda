@@ -1,0 +1,49 @@
+Homework, week 4
+================
+
+Papers to read
+--------------
+
+Everyone should read the following paper for Thursday, Sep 22nd:
+
+    Drummond and Wilke, 2008
+    http://www.cell.com/abstract/S0092-8674(08)00705-8
+
+The assigned group should read & present these two papers in addition to the
+first:
+   
+    Drummond et al, 2005
+    http://www.ncbi.nlm.nih.gov/pmc/articles/PMC1242296/
+
+    Kudla et al., 2009
+    http://www.sciencemag.org/content/324/5924/255.full
+
+    Zhou et al., 2009
+    http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2734146/
+
+Group members should consider addressing these questions:
+
+  1. How would you generalize the notion of dS based on these papers?
+
+  2. What implications do these papers have for dN/dS calculations and
+  detecting "evolutionary signatures of selection"?
+
+Programming Homework (due Monday, midnight Pacific time)
+--------------------------------------------------------
+
+Work through :doc:`tutorial-4` and copy/paste your solutions into
+`this form
+<>`__
+by midnight Pacific.
+
+Reading homework (due Wednesday, midnight Pacific time)
+-------------------------------------------------------
+
+Answer the questions in ~short paragraph form:
+
+  1. Define "translational robustness".
+
+  2. Why would highly expressed genes, in particular, be under stronger
+  selection than other genes for translational robustness?
+
+Submit these answers to `this form <>`__ by midnight PST.
