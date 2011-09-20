@@ -4,7 +4,7 @@ Homework, week 4
 Papers to read
 --------------
 
-Everyone should read the following paper for Thursday, Sep 22nd:
+Everyone should read the following paper for Thursday, Sep 29th:
 
     Drummond and Wilke, 2008
     http://www.cell.com/abstract/S0092-8674(08)00705-8

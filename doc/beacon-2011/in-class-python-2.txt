@@ -1,13 +1,3 @@
-# discuss:
-#   monte carlo
-#   assert statements
-#   averages/stddev.
-# and:
-#   using google
-
-#  do a simple version in class/for class?  yes, for coins.
-#   FUNCTIONS. REFACTOR.  is there a place for an assert??
-
 In-class Python material (#2)
 =============================
 
@@ -23,19 +13,70 @@ Topics to touch on:
 Running code in IDLE
 --------------------
 
-Increasingly, people in the course seem to be figuring out that Crunchy
-is great for some things but not for other things!  Once you're actually
-running great slabs of code (or at least medium-sized ones...) 
+Increasingly, people in the course seem to be figuring out that
+Crunchy is great for some things but not for other things!  Once
+you're actually editing and running great slabs of code (or at least
+medium-sized ones...), there are other solutions that might work
+better.
 
+One fairly straightforward solution is to use IDLE, which comes with
+Python.  Briefly,
+
+   * save https://raw.github.com/ctb/edda/master/doc/beacon-2011/example.py to some place on your hard drive
+   * start IDLE (possibly by right-clicking on example.py and choosing 'open with...', IDLE)
+   * go up to the 'Run...' menu and select 'Run module'.
+     + on Windows, you can use the 'F5' key
+     + on Mac OS X, use Option-F5.
+
+This will run the code in 'example.py' in Python.  Note that you can edit
+the code in example.py and then re-run it, too!
 
 Making random (DNA) sequences
 -----------------------------
 
-Hans asked 
+Hans asked how to make random DNA sequences.  Here's my favorite trick:
+
+   >>> import random
+   >>> x = ["A"]*1000 + ["C"]*1000 + ["G"]*1000 + ["T"]*1000
+   >>> random.shuffle(x)
+   >>> dna = "".join(x)
+   >>> print dna[:50]
+
+The second command makes an ordered list containing 1000 As, Cs, Gs, and Ts,
+in order.  The 'shuffle' command shuffles them randomly.  And then the
+"".join(x) command turns them into a string.
 
 Simulation with random numbers ("Monte Carlo" simulations)
 ----------------------------------------------------------
 
+The coin flipping game is a really simple example of a much more general
+idea: simulation with random numbers, also known as Monte Carlo simulations.
+It's one of the basic techniques that computational scientists use.
+
+Basically, rather than trying to find an analytical solution or think
+your way through a problem, you set up a function that plays a game,
+or runs a simulated decision making process, or whatnot, based on
+random numbers.  Then you run that function many, many times, and look
+at the average behavior of the function.
+
+Important question to think about: how many times do you need to run
+the simulation to reach some sort of conclusion about the behavior of
+the function being simulated?
+
+We'll see another example of it for the next homework, with the Monty
+Hall problem.  There you'll see why Monte Carlo code has at least two
+advantages, one being *clarity*, and the other being *scaling* (at
+least in some cases).
+
+Monte Carlo simulations have a number of really useful properties,
+which we'll probably talk about more in the next week.
+
 Assert statements
 -----------------
 
+In the homework (the Monty Hall problem), you'll see a statement:
+'assert <condition>'.  What this does is NOTHING, as long as the given
+condition is True.  If the condition is *false*, then it raises a
+ruckus.  This is really useful for debugging, if you want to pin down
+
+For now, you can probably remove it, if it starts causing problems.
