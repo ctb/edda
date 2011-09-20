@@ -1,7 +1,5 @@
 # discuss:
 #   monte carlo
-#   functions
-#   refactoring
 #   assert statements
 #   averages/stddev.
 # and:
@@ -13,20 +11,30 @@
 In-class Python material (#2)
 =============================
 
-while loops
------------
+Note ,'while' loops, functions, and refactoring are discussed in
+:doc:`tutorial-4`.  We'll look through those, too.
+
+Topics to touch on:
+
+ - make sure the code you're handing in actually runs, please ;)
+ - generality of solutions!!
+ - complexity of solutions...
+
+Running code in IDLE
+--------------------
+
+Increasingly, people in the course seem to be figuring out that Crunchy
+is great for some things but not for other things!  Once you're actually
+running great slabs of code (or at least medium-sized ones...) 
+
 
 Making random (DNA) sequences
 -----------------------------
 
+Hans asked 
+
 Simulation with random numbers ("Monte Carlo" simulations)
 ----------------------------------------------------------
-
-Functions
----------
-
-Refactoring
------------
 
 Assert statements
 -----------------

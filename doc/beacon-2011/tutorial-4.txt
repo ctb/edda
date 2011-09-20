@@ -1,8 +1,164 @@
 Tutorial 4
 ==========
 
+While loops
+-----------
+
+You may have noticed on the homework solutions for week three that I posted
+a solution using a 'while' loop.  What's that!?
+
+Well,  ::
+
+   i = 0
+   while i < 10:
+      i += 1
+
+is the same as doing ::
+
+   for i in range(10):
+      pass
+
+(Here, 'pass' is a do-nothing command.)  So you could do either::
+
+   i = 0
+   while i < 10:
+      print i
+      i += 1
+
+OR ::
+
+   for i in range(10):
+      print i
+
+for example.  (Generally I go with the one that's more compact.)
+
+Where 'while' loops come in handy is a situation like in the homework,
+where you don't already have a list or a set range of things to iterate
+over.  So, in the homework, there's really no obvious simple way to do this
+with a for loop::
+
+    location = seq.find(motif)
+    while location != -1:
+       print location
+       location = seq.find(motif, location)
+
+A hallmark of the 'while' loop is that you usually have to initialize, or
+set up, the first condition so that the while loop is executed.  Here we
+do that with the first 'location = seq.find(motif)'.
+
 Functions!
 ----------
+
+Functions are blocks of re-usable code.  You've already been using
+them all along -- for example, 'seq.find' is a function, as is 'len'.
+Really anything that you use '(...)' after is a function (although
+there are tricky distinctions like 'methods' and 'classes', but ignore
+those).
+
+Technically, using 'len' like this: 'len(seq)' is known as 'calling' len,
+and the number that 'len' gives back is 'returned'.  So, if you see something
+like this:
+
+  a = len(seq)
+
+you're **assigning the value returned by 'len' on 'seq' to the
+variable 'a'**.  Simple, eh?
+
+Anything you put between the '(' and ')' is an *argument* or *parameter* to
+the function.
+
+How do you define your own function?  You use 'def' (for 'define'):
+
+   def f(a, b, c):
+      print a
+      print b
+      print c
+
+What this does is create a function named 'f' that has three parameters;
+the function prints each parameter on its own line.  If you call ::
+
+   >>> f(1, 2, 3)
+
+you'll get ::
+
+   1
+   2
+   3
+
+printed out.  The parameters a, b, and c are just placeholders that
+are replaced by whatever you put between '(...)' when you call 'f'.
+Note that there's no particular significance to their names, you can
+just call 'em whatever you want.
+
+Coin flipping as a function
+---------------------------
+
+You probably got kind of tired of this code from doc:`tutorial-3`:
+
+  >>> flips = []
+  >>> for i in range(10):
+  ...   if random.randint(1, 100) >= 50:
+  ...      flips.append('heads')
+  ...   else:
+  ...      flips.append('tails')
+
+Is there a way to put this in a function?  Sure! ::
+
+  def flip_coins():
+     flips = []
+     for i in range(10):
+        if random.randint(1, 100) >= 50:
+            flips.append('heads')
+        else:
+            flips.append('tails')
+
+     return flips.count('heads') / float(len(flips))
+
+Now you can call flip_coins like this::
+
+  f_heads = flip_coins()
+
+Making coin flipping a bit more useful with refactoring
+-------------------------------------------------------
+
+Suppose you wanted to be able to change the number of times the coin
+was flipped without writing a new function?  Easy!  First, introduce
+a new variable 'n_times' into the function that specifies how many
+times to flip the coin:
+
+  def flip_coins():
+     flips = []
+     n_times = 10    ## this is new
+
+     for i in range(n_times):   ### this is changed
+        if random.randint(1, 100) >= 50:
+            flips.append('heads')
+        else:
+            flips.append('tails')
+
+     return flips.count('heads') / float(len(flips))
+
+Now, when you're sure that worked, make 'n_times' a *parameter*::
+
+  def flip_coins(n_times): 	   ## this is changed
+     flips = []
+
+     for i in range(n_times):
+        if random.randint(1, 100) >= 50:
+            flips.append('heads')
+        else:
+            flips.append('tails')
+
+     return flips.count('heads') / float(len(flips))
+
+and now you can call 'flip_coins(10)' to flip it 10 times, and
+'flip_coins(100)' to flip it 100 times.
+
+This kind of careful, boring, step-wise change to programs is called
+*refactoring*.  It means 'changing your code without changing what it
+actually does'.  Doing it in this careful, boring, step-wise manner is
+by far the safest way to change code... and, lucky you, you'll get a
+chance to try it out in the homework!
 
 The Monty Hall Problem
 ----------------------
