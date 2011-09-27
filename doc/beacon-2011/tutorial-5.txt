@@ -6,7 +6,18 @@ OK, in this tutorial we're going to do some *really* useful stuff: dealing
 with spreadsheets of information.
 
 You might want to read through the following Software Carpentry lectures,
-and/or brush up on dictionaries, lists and for loops first... @@
+and/or brush up on dictionaries, lists and for loops first.  See:
+
+ - SWC 4.0, `Python <http://software-carpentry.org/4_0/python/>__`
+ - SWC 4.0, `Sets and Dictionaries <http://software-carpentry.org/4_0/setdict/>`__
+
+There are also some more recent book chapters from Software Carpentry
+that might be useful; see:
+
+ - `Basic programming in Python <http://lyorn.idyll.org/~t/swc/book/python.html>`__
+ - `Sets and Dictionaries <http://lyorn.idyll.org/~t/swc/book/setdict.html>`__
+
+I strongly recommend referring back to these if you run into any trouble!
 
 Spreadsheets and "Comma Separated Values"
 =========================================
@@ -278,10 +289,10 @@ Let's start by loading everything into 'datadict', as above::
 
    import csv, urllib
    datadict = {}
-   fp = urllib.urlopen('https://raw.github.com/ctb/edda/master/doc/beacon-2011/tutorial5/short-header.csv')
+   fp = urllib.urlopen('https://raw.github.com/ctb/edda/master/doc/beacon-2011/tutorial5/short-headers.csv')
 
    for row in csv.DictReader(fp):
-      key = row[0]
+      key = row['name']
       datadict[key] = row
 
 OK, now all the data is in 'datadict'.  How can we get the names of 
@@ -308,9 +319,11 @@ store the last name you saw for 'm'!  For example::
       gender = row['gender']
       gender_dict[gender] = name
 
-gives you @@.
+gives you a dictionary that looks like this::
 
-What can you do??
+   { 'm' : 'ringo', 'f' : 'diane' }
+
+What can you do about this??
 
 OK, take a look at the following code::
 
@@ -331,7 +344,7 @@ OK, take a look at the following code::
 
 What does this do?
 
-Well, basically, it create a dictionary 'gender_dict' that has, as keys,
+Well, basically, it creates a dictionary 'gender_dict' that has, as keys,
 genders - so, 'm' or 'f' -- and as values, *lists* of names.  So::
 
   gender_dict['m']
@@ -340,11 +353,135 @@ will return ::
 
   ['tim','john','ringo']
 
+I should say that this looks a lot more complicated than it really is.
+The key to reading code like this is to decompose it into simple operations
+that you understand, and then try to put it back together in your head.
+For example, in this case, you're:
+
+ - getting the gender for each row
+ - getting the value for that gender from the gender_dict.
+
+Now, the value in this case should be a *list*, so you need to make sure
+that if the gender doesn't exist in the gender_dict yet, you use a list.
+In the above case, I use 'get' to return a list if there's nothing in
+the dict.  This is equivalent in function to either this code::
+
+   gender_dict = {}
+   for name in datadict:
+      row = datadict[name]
+      gender = row['gender']
+
+      # if this gender isn't in the gender_dict yet, add it as an empty list.
+      if gender not in gender_dict:
+         gender_dict[gender] = []
+
+      # get a list of names with that gender already assigned
+      name_list = gender_dict.get[gender]
+
+      # now, append the name to the list
+      name_list.append(name)
+
+      # ...and re-store it in the dictionary:
+      gender_dict[gender] = name_list
+
+or this code::
+
+   gender_dict = {}
+   for gender in ['m', 'f']:
+      gender_dict[gender] = []
+
+   for name in datadict:
+      row = datadict[name]
+      gender = row['gender']
+
+      # get a list of names with that gender
+      name_list = gender_dict[gender]
+
+      # now, append the name to the list
+      name_list.append(name)
+
+      # ...and re-store it in the dictionary:
+      gender_dict[gender] = name_list
+
+...although I don't know if that's any clearer in practice ;).
+
 ---
 
-Digression: debugging stuff and grokking code
----------------------------------------------
+Digression: debugging stuff and grokking code with print
+--------------------------------------------------------
 
+We're getting into reasonably complicated code.  How can we figure out
+what it is REALLY doing, in detail?
+
+Consider the following modification to the code that saves names by
+gender, in which we add print statements all over the place::
+
+  gender_dict = {}
+  for name in datadict:
+      print 'NEW NAME:', name
+      
+      row = datadict[name]
+      print 'row is:', row
+      
+      gender = row['gender']
+      print 'gender is:', gender
+  
+      # get a list of names with that gender already assigned; create a new
+      # list if none seen yet.
+      name_list = gender_dict.get(gender, [])
+      print 'name list currently is:', name_list
+  
+      # now, append the name to the list
+      name_list.append(name)
+      print 'appended', name
+  
+      # ...and re-store it in the dictionary:
+      gender_dict[gender] = name_list
+      print 'saved new name list:', name_list
+
+What does this output when you run it? ::
+
+  NEW NAME: jane
+  row is: {'color': 'red', 'gender': 'f', 'age': '16', 'name': 'jane'}
+  gender is: f
+  name list currently is: []
+  appended jane
+  saved new name list: ['jane']
+  NEW NAME: tim
+  row is: {'color': 'blue', 'gender': 'm', 'age': '15', 'name': 'tim'}
+  gender is: m
+  name list currently is: []
+  appended tim
+  saved new name list: ['tim']
+  NEW NAME: john
+  row is: {'color': 'red', 'gender': 'm', 'age': '14', 'name': 'john'}
+  gender is: m
+  name list currently is: ['tim']
+  appended john
+  saved new name list: ['tim', 'john']
+  NEW NAME: diane
+  row is: {'color': 'green', 'gender': 'f', 'age': '14', 'name': 'diane'}
+  gender is: f
+  name list currently is: ['jane']
+  appended diane
+  saved new name list: ['jane', 'diane']
+  NEW NAME: ringo
+  row is: {'color': 'black', 'gender': 'm', 'age': '15', 'name': 'ringo'}
+  gender is: m
+  name list currently is: ['tim', 'john']
+  appended ringo
+  saved new name list: ['tim', 'john', 'ringo']
+
+This is my favorite way to debug.  Basically, you can follow *everything*
+that's going on, using this as a trace of what the program is doing line
+by line.  You should look through this trace, make sure you understand
+what each operation does, and then see if it fits YOUR expectations of
+what should be going on.
+
+For really complicated bits of code, I sometimes use a piece of paper
+to keep track of things.  It's really the only way to make it clear,
+sometimes.
+  
 Asking questions of data with functions
 ---------------------------------------
 
@@ -356,7 +493,7 @@ load it again.
 Take a look at @@.  Here, I provide a bunch of functions that load in
 the list of names and build a bunch of convenient dictionaries.
 
-@@@
+@@@ TODO.
 
 ---
 
@@ -375,42 +512,53 @@ write code to calculate answers to the following questions (also see HW 2 in
 **HW 5.2**: the daily average number for each kind of fish (there are 365 days of fish eatin' in this list).
 
 **HW 5.3**: the fat-weighted daily fish index, FI, for the entire
-year..  (Salmon and ahi: 2.0; cod and sole, 0.5; the rest, 1.0.)
+year.  (Salmon and ahi: 2.0; cod and sole, 0.5; the rest, 1.0.)
 
 **HW 5.4**: the average number of *types* of fish per day.
 
 **HW 5.5**: what days Penny ate a given fish.  (You can print the results out,
 or put them in a list, or whatever; just write the appropriate for loop to print or build the list.)
 
-There's a shorter version of the file here:
+(There's a shorter version of the file here:
 
-   https://raw.github.com/ctb/edda/master/doc/beacon-2011/tutorial5/fishies-short.csv for testing purposes.
+   https://raw.github.com/ctb/edda/master/doc/beacon-2011/tutorial5/fishies-short.csv
+
+for testing purposes.)
 
 Homework 6
 ----------
 
-**HW 6.1** Write a function to return the types of fish eaten on any
-given day.  The function should work like this::
+Add functions to load_fishies.py to *efficiently* return the list of
+days on which a given type of fish was eaten by Penny.
 
-   x = get_fish_by_day('6/1')
+I suggest the following breakdown of the task:
 
-will return a list that contains all of the fish eaten that day.
+ 1) first, write a new function 'make_dates_dict' that takes in fish_d
+ (as returned by load_csv) and builds a *new* dictionary: one where
+ the keys are fish, and the values are lists of dates where that fish
+ was eaten by Penny.
+ 
+ 2) second, write another new function, 'get_dates_by_fish', that takes
+ in the dictionary returned by 'makes_dates_dict' and the name of some
+ fish, and then returns the dates that that fish was eaten by Penny.
+ If the fish doesn't appear in the CSV file return an empty list.
 
-etc. :) 
+Here is a template::
 
-Put all of these functions in a single file that you upload to github.
+   def make_dates_dict(fish_d):
+      dates_d = {}
+      # write code HERE to fill in dates_d
+      return dates_d
+
+   def get_dates_by_fish(dates_d, fish):
+      dateslist = []
+      # write code HERE to fill in dateslist
+      return dateslist
+
+.. Put all of these functions in a single file that you upload to github.
 
 .. Write query functions:
 ..  - what fish did penny eat on day x?
 .. - what days did penny eat a given fish?
-
-.. tuesday:
-.. - cover some programming stuff (naaaah)
-.. - talk about mechanism of sequence change and corresponding mechanism
-..   of finding such stuff!
-.. - monte carlo monty hall
-
-.. thursday:
-..  - more evolutionary signature!
 
 .. print!!!
