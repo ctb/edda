@@ -8,7 +8,7 @@ with spreadsheets of information.
 You might want to read through the following Software Carpentry lectures,
 and/or brush up on dictionaries, lists and for loops first.  See:
 
- - SWC 4.0, `Python <http://software-carpentry.org/4_0/python/>__`
+ - SWC 4.0, `Python <http://software-carpentry.org/4_0/python/>`__
  - SWC 4.0, `Sets and Dictionaries <http://software-carpentry.org/4_0/setdict/>`__
 
 There are also some more recent book chapters from Software Carpentry
@@ -78,7 +78,7 @@ Try running the following bit of code::
       print line
 
 What you see is a line-by-line output of the contents of the file that
-are at the Web address (a.k.a. 'URL') http://xxx....  Yes, Python is
+are at the Web address (a.k.a. 'URL') https://raw.github.com/ctb/edda/master/doc/beacon-2011/tutorial5/short.csv.  Yes, Python is
 contacting the remote computer, grabbing the file, and pulling down the
 data line by line.  Pretty neat, eh?
 
@@ -141,8 +141,8 @@ Here, you're printing out the favorite colors of all female students.
 Right -- so now you know Python code that can grab spreadsheet data
 from remote servers, parse it, and select interesting values.
 
-As usual with programming, the power of this isn't confined to small examples.
-You can do this with the contents of 'http://xxx/tutorial5/long.csv', too...
+As usual with programming, the power of this isn't confined to small examples,
+as you'll see in the homework.
 
 All of the examples above do a kind of "stream" processing -- you're processing
 data as it comes in, examining it, and selecting out the bits that you care
@@ -323,6 +323,9 @@ gives you a dictionary that looks like this::
 
    { 'm' : 'ringo', 'f' : 'diane' }
 
+that's correct as far as it goes but there are far more 'm' and 'f' in
+the file!
+
 What can you do about this??
 
 OK, take a look at the following code::
@@ -490,7 +493,7 @@ Suppose you want to retrieve a bunch of *different* data from a CSV file.
 Also, once you've loaded the data once, you generally don't want to
 load it again.
 
-Take a look at @@.  Here, I provide a bunch of functions that load in
+Take a look at @@@.  Here, I provide a bunch of functions that load in
 the list of names and build a bunch of convenient dictionaries.
 
 @@@ TODO.
@@ -529,7 +532,8 @@ Homework 6
 ----------
 
 Add functions to load_fishies.py to *efficiently* return the list of
-days on which a given type of fish was eaten by Penny.
+days on which a given type of fish was eaten by Penny.  (See:
+https://raw.github.com/ctb/edda/master/doc/beacon-2011/tutorial5/load_fishies.py)
 
 I suggest the following breakdown of the task:
 
