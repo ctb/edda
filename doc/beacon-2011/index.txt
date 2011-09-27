@@ -28,6 +28,9 @@ Contents:
    tutorial-4
    week4-hw
 
+   tutorial-5
+   week5-hw
+
 Reference material
 ------------------
 

@@ -1,0 +1,44 @@
+Homework, week 5
+================
+
+Papers to read
+--------------
+
+Everyone should read the following papers for Thursday, Oct 6th:
+
+    Miller JR et al.,
+    http://www.ncbi.nlm.nih.gov/pubmed/20211242
+    (open access: http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2874646/?tool=pubmed)
+
+    Kingsford et al.,
+    http://www.ncbi.nlm.nih.gov/pubmed/20064276
+    (open access: http://www.biomedcentral.com/1471-2105/11/21)
+
+The assigned group should read & present this papers in addition to the
+first two:
+
+    Li et al.,
+    http://www.nature.com/nature/journal/v463/n7279/full/nature08696.html
+    (open access)
+   
+Group members should address these questions:
+
+    XXX
+
+Programming Homework (due Monday, midnight Pacific time)
+--------------------------------------------------------
+
+Work through :doc:`tutorial-5` and copy/paste your solutions to HW 5 into
+`this form
+<>`__
+by midnight Pacific.
+
+Reading homework (due Wednesday, midnight Pacific time)
+-------------------------------------------------------
+
+Write three sentences (in English) that would be hard to assemble
+(either individually or collectively) with 5-character single-ended
+sequencing reads.  Be creative!  (Even if you work in a group, please
+have everyone submit *different* sentences.)
+
+Submit these sentences to `this form <>`__ by midnight PST.

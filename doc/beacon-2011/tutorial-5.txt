@@ -63,7 +63,7 @@ Try running the following bit of code::
    # import the module that deals with Web requests
    import urllib
    # line by line, print out the remote file
-   for line in urllib.urlopen('http://xxx/tutorial5/short.csv'):
+   for line in urllib.urlopen('https://raw.github.com/ctb/edda/master/doc/beacon-2011/tutorial5/short.csv'):
       print line
 
 What you see is a line-by-line output of the contents of the file that
@@ -78,7 +78,7 @@ file handle*, so we can treat this remote data set as a source of CSV data::
    import csv, urllib
 
    # point the variable 'fp' at the remote data:
-   fp = urllib.urlopen('http://xxx/tutorial5/short.csv')
+   fp = urllib.urlopen('https://raw.github.com/ctb/edda/master/doc/beacon-2011/tutorial5/short.csv')
 
    # parse it with csv!
    for row in csv.reader(fp):
@@ -99,7 +99,7 @@ of data as you wish: for example, try running this::
    import csv, urllib
 
    # point the variable 'fp' at the remote data:
-   fp = urllib.urlopen('http://xxx/tutorial5/short.csv')
+   fp = urllib.urlopen('https://raw.github.com/ctb/edda/master/doc/beacon-2011/tutorial5/short.csv')
 
    # parse it with csv!
    for row in csv.reader(fp):
@@ -118,7 +118,7 @@ data from rows that satisfy certain conditions::
    import csv, urllib
 
    # point the variable 'fp' at the remote data:
-   fp = urllib.urlopen('http://xxx/tutorial5/short.csv')
+   fp = urllib.urlopen('https://raw.github.com/ctb/edda/master/doc/beacon-2011/tutorial5/short.csv')
 
    # parse it with csv!
    for row in csv.reader(fp):
@@ -151,7 +151,7 @@ store them in a list::
    datalist = []
 
    # point the variable 'fp' at the remote data:
-   fp = urllib.urlopen('http://xxx/tutorial5/short.csv')
+   fp = urllib.urlopen('https://raw.github.com/ctb/edda/master/doc/beacon-2011/tutorial5/short.csv')
 
    # parse it with csv!
    for row in csv.reader(fp):
@@ -182,7 +182,7 @@ dictionary to do this::
    datadict = {}
 
    # point the variable 'fp' at the remote data:
-   fp = urllib.urlopen('http://xxx/tutorial5/short.csv')
+   fp = urllib.urlopen('https://raw.github.com/ctb/edda/master/doc/beacon-2011/tutorial5/short.csv')
 
    # parse it with csv!
    for row in csv.reader(fp):
@@ -237,7 +237,7 @@ Slightly more advanced CSV
 You might be getting slightly annoyed by having to refer to column *numbers*
 in each row, like row[0] in this example::
 
-   fp = urllib.urlopen('http://xxx/tutorial5/short.csv')
+   fp = urllib.urlopen('https://raw.github.com/ctb/edda/master/doc/beacon-2011/tutorial5/short.csv')
    for row in csv.reader(fp):
       if row[0] == 'tim':
          print row
@@ -252,7 +252,7 @@ a header line; if you use DictReader you can see now that each row has
 become a dictionary with the keys 'name', 'age', 'color', and
 'gender'. ::
 
-   fp = urllib.urlopen('http://xxx/tutorial5/short-header.csv')
+   fp = urllib.urlopen('https://raw.github.com/ctb/edda/master/doc/beacon-2011/tutorial5/short-headers.csv')
    for row in csv.DictReader(fp):
       if row['name'] == 'tim':
          print row
@@ -262,7 +262,7 @@ specifying the headers explicitly to DictReader::
  
    import csv, urllib
 
-   datafile = urllib.urlopen('http://xxx/tutorial5/short.csv')
+   datafile = urllib.urlopen('https://raw.github.com/ctb/edda/master/doc/beacon-2011/tutorial5/short.csv')
    csv_data = csv.DictReader(datafile, fieldnames=['name','age','color','gender'])
 
    for data in csvdata:
@@ -278,9 +278,9 @@ Let's start by loading everything into 'datadict', as above::
 
    import csv, urllib
    datadict = {}
-   fp = urllib.urlopen('http://xxx/tutorial5/short.csv')
+   fp = urllib.urlopen('https://raw.github.com/ctb/edda/master/doc/beacon-2011/tutorial5/short-header.csv')
 
-   for row in csv.reader(fp):
+   for row in csv.DictReader(fp):
       key = row[0]
       datadict[key] = row
 
@@ -292,7 +292,7 @@ ask which ones have the gender 'm'::
 
    for name in datadict:
       row = datadict[name]
-      if row[3] == 'm':
+      if row['gender'] == 'm':
          print 'found a male:', name
 
 How would we make this into a short lookup, rather than a long iteration?
@@ -305,7 +305,7 @@ store the last name you saw for 'm'!  For example::
    gender_dict = {}
    for name in datadict:
       row = datadict[name]
-      gender = row[3]
+      gender = row['gender']
       gender_dict[gender] = name
 
 gives you @@.
@@ -317,7 +317,7 @@ OK, take a look at the following code::
    gender_dict = {}
    for name in datadict:
       row = datadict[name]
-      gender = row[3]
+      gender = row['gender']
 
       # get a list of names with that gender already assigned; create a new
       # list if none seen yet.
@@ -360,30 +360,57 @@ the list of names and build a bunch of convenient dictionaries.
 
 ---
 
-HW: parse CSV file (using urllib) containing dates and types of fish; extract
+Homework 5
+----------
 
- - average number of fish per day
- - average number of *types* of fish per day
+Using the following CSV file,
 
-Give a simple 5 and complex 500 row spreadsheet.
+   https://raw.github.com/ctb/edda/master/doc/beacon-2011/tutorial5/fishies.csv
 
-Write query functions:
- - what fish did penny eat on day x?
- - what days did penny eat a given fish?
+write code to calculate answers to the following questions (also see HW 2 in
+:doc:`tutorial-2`):
 
-Give real data example?
+**HW 5.1**: the number of different types of fish in this list;
 
-papers:
- - assembly introduction paper; mihai pop paper on repeats.
- - panda paper
+**HW 5.2**: the daily average number for each kind of fish (there are 365 days of fish eatin' in this list).
 
-tuesday:
- - cover some programming stuff (naaaah)
- - talk about mechanism of sequence change and corresponding mechanism
-   of finding such stuff!
- - monte carlo monty hall
+**HW 5.3**: the fat-weighted daily fish index, FI, for the entire
+year..  (Salmon and ahi: 2.0; cod and sole, 0.5; the rest, 1.0.)
 
-thursday:
- - more evolutionary signature!
+**HW 5.4**: the average number of *types* of fish per day.
 
-print!!!
+**HW 5.5**: what days Penny ate a given fish.  (You can print the results out,
+or put them in a list, or whatever; just write the appropriate for loop to print or build the list.)
+
+There's a shorter version of the file here:
+
+   https://raw.github.com/ctb/edda/master/doc/beacon-2011/tutorial5/fishies-short.csv for testing purposes.
+
+Homework 6
+----------
+
+**HW 6.1** Write a function to return the types of fish eaten on any
+given day.  The function should work like this::
+
+   x = get_fish_by_day('6/1')
+
+will return a list that contains all of the fish eaten that day.
+
+etc. :) 
+
+Put all of these functions in a single file that you upload to github.
+
+.. Write query functions:
+..  - what fish did penny eat on day x?
+.. - what days did penny eat a given fish?
+
+.. tuesday:
+.. - cover some programming stuff (naaaah)
+.. - talk about mechanism of sequence change and corresponding mechanism
+..   of finding such stuff!
+.. - monte carlo monty hall
+
+.. thursday:
+..  - more evolutionary signature!
+
+.. print!!!
