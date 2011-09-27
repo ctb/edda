@@ -40,7 +40,7 @@ with a for loop::
     location = seq.find(motif)
     while location != -1:
        print location
-       location = seq.find(motif, location)
+       location = seq.find(motif, location + 1)
 
 A hallmark of the 'while' loop is that you usually have to initialize, or
 set up, the first condition so that the while loop is executed.  Here we
@@ -57,7 +57,7 @@ those).
 
 Technically, using 'len' like this: 'len(seq)' is known as 'calling' len,
 and the number that 'len' gives back is 'returned'.  So, if you see something
-like this:
+like this::
 
   a = len(seq)
 
@@ -67,7 +67,7 @@ variable 'a'**.  Simple, eh?
 Anything you put between the '(' and ')' is an *argument* or *parameter* to
 the function.
 
-How do you define your own function?  You use 'def' (for 'define'):
+How do you define your own function?  You use 'def' (for 'define')::
 
    def f(a, b, c):
       print a
@@ -93,7 +93,7 @@ just call 'em whatever you want.
 Coin flipping as a function
 ---------------------------
 
-You probably got kind of tired of this code from doc:`tutorial-3`:
+You probably got kind of tired of this code from doc:`tutorial-3`::
 
   >>> flips = []
   >>> for i in range(10):
@@ -124,7 +124,7 @@ Making coin flipping a bit more useful with refactoring
 Suppose you wanted to be able to change the number of times the coin
 was flipped without writing a new function?  Easy!  First, introduce
 a new variable 'n_times' into the function that specifies how many
-times to flip the coin:
+times to flip the coin::
 
   def flip_coins():
      flips = []

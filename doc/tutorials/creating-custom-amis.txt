@@ -40,10 +40,7 @@ sure you have access to the following:
     used for identifying your account. To find them, or generate new
     ones, go to
     `the main AWS page <http://aws.amazon.com/>`__ and select 'Account',
-    then 'Security Credentials'::
-
-.. image:: images/aws_credents.png
-   :width: 90%
+    then 'Security Credentials'
 
 Preparation
 -----------

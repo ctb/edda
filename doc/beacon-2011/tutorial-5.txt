@@ -1,0 +1,389 @@
+==========
+Tutorial 5
+==========
+
+OK, in this tutorial we're going to do some *really* useful stuff: dealing
+with spreadsheets of information.
+
+You might want to read through the following Software Carpentry lectures,
+and/or brush up on dictionaries, lists and for loops first... @@
+
+Spreadsheets and "Comma Separated Values"
+=========================================
+
+Most spreadsheet programs -- in particular, Excel -- store their data in
+specialized formats that you're not every going to want to touch.  But all
+spreadsheet programs are capable of importing and exporting their data
+to and from a basic format, generally known as "CSV".  CSV stands for
+"comma-separated values" and basically means that your data is in a format
+that looks like this::
+
+   value1a,value1b,value1c,value1d
+   value2a,value2b,value2c,value2d
+
+That is, your basic spreadsheet format, bereft of any special formatting
+or font information or even formulas.  Each row contains a set of values,
+of which there are usually the same number (i.e. it's a rectangular
+spreadsheet).
+
+You can get a *lot* of different data in this format -- for example,
+many genome annotations come in a variant of this format called 'GFF',
+or 'General Feature Format'.
+
+So, one of the main tasks that faces you will be this: reading in data
+files in the CSV format.  This is also known as *parsing*.
+
+Conveniently, Python has a module that takes care of a lot of the ugly
+details for you!
+
+Getting started
+---------------
+
+OK, the two tasks ahead of us are these:
+
+ - first, find a file with some data and *open it* for reading;
+ - second, use the csv module to parse that file.
+
+(You'll probably want to use IDLE or some other Python interface to run
+the following commands, although they should work in Crunchy.)
+
+Rather than dealing with local files, we're going to be daring and load
+things in over the Web.  This simplifies my job of providing you the data,
+and means that you don't have to worry about where the files are sitting on
+your local hard drive.  We'll talk about file paths and locations for
+dealing with local files -- but later.
+
+There's a general concept in Python called 'file handles', which are
+just variables representing files that are open for reading and/or
+writing.  As I said above, we'll go over them more later, but the
+important bit is that once you have a file handle you can *iterate* over it.
+
+Try running the following bit of code::
+
+   # import the module that deals with Web requests
+   import urllib
+   # line by line, print out the remote file
+   for line in urllib.urlopen('http://xxx/tutorial5/short.csv'):
+      print line
+
+What you see is a line-by-line output of the contents of the file that
+are at the Web address (a.k.a. 'URL') http://xxx....  Yes, Python is
+contacting the remote computer, grabbing the file, and pulling down the
+data line by line.  Pretty neat, eh?
+
+What's even neater is that the csv module can parse CSV lines from *any
+file handle*, so we can treat this remote data set as a source of CSV data::
+
+   # import the two necessary modules
+   import csv, urllib
+
+   # point the variable 'fp' at the remote data:
+   fp = urllib.urlopen('http://xxx/tutorial5/short.csv')
+
+   # parse it with csv!
+   for row in csv.reader(fp):
+      print row
+
+Look carefully at the output of this command, and compare it to the results
+from the first command.  What's going on?
+
+In the first set of commands, you were grabbing data from that remote
+file line by line, and printing out each line.  In *this* set of commands,
+you're asking the csv module to parse each line as a set of comma-separated
+values -- and it's returning a list for each line, rather than a string!
+
+What's neat about this is you can go through and grab individual columns
+of data as you wish: for example, try running this::
+
+   # import the two necessary modules
+   import csv, urllib
+
+   # point the variable 'fp' at the remote data:
+   fp = urllib.urlopen('http://xxx/tutorial5/short.csv')
+
+   # parse it with csv!
+   for row in csv.reader(fp):
+      print row[0], row[2]
+
+Here you're grabbing columns 1 and 3 selectively.
+
+This file, in case you're interested, is a list of teens, together with
+their ages, favorite colors, and gender.  So what you did with that last
+command is printed out names and their favorite color.
+
+You can even do more complicated things like printing out only the
+data from rows that satisfy certain conditions::
+
+   # import the two necessary modules
+   import csv, urllib
+
+   # point the variable 'fp' at the remote data:
+   fp = urllib.urlopen('http://xxx/tutorial5/short.csv')
+
+   # parse it with csv!
+   for row in csv.reader(fp):
+      if row[3] == 'f':
+         print row[2]
+
+Here, you're printing out the favorite colors of all female students.
+
+Right -- so now you know Python code that can grab spreadsheet data
+from remote servers, parse it, and select interesting values.
+
+As usual with programming, the power of this isn't confined to small examples.
+You can do this with the contents of 'http://xxx/tutorial5/long.csv', too...
+
+All of the examples above do a kind of "stream" processing -- you're processing
+data as it comes in, examining it, and selecting out the bits that you care
+about.  (It's called "stream processing" 'cause it's like you're watching
+items of data float by on a stream, and picking the ones you want.)
+This has the advantage of being really simple, but what if you want to
+be able to look rows up later?  Then you need to be able to store items
+somehow.
+
+One way to store items taken from a CSV document would be to simply
+store them in a list::
+
+   # import the two necessary modules
+   import csv, urllib
+
+   # initialize an empty list
+   datalist = []
+
+   # point the variable 'fp' at the remote data:
+   fp = urllib.urlopen('http://xxx/tutorial5/short.csv')
+
+   # parse it with csv!
+   for row in csv.reader(fp):
+      datalist.append(row)
+
+but this has a couple of disadvantages.  The main one is that if you want to
+name and retrieve specific rows, you'll either have to know their position
+in the list, OR you'll have to go through the entire list again.  And that's
+slow!
+
+So what about using a dictionary?
+
+Saving and retrieving data in dictionaries
+------------------------------------------
+
+Let's look at the items in short.csv::
+
+   time,15,blue,m
+
+is the first line.  What if we want to be able to retrieve rows by the
+values in the first line, i.e. the name?  We can easily use a
+dictionary to do this::
+
+   # import the two necessary modules
+   import csv, urllib
+
+   # initialize an empty dict
+   datadict = {}
+
+   # point the variable 'fp' at the remote data:
+   fp = urllib.urlopen('http://xxx/tutorial5/short.csv')
+
+   # parse it with csv!
+   for row in csv.reader(fp):
+      key = row[0]
+      datadict[key] = row
+
+Now we can ask 'what is the row of values associated with the name "diane"
+in the first column' and get the answer easily::
+
+   print datadict['diane']
+
+Digression: iterating vs looking up
+-----------------------------------
+
+Why are we storing things in dictionaries instead of lists, anyway?
+
+There are two complementary reasons.
+
+The first and in some ways most important is that dictionaries let us
+*name* things: storing and retrieving by a key is the same thing,
+semantically, as naming something and referring to it by name.  So
+using dictionaries is very natural and lets you write clear code.  Rather than
+doing::
+
+   for row in datalist:
+      if row[0] == 'tim':
+         print row
+
+to retrieve the data associated with the name tim, we can just do::
+
+   print datadict['tim']
+
+This is much clearer, I think -- shorter, and more direct, and just
+plain easier to read.
+
+It's also *faster*.  When you store & look things up by name, Python
+can do the lookups quite quickly.  This doesn't matter now with small
+data sets that contain only a few dozen to a few hundred rows, but if
+you have to look through a few thousand rows every time you want to
+retrieve data, it's going to be very slow going.  Dictionaries solve
+this problem by providing a really general interface to retrieving
+things *fast* - as long as you can hang a unique key on data,
+something like a name or a number, you can retrieve it quickly.
+
+The *disadvantage* is that if you have multiple people named 'tim', then
+you can only store one value associated with tim in the dictionary.  We'll
+talk a bit more about this below.
+
+Slightly more advanced CSV
+--------------------------
+
+You might be getting slightly annoyed by having to refer to column *numbers*
+in each row, like row[0] in this example::
+
+   fp = urllib.urlopen('http://xxx/tutorial5/short.csv')
+   for row in csv.reader(fp):
+      if row[0] == 'tim':
+         print row
+
+Wouldn't it be nice if you could refer to columns by name?  Ahh, but
+you can!  If you use 'csv.DictReader' instead of 'csv.reader', the
+names of the columns will automatically be filled in from the first
+row (the header row) that is reasonably common in these kinds of
+files.  For example, I've provided you with a file,
+'short-header.csv', that contains the same data in short.csv but with
+a header line; if you use DictReader you can see now that each row has
+become a dictionary with the keys 'name', 'age', 'color', and
+'gender'. ::
+
+   fp = urllib.urlopen('http://xxx/tutorial5/short-header.csv')
+   for row in csv.DictReader(fp):
+      if row['name'] == 'tim':
+         print row
+
+You can also do this for files without that first header row by
+specifying the headers explicitly to DictReader::
+ 
+   import csv, urllib
+
+   datafile = urllib.urlopen('http://xxx/tutorial5/short.csv')
+   csv_data = csv.DictReader(datafile, fieldnames=['name','age','color','gender'])
+
+   for data in csvdata:
+      print data['name'], data['color']
+
+Inverting dictionaries
+----------------------
+
+Suppose we wanted to ask which people had a gender of 'm', and wanted
+to be able to use a dictionary to retrieve it quickly?
+
+Let's start by loading everything into 'datadict', as above::
+
+   import csv, urllib
+   datadict = {}
+   fp = urllib.urlopen('http://xxx/tutorial5/short.csv')
+
+   for row in csv.reader(fp):
+      key = row[0]
+      datadict[key] = row
+
+OK, now all the data is in 'datadict'.  How can we get the names of 
+everyone with the gender 'm'?
+
+One *slow* way is to go through all of the names in the dictionary and
+ask which ones have the gender 'm'::
+
+   for name in datadict:
+      row = datadict[name]
+      if row[3] == 'm':
+         print 'found a male:', name
+
+How would we make this into a short lookup, rather than a long iteration?
+
+Well, if you look at the contents of 'short.csv', you immediately run
+into a problem: there are multiple people with the gender 'm'.  So you
+can't just make a second dictionary keyed on that gender -- you'd only
+store the last name you saw for 'm'!  For example::
+
+   gender_dict = {}
+   for name in datadict:
+      row = datadict[name]
+      gender = row[3]
+      gender_dict[gender] = name
+
+gives you @@.
+
+What can you do??
+
+OK, take a look at the following code::
+
+   gender_dict = {}
+   for name in datadict:
+      row = datadict[name]
+      gender = row[3]
+
+      # get a list of names with that gender already assigned; create a new
+      # list if none seen yet.
+      name_list = gender_dict.get(gender, [])
+
+      # now, append the name to the list
+      name_list.append(name)
+
+      # ...and re-store it in the dictionary:
+      gender_dict[gender] = name_list
+
+What does this do?
+
+Well, basically, it create a dictionary 'gender_dict' that has, as keys,
+genders - so, 'm' or 'f' -- and as values, *lists* of names.  So::
+
+  gender_dict['m']
+
+will return ::
+
+  ['tim','john','ringo']
+
+---
+
+Digression: debugging stuff and grokking code
+---------------------------------------------
+
+Asking questions of data with functions
+---------------------------------------
+
+Suppose you want to retrieve a bunch of *different* data from a CSV file.
+
+Also, once you've loaded the data once, you generally don't want to
+load it again.
+
+Take a look at @@.  Here, I provide a bunch of functions that load in
+the list of names and build a bunch of convenient dictionaries.
+
+@@@
+
+---
+
+HW: parse CSV file (using urllib) containing dates and types of fish; extract
+
+ - average number of fish per day
+ - average number of *types* of fish per day
+
+Give a simple 5 and complex 500 row spreadsheet.
+
+Write query functions:
+ - what fish did penny eat on day x?
+ - what days did penny eat a given fish?
+
+Give real data example?
+
+papers:
+ - assembly introduction paper; mihai pop paper on repeats.
+ - panda paper
+
+tuesday:
+ - cover some programming stuff (naaaah)
+ - talk about mechanism of sequence change and corresponding mechanism
+   of finding such stuff!
+ - monte carlo monty hall
+
+thursday:
+ - more evolutionary signature!
+
+print!!!
