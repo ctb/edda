@@ -1,6 +1,41 @@
 Class Links
 ===========
 
+Tuesday, October 10th, 2011
+---------------------------
+
+At the start of class: working alone or in local groups, examine the
+following code examples and (without running them!) predict what they
+will print out, and why.
+
+  https://raw.github.com/ctb/edda/master/doc/beacon-2011/week7/function-1.py
+
+  https://raw.github.com/ctb/edda/master/doc/beacon-2011/week7/function-2.py
+
+  https://raw.github.com/ctb/edda/master/doc/beacon-2011/week7/function-3.py
+
+  https://raw.github.com/ctb/edda/master/doc/beacon-2011/week7/function-4.py
+
+  https://raw.github.com/ctb/edda/master/doc/beacon-2011/week7/function-5.py
+
+  https://raw.github.com/ctb/edda/master/doc/beacon-2011/week7/scope-1.py
+
+  https://raw.github.com/ctb/edda/master/doc/beacon-2011/week7/scope-2.py
+
+  https://raw.github.com/ctb/edda/master/doc/beacon-2011/week7/scope-3.py
+
+  https://raw.github.com/ctb/edda/master/doc/beacon-2011/week7/scope-4.py
+
+  https://raw.github.com/ctb/edda/master/doc/beacon-2011/week7/scope-5.py
+
+  https://raw.github.com/ctb/edda/master/doc/beacon-2011/week7/scope-6.py
+
+BONUS: If you want to be thoroughly confused, read `this discussion of
+scoping rules
+<http://stackoverflow.com/questions/291978/short-description-of-python-scoping-rules>`__
+-- e.g. see the first answer.
+
+
 Thursday, October 6th, 2011
 ---------------------------
 

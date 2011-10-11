@@ -1,0 +1,141 @@
+Homework, week 7
+================
+
+Papers to read
+--------------
+
+Everyone should read the following paper for Thursday, Oct 20th:
+
+    @@@
+
+Also, please re-read this paper:
+
+    Drummond and Wilke, 2008:
+
+       http://www.cell.com/abstract/S0092-8674(08)00705-8
+
+Reading homework (due Monday, midnight Pacific time)
+----------------------------------------------------
+
+Of what value was the dN/dS simulation in the Drummond & Wilke paper?
+Please be prepared to discuss your answer in class.
+
+Also, please make the following two lists and bring them to class:
+
+ - What data or information would you need to have if you wanted to
+   repeat the simulation from scratch yourself?
+
+ - What data or information would you need to have if you wanted to
+   replicate the results of the paper from scratch yourself?
+
+Programming Homework (due Wednesday, midnight Pacific time)
+-----------------------------------------------------------
+
+1. Create an account at http://github.com/.
+
+2. Create an account at http://dropbox.com/, if you don't already have one.
+
+3. Create an account at http://aws.amazon.com/.
+
+4. Enable your AWS account for EC2 (log in, and click the EC2 tab;
+    then follow the instructions).  **This will involve both inputting
+    credit card information and receiving a phone call.**
+
+5. By Wed midnight, send me the e-mail address associated with your
+   AWS account.
+
+6.  Add two functions to the homework from :doc:`week6-hw`::
+
+       get_fishes_by_datelist(fish_d, datelist)
+
+    and::
+
+       get_dates_by_fishlist(dates_d, fishlist)
+
+    where both 'datelist' and 'fishlist' are *lists of dates and fishes*
+    rather than individual dates or fishes as in HW 6.
+
+7. Upload your file to github by doing the following:
+
+  - first, create a new repository.  Go to github.com, select 'New repository.'
+    Put something simple and lowercase in for "Project Name", like
+    "cse891-fall-2011".
+
+  - on a Mac,
+
+    + download & install "GitHub for Mac" app from http://mac.github.com/.
+    + run the app.
+    + log into your github account (on startup, OR in Preferences... pane)
+    + in the "Repository" window (default window, or View... Repositories)
+      click on your account under GitHub (on the left).
+    + for the repository you created (cse891-fall-2011, for example) click
+      "Clone to Computer".  Put it anywhere you want -- your Desktop is
+      fine, as is the default.
+
+      This will copy your remote github files to your local computer.
+
+    + Outside of the github app, copy the file containing your homework
+      6 & 7 into the repository directory that you selected.  For example,
+      on my computer, I put the file under Desktop... cse891-fall-2011.
+
+    + Go back to the GitHub app and click on the right-pointing arrow in the
+      lozenge corresponding to your repository.
+
+    + Now click on "Changes".  Enter "adding homework" for "Commit summary",
+      and click on "Commit changes."  You should now see "1 unsynchronized
+      commit" just above the "adding homework" message.
+
+    + On the upper right of the window, click "Publish branch."
+
+    + You should now be able to go to http://github.com/, select your
+      cse891 repository under "Your repositories" on the far right,
+      and see your homework file.  If so, success! If not, something
+      went wrong :(.
+
+  - on a Windows machine,
+
+    + download GitExtensions from
+    + install it.  Select "Install MsysGit" and "Install KDiff" when asked.
+      Also select "plink" (the default) for the ssh connection.  Keep all
+      defaults for everything else (just keep clickin' "OK"...)
+
+    + After installation is finished, run "Git... Git GUI" from the Start
+      menu.
+
+    + In the "Clone Existing Repository" window, put the Web address
+      of your repository into "Source Location".  This can be found by
+      going to your github repository Web site (something like
+      'https://github.com/ctb/cse891-fall-2011-test', but for your
+      project) and selecting the 'HTTP' tab; it should look like this
+      URL below, but with your username replacing 'ctb' and your
+      repository name replacing 'cse891-fall-2011-test'.
+
+            https://ctb@github.com/ctb/cse891-fall-2011-test.git
+
+      Make sure that you copy the URL *exactly* without any leading spaces.
+
+      For "Target Directory", just select some common location (like, say,
+      your Desktop) and add the name of your repository after it, e.g.
+
+            .../Desktop/cse891-fall-2011-test
+
+      Then select 'Clone'
+
+    + You may need to type in your github password several times...
+
+    + Now, go to IDLE or whatever you're using to edit Python files,
+      and save your hw file into the git directory that you created
+      (for me, 'cse891-fall-2011-test').
+    + Return to the Git GUI application, and click "Rescan".  (Middle.)
+    + Your hw file should show up under "Unstaged changes".  Select it,
+      and go to the menu "Commit" and select "Stage to commit".
+    + Type "homework 6 and 7!" in the "Commit Message" window, and then
+      click "Commit."
+    + Now select "push".  You'll have to type your password in again.
+    + It should say "successful!" -- just close that window.
+    + You should now be able to go to http://github.com/, select your
+      cse891 repository under "Your repositories" on the far right,
+      and see your homework file.  If so, success! If not, something
+      went wrong :(.
+
+(If you are already a git/github expert, go ahead and do it however you want :)
