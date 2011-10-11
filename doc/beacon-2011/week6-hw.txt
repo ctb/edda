@@ -1,0 +1,50 @@
+Homework, week 6
+================
+
+Papers to read
+--------------
+
+Everyone should read the following papers for Thursday, Oct 6th:
+
+    Reich et al., Nature, 2010.
+    `[ PubMed ] <http://www.ncbi.nlm.nih.gov/pubmed/21179161>`__
+    `[ PDF ] <http://lyorn.idyll.org/~t/transfer/cse891/neanderthal/nature09710.pdf>`__
+
+Team Pink should read & present these papers in addition:
+
+    Green et al., Science, 2010
+    `[ PubMed ] <http://www.ncbi.nlm.nih.gov/pubmed?term=draft%20neandertal>`__
+    `[ PDF ] <http://lyorn.idyll.org/~t/transfer/cse891/neanderthal/Science-2010-Green-710-22.pdf>`__
+
+    Abi-Rached et al., Science 2011
+    `[ PubMed ] <http://www.ncbi.nlm.nih.gov/pubmed/21868630>`__
+    `[ PDF ] <http://lyorn.idyll.org/~t/transfer/cse891/neanderthal/Science-2011-Abi-Rached-science.1209202.pdf>`__
+
+    Yotova et al., MBE, 2011
+    `[ PubMed ] <http://www.ncbi.nlm.nih.gov/pubmed/21266489>`__
+    `[ PDF ] <http://lyorn.idyll.org/~t/transfer/cse891/neanderthal/Mol%20Biol%20Evol-2011-Yotova-1957-62.pdf>`__    
+
+Group members should address these questions:
+
+1. Is the juvenile from the Denisova cave a Neandertal, modern human, or other form of archaic human?
+
+2. Describe the basic logic that led the investigators to understand the directionality of gene flow between populations.
+
+Programming Homework (due Monday, midnight Pacific time)
+--------------------------------------------------------
+
+Work through :doc:`tutorial-5`, and do HW 6; bring a file containing your
+answers to class on Tuesday, along with a computer (if possible).
+
+Reading homework (due Wednesday, midnight Pacific time)
+-------------------------------------------------------
+
+Please answer these questions:
+
+1. What are the evolutionary and health implications of Neandertal DNA
+in modern, non-African humans?
+
+2. How did the investigators come to the conclusion that as much as
+7.4% of Melanesian genomes are derives from Neandertals/Denisovans?
+
+.. Submit these sentences to `this form <https://docs.google.com/spreadsheet/viewform?hl=en_US&formkey=dFRwbTNUejk2c2hJOUp6cmFlbC0xZVE6MQ#gid=0>`__ by midnight PST.

@@ -31,6 +31,8 @@ Contents:
    tutorial-5
    week5-hw
 
+   week6-hw
+
 Reference material
 ------------------
 

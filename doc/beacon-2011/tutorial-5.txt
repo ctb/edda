@@ -491,12 +491,13 @@ Asking questions of data with functions
 Suppose you want to retrieve a bunch of *different* data from a CSV file.
 
 Also, once you've loaded the data once, you generally don't want to
-load it again.
+load it again.  What you might like to do is load the data in ONCE and
+then keep track of it.  Take a look at the functions below for Homework
+6 -- here, the data is loaded into the dictionary 'fish_d' and used by
+various functions to ask questions of the data.
 
-Take a look at @@@.  Here, I provide a bunch of functions that load in
-the list of names and build a bunch of convenient dictionaries.
-
-@@@ TODO.
+Your job for HW 6 is to implement the parts of the functions that actually
+pick out the data of interest.
 
 ---
 
@@ -531,9 +532,8 @@ for testing purposes.)
 Homework 6
 ----------
 
-Add functions to load_fishies.py to *efficiently* return the list of
-days on which a given type of fish was eaten by Penny.  (See:
-https://raw.github.com/ctb/edda/master/doc/beacon-2011/tutorial5/load_fishies.py)
+Implement the get_fishes_by_date, make_dates_dict, and get_dates_by_fish
+functions in the code below.
 
 I suggest the following breakdown of the task:
 
@@ -547,22 +547,68 @@ I suggest the following breakdown of the task:
  fish, and then returns the dates that that fish was eaten by Penny.
  If the fish doesn't appear in the CSV file return an empty list.
 
-Here is a template::
+Here is a template; see comments for where to fill in code.  ::
 
-   def make_dates_dict(fish_d):
+    import csv, urllib
+
+    def load_csv(url):
+      d = {}
+      fp = urllib.urlopen(url)
+      for row in csv.DictReader(fp):
+         key = row['date']
+	 value = row['fish']
+
+         x = d.get(key, [])
+         x.append(value)
+         d[key] = x
+
+      return d
+
+    def make_dates_dict(fish_d):
       dates_d = {}
+
       # write code HERE to fill in dates_d
+
+      # note, fish_d is a dictionary created by load_csv where the
+      # KEYS are dates and the VALUES are lists of fish.  from
+      # csv.DictReader.  so, fish_d[date] is a list of fish from that
+      # day.
+      #
+      # the return value, 'dates_d', should be a dictionary where the
+      # KEYS are fish and the VALUES are lists of dates.
+
       return dates_d
 
-   def get_dates_by_fish(dates_d, fish):
+    def get_fishes_by_date(fish_d, date):
+      fishlist = []
+      # write code HERE to fill in fishlist
+
+      return fishlist
+
+    def get_dates_by_fish(dates_d, fish):
       dateslist = []
       # write code HERE to fill in dateslist
+
+      # note, dates_d is a dictionary created by make_dates_dict; see the
+      # comment there for more info.
+
       return dateslist
 
-.. Put all of these functions in a single file that you upload to github.
+    # this code is outside the functions and USES the functions to
+    # load data and ask questions of the data.
 
-.. Write query functions:
-..  - what fish did penny eat on day x?
-.. - what days did penny eat a given fish?
+    fish_d = load_csv('https://raw.github.com/ctb/edda/master/doc/beacon-2011/tutorial5/fishies.csv')
+    dates_d = make_dates_dict(fish_d)
 
-.. print!!!
+    print get_fishes_by_date(fish_d, '1/1')
+    print get_dates_by_fish(dates_d, 'plaice')
+
+Put all of these functions in a single file and hang onto that file;
+we'll show you how to upload the file on next Tuesday (bring laptops
+if possible!).  I suggest using IDLE or some other text editor...
+
+Be sure to verify that your results are right for at least a few dates
+and fish types!
+
+I would suggest using lots of print statements and testing on a short set
+of data, so that you can understand everything that's going on in detail.

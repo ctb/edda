@@ -1,6 +1,112 @@
 Class Links
 ===========
 
+Thursday, October 6th, 2011
+---------------------------
+
+At the start of class: working in your usual groups, ACROSS
+INSTITUTIONS, check out the list of sentences submitted, here:
+
+   http://lyorn.idyll.org/~t/transfer/cse891/sentences.txt
+
+Divide them into categories of easy- vs hard-to-assemble, and (based
+on your expertise in sequence assembly) further categorize the "hard"
+sentences around the *reason* they'd be hard to assemble.  Think
+especially about:
+
+ - short reads
+ - single- vs paired-end reads / short-insert vs long insert
+ - reverse/forward matching sequences (which we didn't discuss in class...)
+ - error prone sequencing
+
+Please put at least one of each category up on a Jot! board specific
+to your group (your categories should encompass all the sentences, but
+you can use an exemplar of each sequence).  If you disagree on anything,
+note that and ask.
+
+Tuesday, October 4th, 2011
+--------------------------
+
+At the start of class:
+
+   Working in groups or individually, please come up with a list of
+   items you do not like about the course so far, and what (if
+   anything) should be changed for each item.  You might touch on some
+   or all of these --
+
+       1. programming tutorials
+       2. programming HW
+       3. programming support
+       4. programming handins
+       5. in-class group discussions
+       6. in-class "global" discussions
+       7. in-class presentations
+       8. paper topics and discussions of papers
+       9. remote interaction
+       10. groups and group structure
+
+   and anything else miscellaneous you might have to say.
+
+   Please try to be *inclusive*, that is, synthesize everything the group
+   has to say rather than eliminating concerns that aren't universally agreed
+   upon.
+
+   Choose one person at each location to be a scribe, write them down,
+   and then paste them into `this link
+   <https://docs.google.com/spreadsheet/viewform?formkey=dGhMSFdEWWVzVm9pQ0x1cW0wRFZ0ZEE6MQ>`__.
+   Anonymous and individual comments and suggestions are also welcome.
+   You can submit during class, or after class -- basically any time
+   before Wed evening would be good.
+
+Then, let's play... THE ASSEMBLY GAME!
+
+Each group should have a pile of papers, representing different sets
+of short-read sequencing data resulting from feeding the same set of
+English quotes into a woodchipper.  The papers contain reads randomly
+chosen from the quotes; some are in paired-end form, where the '...'
+represents missing text of unknown (but generally consistent...)
+length.
+
+Your goal(s)?  Using only pen(cil) and paper -- no Google! --
+
+   1. Identify the total number of source quotes.
+
+   2. Determine the true source text of all the quotes.
+
+This is known as the assembly problem in sequence analysis.
+
+Also, develop (and be prepared to describe) a workflow for doing this
+in general (i.e. suppose you were given this every day for a week, how
+would you proceed?)  Feel free to draw...
+
+Issues to consider: how does adding more people to local groups help
+or hurt?  How does adding more people to remote groups help or hurt?
+What kind of data preparation steps would be a good investment, if you
+were given the data in a Python script and could manipulate it at
+will?  (Think: sorting? trimming off the end? removing?)
+
+Final question -- each of the data sets (collections of paper) you got
+have different properties.  Some of them are marked -- others aren't.
+What are the different properties that aren't marked?
+
+Thursday, September 29th, 2011
+------------------------------
+
+   http://lyorn.idyll.org/~t/transfer/cse891/Drummondetal2005.pptx.pdf
+
+   http://lyorn.idyll.org/~t/transfer/cse891/Kudla%20et%20al%20presentation%20092911.ppt.pdf
+
+   http://lyorn.idyll.org/~t/transfer/cse891/Singhal_Conlin_Presentation_09_28_2011.pptx.pdf
+
+In-class questions to answer (in groups):
+
+   1. What did the simulation add to the Cell paper that you all read?
+   (Drummond and Wilke)
+
+   2. What evidence was provided that the mechanism of selection
+   against misfolding is cytotoxicity? Can you think of alternative
+   mechanisms?
+
 Thursday, September 22, 2011
 ----------------------------
 
