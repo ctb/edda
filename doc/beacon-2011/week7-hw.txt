@@ -6,7 +6,8 @@ Papers to read
 
 Everyone should read the following paper for Thursday, Oct 20th:
 
-    @@@
+    Pennock et al.
+    https://www.msu.edu/~pennock5/research/papers/Pennock_ModelsSimsInstsEv.pdf
 
 Also, please re-read this paper:
 
@@ -55,6 +56,12 @@ Programming Homework (due Wednesday, midnight Pacific time)
     where both 'datelist' and 'fishlist' are *lists of dates and fishes*
     rather than individual dates or fishes as in HW 6.
 
+    The first function should return a list of those fish that were
+    eaten on the dates given in 'datelist', which is a list of dates.
+
+    The second function should return a list of those dates on which
+    the fish given in 'fishlist' (a list of fish) were eaten.
+
 7. Upload your file to github by doing the following:
 
   - first, create a new repository.  Go to github.com, select 'New repository.'
@@ -94,7 +101,7 @@ Programming Homework (due Wednesday, midnight Pacific time)
 
   - on a Windows machine,
 
-    + download GitExtensions from
+    + download GitExtensions from http://gitextensions.googlecode.com/files/GitExtensions225SetupComplete.msi
     + install it.  Select "Install MsysGit" and "Install KDiff" when asked.
       Also select "plink" (the default) for the ssh connection.  Keep all
       defaults for everything else (just keep clickin' "OK"...)

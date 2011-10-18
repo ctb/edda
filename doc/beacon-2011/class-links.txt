@@ -1,6 +1,38 @@
 Class Links
 ===========
 
+Tuesday, October 17th, 2011
+---------------------------
+
+At the start of class: working alone or in local groups, examine the
+following code examples and (without running them!) predict what they
+will print out, and why.
+
+
+  
+
+
+Thursday, October 13th, 2011
+----------------------------
+
+For the first 15 minutes, discuss:
+
+  What are the evolutionary and health implications of Neandertal DNA
+  in modern, non-African humans?
+
+  How did the investigators come to the conclusion that as much as
+  7.4% of Melanesian genomes are derives from Neandertals/Denisovans?
+
+Presentations for today:
+
+  http://lyorn.idyll.org/~t/transfer/cse891/Denisovan.pptx.pdf
+
+  http://lyorn.idyll.org/~t/transfer/cse891/neandertal-draft-sequence.pdf
+
+  http://lyorn.idyll.org/~t/transfer/cse891/shaping-of-modern-human-immune.pdf
+
+  http://lyorn.idyll.org/~t/transfer/cse891/yotova.pdf
+
 Tuesday, October 10th, 2011
 ---------------------------
 
@@ -34,6 +66,10 @@ BONUS: If you want to be thoroughly confused, read `this discussion of
 scoping rules
 <http://stackoverflow.com/questions/291978/short-description-of-python-scoping-rules>`__
 -- e.g. see the first answer.
+
+Later in the class, we'll also take a look at this little assembler:
+
+  https://raw.github.com/ctb/edda/master/doc/beacon-2011/week7/assemble.py
 
 
 Thursday, October 6th, 2011
