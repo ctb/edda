@@ -32,6 +32,8 @@ Also, please make the following two lists and bring them to class:
 Programming Homework (due Wednesday, midnight Pacific time)
 -----------------------------------------------------------
 
+Please enter your github, dropbox, and amazon account names on `this form <https://docs.google.com/spreadsheet/viewform?formkey=dFBON2dfZ1JBVzM1TWlib2hjQW9RUXc6MQ>`__.  Thanks!
+
 1. Create an account at http://github.com/.
 
 2. Create an account at http://dropbox.com/, if you don't already have one.

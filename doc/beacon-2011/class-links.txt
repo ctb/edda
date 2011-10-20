@@ -1,6 +1,33 @@
 Class Links
 ===========
 
+Thursday, October 19th, 2011
+----------------------------
+
+At the start of class, working alone in or in groups, examine these
+code snippets and figure out what they will print out:
+
+  https://raw.github.com/ctb/edda/master/doc/beacon-2011/week8/d-4.py
+
+  https://raw.github.com/ctb/edda/master/doc/beacon-2011/week8/d-5.py
+
+  https://raw.github.com/ctb/edda/master/doc/beacon-2011/week8/d-6.py
+
+  https://raw.github.com/ctb/edda/master/doc/beacon-2011/week8/t-1.py
+
+  https://raw.github.com/ctb/edda/master/doc/beacon-2011/week8/t-2.py
+
+  https://raw.github.com/ctb/edda/master/doc/beacon-2011/week8/t-3.py
+
+  https://raw.github.com/ctb/edda/master/doc/beacon-2011/week8/f-1.py
+
+  https://raw.github.com/ctb/edda/master/doc/beacon-2011/week8/f-2.py
+
+  https://raw.github.com/ctb/edda/master/doc/beacon-2011/week8/f-3.py
+
+  https://raw.github.com/ctb/edda/master/doc/beacon-2011/week8/f-4.py
+  
+
 Tuesday, October 17th, 2011
 ---------------------------
 
@@ -9,8 +36,29 @@ following code examples and (without running them!) predict what they
 will print out, and why.
 
 
-  
+  https://raw.github.com/ctb/edda/master/doc/beacon-2011/week8/l-1.py
 
+  https://raw.github.com/ctb/edda/master/doc/beacon-2011/week8/l-2.py
+
+  https://raw.github.com/ctb/edda/master/doc/beacon-2011/week8/l-3.py
+
+  https://raw.github.com/ctb/edda/master/doc/beacon-2011/week8/l-4.py
+
+  https://raw.github.com/ctb/edda/master/doc/beacon-2011/week8/l-5.py
+
+  https://raw.github.com/ctb/edda/master/doc/beacon-2011/week8/l-6.py
+
+  https://raw.github.com/ctb/edda/master/doc/beacon-2011/week8/l-7.py
+
+  https://raw.github.com/ctb/edda/master/doc/beacon-2011/week8/l-8.py
+
+  https://raw.github.com/ctb/edda/master/doc/beacon-2011/week8/l-9.py
+
+  https://raw.github.com/ctb/edda/master/doc/beacon-2011/week8/d-1.py
+
+  https://raw.github.com/ctb/edda/master/doc/beacon-2011/week8/d-2.py
+
+  https://raw.github.com/ctb/edda/master/doc/beacon-2011/week8/d-3.py
 
 Thursday, October 13th, 2011
 ----------------------------

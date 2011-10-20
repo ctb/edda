@@ -33,6 +33,10 @@ Contents:
 
    week6-hw
 
+   week7-hw
+
+   week8-hw
+
 Reference material
 ------------------
 
