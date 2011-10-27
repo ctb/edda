@@ -29,7 +29,6 @@ def make_dates_dict(fish_d):
 
 def get_fishes_by_date(fish_d, date):
   fishlist = []
-  # write code HERE to fill in fishlist
   for date in fish_d:
       fishlist=(set(fish_d[date]))
    
