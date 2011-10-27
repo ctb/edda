@@ -40,8 +40,6 @@ def make_dates_dict(fish_d):
           
     return dates_d
 
-#==============================================
-
 def get_fishes_by_date(fish_d, date):
     fishlist = []
 

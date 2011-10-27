@@ -42,10 +42,6 @@ def get_dates_by_fish(dates_d, fish):
   dates_list = dates_d.get(fish, [])
 
   return dates_list
-  # write code HERE to fill in dateslist
-
-  # note, dates_d is a dictionary created by make_dates_dict; see the
-  # comment there for more info.
 
 # the following function takes a dictionary with keys = date, values = fish
 def get_fishes_by_datelist(fish_d, datelist):

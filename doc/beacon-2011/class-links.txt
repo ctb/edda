@@ -9,7 +9,15 @@ At the beginning of class, score the following five programs based on
 efficiency.  (If you could put your scores up on a Jot! board, that'd
 be extra super neat.)
 
+  https://github.com/ctb/edda/blob/master/doc/beacon-2011/week9/hw-a.py
 
+  https://github.com/ctb/edda/blob/master/doc/beacon-2011/week9/hw-b.py
+
+  https://github.com/ctb/edda/blob/master/doc/beacon-2011/week9/hw-c.py
+
+  https://github.com/ctb/edda/blob/master/doc/beacon-2011/week9/hw-d.py
+
+  https://github.com/ctb/edda/blob/master/doc/beacon-2011/week9/hw-e.py
 
 Tuesday, October 25th, 2011
 ---------------------------
