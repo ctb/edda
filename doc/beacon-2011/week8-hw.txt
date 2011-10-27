@@ -1,0 +1,31 @@
+Homework, week 8
+================
+
+Papers to read
+--------------
+
+Please skim this paper for Tuesday, Oct 25th:
+
+   Pennisi, Science, 2011.  Will computers crash genomics?
+
+   http://www.sciencemag.org/content/331/6018/666.full.pdf
+
+   http://lyorn.idyll.org/~t/transfer/cse891/will-computers-crash-genomics-2011-pennisi-science.pdf
+
+If you want my perspective, you can read these two blog posts:
+
+  http://ivory.idyll.org/blog/oct-10/sky-is-falling
+
+  http://ivory.idyll.org/blog/aug-11/cloud-not-the-solution.html
+
+Reading homework (bring to class): Preparatory to class, list pros and
+cons for using the Amazon cloud for teaching and research.
+
+Again, my perspective:
+
+http://ivory.idyll.org/blog/jun-10/ngs-course-postmortem.html
+
+Programming Homework (due Wednesday, midnight Pacific time)
+-----------------------------------------------------------
+
+TBD.

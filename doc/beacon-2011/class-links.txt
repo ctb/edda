@@ -1,6 +1,39 @@
 Class Links
 ===========
 
+Thursday, October 27th, 2011
+----------------------------
+
+At the beginning of class, score the following five programs based on
+(a) concision, (b) ease of understanding, (c) correctness, and (d)
+efficiency.  (If you could put your scores up on a Jot! board, that'd
+be extra super neat.)
+
+
+
+Tuesday, October 25th, 2011
+---------------------------
+
+At the beginning of class, draw out (using Jot! in local OR distance
+groups, as you want) the workflow or pipeline for the simulation done
+by Drummond and Wilke, here:
+
+       http://www.cell.com/abstract/S0092-8674(08)00705-8
+
+That is, draw boxes with each significant set of actions taken, and
+arrows between them; hint, there should be at least two boxes :).  For
+each box/arrow, consider:
+
+ - how would you test that this aspect of the workflow works correctly?
+
+ - is this aspect of the workflow a proper analogy (in the
+   Dakotan/Pennock sense) for the biological process under study?  How
+   is it or is it not?
+
+Also consider: is it sufficient for the correctness of the final
+result that each step in the pipeline leading to the final result be
+correct?  Is it it necessary?
+
 Thursday, October 19th, 2011
 ----------------------------
 

@@ -1,0 +1,26 @@
+Homework, week 9
+================
+
+Papers to read
+--------------
+
+Please read these papers for Tuesday, Nov 1st:
+
+  http://lyorn.idyll.org/~t/transfer/cse891/the-trouble-with-replication.pdf
+
+and consider, for discussion in class, the following question:
+
+  What techniques would you use to replicate, reproduce, or otherwise
+  validate the coin flip and Monty Hall Monte Carlo simulations from a
+  few weeks ago (see: :doc:`tutorial-4`), assuming that you were
+  reading about them in Science?  (Brown, CT: Gambling for science,
+  Science, 2011... j/k!)  What standards would you hold the papers to?
+
+Programming Homework (due Wednesday, midnight Pacific time)
+-----------------------------------------------------------
+
+Run through :doc:`tutorial-6` and bring your answers to the three homework
+problems at the bottom to class.
+
+**Be sure to shut down your Amazon instance.**
+

@@ -37,6 +37,9 @@ Contents:
 
    week8-hw
 
+   week9-hw
+   tutorial-6
+
 Reference material
 ------------------
 

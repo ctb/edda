@@ -1,0 +1,184 @@
+=================================================
+Tutorial 6: Experimental statistics, and plotting
+=================================================
+
+(Or: Return of Crunchy)
+
+We're going to do some graphing today!
+
+The first question is, why didn't we do graphing before?  The answer
+is that we're going to be using software that doesn't come with
+Python: it's called `matplotlib
+<http://matplotlib.sourceforge.net/>`__, and it can be a pain to
+install.  So, we're going to run this stuff in ... the cloud!!!
+
+In order to run this tutorial, you'll need to start up an EC2 machine
+that runs a Crunchy site, and then go to that crunchy site.  Go follow
+these directions: :doc:`running-crunchy-on-ec2`.  It should end with you
+back on this page, running through Crunchy (i.e. with interactive Python
+prompts embedded in the page).
+
+BTW, you want to be very sure to shut down your EC2 machine when you're
+done with it!  I can show you how to do so via Python at the end of this
+tutorial.
+
+Ready?
+
+Graphing!
+=========
+
+Before we go further, let's load a few useful modules and set up one
+key thing, a file (that'll be on *on your EC2 machine*) to contain
+your graphs.
+
+   >>> import random
+   >>> from matplotlib import pyplot
+   >>> import dhtml
+   >>> image_file = dhtml.join_path(crunchy.temp_dir, "graph.png")
+
+OK, done!  (You need to do that once each time that you run Crunchy.)
+
+Let's start by generating some numbers.  Here's a function that pretends
+that we're rolling a 1000-sided die, 150 times:
+
+   >>> def roll():
+   ...   avgs = []
+   ...   x = []
+   ...   y = []
+   ...   for i in range(150):
+   ...      y.append(random.randint(1, 1000))
+   ...      x.append(i)
+   ...      avgs.append( sum(y) / float(len(y)) )
+   ...   return x, avgs
+
+In this function, 'x' is a list containing the number of the trial
+(0...149); 'y' is a list containing the result of each trial (a number
+between 1 and 1000); and 'avgs' is a list containing the running
+average of the trials.  The function returns a tuple of 'x' and 'avgs'.
+
+What do the numbers look like??  Let's run it and plot the results:
+
+   >>> x, y = roll()
+   >>> pyplot.plot( x, y )
+   >>> pyplot.savefig(image_file)
+   >>> dhtml.image(image_file)
+
+Here, the 'plot' function just produces an X-Y scatter plot, connected
+by a line.  (You can see a list of all the awesome plots that
+matplotlib can produce here, in the `gallery
+<http://matplotlib.sourceforge.net/gallery.html>`__.)  Then 'savefig'
+saves the plot to an image and 'dhtml.image' is a special command to
+ask Crunchy to load it ('dhtml' stands for 'dynamic HTML').
+
+It you run this, you should see an image of a plot.
+
+Now run it again!  And again!  And again!  (The plot should
+dynamically update, adding a new line each time you run the commands.)
+
+What you're seeing is a graph of the convergence to an average for
+multiple trials of a 1000-sided dice roll.  Pretty neat, huh?
+
+You can try giving 'pyplot.plot' a third argument, the color of the
+line or dots -- try 
+
+   >>> x, y = roll()
+   >>> pyplot.plot( x, y, 'r--' )
+   >>> pyplot.savefig(image_file)
+   >>> dhtml.image(image_file)
+
+and
+
+   >>> x, y = roll()
+   >>> pyplot.plot( x, y, 'b+' )
+   >>> pyplot.savefig(image_file)
+   >>> dhtml.image(image_file)
+
+to plot a red dashed line and a blue set of pluses (which may not be visible
+at this scale).
+
+The 'axis' command can be used to zoom in, too:
+
+   >>> min_x, max_x = 0, 40
+   >>> min_y, max_y = 0, 1000
+   >>> pyplot.axis([min_x, max_x, min_y, max_y])
+   >>> pyplot.savefig(image_file)
+   >>> dhtml.image(image_file)
+
+Before you continue, you probably want to clear the plot:
+
+   >>> pyplot.clf()
+
+Plotting histograms
+===================
+
+Now let's plot a histogram!  To do this, let's define a new function,
+'roll2', that produces an average of 150 rolls of our 1000-sided dice.
+(This is the same as our 'roll' function, above, but without tracking
+the running average.)
+
+   >>> def roll2():
+   ...   x = []
+   ...   for i in range(150):
+   ...      x.append(random.randint(1, 1000))
+   ...   return sum(x) / 150.0
+
+OK, now run it a bunch of times and keep track of 'avgs', which in
+this case is now a bunch of independent averages:
+
+   >>> avgs = []
+   >>> for i in range(100):
+   ...   avgs.append(roll2())
+
+And now... plot!  Here we're using the 'hist' command, which (guess...)
+makes a histogram:
+
+   >>> pyplot.hist(avgs, 50)
+   >>> pyplot.savefig(image_file)
+   >>> dhtml.image(image_file)
+
+Neat, eh?
+
+Shutting down your EC2 machine
+==============================
+
+After doing the homework, run this command:
+
+   >>> import os
+   >>> os.system('/sbin/shutdown -h now')
+
+any guesses as to what that does? :)
+
+Yep, that's right -- it turns off your EC2 machine!  Be sure to verify
+this by going to your EC2 dashboard at
+https://console.aws.amazon.com/ec2/home and make sure you have no
+instances running.  Seriously.  This shit costs money.
+
+Homework
+--------
+
+**Bring your answers to class on Thursday.**
+
+1. What probability distribution do the numbers returned by 'roll2'
+belong to?  That is, if you run roll2() a lot, what distribution
+does it look like?  Feel free to modify the code above to get a better
+look by running more trials.
+
+2. Now change the function in 'roll2' to use 'math.log', e.g. ::
+ 
+   x.append(math.log(random.randint(1, 1000)))
+
+What does the new distribution look like?  (You'll need to 'import math'
+somewhere.)
+
+3. Write a function to display a pie chart of the number of fish eaten
+by Penny on a given list of days.  (Sorry, this will involve copying
+and pasting some of your previous code...)
+
+Hint: adapt pie chart code at
+http://matplotlib.sourceforge.net/users/screenshots.html ; note that
+the 'figure', 'axes', 'pie', and 'title' functions can all be used like
+the 'hist' and 'savefig' commands above.
+
+(Here's a Python prompt -- free!)
+
+  >>> 
