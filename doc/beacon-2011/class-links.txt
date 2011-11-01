@@ -1,6 +1,17 @@
 Class Links
 ===========
 
+Tuesday, November 1st, 2011
+---------------------------
+
+Take a look at this program from last week:
+
+  https://github.com/ctb/edda/blob/master/doc/beacon-2011/week9/hw-e.py
+
+and now consider these modifications at the bottom:
+
+  https://github.com/ctb/edda/blob/master/doc/beacon-2011/week10/hw-e-2.py
+
 Thursday, October 27th, 2011
 ----------------------------
 

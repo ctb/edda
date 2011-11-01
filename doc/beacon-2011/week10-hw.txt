@@ -1,0 +1,41 @@
+Homework, week 10
+================
+
+Papers to read
+--------------
+
+Please read these papers for Tuesday, Nov 9th:
+
+  Ofria, Bryson, and Wilke, 2009
+  http://www.cse.msu.edu/~ofria/pubs/2009AvidaIntro.pdf
+
+  Lenski, Ofria, Pennock, Adami
+  http://www.cse.msu.edu/~ofria/pubs/2003LenskiEtAl.pdf
+
+and consider, for discussion in class, the following question:
+
+  Is this a simulation of evolution, or an instance?
+
+  How or why does it matter for studying evolution?
+
+Programming Homework (due Wednesday, midnight Pacific time)
+-----------------------------------------------------------
+
+1) Install an SSH program and configure it to log into your EC2 machine.
+
+2) Once logged in, enable Dropbox on your EC2 machine.
+
+3) Put the matplotlib running-average code from :doc:`tutorial-6`
+(minus the dhtml stuff) into a file called 'plot-running-average.py'.
+Put it in dropbox, and run it on your EC2 machine by typing ::
+
+    python ~/Dropbox/plot-running-average.py
+
+Commit it to your git repo and push it to your git repository.
+
+4) Build avida according to :doc:`building-avida`; install it; and run it.
+
+Send me the last line of XXX file.
+
+**Be sure to shut down your Amazon instance when you're done.**
+
