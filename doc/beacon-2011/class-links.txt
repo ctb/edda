@@ -1,6 +1,27 @@
 Class Links
 ===========
 
+Thursday, November 3rd, 2011
+----------------------------
+
+Can you change just the code in 'fn' to make the tests in these files
+pass?  (The same 'fn' will work for all three files; the tests are
+just added incrementally.)
+
+  https://github.com/ctb/edda/blob/master/doc/beacon-2011/week9/tests-a.py
+
+  https://github.com/ctb/edda/blob/master/doc/beacon-2011/week9/tests-b.py
+
+  https://github.com/ctb/edda/blob/master/doc/beacon-2011/week9/tests-c.py
+
+And can you change just the code in 'fn2' to make the tests in these files
+pass?
+
+  https://github.com/ctb/edda/blob/master/doc/beacon-2011/week9/tests-d.py
+
+  https://github.com/ctb/edda/blob/master/doc/beacon-2011/week9/tests-e.py
+
+
 Tuesday, November 1st, 2011
 ---------------------------
 
@@ -11,6 +32,21 @@ Take a look at this program from last week:
 and now consider these modifications at the bottom:
 
   https://github.com/ctb/edda/blob/master/doc/beacon-2011/week10/hw-e-2.py
+
+Consider:
+
+ - do these tests (the 'assert' statements, and code setting them up)
+   seem reasonable, given hw 5 and 6?  (see: :doc:`tutorial-5`)
+
+ - which of the programs from last week passes these tests?  which of the
+   programs are "wrong" and which of them are "right"?
+
+ - what are some additional tests that you might consider adding?
+
+ - are tests like these a reasonable way to "specify" the required
+   results in homework assignments?  why or why not?
+
+ - what is the cost of having these tests in the source code?
 
 Thursday, October 27th, 2011
 ----------------------------

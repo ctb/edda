@@ -40,6 +40,8 @@ Contents:
    week9-hw
    tutorial-6
 
+   week10-hw
+
 Reference material
 ------------------
 

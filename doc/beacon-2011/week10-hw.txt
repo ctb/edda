@@ -12,30 +12,40 @@ Please read these papers for Tuesday, Nov 9th:
   Lenski, Ofria, Pennock, Adami
   http://www.cse.msu.edu/~ofria/pubs/2003LenskiEtAl.pdf
 
-and consider, for discussion in class, the following question:
+and consider, for discussion in class, the following questions:
 
   Is this a simulation of evolution, or an instance?
 
   How or why does it matter for studying evolution?
 
+  What evolutionary questions that interest you, might we be able to study
+  with Avida?
+
 Programming Homework (due Wednesday, midnight Pacific time)
 -----------------------------------------------------------
 
-1) Install an SSH program and configure it to log into your EC2 machine.
+1. Install an SSH program and configure it to log into your EC2
+machine; see :doc:`starting-your-cloud-system`.
 
-2) Once logged in, enable Dropbox on your EC2 machine.
+2. Once logged in, enable Dropbox on your EC2 machine (see:
+:doc:`../tutorials-2011/installing-dropbox`)
 
-3) Put the matplotlib running-average code from :doc:`tutorial-6`
-(minus the dhtml stuff) into a file called 'plot-running-average.py'.
-Put it in dropbox, and run it on your EC2 machine by typing ::
+3. Put the matplotlib running-average code from :doc:`tutorial-6`
+(remove the dhtml stuff) into a file called 'plot-running-average.py'.
+Put it in dropbox on your local computer, and then run it on your EC2
+machine by typing ::
 
-    python ~/Dropbox/plot-running-average.py
+   %% python ~/Dropbox/plot-running-average.py
 
 Commit it to your git repo and push it to your git repository.
 
-4) Build avida according to :doc:`building-avida`; install it; and run it.
+4) Build & run avida according to :doc:`building-and-running-avida`.
+Send Titus the last line of your data/average.dat file, as per the end of
+that tutorial.
 
-Send me the last line of XXX file.
+5) Take the unit tests from the :doc:`class-links` for November 1st,
+add them to the bottom of your Python homework, and update your file
+in git so that they pass.  (If you could rename your file to something
+like 'penny-utils.py' that would also be nice.)
 
 **Be sure to shut down your Amazon instance when you're done.**
-
