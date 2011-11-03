@@ -14,7 +14,8 @@ install.  So, we're going to run this stuff in ... the cloud!!!
 
 In order to run this tutorial, you'll need to start up an EC2 machine
 that runs a Crunchy site, and then go to that crunchy site.  Go follow
-these directions: :doc:`running-crunchy-on-ec2`.  It should end with you
+this video: http://lyorn.idyll.org/~t/transfer/cse891/crunchy-on-amazon.mp4 .
+It should end with you
 back on this page, running through Crunchy (i.e. with interactive Python
 prompts embedded in the page).
 

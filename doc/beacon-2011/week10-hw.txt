@@ -4,22 +4,12 @@ Homework, week 10
 Papers to read
 --------------
 
-Please read these papers for Tuesday, Nov 9th:
+Please read this paper for Tuesday, Nov 9th:
 
-  Ofria, Bryson, and Wilke, 2009
-  http://www.cse.msu.edu/~ofria/pubs/2009AvidaIntro.pdf
+   Adami, C, 2006
+   http://www.nature.com/nrg/journal/v7/n2/abs/nrg1771.html
 
-  Lenski, Ofria, Pennock, Adami
-  http://www.cse.msu.edu/~ofria/pubs/2003LenskiEtAl.pdf
-
-and consider, for discussion in class, the following questions:
-
-  Is this a simulation of evolution, or an instance?
-
-  How or why does it matter for studying evolution?
-
-  What evolutionary questions that interest you, might we be able to study
-  with Avida?
+Please send me a note if you need access to the PDF.
 
 Programming Homework (due Wednesday, midnight Pacific time)
 -----------------------------------------------------------

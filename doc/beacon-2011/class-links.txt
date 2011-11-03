@@ -8,18 +8,18 @@ Can you change just the code in 'fn' to make the tests in these files
 pass?  (The same 'fn' will work for all three files; the tests are
 just added incrementally.)
 
-  https://github.com/ctb/edda/blob/master/doc/beacon-2011/week9/tests-a.py
+  https://github.com/ctb/edda/blob/master/doc/beacon-2011/week10/tests-a.py
 
-  https://github.com/ctb/edda/blob/master/doc/beacon-2011/week9/tests-b.py
+  https://github.com/ctb/edda/blob/master/doc/beacon-2011/week10/tests-b.py
 
-  https://github.com/ctb/edda/blob/master/doc/beacon-2011/week9/tests-c.py
+  https://github.com/ctb/edda/blob/master/doc/beacon-2011/week10/tests-c.py
 
 And can you change just the code in 'fn2' to make the tests in these files
 pass?
 
-  https://github.com/ctb/edda/blob/master/doc/beacon-2011/week9/tests-d.py
+  https://github.com/ctb/edda/blob/master/doc/beacon-2011/week10/tests-d.py
 
-  https://github.com/ctb/edda/blob/master/doc/beacon-2011/week9/tests-e.py
+  https://github.com/ctb/edda/blob/master/doc/beacon-2011/week10/tests-e.py
 
 
 Tuesday, November 1st, 2011

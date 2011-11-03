@@ -16,7 +16,7 @@ assert "tuna" in newlist
 
 # test 2
 somelist = ["tuna"]
-fn(somelist, "ahi")
+newlist = fn2(somelist, "ahi")
 
 assert "tuna" in newlist
 assert "ahi" in newlist
