@@ -20,14 +20,21 @@ machine; see :doc:`starting-your-cloud-system`.
 2. Once logged in, enable Dropbox on your EC2 machine (see:
 :doc:`../tutorials-2011/installing-dropbox`)
 
-3. Put the matplotlib running-average code from :doc:`tutorial-6`
-(remove the dhtml stuff) into a file called 'plot-running-average.py'.
-Put it in dropbox on your local computer, and then run it on your EC2
-machine by typing ::
+3. Put the matplotlib running-average code from :doc:`tutorial-6` (the
+first example plot) into a file called
+'plot-running-average.py'.  Put it in dropbox on your local computer,
+and then run it on your EC2 machine by typing ::
 
    %% python ~/Dropbox/plot-running-average.py
 
 Commit it to your git repo and push it to your git repository.
+Note: You'll need to modify the code to set ::
+
+   image_file = '/root/Dropbox/graph.png'
+
+before calling 'pyplot.savefig(image_file)'.  Once you run the code,
+you should see the image in your Dropbox on your own computer, not
+just your EC2 machine.
 
 4) Build & run avida according to :doc:`building-and-running-avida`.
 Send Titus the last line of your data/average.dat file, as per the end of

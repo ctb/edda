@@ -1,6 +1,14 @@
 Class Links
 ===========
 
+Tuesday, November 8th, 2011
+---------------------------
+
+Using Jot!, sketch box-and-arrow diagrams of "program flow" (interpret
+what that means as you wish...) for the following four programs.
+
+  
+
 Thursday, November 3rd, 2011
 ----------------------------
 
