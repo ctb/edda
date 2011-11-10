@@ -1,13 +1,31 @@
 Class Links
 ===========
 
+Thursday, November 10th, 2011
+-----------------------------
+
+Read and interpret these three programs, for discussion:
+
+  https://github.com/ctb/edda/blob/master/doc/beacon-2011/week11/e-1.py
+
+  https://github.com/ctb/edda/blob/master/doc/beacon-2011/week11/e-2.py
+
+  https://github.com/ctb/edda/blob/master/doc/beacon-2011/week11/e-3.py
+
+
 Tuesday, November 8th, 2011
 ---------------------------
 
 Using Jot!, sketch box-and-arrow diagrams of "program flow" (interpret
-what that means as you wish...) for the following four programs.
+what that means as you wish...) for the following four programs:
 
-  
+  https://github.com/ctb/edda/blob/master/doc/beacon-2011/week11/p-1.py
+
+  https://github.com/ctb/edda/blob/master/doc/beacon-2011/week11/p-2.py
+
+  https://github.com/ctb/edda/blob/master/doc/beacon-2011/week11/p-3.py
+
+  https://github.com/ctb/edda/blob/master/doc/beacon-2011/week11/p-4.py
 
 Thursday, November 3rd, 2011
 ----------------------------
