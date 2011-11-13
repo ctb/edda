@@ -1,0 +1,207 @@
+====================================
+Running Avida and saving the results
+====================================
+
+The purpose of this tutorial is to get you to the point where you can
+run multiple avida experiments and save the results for later use.  To
+do this, we're going to use Amazon's Elastic Block Store (EBS), which
+is a fancy way of saying "we're going to rent a hard disk from Amazon."
+
+First, start up a cloud system, as in :doc:`starting-your-cloud-system`
+**using the AMI ami-67fe300e.**  One key difference is that you need to
+pick an availability zone (on the first window after selecting the AMI) --
+something like us-east-1a, or us-east-1d.  Follow the rest of the
+instructions the same way you did before.
+
+Now your cloud machine should be starting up.  But before logging in,
+create an EBS volume to attach to your new computer.
+
+To do this, either watch @@ this video, and/or follow these brief
+instructions:
+
+ 1. In the EC2 control tab, select 'Snapshots'.  Select "Public snapshots".
+    Search for snap-57bad535, which is a snapshot that contains a compiled
+    version of Avida.  Select it, and click Create Volume.  Select the
+    same availability zone as you selected above for your cloud machine.
+    Select 'create' (you don't need to specify a size).
+
+    This takes a hard disk image that I created for you, which contains a
+    compiled version of avida, and makes your own personal copy of it.
+
+    Note that you only need to do this once, the first time through --
+    after that, the volume will be there for you to use again and again.
+
+ 2. Go to Volumes, on the left.  Select the 'empty' volume, which is the
+    one you just created (there should be only one).
+
+    Optional: If you want to name it, find the 'tags' tab and add/edit
+    tags; set the value for the key=name row to something like 'my
+    avida data'.  Save tags.
+
+    Now, select 'attach volume'.  Select the name of the instance that you
+    started up (again, there should only be one).  Attach as '/dev/sdf'.
+    If you don't find a running instance in the menu, check to make sure that
+    the instance status is green; if it's not, wait.  If it IS green, then
+    try doing a full page-reload on the Web page in question.
+
+    This takes the created hard disk image and attaches it (for the duration
+    of this instance's life only) to your running instance.
+
+Now, log in as before (see :doc:`logging-into-ec2-mac` or
+:Doc:`logging-into-ec2-windows`).
+
+The first step is to point the instance's operating system at the new
+hard drive, and give it a name.  To do this, type ::
+
+   %% mount /dev/xvdf /data
+
+Anytime you reference anything under /data, you are now touching on
+that hard drive instance.  It's like Amazon sent you a shiny new hard
+drive (10 GB in size only, to be sure) and now you've plugged it into
+your instance.  Neat, eh?
+
+Now run the following commands::
+
+   %% cd /data
+   %% mkdir experiment1
+   %% cd experiment1
+
+This creates a directory /data/experiment1 that we're going to use to store
+our Avida results.  Configure it for running Avida::
+
+   %% cp /data/avida/avida-core/support/config/avida.cfg .
+   %% cp /data/avida/avida-core/support/config/environment.cfg .
+   %% cp /data/avida/avida-core/support/config/instset-heads.cfg .
+   %% cp /data/avida/avida-core/support/config/default-heads.org .
+   %% curl -O http://ged.msu.edu/angus/files/events.cfg
+
+Now let's try running Avida again, from the built version that I included
+on the snapshot::
+
+  %% /data/avida/cbuild/bin/avida -s 1
+
+Great!  Now you have a running install of Avida in the directory
+/data/experiment1.
+
+A few notes before we continue.
+
+Setting up and running new experiments
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You can name your directory anything you want (although I'd suggest
+sticking with experiment1, experiment2, etc, and similarly banal
+names).  Just replace 'experiment1' in the following with your new
+name, and then repeat the configuration stuff above (the cp and curl
+commands). ::
+
+   %% cd /data
+   %% mkdir experiment1
+   %% cd experiment1
+
+Also, it's always a good idea to run avida for a short little while in
+each experiment directory, just to make sure it doesn't complain about
+the configuration, before doing more with
+
+Configuring avida with different commands and environments
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+There are a couple files to look at for modifying configurations, but the
+main two for Week 11's homework are 'events.cfg' and 'environment.cfg'.
+
+There are many ways to change these files, but the simplest is to use a local
+editor called 'nano'.  To use nano, type 'nano' followed by the filename,
+e.g. ::
+
+   %% nano events.cfg
+
+You can use the arrow keys (but not the mouse!) to move around, and scroll
+down past the end of the file.  Just maneuver to the info you want to change,
+and then use your backspace or delete key to remove stuff & insert new stuff
+just by typing.
+
+For example, to change the end update for your avida run from 5000 to
+50000, change the last line of events.cfg from this ::
+
+  u 500 Exit                        # exit
+
+to this ::
+
+  u 50000 Exit                        # exit
+
+To save the newly changed file, type CTRL-X and then say 'y' when it asks
+you if you want to save the file.
+
+To eliminate a task from the environment as per HW 11, edit
+environment.cfg and comment out whichever task you want by putting a
+'#' at the very beginning of the line.
+
+Output files
+~~~~~~~~~~~~
+
+All of the output files come with their own headers telling you what column
+is what.  You look at the top of them using 'more', which lets you page
+through them using the space bar; use 'q' or CTRL-C when you're done.  The
+'tail' command will let you see the bottom of the files.
+
+For example, to look at 'average.dat', do::
+
+   %% more data/average.dat
+
+when you're in the /data/experiment1 directory after running avida.  You can
+look at the bottom of the file with ::
+
+   %% tail data/average.dat
+
+You can also read the files with Python... more on that in a bit.
+
+Running avida for a long time
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+One of the tasks for HW 11 is to run avida for 50,000 generations.  This
+may take a long time, up to ~24 hours!  You definitely don't want to spend
+all that time sitting in front of the computer watching it run, and you
+might want to be able to disconnect and reconnect from elsewhere.  How can
+you do this?
+
+Before you start running avida, try typing 'screen' on your EC2 machine::
+
+   %% screen
+
+This creates a *virtual terminal window* that can be detached and
+reattached later, in which Avida will quite happily run.  So,
+basically, run 'screen' when you first log in, then setup and
+configure avida, and start it running.  When you are sure it's
+going to go past 500 updates :), type 'CTRL-A' followed by a 'd'
+to detach.  You'll be back at the prompt you were at before you
+typed 'screen'.
+
+You can now log out, go home, etc., and screen and avida will keep
+on running.  If you want to pick it back up, log into your EC2
+machine and type::
+
+  %% screen -r
+
+This will reconnect you to your screen session.
+
+You can run multiple 'screen's at the same time, for example if you
+want to run two avidas at the same time.  (Like a lot of the other
+stuff we've talked about in class, screen is very powerful and can do
+a lot of things, but we're only covering some basics in class.)
+
+One way to tell if your avida run is done is to reattach to the
+screen session using 'screen -r' and see if it's finished & back at the
+% prompt.  Alternatively, you can do ::
+
+  %% tail data/average.dat
+
+in your experiment director and check to see if it's reached the update
+specified for exit in your events.cfg file.
+
+Exiting avida
+~~~~~~~~~~~~~
+
+If you want to exit from avida before it's done, type CTRL-C.  This is
+actually a pretty good tip for many UNIX programs...
+
+**Important:** Don't shut down your EC2 machine until your avida runs
+are done!

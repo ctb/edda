@@ -1,0 +1,35 @@
+Homework, week 10
+================
+
+Papers to read
+--------------
+
+Please read these papers for Tuesday, Nov 16th:
+
+  Ofria, Bryson, and Wilke, 2009
+  http://www.cse.msu.edu/~ofria/pubs/2009AvidaIntro.pdf
+
+  Lenski, Ofria, Pennock, Adami
+  http://www.cse.msu.edu/~ofria/pubs/2003LenskiEtAl.pdf
+
+and consider, for discussion in class, the following questions:
+
+  How does mutation rate affect evolution?
+
+  How does population size in Avida affect evolution?
+
+  How is world topology likely to affect evolution?
+
+Programming Homework (due Wednesday, midnight Pacific time)
+-----------------------------------------------------------
+
+1. Run & save at least two different Avida experiments to 50,000
+generations, one with the default task environment and one with at
+least one non-EQU task eliminated. NOTE: each experiment may take up
+to 24 hours to run!  See the instructions here:
+:doc:`running-and-saving-avida-results`.
+
+2. Plot the evolutionary fitness of each run together on an x-y plot,
+adapting `this script <>`__ to do so.  You may want to set the X axis to
+log scale @@.  Here is an example file to try.  Remember to establish
+Dropbox as per :doc:`../tutorials-2011/installing-dropbox`.

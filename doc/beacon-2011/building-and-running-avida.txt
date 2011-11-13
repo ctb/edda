@@ -1,0 +1,72 @@
+=============================
+Building and installing Avida
+=============================
+
+We'll talk about Avida -- what it is and what it does -- at some
+length in this course, but the first thing we want to do is get it up
+and running.  For now, for more information on Avida you can visit the
+`Avida development site @ the Devolab <http://avida.devosoft.org/>`__.
+
+Start up a cloud system, as in :doc:`starting-your-cloud-system`
+**using the AMI ami-67fe300e.** Then log into the system as
+detailed in :doc:`logging-into-ec2-mac` or
+:Doc:`logging-into-ec2-windows`.  You should arrive at a prompt with
+'%' at the end
+
+.. @@ update for video, new AMI
+
+Let's start by using git at the command line to get the avida source code.
+
+First, go to the '/mnt' directory.  On Amazon cloud instances, this is a
+directory into which you can put large amounts of data; note, though,
+that it's temporary, so it will go away when you shut down the machine! ::
+
+  %% cd /mnt
+
+Next, use 'git' to create a copy of the avida source code: ::
+
+  %% git clone git://avida.devosoft.org/avida.git
+  %% cd avida
+  %% git submodule init
+  %% git submodule update
+
+And, finally, build avida!  This involves translating the source code
+that avida is written in (mostly C++) into something that the computer
+understands.  Unlike Python (which is interpreted interactively), C++
+is compiled and so you have to run a compilation command before you
+can run C++ programs.  We'll talk a bit more about these differences
+later on in the course. ::
+
+  %% ./build_avida
+
+This command may take a while (~5-10 minutes) -- yeah, Avida is kind of big!
+
+Next, make a new directory, change into it, and configure it to be an
+avida working directory by copying ('cp') in a bunch of files::
+
+  %% mkdir beacon
+  %% cd beacon
+
+  %% cp ../avida-core/support/config/avida.cfg .
+  %% cp ../avida-core/support/config/environment.cfg .
+  %% cp ../avida-core/support/config/instset-heads.cfg .
+  %% cp ../avida-core/support/config/default-heads.org .
+
+Last, but not least, pull down a configuration file from the course
+Web site.  Here, the 'curl' command grabs the given file from the
+given Web address and saves it to the current directory. ::
+
+  %% curl -O http://ged.msu.edu/angus/files/events.cfg
+
+and, finally... run avida! ::
+
+  %% ../cbuild/bin/avida
+
+It should run for about a minute and then exit.
+
+For your homework, please send me the following piece of information in
+e-mail::
+
+  %% tail -1 data/average.dat
+
+(Be sure to shut down your Amazon rental machine...)

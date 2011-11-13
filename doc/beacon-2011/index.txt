@@ -42,6 +42,8 @@ Contents:
 
    week10-hw
 
+   week11-hw
+
 Reference material
 ------------------
 
