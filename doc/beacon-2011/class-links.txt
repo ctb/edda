@@ -1,6 +1,48 @@
 Class Links
 ===========
 
+Thursday, November 17th, 2011
+-----------------------------
+
+Consider an Avida environment with just two digital organisms, Art and Dakota.
+
+
+1. Suppose Art has a merit of 5 and Dakota has a merit of 10. If we
+   inject 100 cpu-cycles into the environment, approximately how many
+   cpu-cycles will Art get and how many will Dakota get?
+
+2. If Art has a gestation time of 5 and Dakota has a gestation time
+   of 15, approximately how many offspring will each digital organism
+   produce?
+
+3. Suppose Dakota receives a cosmic ray mutation that reduces her
+   gestation time to 5, now how many offspring will each digital
+   organism produce?
+
+4. What is the minimum change to Art's merit that would keep him
+   competitive with Dakota?
+
+5. Suppose you now have a population with 5 organisms, each with
+   merit of 5. Compute the total merit, and estimate how many
+   cpu-cycles each will get if 100 cpu cycles are injected into the
+   environment.
+
+6. If one of the 5 organisms is mutated to a merit of 10, how does
+   that effect the portion of cpu-cycles it receives? Try answering
+   in terms of how much 'faster' and 'slower' each organism will run.
+
+7. Using words, describe a way to probabilistically schedule
+   cpu-cycles relative to merit, using one random number draw between
+   0-1 per cycle that is scheduled. Hint: start by computing the sum
+   of all merits in the population.
+
+Tuesday, November 15th, 2011
+----------------------------
+
+In small groups, discuss how Avida handles updates, reproduction, mutation,
+and fitness calculations.  Draw a diagram representing some aspect of this
+process & we'll discuss it in class.
+
 Thursday, November 10th, 2011
 -----------------------------
 

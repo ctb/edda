@@ -6,7 +6,9 @@ You should start this tutorial at a prompt that looks something like this::
 
    root@ip-10-82-233-6:~#
 
-Type 'cd' to go to your home directory on your EC2 machine.
+Type 'cd' to go to your home directory on your EC2 machine. ::
+
+  %% cd
 
 Now, download the dropbox file::
 

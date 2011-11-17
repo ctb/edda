@@ -78,7 +78,7 @@ our Avida results.  Configure it for running Avida::
 Now let's try running Avida again, from the built version that I included
 on the snapshot::
 
-  %% /data/avida/cbuild/bin/avida -s 1
+  %% /data/avida/cbuild/bin/avida
 
 Great!  Now you have a running install of Avida in the directory
 /data/experiment1.

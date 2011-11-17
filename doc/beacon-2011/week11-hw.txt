@@ -1,5 +1,5 @@
-Homework, week 10
-================
+Homework, week 11
+=================
 
 Papers to read
 --------------
@@ -24,12 +24,29 @@ Programming Homework (due Wednesday, midnight Pacific time)
 -----------------------------------------------------------
 
 1. Run & save at least two different Avida experiments to 50,000
-generations, one with the default task environment and one with at
+updates, one with the default task environment and one with at
 least one non-EQU task eliminated. NOTE: each experiment may take up
 to 24 hours to run!  See the instructions here:
 :doc:`running-and-saving-avida-results`.
 
 2. Plot the evolutionary fitness of each run together on an x-y plot,
-adapting `this script <>`__ to do so.  You may want to set the X axis to
-log scale @@.  Here is an example file to try.  Remember to establish
-Dropbox as per :doc:`../tutorials-2011/installing-dropbox`.
+adapting `this script
+<https://raw.github.com/ctb/edda/master/doc/beacon-2011/week11/plot-fitness.py>`__
+to do so.  You may want to set the X axis to log scale by switching
+'plot' to 'semilogx'.  The simplest way to go about running this is to
+establish Dropbox on your EC2 machine, as per
+:doc:`../tutorials-2011/installing-dropbox`; then, copy the
+'plot-fitness.py' file into your local computer's Dropbox directory.
+Now you can run it on your remote EC2 machine by doing ::
+
+   %% python /root/Dropbox/plot-fitness.py
+
+
+3. Save copies of each 50k run average.dat file by putting them in your
+Dropbox folder, like so::
+
+   %% cp /data/experiment1/data/average.dat /root/Dropbox/experiment1-average.dat
+
+(but for each experiment directory) and then e-mail them to me at
+titus@idyll.org (all attached to one e-mail is fine).  Please note down
+what you did to generate each experiment file (eliminated tasks, etc.)
