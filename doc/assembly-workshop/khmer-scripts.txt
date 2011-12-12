@@ -1,0 +1,103 @@
+====================
+Useful Khmer Scripts
+====================
+
+:Author: Adina Howe
+:Date: December 11, 2011
+:Last Updated: December 11, 2011 (Adina)
+
+We thought we'd highlight some useful khmer scripts and their usage.  We
+assume you've already successfully installed khmer.  The scripts shown here
+will not include those used for partitioning a dataset as those will be
+covered in a different tutorial.
+
+Quality Filtering of Illumina Sequences
+
+Quality scores at the ends of reads are unreliable, and Illumina has a special
+indicator (a quality score of 2, encoded as "B") to flag this region.  See the
+following post for more information:
+(http://news.open-bio.org/news/2010/04/illumina-q2-trim-fastq/).  
+
+In khmer, we use:
+
+   %% python khmer/scripts/quality-trim.py <input fastq> <output fastq>
+
+File Format Changes
+
+   %% python khmer/scripts/fasta-to-fastq.py <input> > <output>
+   %% python khmer/scripts/fastq-to-fasta.py <input> > <output>
+
+You may change the parameters of the filtering within the script (i.e. K-size,
+HT size, number of HTs, abundance threshold).  This script removes reads whose
+k-mers are all greater than the abundance threshold.  Be aware of the choosing
+the correct HT size appropriate for your dataset size (diversity).
+
+Characterizing Diversity with a Dataset
+
+We often use the diversity of k-mers within a dataset to evaluate the
+diversity within it or to estimate memory requirements for other processing
+(i.e. partitioning).
+
+   %% python khmer/scripts/bloom_count.py <input> <K-mer length> <HT Size> <#
+   of HT>
+
+The first line output of this script will be the number of unique k-mers.
+The second line output is the occupancy with the hashtable.  
+The third line output is a double-check on the total number of unique k-mers
+(it should be the same as the first line).
+
+If you want to get the distribution of k-mer abundances in your dataset, you
+can do the following:
+
+First, build a counting Bloom filter from your sequences.  Note that you can
+   change the default HT sizes to suit your needs.
+
+   %% python khmer/scripts/load-into-counting.py <htname> <input data>
+
+Next, generate kmer-abundance-histogram from counting bloom filter.
+
+   %% python khmer/scripts/kmer-abundance-hist.py <htname> <input data>
+   <output>
+
+Removing high abundance k-mers
+
+In the metahit (Qin et al, 2010) and rumen (Hess et al, 2011) assemblies, low
+   abundance k-mers were removed prior to assembly to reduce computational
+   requirements.  Perhaps you've looked at your k-mer abundance distribution
+   by generationg the k-mer abundance histogram, and you now wnat to remove
+   low abundance k-mers.
+
+   %% python khmer/scripts/filter-inexact-all.py <input> <output>
+
+You may change the parameters of the filtering within the script (i.e. K-size,
+HT size, number of HTs, abundance threshold).  This script removes reads whose
+k-mers are all greater than the abundance threshold.  Be aware of the choosing
+the correct HT size appropriate for your dataset size (diversity).
+
+K-mer Coverage of Assembled Contigs
+
+So you have an assembly, now what?  Maybe you'd like to look at how the
+originating reads map back to the assembled contigs.  There are programs to do
+this (i.e. Bowtie, BWA, etc).  However, we can also do this at the k-mer
+coverage level (vs. read coverage) with our Bloom filter data structure, and
+we can get it done really fast.  
+
+First, we build our counting filter to count the k-mers within our reads.
+
+   %% python khmer/scripts/load-into-counting.py <htname> <input data>
+
+Next, we go through the k-mers in our assembled contigs and query the bloom
+filter to see how many k-mers from our reads match the contig's k-mer.  The
+output from this script gives you the median, average, and std dev of the
+k-mer coverage estimates and the length of the assembled sequence for each contig.  
+
+   %% python khmer/scripts/count-median-exp.py <htname> <assembled contigs
+   data> > <output file>
+
+To change the sensitivity/specificity of this estimate, you can change the
+K-length within the scripts.  
+
+
+
+  
+  
