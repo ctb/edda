@@ -44,6 +44,8 @@ Contents:
 
    week11-hw
 
+   week14-hw
+
 Reference material
 ------------------
 

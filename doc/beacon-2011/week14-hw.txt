@@ -1,0 +1,90 @@
+Homework, week 14
+=================
+
+Papers to read
+--------------
+
+Please read these papers/blog post for Thursday, Dec 1st.
+
+   http://www.plosone.org/article/info%3Adoi%2F10.1371%2Fjournal.pone.0018011
+
+   http://phylogenomics.blogspot.com/2011/03/story-behind-story-of-my-new-plosone.html
+
+   http://www.nature.com/news/2011/110803/full/476020a.html
+
+For class, consider the following questions:
+
+   What kind of evidence is being used to infer the existence of a "4th
+   domain of life"?
+
+   What kind of additional information would you like in order to
+   substantiate their hypothesis?
+
+   What kind of information or results would *disprove* their
+   hypothesis?
+
+   What did their computational analysis pipeline look like?  (Hint: you'll
+   be asked to draw it in class.)
+
+.. Were there any arbitrary choices made in their computational pipeline?
+
+More papers to read
+-------------------
+
+For Tuesday's class, read these:
+
+   http://biologicinstitute.org/2008/10/17/the-genius-behind-the-ingenious/
+
+   http://www.nasa.gov/centers/ames/news/releases/2004/04_55AR.html
+
+   http://www.mitpressjournals.org/doi/abs/10.1162/EVCO_a_00005
+
+and consider, for discussion, the differences between the genetic algorithm
+design approach used in this antenna design, Drummond & Wilke's protein
+folding simulation, and Avida.  Do they all have the same goals?  Do they
+use similar techniques?  What are the similarities and differences between
+the evolution techniques?
+
+Computational HW (due Wednesday, Dec 7th, at midnight)
+------------------------------------------------------
+
+Run through :doc:`../tutorials-2011/short-read-assembly-velvet`, using AMI
+ami-67fe300e.  The data is on snapshot snap-000d346e, so you'll need
+to create a volume from that snapshot and mount it as /dev/xvdf.  (See
+:doc:`running-and-saving-avida-results` for snapshot/volume basics.)
+
+Once you complete your first assembly, grab the khmer and screed
+source code::
+
+   %% git clone git://github.com/ctb/screed.git
+   %% cd screed
+   %% python setup.py install
+   %% cd ..
+
+   %% git clone git://github.com/ctb/khmer.git
+
+and use the 'assemstats3.py' script to look at the contigs.fa file::
+
+   %% python khmer/scripts/assemstats3.py 200 */contigs.fa
+
+What is assemstats reporting?  What values are you looking for here?
+
+Try assembling with different 'k' values (e.g. 33 instead of 31, or 29
+instead of 31).  Which assembly is the best?  On what criterion?
+
+(See the Miller paper from :doc:`week5-hw` for info on assembly.)
+
+Send me (ctb@msu.edu) the first sequence from the best assembly (the
+one you chose).  You can get this sequence by enabling Dropbox and
+doing ::
+
+   %% python
+   >>> import screed
+   >>> sequences = list(screed.open('dirname/contigs.fa'))
+   >>> fp = open('/root/Dropbox/output.txt', 'w')
+   >>> fp.write(sequences[0].sequence)
+
+where you replace 'dirname' with the name of the assembly directory, e.g.
+'k31'.
+ 
+Type CTRL-D to exit the Python prompt.

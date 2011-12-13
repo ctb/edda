@@ -1,6 +1,80 @@
 Class Links
 ===========
 
+Thursday, December 1st, 2011
+----------------------------
+
+In groups or on your own, draw an outline of the computational process
+used in the 4th domain paper.  While doing so, consider: what data did
+they start with, how did they analyze it, where were parameters
+chosen, how were controls performed, etc.?
+
+If you can use Jot! to draw, please do so.
+
+Tuesday, November 29th, 2011
+----------------------------
+
+Skim the "Instruction set reference" and "example logic gene", here,
+
+   http://lyorn.idyll.org/~t/avida/cpu_tour.html
+
+and the more detailed instructions, here,
+
+   http://lyorn.idyll.org/~t/avida/inst_set.html
+
+and write AND and NOR  from Table I of
+
+   http://www.cse.msu.edu/~ofria/pubs/2003LenskiEtAl.pdf
+
+by hand.  I've transcribed them here: AND is ::
+
+   A and B
+
+(i.e 'true' if both 'a' and 'b' are true), while NOR is ::
+
+   (NOT A) and (NOT B)
+
+(i.e. 'true' if neither 'a' nor 'b' are true).
+
+A few hints.  First, ::
+
+   IO
+   nop-C
+
+will get a new input value (think true/false) and put it in the CX
+register.  If you change nop-C to a nop-A, then the value will go into
+the AX register; by default, or with a nop-B, the value will go into
+the BX register.  Any time you see a ?BX? in an instruction
+description, it means the output destination can be modified by
+following the instruction with a nop-A or a nop-C, as with IO.
+
+Second, (A NAND A) is equivalent to (NOT A) -- see the truth table
+in http://en.wikipedia.org/wiki/Logical_NAND.  Similarly,
+NOT (A NAND B) is equivalent to (A AND B) (see the same truth table :).x
+
+Third, you can use 'push' and 'pop' to copy values from one register
+to another.  For example, ::
+
+   push
+   pop
+   nop-C
+
+copies from BX into CX.  And ::
+
+   push
+   nop-C
+   pop
+
+copies from CX into BX.
+
+In class we'll also look at the default starting organism,
+
+   http://lyorn.idyll.org/~t/transfer/cse891/default-heads.org
+
+and an evolved guy with high fitness:
+
+   http://lyorn.idyll.org/~t/transfer/cse891/exp8-decoded.org
+
 Thursday, November 17th, 2011
 -----------------------------
 
