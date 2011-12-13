@@ -4,14 +4,13 @@ Comparing assemblies done with different k values
 Here we're going to answer the age-old question: which is better, k=31
 or k=33?
 
-@@smallcorn.fa
-
 Get the small corn data set::
 
   %% cd /mnt
   %% mkdir corn
   %% cd corn
-  %% @@
+  %% cp /data/smallcorn.fa.gz .
+  %% gunzip smallcorn.fa.gz
 
 Assemble with two different k values, 31 and 33::
 
@@ -35,7 +34,7 @@ You should see this::
 OK, clearly k=33 is better, right?  Right?
 
 Well, let's see... let's do a comparison.  First, extract just those
-sequences > 100.
+sequences > 100. ::
 
   %% python /mnt/khmer/sandbox/extract-long-sequences.py 100 corn.33/contigs.fa > corn33.fa
   %% python /mnt/khmer/sandbox/extract-long-sequences.py 100 corn.31/contigs.fa > corn31.fa

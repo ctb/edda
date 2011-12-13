@@ -1,0 +1,51 @@
+Merging Velvet multi-k assemblies
+=================================
+
+Patrick Chain's group at LANL has developed an approach to merge
+regular Velvet assemblies with multiple ks using a program called
+minimus2.  Let's try it out!
+
+First, install some necessary software::
+
+  %% apt-get -y --force-yes install mummer libxml-parser-perl libexpat1-dev
+  %% ln /usr/bin/show-coords /usr/local/bin
+
+Now, download AMOS, the parent package containing minimus2::
+
+  %% cd /mnt
+  %% curl -L http://sourceforge.net/projects/amos/files/amos-3.1.0-rc1.tar.gz/download > amos-3.1.0-rc1.tar.gz
+
+Configure & build it::
+
+  %% tar xzf amos-3.1.0-rc1.tar.gz
+  %% cd amos-3.1.0-rc1
+  %% ./configure
+  %% make
+  %% make install
+  %% cp bin/* /usr/local/bin
+
+Go to corn::
+
+  %% cd /mnt/corn
+  %% cat corn31.fa corn33.fa > all-corn.fa
+  %% toAmos -s all-corn.fa -o all-corn.afg
+  %% minimus2 all-corn
+
+This will produce a file 'all-corn.fasta'; let's check it out::
+
+  %% python /mnt/khmer/sandbox/assemstats3.py 100 smallcorn.k25.k35-contig.fa  corn.*/*contigs.fa all-corn.fasta
+  ** cutoff: 100
+  N       sum     max     filename
+  4826    1296668 4082    smallcorn.k25.k35-contig.fa
+  7661    1664903 4296    corn.31/contigs.fa
+  8177    1784032 4167    corn.33/contigs.fa
+  2250    1147502 11801   corn.33/meta-velvetg.contigs.fa
+  5986    1635992 5020    all-corn.fasta
+  --
+  TOTAL: 7.5291e+06 in 28900 contigs (mean size 261)
+
+OK.  Now we've given you at least three different ways of generating
+metagenome assemblies.  Which one is best??
+
+We don't really know.  We're currently using the minimus2 approach, because
+we think it does a decent job, but we can't really justify it to you yet :).

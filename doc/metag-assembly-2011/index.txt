@@ -1,12 +1,12 @@
-December 2011 / Metagenome Assembly class
-=========================================
+December 2011 / Metagenome Assembly workshop
+============================================
 
 Contents:
 
 .. toctree::
    :maxdepth: 1
 
-   getting-started
+   starting-your-cloud-system
 
    installing-khmer
 
@@ -18,14 +18,16 @@ Contents:
 
    short-read-assembly-idba
 
-   big-black-magic-boxes
-
    velvet-multik
 
    diginorm
 
    partitioning
 
-   mapping
+   khmer-scripts
 
-.. @@  khmer-scripts
+   installing-dropbox
+
+..   big-black-magic-boxes
+..   mapping
+

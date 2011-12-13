@@ -1,3 +1,0 @@
-rent EC2 machine
-log into EC2 machine
-set up dropbox

@@ -19,11 +19,6 @@ Go to your /mnt directory where there is more free space::
 
    %% cd /mnt
 
-Next, we need to obtain some different files.  To obtain Velvet,
-use curl::
-
-  %% curl -O http://www.ebi.ac.uk/~zerbino/velvet/velvet_1.1.07.tgz
-
 We're going to assemble a simulated metagenome which has been
 published in "Evaluating the Fidelity of De Novo Short Read
 Metagenomic Assembly Using Simulated Data".  It is a mixture of
@@ -35,11 +30,18 @@ small dataset that should assemble pretty fast.
 
 Let's copy the dataset to your instance and uncompress it::
 
-   @@ /mnt/simulated
+   %% mkdir simulated
+   %% cd simulated 
    %% cp /data/simulated_subset.fa .
 
 Installing Velvet (threaded)
 -----------------------------
+
+Next, we need to obtain some different files.  To obtain Velvet,
+use curl::
+
+  %% cd /mnt
+  %% curl -O http://www.ebi.ac.uk/~zerbino/velvet/velvet_1.1.07.tgz
 
 Uncompress the tarballs and move into the Velvet directory::
 
@@ -67,7 +69,7 @@ We will now "install" Velvet onto your instance::
 Running Velvet
 --------------
 
-Before you use velvet, you should read the manual
+Before you use velvet a lot, you should read the manual
 (http://www.ebi.ac.uk/~zerbino/velvet/).  You'll notice that velvet
 takes a variety of input formats, and generally you'll need to specify
 which ones you have.  Also, if you have paired-end reads and
@@ -134,7 +136,7 @@ which in this case is > 100, so never mind :).
 
 After you have created all of your assemblies, run::
 
-  %% python /mnt/khmer/sandbox/assemstats3.py 0 k*/contigs.fa
+  %% python /mnt/khmer/sandbox/assemstats3.py 0 */contigs.fa
 
 again to see how the assemblies compare to each other.  If you
 generate a lot of assemblies, you can copy and paste the output to a

@@ -1,0 +1,43 @@
+Partitioning
+============
+
+As part of our efforts to scale metagenome assembly, we've developed an
+IDBA/MetaVelvet-like approach that not only subdivides the reads into
+disconnected components but does so in less memory than either of the
+other approaches.
+
+To run partitioning on the corn sample, do the following::
+
+  %% cd /mnt
+  %% mkdir partcorn
+  %% cd partcorn
+  %% cp ../data/smallcorn.fa.gz .
+
+First, load the data into a graph file::
+
+  %% /mnt/khmer/scripts/load-graph.py -k 32 -x 1e9 -N 4 corn smallcorn.fa.gz
+
+Partition the graph::
+
+  %% /mnt/khmer/scripts/partition-graph.py corn
+
+Merge the partitions (which are in .pmap files at the moment)::
+
+  %% /mnt/khmer/scripts/merge-partitions.py -k 32 corn
+
+Annotate the original read set with its partitions::
+
+  %% /mnt/khmer/scripts/annotate-partitions.py -k 32 corn smallcorn.fa.gz
+
+And now extract the partitions::
+
+  %% /mnt/khmer/scripts/extract-partitions.py -X 1 cornpart *.part
+
+This leaves you with a bunch of cornpart.groupNNNN.fa files, each of which
+is completely disconnected from the others.
+
+One caveat about these files, though: they cannot be directly assembled with
+Velvet, because the partitioning information on the end of the sequence names
+confuses Velvet.  You need to strip this off like so::
+
+  %% python /mnt/khmer/sandbox/strip-partition.py cornpart.group0000.fa > cornpart.group0000nop.fa

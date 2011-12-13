@@ -15,7 +15,7 @@ should have roughly the same coverage within the metagenome.
 
 We're going to assume you've gone through the Velvet assembler tutorial at
 this point.  So let's start with installing MetaVelvet.  These commands should
-look familiar.
+look familiar... ::
 
    %% cd /mnt
    %% curl -O http://metavelvet.dna.bio.keio.ac.jp/src/MetaVelvet-1.1.01.tgz
@@ -25,7 +25,7 @@ look familiar.
    %% cp meta-velvetg /usr/local/bin
 
 Now, let's take the assembly we previously completed with Velvet and see
-what MetaVelvet comes up with.
+what MetaVelvet comes up with. ::
 
    %% cd /mnt/simulated
    %% meta-velvetg sim.33 | tee logfile
@@ -35,7 +35,7 @@ You'll see the output of MetaVelvet within your sim.33 directory as
 
    %% python /mnt/khmer/sandbox/assemstats3.py 100 sim.33/*contigs.fa
 
-you'll see:
+you'll see::
 
   ** cutoff: 100
   N  sum  max    filename
@@ -44,7 +44,7 @@ you'll see:
   --
   TOTAL: 1.0762e+07 in 97834 contigs (mean size 110)
 
-...or, identical.  Well, this IS simulated data... what happens on corn? ::
+...or, identical!  Well, this IS simulated data... what happens on corn? ::
 
   %% cd /mnt/corn
   %% meta-velvetg corn.33 | tee logfile.33

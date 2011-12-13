@@ -1,0 +1,75 @@
+Digital normalization
+=====================
+
+One approach to dealing with big data sets is to throw out redundant
+reads, which is pretty much what digital normalization does.
+
+Let's try a MetaHit data set. ::
+
+  %% cd /mnt
+  %% mkdir mh
+  %% cd mh
+  %% cp /data/MH0001.trimmed.fa.gz .
+
+OK, now tell khmer to toss any read that it's seen more than 20 times (-C 20)
+based on a median k-mer count for k=20. ::
+
+  %% /mnt/khmer/scripts/normalize-by-median.py -k 20 -C 20 -x 1e9 -N 4 --savehash mh.kh MH0001.trimmed.fa.gz
+
+You should see a lot of output; it will take about an hour to go through
+it all::
+
+  ...
+  ... kept 21810157 of 42450000 , or 51 %
+  ... in file MH0001.trimmed.fa.gz
+  DONE with MH0001.trimmed.fa.gz ; kept 21813730 of 42458402 or 51 %
+  output in MH0001.trimmed.fa.gz.keep
+  fp rate estimated to be 0.002
+
+Yep, that's right, it threw out 50% of the reads!
+
+Next, you can trim the reads at all low-abundance k-mers.  These may
+or may not be real, but it's a good way to remove (random) errors (which are
+virtually guaranteed to be unique)::
+
+  %% python /mnt/khmer/scripts/filter-abund.py mh.hk MH0001.trimmed.fa.gz.keep
+
+You'll see::
+
+  ... filtering 21800000
+  ... filtering 21810000
+  done loading in sequences
+  DONE writing.
+  processed 21795730 / wrote 15587711 / removed 6208019
+  processed 951002635 bp / wrote 627363382 bp / removed 323639253 bp
+  discarded 34.0%
+  output in MH0001.trimmed.fa.gz.keep.abundfilt
+
+Yep, another 1/3 gone!
+
+This results in a file 'MH001.trimmed.fa.gz.keep.abundfilt'.  At this
+point, you can either assemble THAT, or you can go for one more round
+of normalization -- this time down to 5::
+
+   %% /mnt/khmer/scripts/normalize-by-median.py -k 20 -C 5 -x 1e9 -N 4 MH0001.trimmed.fa.gz.keep.abundfilt
+
+you should see the output ::
+
+   ... kept 9566455 of 15590000 , or 61 %
+   ... in file MH0001.trimmed.fa.gz.keep.abundfilt
+   DONE with MH0001.trimmed.fa.gz.keep.abundfilt ; kept 9569886 of 15597621 or 61 %
+   output in MH0001.trimmed.fa.gz.keep.abundfilt.keep
+   fp rate estimated to be 0.000
+
+This will (finally!) end in a file
+'MH0001.trimmed.fa.gz.keep.abundfilt.keep' that you can then assemble.
+
+(Note that all of these files are available on /data/ if you don't want
+to bother running all this stuff to completion.)
+
+Briefly: the first normalization (to 20) eliminates lots of redundant
+reads and counts k-mers; the abundance filtering trims off errors; and
+the second normalization throws away a bunch more redundant data.  In
+the end you have about 1/4 the data you started with, but should get
+nearly identical assemblies.  Huzzah!
+
