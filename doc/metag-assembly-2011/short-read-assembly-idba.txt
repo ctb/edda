@@ -1,0 +1,56 @@
+==================================
+Short Read Assembly with Meta-IDBA
+==================================
+
+:Author: Adina Howe
+:Date: December 11, 2011
+:Last Updated: December 11, 2011 (Adina)
+
+For this tutorial, we will be installing and using a de novo metagenomic
+assembler, Meta-IDBA.
+(http://bioinformatics.oxfordjournals.org/content/27/13/i94.short)
+Meta-IDBA partitions the assembly graph into separate components and then
+assembles each component.
+
+Let's grab it and install it. ::
+
+   %% cd /mnt
+   %% curl -O http://hku-idba.googlecode.com/files/idba-0.19.tar.gz
+   %% tar xvzf idba-0.19.tar.gz 
+   %% cd idba-0.19
+   %% ./configure
+   %% make
+   %% cp bin/idba /usr/local/bin
+
+To run an assembly of the simulated dataset we used in previous tutorials. ::
+
+   %% cd /mnt/simulated
+   %% idba --read simulated_subset.fa --output simulated_subset.k25.k35 --mink 25 --maxk 35 --minCount 0 
+
+Now take a look at it with assemstats3::
+
+   %% python /mnt/khmer/sandbox/assemstats3.py 100 simulated_subset.k25.k35-contig.fa 
+   ** cutoff: 100
+   N  sum  max    filename
+   38920   5097887 276 simulated_subset.k25.k35-contig.fa
+
+And there you have it, you've run an assembly with Meta-IDBA.
+
+Let's try it out on the corn data set... ::
+
+   %% cd /mnt/corn
+   %% idba --read smallcorn.fa --output smallcorn.k25.k35 --mink 25 --maxk 35 --minCount 0
+   %% python /mnt/khmer/sandbox/assemstats3.py 100 smallcorn.k25.k35-contig.fa corn.*/*contigs.fa
+   ** cutoff: 100
+   N  sum  max    filename
+   4826    1296668 4082 smallcorn.k25.k35-contig.fa
+   7661    1664903 4296 corn.31/contigs.fa
+   8177    1784032 4167 corn.33/contigs.fa
+   2250    1147502 11801 corn.33/meta-velvetg.contigs.fa
+   --
+   TOTAL: 5.8931e+06 in 22914 contigs (mean size 257)
+
+Note how the IDBA assembly has the best average, the k=33 Velvet assembly
+has the best sum, and the MetaVelvet assembly has the longest contig.
+
+Welcome... to metagenomics!!!!

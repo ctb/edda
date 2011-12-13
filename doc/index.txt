@@ -30,7 +30,11 @@ Contents:
 .. toctree::
    :maxdepth: 1
 
-   tutorials-2011
+   metag-assembly-2011/index
+
+   beacon-2011/index
+
+   tutorials-2011/index
 
    ngs-course-schedule
    presentations

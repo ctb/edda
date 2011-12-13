@@ -1,0 +1,64 @@
+===============================================
+Short Read Assembly with Meta-Velvet
+===============================================
+
+:Author: Adina Howe
+:Date: December 11, 2011
+:Last Updated: December 11, 2011 (Adina)
+
+For this tutorial, we will be extending the our use of the short read de novo 
+assembler Velvet by using the MetaVelvet package.  The manual for MetaVelvet
+is found at http://metavelvet.dna.bio.keio.ac.jp/.  Basically, MetaVelvet
+breaks apart the assembly graph into separate components based on estimated
+coverage.  This strategy assumes that reads that are from the same genomes 
+should have roughly the same coverage within the metagenome. 
+
+We're going to assume you've gone through the Velvet assembler tutorial at
+this point.  So let's start with installing MetaVelvet.  These commands should
+look familiar.
+
+   %% cd /mnt
+   %% curl -O http://metavelvet.dna.bio.keio.ac.jp/src/MetaVelvet-1.1.01.tgz
+   %% tar xvzf MetaVelvet-1.1.01.tgz
+   %% cd MetaVelvet-1.1.01
+   %% make ['MAXKMERLENGTH=49'] ['CATEGORIES = cat'] ['OPENMP=2']
+   %% cp meta-velvetg /usr/local/bin
+
+Now, let's take the assembly we previously completed with Velvet and see
+what MetaVelvet comes up with.
+
+   %% cd /mnt/simulated
+   %% meta-velvetg sim.33 | tee logfile
+
+You'll see the output of MetaVelvet within your sim.33 directory as
+'meta-velvetg.*', e.g. 'meta-velvetg.contigs.fa'.  If you run assemstats3 ::
+
+   %% python /mnt/khmer/sandbox/assemstats3.py 100 sim.33/*contigs.fa
+
+you'll see:
+
+  ** cutoff: 100
+  N  sum  max    filename
+  48917   5381022 158 sim.33/contigs.fa
+  48917   5381022 158 sim.33/meta-velvetg.contigs.fa
+  --
+  TOTAL: 1.0762e+07 in 97834 contigs (mean size 110)
+
+...or, identical.  Well, this IS simulated data... what happens on corn? ::
+
+  %% cd /mnt/corn
+  %% meta-velvetg corn.33 | tee logfile.33
+  %% python /mnt/khmer/sandbox/assemstats3.py 100 corn.33/*contigs.fa
+  ** cutoff: 100
+  N  sum  max    filename
+  8177    1784032 4167 corn.33/contigs.fa
+  2250    1147502 11801 corn.33/meta-velvetg.contigs.fa
+  --
+  TOTAL: 2.93153e+06 in 10427 contigs (mean size 281)
+
+Hmm, that DOES look better, doesn't it!
+
+How would you tell which set of assemblies is better?
+
+
+

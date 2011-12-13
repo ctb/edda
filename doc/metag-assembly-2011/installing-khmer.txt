@@ -1,0 +1,46 @@
+Installing khmer
+================
+
+khmer is a toolkit that we have been building here at MSU.  It contains
+a bunch of scripts and libraries that are of varying utility.  Below,
+we'll install it on our EC2 machine for later use.
+
+Change to the working disk::
+
+  %% cd /mnt
+
+Install some Python tools::
+
+  %% curl -O http://python-distribute.org/distribute_setup.py
+  %% python distribute_setup.py
+  %% easy_install nose
+
+Install a copy of our sequence IO library, screed::
+
+  %% git clone git://github.com/ctb/screed.git
+  %% cd screed
+  %% python setup.py install
+  %% cd ..
+
+Install a copy of khmer, our assembly tools library::
+
+  %% git clone git://github.com/ctb/khmer.git -b refactor
+  %% cd khmer
+  %% make test
+
+Make sure we can run it from our /mnt directory::
+
+  %% echo export PYTHONPATH=/mnt/khmer/python >> /root/.bashrc
+  %% export PYTHONPATH=/mnt/khmer/python >> /root/.bashrc
+
+Test::
+
+  %% python
+  >>> import khmer
+
+(make sure there's no error!)
+
+now exit Python::
+
+  >>> exit()
+

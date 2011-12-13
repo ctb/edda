@@ -1,0 +1,31 @@
+December 2011 / Metagenome Assembly class
+=========================================
+
+Contents:
+
+.. toctree::
+   :maxdepth: 1
+
+   getting-started
+
+   installing-khmer
+
+   short-read-assembly-velvet
+
+   assembly-diff
+
+   short-read-assembly-metavelvet
+
+   short-read-assembly-idba
+
+   big-black-magic-boxes
+
+   velvet-multik
+
+   diginorm
+
+   partitioning
+
+   mapping
+
+.. @@  khmer-scripts

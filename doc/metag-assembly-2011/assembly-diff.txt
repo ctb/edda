@@ -1,0 +1,83 @@
+Comparing assemblies done with different k values
+=================================================
+
+Here we're going to answer the age-old question: which is better, k=31
+or k=33?
+
+@@smallcorn.fa
+
+Get the small corn data set::
+
+  %% cd /mnt
+  %% mkdir corn
+  %% cd corn
+  %% @@
+
+Assemble with two different k values, 31 and 33::
+
+  %% velveth corn.33 33 -fasta -short smallcorn.fa
+  %% velvetg corn.33 -exp_cov auto -cov_cutoff 0 -scaffolding no
+
+  %% velveth corn.31 31 -fasta -short smallcorn.fa
+  %% velvetg corn.31 -exp_cov auto -cov_cutoff 0 -scaffolding no
+
+Now run assemstats3::
+
+  %% python /mnt/khmer/sandbox/assemstats3.py 100 corn.*/contigs.fa
+
+You should see this::
+
+  ** cutoff: 100
+  N  sum  max    filename
+  7661    1664903 4296 corn.31/contigs.fa
+  8177    1784032 4167 corn.33/contigs.fa
+
+OK, clearly k=33 is better, right?  Right?
+
+Well, let's see... let's do a comparison.  First, extract just those
+sequences > 100.
+
+  %% python /mnt/khmer/sandbox/extract-long-sequences.py 100 corn.33/contigs.fa > corn33.fa
+  %% python /mnt/khmer/sandbox/extract-long-sequences.py 100 corn.31/contigs.fa > corn31.fa
+
+Now let's subtract the sequences using a khmer tool::
+
+  %% python /mnt/khmer/sandbox/assembly-diff-2.py corn33.fa corn31.fa
+  %% python /mnt/khmer/sandbox/assembly-diff-2.py corn31.fa corn33.fa
+
+Here, 'assembly-diff-2.py' is looking for unique 100-bp-or-longer
+sequences that do not appear in the second file; it outputs them
+to .uniq files. 
+
+Now run::
+
+  %% ls -la *.uniq
+
+You'll see something like this::
+
+  -rw-r--r-- 1 root root 68307 Dec 13 03:03 corn31.fa.uniq
+  -rw-r--r-- 1 root root 83791 Dec 13 03:02 corn33.fa.uniq
+
+which tells you that ...
+
+If you page down to one of the longer 'uniq' sequences, in corn31.fa.uniq,
+and grab it -- say,
+
+   CTTCTTCGCGGGTGATACAGGCTACCACCCGGAGTTCAACAGGATCGGCGAGCGCTATGGTCCGTTCGACATCGCATTAC
+   TTCCGATAGGAGCGTACGACCCGCGCTGGTTCATGCGACCCGTGCACATGGACCCCGAGGAGGCGGTGCGCGCCTTCCTC
+   GAGATCAGCGACGGCAGTGCCGTGGCAGCCGGATCGCCGCCACTGCGCCGCATCGCGCTCGGCATCCACTGGGGCACCTTC
+
+and then BLASTX it against the nr database (use `this link
+<http://blast.ncbi.nlm.nih.gov/Blast.cgi?PROGRAM=blastx&BLAST_PROGRAMS=blastx&PAGE_TYPE=BlastSearch&SHOW_DEFAULTS=on&LINK_LOC=blasthome>`__
+if you want to try) you'll see that some of these sequences look
+"real", in the sense that they have homology to known proteins.  (The
+one above looks like it's from a phospholipase D.)
+
+If you poke around a bit more, you'll find that many of the sequences
+that appear in one assembly (at, say, k=33) but not in another assembly
+(say, k=31) appear to be real.  What does this mean?  As far as we can
+tell, it means that there *is* no single, real best k to use.
+
+Welcome to metagenomics!!!
+
+**Pause for discussion :)**
