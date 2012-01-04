@@ -1,0 +1,57 @@
+Running Trinity in da cloud
+===========================
+
+Follow :doc:`starting-your-cloud-system` up until "Getting data".
+Use the AMI (Amazon Machine Image) ami-2946a740 (Debian 6.0).
+
+You should now be logged in at a prompt that looks something like this::
+
+   ip-10-243-151-85:~#
+
+Install necessary software by running::
+
+   %% apt-get update
+   %% apt-get -y --force-yes install libbz2-1.0 libbz2-dev libncurses5-dev openjdk-6-jre-headless zlib1g-dev
+
+(copy/paste, ignoring the '%%' -- that just means it's a shell command).
+
+Now, change to the /mnt directory and download Trinity::
+
+  %% cd /mnt
+  %% curl -L 'http://downloads.sourceforge.net/project/trinityrnaseq/trinityrnaseq_r2011-11-26.tgz?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Ftrinityrnaseq%2F&ts=1325692775&use_mirror=cdnetworks-us-2' > trinityrnaseq_r2011-11-26.tgz
+
+Next, unpack Trinity and build it::
+
+  %% tar xzf trinityrnaseq_r2011-11-26.tgz
+  %% cd trinityrnaseq_r2011-11-26
+  %% make
+
+Finally, run the test script. ::
+
+  %% cd sample_data/test_Trinity_Assembly/
+  %% bash runMe.sh
+
+Your assembly will be in ::
+
+  /mnt/trinityrnaseq_r2011-11-26/sample_data/test_Trinity_Assembly/trinity_out_dir/Trinity.fasta
+
+A few notes --
+
+ * when you shut the system down, all your data and results will go
+   away forever, unless you save them!  You can copy them off using
+   scp or Dropbox (see :doc:`../tutorials-2011/installing-dropbox`),
+   or save it on Amazon disks using an EBS volume (see
+   :doc:`../tutorials-2011/creating-ebs-volume`).
+
+ * be sure to shut down the system (using either 'shutdown -h now' at
+   the command line, or 'Terminate Instance' at the AWS console) when
+   you're done.  Otherwise YOU WILL BE CHARGED $$ even if you're not
+   running any processes.
+
+ * Pick the appropriate `instance type
+   <http://aws.amazon.com/ec2/#instance>`__ (most especially
+   memory/RAM!) for your data set size.  Trinity is a memory hog and
+   usually you will want to pick 34GB or 68GB of RAM.  (`This may not
+   be that cheap <http://aws.amazon.com/ec2/#pricing>__` ;).  Note the
+   number of cores so that you can adjust Trinity command line
+   parameters to use them all.

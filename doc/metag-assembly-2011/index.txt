@@ -28,6 +28,8 @@ Contents:
 
    installing-dropbox
 
+   running-trinity
+
 ..   big-black-magic-boxes
 ..   mapping
 

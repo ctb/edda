@@ -32,7 +32,8 @@ Let's copy the dataset to your instance and uncompress it::
 
    %% mkdir simulated
    %% cd simulated 
-   %% cp /data/simulated_subset.fa .
+   %% cp /data/simulated_subset.fa.gz .
+   %% gunzip simulated_subset.fa.gz
 
 Installing Velvet (threaded)
 -----------------------------

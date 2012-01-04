@@ -131,7 +131,7 @@ at the '%' prompt in Terminal app.  You only have to do this once, and
 if you forget to do it, you'll get a note about security permissions
 being too open.
 
-Next, run:
+Next, run::
 
   %% ssh -i ~/Desktop/amazon.pem root@ec2-174-129-122-189.compute-1.amazonaws.com
 
