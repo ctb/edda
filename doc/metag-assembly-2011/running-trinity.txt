@@ -52,6 +52,6 @@ A few notes --
    <http://aws.amazon.com/ec2/#instance>`__ (most especially
    memory/RAM!) for your data set size.  Trinity is a memory hog and
    usually you will want to pick 34GB or 68GB of RAM.  (`This may not
-   be that cheap <http://aws.amazon.com/ec2/#pricing>__` ;).  Note the
+   be that cheap <http://aws.amazon.com/ec2/#pricing>`__ ;).  Note the
    number of cores so that you can adjust Trinity command line
    parameters to use them all.
