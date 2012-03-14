@@ -10,7 +10,8 @@ First, install some necessary software::
   %% apt-get -y --force-yes install mummer libxml-parser-perl libexpat1-dev
   %% ln /usr/bin/show-coords /usr/local/bin
 
-Now, download CD-HIT, its a softward package which clusters sequences by similarity and we use it to dereplicate our contigs.
+Now, download CD-HIT, it's a softward package which clusters sequences by
+similarity; we use it to dereplicate our contigs.
 
   %% cd /mnt
   %% curl -L http://code.google.com/p/cdhit/downloads/detail?name=cd-hit-v4.5.7-2011-12-16.tgz&can=2&q=

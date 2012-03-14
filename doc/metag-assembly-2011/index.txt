@@ -30,6 +30,8 @@ Contents:
 
    running-trinity
 
+   diginorm-mrnaseq
+
 ..   big-black-magic-boxes
 ..   mapping
 
