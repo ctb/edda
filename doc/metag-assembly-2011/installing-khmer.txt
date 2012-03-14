@@ -24,7 +24,7 @@ Install a copy of our sequence IO library, screed::
 
 Install a copy of khmer, our assembly tools library::
 
-  %% git clone git://github.com/ctb/khmer.git -b refactor
+  %% git clone git://github.com/ctb/khmer.git
   %% cd khmer
   %% make test
 
