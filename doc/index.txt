@@ -30,6 +30,8 @@ Contents:
 .. toctree::
    :maxdepth: 1
 
+   diginorm-2012/index
+
    metag-assembly-2011/index
 
    beacon-2011/index
