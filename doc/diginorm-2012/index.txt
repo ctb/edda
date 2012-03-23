@@ -80,7 +80,7 @@ And voila -- the sequences to assemble are in
 
 If you want to split into paired and orphan reads, do::
 
- % python /root/khmer/sandbox/strip-and-split-for-assembly.py ecoli_ref.fq.gz.keep.abundfilt
+ % python /root/khmer/sandbox/strip-and-split-for-assembly.py ecoli_ref.fq.gz.keep.abundfilt.keep
 
 This will output .pe and .se files that you can feed into Velvet as
 -fasta -shortPaired and -fasta -short, respectively.  You will want to
