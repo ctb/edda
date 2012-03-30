@@ -1,0 +1,163 @@
+From sequence to assembly, HMP mock community example
+======================================================
+
+We're going to demonstrate the pipeline we use to tackle complex metagenomic datasets.  Our goal is to reduce to the dataset size to be smaller, disconnected partitions which one could then use for whatever needs you might have.  In this example, we demonstrate the assembly and annotation of a metagenome using these methods.
+
+To summarize, the process includes 1) digital normalization to a specified coverage of quality-trimmed sequencing reads, 2) partitioning of disconnected subsets of reads, 3) removal of sequencing artifacts from the largest subset, 4) partitioning of the artifact-removed subset, 5) assembly of the partitions, 6) annotation of partitions with MG-RAST, and 7) recovering abundance information from raw reads for annotated ORFs.
+
+To complete this tutorial, you'll want to start an Amazon EC2 instance which is appropriate for the dataset size you will be using.  Information on how to do that can be found here:
+
+http://ged.msu.edu/angus/metag-assembly-2011/starting-your-cloud-system.html
+
+To demonstrate this tutorial, we used an extra large instance but one could use a large instance (for more time).
+
+Software Required
+=================
+You'll want to install our software and others we will use during this tutorial by using the tutorials listed below:
+
+Installation of khmer:
+http://ged.msu.edu/angus/metag-assembly-2011/installing-khmer.html
+
+Installation of the Velvet assembler:
+http://ged.msu.edu/angus/metag-assembly-2011/short-read-assembly-velvet.html
+
+Installation of emacs (for Adina since she likes it):
+apt-get install emacs
+
+Data required
+=============
+To data we use for this tutorial can be obtained by creating a volume from the snapshot XXXXX and mounting it to your instance.  I attached my volume as /dev/xvdf so I'll use the following commands to mount it:
+
+mkdir /mock
+mount /dev/xvdf /mock 
+
+To complete this tutorial, we suggest creating a new volume to store your results.  For example, create a 30 Gb volume, mount it to your instance as /dev/xvdg, and format it for usage:
+
+cd 
+mkfs -t ext2 /dev/xvdg
+mkdir /mydata
+mount /dev/xvdg /mydata
+
+Note:  All the files generated and used in this tutorial can be found in the snapshot for reference.
+
+The raw files from the HPC mock community can be found in the /mock/raw-files folder.  These are two lanes of Illumina sequencing for the mock community.  For future reference, we suggest copying these files over to your /mydata volume.
+
+cp /mock/raw-files /mydata/.
+
+Digital normalization - 30 min, 4 Gb
+====================================
+We're going to normalize for a median read coverage of C=5 for this dataset using kmer-lengths of k=20 and using 4 x 1x9 byte hashtables (saved as mock.ht):
+
+python /mnt/khmer/scripts/normalize-by-median.py -k 20 -C 5 -x 1e9 -N 4 -s mock.ht SRR172902.fastq.gz SRR172903.fastq.gz > diginorm.log 2>&1
+
+This will result in producing two "diginormed" files (*keep files) where we can see from the diginorm.log file that 43% of the reads were kept.
+
+tail diginorm.log
+
+Partition diginormed reads - Round 1 - 5 hours, ~5 Gb
+=======================================================
+We next load our normalized reads into a probablistic graph structure and separate disconnected partitions of reads.  You want to choose a hash table size appropriate to your data.  Here, we use a 5 Gb hashtable.  You can find out more about these scripts here:
+
+http://lyorn.idyll.org/~t/khmer/partitioning-big-data.html
+
+python /mnt/khmer/scripts/load-graph.py -k 32 -N 4 -x 1e10 mock.part1 *keep > load-graph.log 2>&1
+
+You can check the false positive rate of the hashtable size you chose.
+
+tail load-graph.log
+
+python /mnt/khmer/scripts/partition-graph.py --threads 8 -s 1e5 mock.part1 > partition-graph.log 2>&1
+
+python /mnt/khmer/scripts/merge-partitions.py mock.part1 > merge-part.log 2>&1
+
+python /mnt/khmer/scripts/annotate-partitions.py mock.part1 *keep > annotate.log 2>&1
+
+*Note I changed the script below to include less reads.
+python /mnt/khmer/scripts/extract-partitions.py mock.part1 *part > extract.log 2>&1
+
+You can look at the distribution of reads in partitions by looking a the mock.part1.dist file.
+
+The command:
+
+tail -n 5 mock.part1.dist 
+
+prints the following: 
+
+255 1 648253 1534438
+258 1 648254 1534696
+267 1 648255 1534963
+397 1 648256 1535360
+4612473 1 648257 6147833
+
+The largest partition has 4,612,473 reads of the 6,147,833 original reads.  There are 648,257 partitions in total but we group these into "grouped" files.  You can change the number of partitions grouped into files in the /mnt/khmer/scripts/extract-partitions.py script. 
+
+In total, if look at the group files, our partitioning has resulted in 73 small files and 1 larger file.  
+
+ls -lah mock.part1.group*.fa
+
+At this point, we like to separate our small partitions from our "lump" partition (in this case, mock.part1.group0074.fa).
+
+mkdir lump
+mv mock.part1.group0074.fa lump/.
+mkdir non-lump-fastas
+mv mock.part1.group*.fa non-lump-fastas
+
+Artifact Removal and Repartitioning, ~3 hours (?), 5 Gb (?)
+===========================================================
+To remove artifacts, we need to run the following commands:
+
+cd lump
+
+python /mnt/khmer/scripts/load-graph.py -k 32 -N 4 -x 1e9 lump *fa > lump.load.log 2>&1
+
+python /mnt/khmer/scripts/make-initial-stoptags.py lump > stoptag-ini.log 2>&1
+
+python /mnt/khmer/scripts/partition-graph.py --stoptags lump.stoptags lump >> partition.log 2>&1
+
+python /mnt/khmer/scripts/find-knots.py -x 2e8 -N 4 lump > find-knots.log 2>&1
+
+python /mnt/khmer/scripts/filter-stoptags.py *.stoptags *fa > filter.log 2>&1
+
+Then, to repartition the filtered sequences, we run the following commands:
+
+python /mnt/khmer/scripts/load-graph.py -x 1e9 -k 32 -N 4 lumpfilt *stopfilt > lumpfilt-load.log 2>&1
+
+python /mnt/khmer/scripts/partition-graph.py -T 4 lumpfilt > partition2.log 2>&1
+
+python /mnt/khmer/scripts/merge-partitions.py lumpfilt > merge.log 2>&1
+
+python /mnt/khmer/scripts/annotate-partitions.py lumpfilt *stopfilt > annotate.log 2>&1
+
+python /mnt/khmer/scripts/extract-partitions.py lumpfilt *part > extract.log 2>&1
+
+Looking at the lump.dist file, we see that we now have roughly ~1000 reads in each partition.  We can also see that we have a lot of "lumpfilt.group*fa" grouped sequence files. We like to keep these organized.
+
+cd /mydata
+mkdir lump-fastas
+mv /mydata/lump/lumpfilt.group*fa lump-fastas/.
+
+Assembly
+=======
+The next step is fun because rather than over 6 million reads to assemble, we have chunks of less than 1000 sequences to assemble.  We use the following script to assemble these chunks in parallel at K=33:
+
+cd /mydata/lump-fastas
+python /mnt/khmer/sandbox/multi-velvet.py *fa
+for f *ass.33/contigs.fa; do cat $f >> all-lump-contigs.fa; done
+
+cd /mydata/non-lump-fastas
+python /mnt/khmer/sandbox/multi-velvet.py *fa
+for f *ass.33/contigs.fa; do cat $f >> all-nonlump-contigs.fa; done
+
+To combine all the contigs:
+
+cd /mydata
+cat /mydata/non-lump-fastas/all-nonlump-contigs.fa /mydata/lump-fastas/all-lump-contigs.fa > all-contigs-k33.fa
+
+Before we load these into MG-RAST for annotation, I like to rename them and only output contigs > then 300 bp in length.
+
+python /mock/rename.py mock-k33 all-contigs-k33.fa > all-contigs-k33-renamed.fa
+python /mnt/khmer/sandbox/extract-long-sequences.py 300 all-contigs-k33-renamed.fa > mock-contigs-300.fa
+
+The next step is to upload this file into MG-RAST (you'll need to transfer it to your local computer first - an inefficiency that is really irritating.)
+
+
