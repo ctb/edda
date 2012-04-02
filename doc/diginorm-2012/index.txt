@@ -1,117 +1,14 @@
-A tutorial in basic digital normalization
-=========================================
+=================================================
+Digital normalization (2012 paper notes/pipeline)
+=================================================
 
 See http://arxiv.org/abs/1203.4802 for more information on digital
 normalization.
 
-First, start up an EC2 instance using ami-999d49f0 running on
-m2.xlarge (17.1 GB of RAM).  See (for example)
-:doc:`../metag-assembly-2011/starting-your-cloud-system` for basic
-information on doing so & on connecting in to it.
+Contents:
 
-Now, ssh in.
+.. toctree::
+   :maxdepth: 1
 
-Installing khmer
-----------------
-
-You'll need to install both screed and khmer::
-
- % git clone git://github.com/ctb/screed.git
- % git clone git://github.com/ctb/khmer.git
-
- % cd screed
- % python setup.py install
- % cd ..
-
- % cd khmer
- % make test
- % cd ..
-
- % export PYTHONPATH=/root/khmer/python
-
-Getting test data
------------------
-
-Next let's get the tutorial data. Basically, just make an EC2 volume
-from snap-9d295ee7, attach as sdf, and mount as /data::
-
- % mkdir /data
- % mount /dev/xvdf /data
-
-Voila! ::
-
- % ls /data
-
-should show ::
-
- README.txt  ecoli_ref.fq.gz  lost+found  schizo-50m.fq.gz
-
-Three-pass diginorm for microbial genomic DNA
----------------------------------------------
-
-We'll start by working with a small E. coli data set from the Velvet-SC
-paper (`Chitsaz et al., 2011 <http://www.ncbi.nlm.nih.gov/pubmed?term=21926975>`__)
-
-For genomic DNA, we will do a three-pass approach (see
-http://arxiv.org/abs/1203.4802).  First, do a first round of digital
-normalization to C=20::
-
- % cd /mnt
- % /root/khmer/scripts/normalize-by-median.py -C 20 -k 20 -N 4 -x 2.5e8 --savehash ecoli_ref.kh /data/ecoli_ref.fq.gz
- 
-(wait a while...) ...this should eliminate about 2/3 of the data.
-
-Next, trim low-abundance k-mers::
-
- % /root/khmer/scripts/filter-abund.py ecoli_ref.kh ecoli_ref.fq.gz.keep
-
-(wait a while...) ...this should get rid of another 25% or so.
-
-Finally, do the second round of normalization to C=5 ::
-
- % /root/khmer/scripts/normalize-by-median.py -C 5 -k 20 -N 4 -x 1e8 ecoli_ref.fq.gz.keep.abundfilt
-
-(wait a while...) ...this will get rid of another 75%, leaving under 400,000
-sequences of the original 5m.
-
-And voila -- the sequences to assemble are in
-'ecoli_ref.fq.gz.keep.abundfilt.keep', in FASTA format.  See
-:doc:`../tutorials-2011/short-read-assembly-velvet`.
-
-If you want to split into paired and orphan reads, do::
-
- % python /root/khmer/sandbox/strip-and-split-for-assembly.py ecoli_ref.fq.gz.keep.abundfilt.keep
-
-This will output .pe and .se files that you can feed into Velvet as
--fasta -shortPaired and -fasta -short, respectively.  You will want to
-try out a bunch of different k parameters for the assembly, note.
-
-Single-pass diginorm for mRNAseq
---------------------------------
-
-For the yeast mRNAseq, we'll do a single-pass approach on the 100m
-read data set from the Trinity paper (`Grabherr et al., 2011
-<http://www.ncbi.nlm.nih.gov/pubmed?term=21572440>`__.)  Again, see
-http://arxiv.org/abs/1203.4802 for discussion.
-
-Run::
-
- % /root/khmer/scripts/normalize-by-median.py -C 20 -k 20 -N 4 -x 2e9 /data/schizo-50m.fq.gz
-
-This will get rid of about 90% of the data in the 100m read data set.  It will
-probably take an hour or two...
-
-Now, you'll be left with the data in schizo-50m.fq.gz.keep.  
-
-For Oases, you may want to split these into paired and orphan reads files::
-
- % python /root/khmer/sandbox/strip-and-split-for-assembly.py schizo-50m.fq.gz.keep
-
-which will produce .pe and .se files.  Note that you will want to try a
-range of k values for the diginorm files.
-
-For Trinity, you may want to split these into /1 and /2 ended files::
-
- % python /root/khmer/sandbox/split-pe.py schizo-50m.fq.gz.keep
-
-which will produce .1 and .2 FASTA files that you can then feed into Trinity.
+   tutorial
+   pipeline-notes

@@ -11,16 +11,15 @@ First, install some necessary software::
   %% ln /usr/bin/show-coords /usr/local/bin
 
 Now, download CD-HIT, it's a softward package which clusters sequences by
-similarity; we use it to dereplicate our contigs.
+similarity; we use it to dereplicate our contigs. ::
 
   %% cd /mnt
-  %% curl -L http://code.google.com/p/cdhit/downloads/detail?name=cd-hit-v4.5.7-2011-12-16.tgz&can=2&q=
+  %% curl -O http://cdhit.googlecode.com/files/cd-hit-v4.5.7-2011-12-16.tgz
 
 Configure & build it::
 
    %% tar xzf cd-hit-v4.5.7-2011-12-16.tgz
    %% cd cd-hit-v4.5.7-2011-12-16
-   %% ./configure
    %% make
    %% make install
   
@@ -43,24 +42,24 @@ Go to corn::
   %% cd /mnt/corn
   %% cat corn31.fa corn33.fa > all-corn.fa
 
-You must now uniquely rename your combined contigs.  We also only consider contigs longer than 200 bp for further processing.
+You must now uniquely rename your combined contigs.  We also only consider contigs longer than 200 bp for further processing. ::
  
-  %% python multi-rename.py all-corn.fa > all-corn.fa.renamed.200
+  %% python /mnt/khmer/sandbox/multi-rename.py all-corn.fa > all-corn.fa.renamed.200
 
-Next, we dereplicate sequences by removing redundant sequences which our 99% similar.
+Next, we dereplicate sequences by removing redundant sequences which our 99% similar. ::
 
   %% cd-hit-est -i all-corn.fa -o all-corn.cdhit.out -c 0.99 
 
-Next, we merge the contigs.
+Next, we merge the contigs. ::
 
-  %% toAmos -s all-corn.fa -o all-corn.afg
+  %% toAmos -s all-corn.cdhit.out -o all-corn.afg
   %% minimus2 all-corn
 
-This will produce files 'all-corn.fasta' (the merged contigs) and 'all-corn.singletons.seq' (the unmerged singletons).  Combine these files with the following command.
+This will produce files 'all-corn.fasta' (the merged contigs) and 'all-corn.singletons.seq' (the unmerged singletons).  Combine these files with the following command. ::
 
   %% cat all-corn.fasta all-corn.singletons.seq > all-merged-corn-contigs.fa
 
-Now, let's check out the final assembly.
+Now, let's check out the final assembly. ::
 
   %% python /mnt/khmer/sandbox/assemstats3.py 100 smallcorn.k25.k35-contig.fa  corn.*/*contigs.fa all-merged-corn-contigs.fa
 
