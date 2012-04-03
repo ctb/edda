@@ -16,10 +16,16 @@ Paper drafts
 
 `Digital normalization paper draft <http://ivory.idyll.org/blog/mar-12/diginorm-paper-posted.html>`__
 
-Current tutorials and useful links
-----------------------------------
+A demo, and some useful links
+-----------------------------
 
-Briefly:
+You can see static versions of the ipython notebooks for the demo here:
+
+ 1. XXX
+ 2. `Partitioning the HMP mock data set <files/92-mock-partition.html>`__
+ 3. `Assembling the partitioned HMP mock data set <files/93-mock-assembly.html>`__
+
+**To run the demo yourself**, do the following:
 
 1. Start up ami-e9a57c80 on EC2, with ~16gb of RAM or more; I suggest
    using m2.xlarge machine.
@@ -45,12 +51,6 @@ The khmer software is available at http://github.com/ctb/khmer/ and
 the scripts are `documented here
 <http://lyorn.idyll.org/~t/khmer/scripts.html>`__.
 
-You can also see static versions of the ipython notebook tutorials here:
-
- 1. XXX
- 2. `Partitioning the HMP mock data set <files/92-mock-partition.html>`__
- 3. `Assembling the partitioned HMP mock data set <files/93-mock-assembly.html>`__
-
 Older tutorials
 ---------------
 
@@ -62,5 +62,6 @@ and eukaryotic transcriptome assembly.
 :doc:`../metag-assembly-2011/index` -- A slightly older (but more
 comprehensive) introduction to metagenome assembly, from an MSU-local workshop.
 
-.. links to tutorials for ipynb stuff
+Note that there are tons of other tutorials for all sorts of things next-gen-sequence-y here: :doc:`../tutorials-2011/index`.
+
 .. surely tut
