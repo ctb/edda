@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<title>92-mock-data-partition</title>
+<link rel="stylesheet" href="92-mock-partition_files/jquery-ui.css" type="text/css">
+<link rel="stylesheet" href="92-mock-partition_files/boilerplate.css" type="text/css">
+<link rel="stylesheet" href="92-mock-partition_files/fbm.css" type="text/css">
+<link rel="stylesheet" href="92-mock-partition_files/page.css" type="text/css">
+
+
+<script type="text/javascript" src="92-mock-partition_files/MathJax.js" charset="utf-8"></script>
+
+<script type="text/javascript">
+// MathJax disabled, set as null to distingish from *missing* MathJax,
+// where it will be undefined, and should prompt a dialog later.
+window.mathjax_url = "/static/mathjax/MathJax.js";
+</script>
+<link rel="stylesheet" href="92-mock-partition_files/codemirror.css">
+<link rel="stylesheet" href="92-mock-partition_files/ipython.css">
+<link rel="stylesheet" href="92-mock-partition_files/prettify.css">
+<link rel="stylesheet" href="92-mock-partition_files/notebook.css" type="text/css">
+<link rel="stylesheet" href="92-mock-partition_files/renderedhtml.css" type="text/css">
+
+
+
+<style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-family: serif; font-size: 85%; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 5px 0px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -khtml-border-radius: 5px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 1px 2em; background: transparent}
+.MathJax_MenuTitle {background-color: #CCCCCC; margin: -5px 0 0 0; text-align: center; font-style: italic; font-size: 80%; color: #444444; padding: 2px 0; overflow: hidden}
+.MathJax_MenuArrow {position: absolute; right: .5em; color: #666666}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuRadioCheck {position: absolute; left: .7em}
+.MathJax_MenuLabel {padding: 1px 2em 3px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #DDDDDD; margin: 4px 3px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: #606872; color: white}
+</style><style type="text/css">#MathJax_Message {position: fixed; left: 1px; bottom: 2px; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MathJax_Display {text-align: center; margin: 0; position: relative; display: block; width: 100%}
+.MathJax .merror {color: black; border: 1px solid; padding: 1px 3px; font-family: serif; font-size: 80%; vertical-align: ; text-align: left}
+.MathJax_Preview {color: #888888}
+#MathJax_Tooltip {background-color: InfoBackground; color: InfoText; border: 1px solid black; box-shadow: 2px 2px 5px #AAAAAA; -webkit-box-shadow: 2px 2px 5px #AAAAAA; -moz-box-shadow: 2px 2px 5px #AAAAAA; -khtml-box-shadow: 2px 2px 5px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true'); padding: 3px 4px; position: absolute; left: 0; top: 0; width: auto; height: auto; display: none}
+.MathJax {display: inline; font-family: serif; font-style: normal; font-weight: normal; line-height: normal; font-size: 100%; font-size-adjust: none; text-indent: 0; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; border: 0; padding: 0; margin: 0}
+.MathJax img, .MathJax nobr, .MathJax a {border: 0; padding: 0; margin: 0; max-width: none; max-height: none; vertical-align: 0; line-height: normal; text-decoration: none}
+img.MathJax_strut {border: 0 !important; padding: 0 !important; margin: 0 !important; vertical-align: 0 !important}
+.MathJax span {display: inline; position: static; border: 0; padding: 0; margin: 0; vertical-align: 0; line-height: normal; text-decoration: none}
+.MathJax nobr {white-space: nowrap}
+.MathJax_Processing {visibility: hidden; position: fixed; width: 0; height: 0; overflow: hidden}
+.MathJax .MathJax_HitBox {cursor: text}
+#MathJax_Tooltip * {filter: none; background: transparent}
+#MathJax_getScales {font-family: STIXGeneral,STIXNonUnicode,STIXSizeOneSym}
+.MathJax .math span {font-family: STIXGeneral,STIXNonUnicode,STIXSizeOneSym}
+</style></head>
+<body data-project="/usr/local/ipython/notebooks" data-base-project-url="/" data-base-kernel-url="/" data-read-only="False" data-notebook-id="c249d263-83d9-4df9-9ba4-f2d5497e6317"><div style="visibility: hidden; overflow: hidden; position: absolute; top: 0pt; height: 1px; width: auto; padding: 0pt; border: 0pt none; margin: 0pt; text-align: left; text-indent: 0pt; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal;"><div id="MathJax_Hidden"></div></div><div style="display: none;" id="MathJax_Message"></div>
+<div class="border-box-sizing ui-widget ui-widget-content" style="border-style: none; display: none;" id="header">
+<span id="ipython_notebook"><h1><a href="https://ec2-107-21-165-105.compute-1.amazonaws.com/" alt="dashboard"><img src="92-mock-partition_files/ipynblogo.png" alt="IPython Notebook"></a></h1></span>
+
+<span id="login_widget">
+
+<button aria-disabled="false" role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" id="logout"><span class="ui-button-text">Logout</span></button>
+
+</span>
+
+
+<span id="save_widget">
+<span class="ui-widget ui-widget-content" id="notebook_name">92-mock-data-partition</span>
+<span style="border: medium none; margin-left: 20px;" class="ui-widget ui-widget-content" id="save_status">Last saved: Apr 03 5:20 PM</span>
+</span>
+
+</div>
+<div style="display: block;" class="border-box-sizing" id="site">
+
+<div id="menubar_container">
+<div style="" class="border-box-sizing" id="menubar">
+<ul role="menubar" class="ui-menubar ui-widget-header ui-helper-clearfix" id="menus">
+<li role="presentation" class="ui-menubar-item"><a aria-haspopup="true" role="menuitem" class="ui-button ui-widget ui-button-text-only ui-menubar-link" href="#"><span class="ui-button-text">File</span></a>
+<ul aria-hidden="true" aria-activedescendant="ui-menu-0-3" aria-expanded="false" style="display: none; top: 32px; left: 1px;" tabindex="0" role="menu" id="ui-menu-0" class="ui-menu ui-widget ui-widget-content ui-corner-all">
+<li role="presentation" class="ui-menu-item" id="new_notebook"><a id="ui-menu-0-0" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">New</a></li>
+<li role="presentation" class="ui-menu-item" id="open_notebook"><a id="ui-menu-0-1" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Open...</a></li>
+<hr>
+<li role="presentation" class="ui-menu-item" id="copy_notebook"><a id="ui-menu-0-2" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Make a Copy...</a></li>
+<li role="presentation" class="ui-menu-item" id="rename_notebook"><a id="ui-menu-0-3" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Rename...</a></li>
+<li role="presentation" class="ui-menu-item" id="save_notebook"><a id="ui-menu-0-4" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Save</a></li>
+<hr>
+<li role="presentation" class="ui-menu-item"><a aria-haspopup="true" id="ui-menu-0-5" role="menuitem" tabindex="-1" class="ui-corner-all" href="#"><span class="ui-menu-icon ui-icon ui-icon-carat-1-e"></span>Download as</a>
+<ul aria-labelledby="ui-menu-0-5" aria-expanded="false" aria-hidden="true" style="display: none;" role="menu" class="ui-menu ui-widget ui-widget-content ui-corner-all">
+<li role="presentation" class="ui-menu-item" id="download_ipynb"><a id="ui-menu-0-7" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">IPython (.ipynb)</a></li>
+<li role="presentation" class="ui-menu-item" id="download_py"><a id="ui-menu-0-8" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Python (.py)</a></li>
+</ul>
+</li>
+<hr>
+<li role="presentation" class="ui-menu-item" id="print_notebook"><a id="ui-menu-0-6" role="menuitem" tabindex="-1" class="ui-corner-all" href="https://ec2-107-21-165-105.compute-1.amazonaws.com/c249d263-83d9-4df9-9ba4-f2d5497e6317/print" target="_blank">Print View</a></li>
+</ul>
+</li>
+<li role="presentation" class="ui-menubar-item"><a aria-haspopup="true" role="menuitem" class="ui-button ui-widget ui-button-text-only ui-menubar-link" tabindex="-1" href="#"><span class="ui-button-text">Edit</span></a>
+<ul aria-expanded="false" aria-hidden="true" style="display: none;" tabindex="0" role="menu" id="ui-menu-1" class="ui-menu ui-widget ui-widget-content ui-corner-all">
+<li role="presentation" class="ui-menu-item" id="cut_cell"><a id="ui-menu-1-0" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Cut Cell</a></li>
+<li role="presentation" class="ui-menu-item" id="copy_cell"><a id="ui-menu-1-1" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Copy Cell</a></li>
+<li role="presentation" id="paste_cell" class="ui-state-disabled ui-menu-item"><a id="ui-menu-1-2" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Paste Cell</a></li>
+<li role="presentation" id="paste_cell_above" class="ui-state-disabled ui-menu-item"><a id="ui-menu-1-3" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Paste Cell Above</a></li>
+<li role="presentation" id="paste_cell_below" class="ui-state-disabled ui-menu-item"><a id="ui-menu-1-4" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Paste Cell Below</a></li>
+<li role="presentation" class="ui-menu-item" id="delete_cell"><a id="ui-menu-1-5" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Delete</a></li>
+<hr>
+<li role="presentation" class="ui-menu-item" id="split_cell"><a id="ui-menu-1-6" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Split Cell</a></li>
+<li role="presentation" class="ui-menu-item" id="merge_cell_above"><a id="ui-menu-1-7" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Merge Cell Above</a></li>
+<li role="presentation" class="ui-menu-item" id="merge_cell_below"><a id="ui-menu-1-8" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Merge Cell Below</a></li>
+<hr>
+<li role="presentation" class="ui-menu-item" id="move_cell_up"><a id="ui-menu-1-9" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Move Cell Up</a></li>
+<li role="presentation" class="ui-menu-item" id="move_cell_down"><a id="ui-menu-1-10" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Move Cell Down</a></li>
+<hr>
+<li role="presentation" class="ui-menu-item" id="select_previous"><a id="ui-menu-1-11" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Select Previous Cell</a></li>
+<li role="presentation" class="ui-menu-item" id="select_next"><a id="ui-menu-1-12" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Select Next Cell</a></li>
+</ul>
+</li>
+<li role="presentation" class="ui-menubar-item"><a aria-haspopup="true" role="menuitem" class="ui-button ui-widget ui-button-text-only ui-menubar-link" href="#"><span class="ui-button-text">View</span></a>
+<ul aria-hidden="true" aria-activedescendant="ui-menu-2-1" aria-expanded="false" style="display: none; top: 32px; left: 110px;" tabindex="0" role="menu" id="ui-menu-2" class="ui-menu ui-widget ui-widget-content ui-corner-all">
+<li role="presentation" class="ui-menu-item" id="toggle_header"><a id="ui-menu-2-0" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Toggle Header</a></li>
+<li role="presentation" class="ui-menu-item" id="toggle_toolbar"><a id="ui-menu-2-1" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Toggle Toolbar</a></li>
+</ul>
+</li>
+<li role="presentation" class="ui-menubar-item"><a aria-haspopup="true" role="menuitem" class="ui-button ui-widget ui-button-text-only ui-menubar-link" tabindex="-1" href="#"><span class="ui-button-text">Insert</span></a>
+<ul aria-expanded="false" aria-hidden="true" style="display: none;" tabindex="0" role="menu" id="ui-menu-3" class="ui-menu ui-widget ui-widget-content ui-corner-all">
+<li role="presentation" class="ui-menu-item" id="insert_cell_above"><a id="ui-menu-3-0" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Insert Cell Above</a></li>
+<li role="presentation" class="ui-menu-item" id="insert_cell_below"><a id="ui-menu-3-1" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Insert Cell Below</a></li>
+</ul>
+</li>
+<li role="presentation" class="ui-menubar-item"><a aria-haspopup="true" role="menuitem" class="ui-button ui-widget ui-button-text-only ui-menubar-link" href="#"><span class="ui-button-text">Cell</span></a>
+<ul aria-hidden="true" aria-activedescendant="ui-menu-4-2" aria-expanded="false" style="display: none; top: 32px; left: 239px;" tabindex="0" role="menu" id="ui-menu-4" class="ui-menu ui-widget ui-widget-content ui-corner-all">
+<li role="presentation" class="ui-menu-item" id="run_cell"><a id="ui-menu-4-0" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Run</a></li>
+<li role="presentation" class="ui-menu-item" id="run_cell_in_place"><a id="ui-menu-4-1" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Run in Place</a></li>
+<li role="presentation" class="ui-menu-item" id="run_all_cells"><a id="ui-menu-4-2" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Run All</a></li>
+<hr>
+<li role="presentation" class="ui-menu-item" id="to_code"><a id="ui-menu-4-3" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Code</a></li>
+<li role="presentation" class="ui-menu-item" id="to_markdown"><a id="ui-menu-4-4" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Markdown </a></li>
+<li role="presentation" class="ui-menu-item" id="to_plaintext"><a id="ui-menu-4-5" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Plaintext</a></li>
+<li role="presentation" class="ui-menu-item" id="to_heading1"><a id="ui-menu-4-6" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Heading 1</a></li>
+<li role="presentation" class="ui-menu-item" id="to_heading2"><a id="ui-menu-4-7" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Heading 2</a></li>
+<li role="presentation" class="ui-menu-item" id="to_heading3"><a id="ui-menu-4-8" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Heading 3</a></li>
+<li role="presentation" class="ui-menu-item" id="to_heading4"><a id="ui-menu-4-9" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Heading 4</a></li>
+<li role="presentation" class="ui-menu-item" id="to_heading5"><a id="ui-menu-4-10" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Heading 5</a></li>
+<li role="presentation" class="ui-menu-item" id="to_heading6"><a id="ui-menu-4-11" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Heading 6</a></li>
+<hr>
+<li role="presentation" class="ui-menu-item" id="toggle_output"><a id="ui-menu-4-12" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Toggle Output</a></li>
+<li role="presentation" class="ui-menu-item" id="clear_all_output"><a id="ui-menu-4-13" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Clear All Output</a></li>
+</ul>
+</li>
+<li role="presentation" class="ui-menubar-item"><a aria-haspopup="true" role="menuitem" class="ui-button ui-widget ui-button-text-only ui-menubar-link" tabindex="-1" href="#"><span class="ui-button-text">Kernel</span></a>
+<ul aria-expanded="false" aria-hidden="true" style="display: none;" tabindex="0" role="menu" id="ui-menu-5" class="ui-menu ui-widget ui-widget-content ui-corner-all">
+<li role="presentation" class="ui-menu-item" id="int_kernel"><a id="ui-menu-5-0" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Interrupt</a></li>
+<li role="presentation" class="ui-menu-item" id="restart_kernel"><a id="ui-menu-5-1" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Restart</a></li>
+</ul>
+</li>
+<li role="presentation" class="ui-menubar-item"><a aria-haspopup="true" role="menuitem" class="ui-button ui-widget ui-button-text-only ui-menubar-link" tabindex="-1" href="#"><span class="ui-button-text">Help</span></a>
+<ul aria-expanded="false" aria-hidden="true" style="display: none;" tabindex="0" role="menu" id="ui-menu-6" class="ui-menu ui-widget ui-widget-content ui-corner-all">
+<li role="presentation" class="ui-menu-item"><a id="ui-menu-6-0" role="menuitem" tabindex="-1" class="ui-corner-all" href="http://ipython.org/documentation.html" target="_blank">IPython Help</a></li>
+<li role="presentation" class="ui-menu-item"><a id="ui-menu-6-1" role="menuitem" tabindex="-1" class="ui-corner-all" href="http://ipython.org/ipython-doc/stable/interactive/htmlnotebook.html" target="_blank">Notebook Help</a></li>
+<li role="presentation" class="ui-menu-item" id="keyboard_shortcuts"><a id="ui-menu-6-2" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Keyboard Shortcuts</a></li>
+<hr>
+<li role="presentation" class="ui-menu-item"><a id="ui-menu-6-3" role="menuitem" tabindex="-1" class="ui-corner-all" href="http://docs.python.org/" target="_blank">Python</a></li>
+<li role="presentation" class="ui-menu-item"><a id="ui-menu-6-4" role="menuitem" tabindex="-1" class="ui-corner-all" href="http://docs.scipy.org/doc/numpy/reference/" target="_blank">NumPy</a></li>
+<li role="presentation" class="ui-menu-item"><a id="ui-menu-6-5" role="menuitem" tabindex="-1" class="ui-corner-all" href="http://docs.scipy.org/doc/scipy/reference/" target="_blank">SciPy</a></li>
+<li role="presentation" class="ui-menu-item"><a id="ui-menu-6-6" role="menuitem" tabindex="-1" class="ui-corner-all" href="http://docs.sympy.org/dev/index.html" target="_blank">SymPy</a></li>
+<li role="presentation" class="ui-menu-item"><a id="ui-menu-6-7" role="menuitem" tabindex="-1" class="ui-corner-all" href="http://matplotlib.sourceforge.net/" target="_blank">Matplotlib</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div style="display: none;" class="ui-widget ui-widget-content ui-corner-all border-box-sizing" id="notification"></div>
+</div>
+<div style="border-top-style: none; border-left-style: none; border-right-style: none; display: none;" class="border-box-sizing ui-widget ui-widget-content" id="toolbar">
+<span>
+<button title="Save" aria-disabled="false" role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only" id="save_b"><span class="ui-button-icon-primary ui-icon ui-icon-disk"></span><span class="ui-button-text">Save</span></button>
+</span>
+<span class="ui-buttonset" id="cut_copy_paste">
+<button aria-disabled="false" role="button" class="ui-button ui-widget ui-state-default ui-button-icon-only ui-corner-left" id="cut_b" title="Cut Cell"><span class="ui-button-icon-primary ui-icon ui-icon-scissors"></span><span class="ui-button-text">Cut Cell</span></button>
+<button aria-disabled="false" role="button" class="ui-button ui-widget ui-state-default ui-button-icon-only" id="copy_b" title="Copy Cell"><span class="ui-button-icon-primary ui-icon ui-icon-copy"></span><span class="ui-button-text">Copy Cell</span></button>
+<button aria-disabled="false" role="button" class="ui-button ui-widget ui-state-default ui-button-icon-only ui-corner-right" id="paste_b" title="Paste Cell"><span class="ui-button-icon-primary ui-icon ui-icon-clipboard"></span><span class="ui-button-text">Paste Cell</span></button>
+</span>
+<span class="ui-buttonset" id="move_up_down">
+<button aria-disabled="false" role="button" class="ui-button ui-widget ui-state-default ui-button-icon-only ui-corner-left" id="move_up_b" title="Move Cell Up"><span class="ui-button-icon-primary ui-icon ui-icon-arrowthick-1-n"></span><span class="ui-button-text">Move Cell Up</span></button>
+<button aria-disabled="false" role="button" class="ui-button ui-widget ui-state-default ui-button-icon-only ui-corner-right" id="move_down_b" title="Move Cell Down"><span class="ui-button-icon-primary ui-icon ui-icon-arrowthick-1-s"></span><span class="ui-button-text">Move Down</span></button>
+</span>
+<span class="ui-buttonset" id="insert_above_below">
+<button aria-disabled="false" role="button" class="ui-button ui-widget ui-state-default ui-button-icon-only ui-corner-left" id="insert_above_b" title="Insert Cell Above"><span class="ui-button-icon-primary ui-icon ui-icon-arrowthickstop-1-n"></span><span class="ui-button-text">Insert Cell Above</span></button>
+<button aria-disabled="false" role="button" class="ui-button ui-widget ui-state-default ui-button-icon-only ui-corner-right" id="insert_below_b" title="Insert Cell Below"><span class="ui-button-icon-primary ui-icon ui-icon-arrowthickstop-1-s"></span><span class="ui-button-text">Insert Cell Below</span></button>
+</span>
+<span class="ui-buttonset" id="run_int">
+<button aria-disabled="false" role="button" class="ui-button ui-widget ui-state-default ui-button-icon-only ui-corner-left" id="run_b" title="Run Cell"><span class="ui-button-icon-primary ui-icon ui-icon-play"></span><span class="ui-button-text">Run Cell</span></button>
+<button aria-disabled="false" role="button" class="ui-button ui-widget ui-state-default ui-button-icon-only ui-corner-right" id="interrupt_b" title="Interrupt"><span class="ui-button-icon-primary ui-icon ui-icon-stop"></span><span class="ui-button-text">Interrupt</span></button>
+</span>
+<span>
+<select class="ui-widget ui-widget-content" id="cell_type">
+<option value="code">Code</option>
+<option selected="selected" value="markdown">Markdown</option>
+<option value="plaintext">Plaintext</option>
+<option value="heading1">Heading 1</option>
+<option value="heading2">Heading 2</option>
+<option value="heading3">Heading 3</option>
+<option value="heading4">Heading 4</option>
+<option value="heading5">Heading 5</option>
+<option value="heading6">Heading 6</option>
+</select>
+</span>
+</div>
+<div style="height: 701px;" class="border-box-sizing ui-widget" id="main_app">
+<div class="border-box-sizing ui-widget" id="notebook_panel">
+<div style="height: 693px;" class="border-box-sizing" id="notebook"><div tabindex="2" class="cell text_cell border-box-sizing ui-widget-content ui-corner-all"><div style="display: none;" class="text_cell_input border-box-sizing"><div class="CodeMirror CodeMirror-wrap"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 94.7167px; left: 811.717px;"><textarea style="position: absolute; padding: 0pt; width: 1px; height: 1em;" wrap="off" autocorrect="off" autocapitalize="off">first step of digital normalization.</textarea></div><div class="CodeMirror-scroll cm-s-default" tabindex="-1"><div style="position: relative; height: 117.6px;"><div style="position: relative; top: 0px;"><div style="display: none;" class="CodeMirror-gutter"><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div draggable="true" style="position: relative; z-index: 0; outline: medium none;"><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"><pre>Here we are starting with the 'below.keep' files from the first step of digital normalization.<span id="CodeMirror-temp-cc9f10"> </span></pre></div><pre style="top: 89px; left: 806px;" class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1; display: none;"><div class="CodeMirror-selected" style="position: absolute; left: 0px; top: 0px; right: 0px; height: 53.800000000000004px"></div><div class="CodeMirror-selected" style="position: absolute; left: 0px; top: 53.800000000000004px; right: 606px; height: 17.6px"></div></div><div style=""><pre>## Partitioning the HMP mock data set</pre><pre> </pre><pre>Partitioning breaks your data set into many smaller chunks so that they can be assembled more easily.  See the k-mer percolation paper</pre><pre>(at http://ivory.idyll.org/blog/dec-11/kmer-percolation-posted.html) for more information.</pre><pre> </pre><pre>Here we are starting with the 'below.keep' files from the first step of digital normalization.</pre></div></div></div></div></div></div></div></div><div style="display: block;" tabindex="-1" class="text_cell_render border-box-sizing rendered_html"><h2>Partitioning the HMP mock data set</h2>
+
+<p>Partitioning breaks your data set into many smaller chunks so that 
+they can be assembled more easily.  See the k-mer percolation paper
+(at <a href="http://ivory.idyll.org/blog/dec-11/kmer-percolation-posted.html">http://ivory.idyll.org/blog/dec-11/kmer-percolation-posted.html</a>) for more information.</p>
+
+<p>Here we are starting with the 'below.keep' files from the first step of digital normalization.</p></div></div><div tabindex="2" class="cell border-box-sizing code_cell vbox"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[1]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 23.3167px; left: 356.717px;"><textarea style="position: absolute; padding: 0pt; width: 1px; height: 1em;" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 47.2px;"><div style="position: relative; top: 0px;"><div style="display: none;" class="CodeMirror-gutter"><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div draggable="true" style="position: relative; z-index: 0; outline: medium none;"><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"><pre><span class="cm-operator">!</span><span class="cm-variable">rsync</span> <span class="cm-operator">-</span><span class="cm-variable">av</span> <span class="cm-operator">/</span><span class="cm-variable">usr</span><span class="cm-operator">/</span><span class="cm-variable">local</span><span class="cm-operator">/</span><span class="cm-variable">data</span><span class="cm-operator">/</span><span class="cm-variable">mock</span><span class="cm-operator">-</span><span class="cm-variable">partition</span><span id="CodeMirror-temp-b34efb"> </span></pre></div><pre style="top: 17.6px; left: 351px;" class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1; display: none;"></div><div style=""><pre><span class="cm-comment"># copy data to working directory</span></pre><pre><span class="cm-operator">!</span><span class="cm-variable">rsync</span> <span class="cm-operator">-</span><span class="cm-variable">av</span> <span class="cm-operator">/</span><span class="cm-variable">usr</span><span class="cm-operator">/</span><span class="cm-variable">local</span><span class="cm-operator">/</span><span class="cm-variable">data</span><span class="cm-operator">/</span><span class="cm-variable">mock</span><span class="cm-operator">-</span><span class="cm-variable">partition</span> <span class="cm-operator">/</span><span class="cm-variable">mnt</span></pre></div></div></div></div></div></div></div></div></div><div style="display: -moz-box;" class="output vbox"><div class="hbox output_area"><div class="prompt"></div><div class="box_flex1 output_subarea output_text output_stream output_stdout"><pre>sending incremental file list
+
+sent 146 bytes  received 13 bytes  318.00 bytes/sec
+total size is 413578845  speedup is 2601124.81
+</pre></div></div></div></div><div tabindex="2" class="cell border-box-sizing code_cell vbox"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[2]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5.71667px; left: 5.71667px;"><textarea style="position: absolute; padding: 0pt; width: 1px; height: 1em;" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 29.6px;"><div style="position: relative; top: 0px;"><div style="display: none;" class="CodeMirror-gutter"><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div draggable="true" style="position: relative; z-index: 0; outline: medium none;"><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre style="top: 0px; left: 0px;" class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1; display: none;"></div><div style=""><pre><span class="cm-variable">cd</span> <span class="cm-operator">/</span><span class="cm-variable">mnt</span><span class="cm-operator">/</span><span class="cm-variable">mock</span><span class="cm-operator">-</span><span class="cm-variable">partition</span></pre></div></div></div></div></div></div></div></div></div><div style="display: -moz-box;" class="output vbox"><div class="hbox output_area"><div class="prompt"></div><div class="box_flex1 output_subarea output_text output_stream output_stdout"><pre>/mnt/mock-partition
+</pre></div></div></div></div><div tabindex="2" class="cell border-box-sizing code_cell vbox"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[3]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5.71666px; left: 5.71667px;"><textarea style="position: absolute; padding: 0pt; width: 1px; height: 1em;" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 29.6px;"><div style="position: relative; top: 0px;"><div style="display: none;" class="CodeMirror-gutter"><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div draggable="true" style="position: relative; z-index: 0; outline: medium none;"><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre style="top: 0px; left: 0px;" class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1; display: none;"></div><div style=""><pre><span class="cm-operator">!</span><span class="cm-variable">ls</span> <span class="cm-operator">*</span><span class="cm-variable">.below.keep</span></pre></div></div></div></div></div></div></div></div></div><div style="display: -moz-box;" class="output vbox"><div class="hbox output_area"><div class="prompt"></div><div class="box_flex1 output_subarea output_text output_stream output_stdout"><pre>SRR172902.fastq.gz.keep.abundfilt.below.keep
+SRR172903.fastq.gz.keep.abundfilt.below.keep
+</pre></div></div></div></div><div tabindex="2" class="cell text_cell border-box-sizing"><div style="display: none;" class="text_cell_input border-box-sizing"><div class="CodeMirror CodeMirror-wrap"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 6.71667px; left: 288.717px;"><textarea style="position: absolute; padding: 0pt; width: 1px; height: 1em;" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-default" tabindex="-1"><div style="position: relative; height: 29.6px;"><div style="position: relative; top: 0px;"><div style="display: none;" class="CodeMirror-gutter"><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div draggable="true" style="position: relative; z-index: 0; outline: medium none;"><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"><pre>### Initial round of partitioning<span id="CodeMirror-temp-f7ae72"> </span></pre></div><pre style="top: 1px; left: 283px;" class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1; display: none;"><div class="CodeMirror-selected" style="position: absolute; left: 0px; top: 1px; right: 1343px; height: 17.6px"></div></div><div style=""><pre>### Initial round of partitioning</pre></div></div></div></div></div></div></div></div><div style="display: block;" tabindex="-1" class="text_cell_render border-box-sizing rendered_html"><h3>Initial round of partitioning</h3></div></div><div tabindex="2" class="cell border-box-sizing code_cell vbox"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[4]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5.71667px; left: 202.717px;"><textarea style="position: absolute; padding: 0pt; width: 1px; height: 1em;" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 29.6px;"><div style="position: relative; top: 0px;"><div style="display: none;" class="CodeMirror-gutter"><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div draggable="true" style="position: relative; z-index: 0; outline: medium none;"><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"><pre><span class="cm-operator">!/</span><span class="cm-variable">usr</span><span class="cm-operator">/</span><span class="cm-variable">local</span><span class="cm-operator">/</span><span class="cm-variable">src</span><span class="cm-operator">/</span><span class="cm-variable">khmer</span><span class="cm-operator">/</span><span class="cm-variable">s</span><span id="CodeMirror-temp-4b2a18">c</span></pre></div><pre style="top: 0px; left: 197px;" class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1; display: none;"></div><div style=""><pre><span class="cm-operator">!/</span><span class="cm-variable">usr</span><span class="cm-operator">/</span><span class="cm-variable">local</span><span class="cm-operator">/</span><span class="cm-variable">src</span><span class="cm-operator">/</span><span class="cm-variable">khmer</span><span class="cm-operator">/</span><span class="cm-variable">scripts</span><span class="cm-operator">/</span><span class="cm-variable">load</span><span class="cm-operator">-</span><span class="cm-variable">graph.py</span> <span class="cm-operator">-</span><span class="cm-variable">k</span> <span class="cm-number">32</span> <span class="cm-operator">-</span><span class="cm-variable">N</span> <span class="cm-number">4</span> <span class="cm-operator">-</span><span class="cm-variable">x</span> <span class="cm-number">1e9</span> <span class="cm-variable">mock.part1</span> <span class="cm-operator">*</span><span class="cm-variable">.below.keep</span></pre></div></div></div></div></div></div></div></div></div><div style="display: -moz-box; height: 504px; overflow: scroll; border: 2px solid rgb(204, 204, 204);" class="output vbox"><div class="hbox output_area"><div class="prompt"></div><div class="box_flex1 output_subarea output_text output_stream output_stdout"><pre>
+PARAMETERS:
+ - kmer size =    32 		(-k)
+ - n hashes =     4 		(-N)
+ - min hashsize = 1e+09 	(-x)
+
+Estimated memory usage is 5e+08 bytes (n_hashes x min_hashsize / 8)
+--------
+Saving hashtable to mock.part1
+Loading kmers from sequences in ['SRR172902.fastq.gz.keep.abundfilt.below.keep', 'SRR172903.fastq.gz.keep.abundfilt.below.keep']
+We WILL build the tagset (for partitioning/traversal).
+making hashtable
+consuming input SRR172902.fastq.gz.keep.abundfilt.below.keep
+n tags: 148510
+... consume_fasta_and_tag 100000 3135623
+n tags: 281255
+... consume_fasta_and_tag 200000 5806923
+n tags: 402059
+... consume_fasta_and_tag 300000 8157877
+n tags: 515813
+... consume_fasta_and_tag 400000 10306411
+n tags: 623876
+... consume_fasta_and_tag 500000 12294070
+n tags: 727396
+... consume_fasta_and_tag 600000 14161623
+n tags: 827754
+... consume_fasta_and_tag 700000 15939512
+n tags: 924943
+... consume_fasta_and_tag 800000 17636385
+n tags: 1020089
+... consume_fasta_and_tag 900000 19266971
+n tags: 1112343
+... consume_fasta_and_tag 1000000 20823757
+n tags: 1203216
+... consume_fasta_and_tag 1100000 22329710
+n tags: 1289481
+... consume_fasta_and_tag 1200000 23730617
+n tags: 1376224
+... consume_fasta_and_tag 1300000 25117940
+n tags: 1460149
+... consume_fasta_and_tag 1400000 26400543
+n tags: 1538463
+... consume_fasta_and_tag 1500000 27601796
+n tags: 1618072
+... consume_fasta_and_tag 1600000 28795469
+n tags: 1695907
+... consume_fasta_and_tag 1700000 29934241
+n tags: 1757402
+... consume_fasta_and_tag 1800000 30814216
+n tags: 1826413
+... consume_fasta_and_tag 1900000 31787847
+n tags: 1898188
+... consume_fasta_and_tag 2000000 32766711
+n tags: 1967460
+... consume_fasta_and_tag 2100000 33686423
+n tags: 2035184
+... consume_fasta_and_tag 2200000 34565041
+n tags: 2102288
+... consume_fasta_and_tag 2300000 35408262
+n tags: 2168162
+... consume_fasta_and_tag 2400000 36194703
+n tags: 2231916
+... consume_fasta_and_tag 2500000 36952165
+n tags: 2291164
+... consume_fasta_and_tag 2600000 37611950
+n tags: 2351380
+... consume_fasta_and_tag 2700000 38293579
+n tags: 2411361
+... consume_fasta_and_tag 2800000 38959317
+n tags: 2469543
+... consume_fasta_and_tag 2900000 39592995
+n tags: 2526730
+... consume_fasta_and_tag 3000000 40188496
+n tags: 2583362
+... consume_fasta_and_tag 3100000 40759823
+n tags: 2638253
+... consume_fasta_and_tag 3200000 41300115
+consuming input SRR172903.fastq.gz.keep.abundfilt.below.keep
+n tags: 2749165
+... consume_fasta_and_tag 100000 697404
+n tags: 2807642
+... consume_fasta_and_tag 200000 1343411
+n tags: 2864528
+... consume_fasta_and_tag 300000 1955376
+n tags: 2920105
+... consume_fasta_and_tag 400000 2540618
+n tags: 2973635
+... consume_fasta_and_tag 500000 3084782
+n tags: 3026552
+... consume_fasta_and_tag 600000 3615286
+n tags: 3078045
+... consume_fasta_and_tag 700000 4109331
+n tags: 3128209
+... consume_fasta_and_tag 800000 4575785
+n tags: 3176905
+... consume_fasta_and_tag 900000 5008891
+n tags: 3210515
+... consume_fasta_and_tag 1000000 5320621
+n tags: 3259176
+... consume_fasta_and_tag 1100000 5725178
+n tags: 3307291
+... consume_fasta_and_tag 1200000 6093852
+n tags: 3353719
+... consume_fasta_and_tag 1300000 6481587
+n tags: 3399571
+... consume_fasta_and_tag 1400000 6803123
+n tags: 3443488
+... consume_fasta_and_tag 1500000 7129397
+n tags: 3486190
+... consume_fasta_and_tag 1600000 7437694
+saving hashtable in mock.part1.ht
+saving tagset in mock.part1.tagset
+fp rate estimated to be 0.000
+</pre></div></div></div></div><div tabindex="2" class="cell border-box-sizing code_cell vbox"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[5]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5.71667px; left: 5.71667px;"><textarea style="position: absolute; padding: 0pt; width: 1px; height: 1em;" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 29.6px;"><div style="position: relative; top: 0px;"><div style="display: none;" class="CodeMirror-gutter"><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div draggable="true" style="position: relative; z-index: 0; outline: medium none;"><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre style="top: 0px; left: 0px;" class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1; display: none;"></div><div style=""><pre><span class="cm-operator">!/</span><span class="cm-variable">usr</span><span class="cm-operator">/</span><span class="cm-variable">local</span><span class="cm-operator">/</span><span class="cm-variable">src</span><span class="cm-operator">/</span><span class="cm-variable">khmer</span><span class="cm-operator">/</span><span class="cm-variable">scripts</span><span class="cm-operator">/</span><span class="cm-variable">partition</span><span class="cm-operator">-</span><span class="cm-variable">graph.py</span> <span class="cm-operator">--</span><span class="cm-variable">threads</span> <span class="cm-number">8</span> <span class="cm-operator">-</span><span class="cm-variable">s</span> <span class="cm-number">1e5</span> <span class="cm-variable">mock.part1</span></pre></div></div></div></div></div></div></div></div></div><div style="display: -moz-box; height: 504px; overflow: scroll; border: 2px solid rgb(204, 204, 204);" class="output vbox"><div class="hbox output_area"><div class="prompt"></div><div class="box_flex1 output_subarea output_text output_stream output_stdout"><pre>--
+SUBSET SIZE 100000.0
+N THREADS 8
+--
+loading ht mock.part1.ht
+** Traverse all the things: stop_big_traversals is false.
+enqueued 36 subset tasks
+starting 8 threads
+---
+starting: mock.part1 0
+starting: mock.part1 1
+starting: mock.part1 2
+starting: mock.part1 3
+starting: mock.part1 4
+starting: mock.part1 5
+starting: mock.part1 6
+done starting threads
+starting: mock.part1 7
+...subset-part 2198606868-97202892398291028: 100000 &lt;- 87245
+saving: mock.part1 0
+starting: mock.part1 8
+...subset-part 961590883688452109-1206520299373863385: 100000 &lt;- 92040
+saving: mock.part1 5
+starting: mock.part1 9
+...subset-part 276142514102407816-437374272204077096: 100000 &lt;- 89401
+saving: mock.part1 2
+...subset-part 97202892398291028-276142514102407816: 100000 &lt;- 91409
+saving: mock.part1 1
+starting: mock.part1 10
+starting: mock.part1 11
+...subset-part 1206520299373863385-1472305409934618016: 100000 &lt;- 89424
+saving: mock.part1 6
+...subset-part 1472305409934618016-1688345413618718027: 100000 &lt;- 91130
+...subset-part 437374272204077096-677656264927161776: 100000 &lt;- 91507
+...subset-part 677656264927161776-961590883688452109: 100000 &lt;- 92124
+saving: mock.part1 3
+saving: mock.part1 7
+saving: mock.part1 4
+starting: mock.part1 12
+starting: mock.part1 13
+starting: mock.part1 14
+starting: mock.part1 15
+...subset-part 1688345413618718027-1965910388185070599: 100000 &lt;- 92081
+saving: mock.part1 8
+starting: mock.part1 16
+...subset-part 1965910388185070599-2270192673430181186: 100000 &lt;- 92082
+saving: mock.part1 9
+starting: mock.part1 17
+...subset-part 2270192673430181186-2682213014826079788: 100000 &lt;- 91967
+saving: mock.part1 10
+...subset-part 3100524946931368271-3496511267674431414: 100000 &lt;- 90970
+starting: mock.part1 18
+ saving: mock.part1 12
+...subset-part 2682213014826079788-3100524946931368271: 100000 &lt;- 91995
+saving: mock.part1 11
+starting: mock.part1 19
+starting: mock.part1 20
+...subset-part 3496511267674431414-3914649231702503879: 100000 &lt;- 91824
+saving: mock.part1 13
+...subset-part 4313283702847763703-4658223252005552216: 100000 &lt;- 91855
+saving: mock.part1 15
+...subset-part 3914649231702503879-4313283702847763703: 100000 &lt;- 91188
+saving: mock.part1 14
+starting: mock.part1 21
+starting: mock.part1 22
+starting: mock.part1 23
+...subset-part 4658223252005552216-5000474751384075783: 100000 &lt;- 89460
+saving: mock.part1 16
+starting: mock.part1 24
+...subset-part 5000474751384075783-5485630688337428848: 100000 &lt;- 91361
+saving: mock.part1 17
+starting: mock.part1 25
+...subset-part 5485630688337428848-5961103565874901326: 100000 &lt;- 91186
+saving: mock.part1 18
+...subset-part 5961103565874901326-6237642271220966431: 100000 &lt;- 89572
+starting: mock.part1 26
+saving: mock.part1 19
+starting: mock.part1 27
+...subset-part 6237642271220966431-6614163425038427695: 100000 &lt;- 91875
+saving: mock.part1 20
+starting: mock.part1 28
+...subset-part 6614163425038427695-7029159242321453498: 100000 &lt;- 91833
+saving: mock.part1 21
+...subset-part 7491349236554794030-7991581720221377211: 100000 &lt;- 89330
+...subset-part 7029159242321453498-7491349236554794030: 100000 &lt;- 91851
+saving: mock.part1 22
+saving: mock.part1 23
+starting: mock.part1 29
+starting: mock.part1 30
+starting: mock.part1 31
+...subset-part 7991581720221377211-8451127861254422263: 100000 &lt;- 91756
+saving: mock.part1 24
+starting: mock.part1 32
+...subset-part 8945312319613799650-9484435911281955067: 100000 &lt;- 91304
+saving: mock.part1 26
+...subset-part 8451127861254422263-8945312319613799650: 100000 &lt;- 90503
+saving: mock.part1 25
+starting: mock.part1 33
+...subset-part 9484435911281955067-10226640023191260438: 100000 &lt;- 91112
+saving: mock.part1 27
+...subset-part 10226640023191260438-11025140690792566847: 100000 &lt;- 91085
+saving: mock.part1 28
+starting: mock.part1 34
+starting: mock.part1 35
+exiting
+...subset-part 11025140690792566847-11731531091742715195: 100000 &lt;- 89162
+saving: mock.part1 29
+...subset-part 11731531091742715195-12372087942452297262: 100000 &lt;- 85243
+saving: mock.part1 30
+exiting
+exiting
+...subset-part 12372087942452297262-12953456084389902278: 100000 &lt;- 83629
+saving: mock.part1 31
+exiting
+saving: mock.part1 35
+exiting
+...subset-part 12953456084389902278-13743573098667347482: 100000 &lt;- 84566
+saving: mock.part1 32
+exiting
+...subset-part 13743573098667347482-15093063735420732762: 100000 &lt;- 90581
+saving: mock.part1 33
+...subset-part 15093063735420732762-17155258418998471658: 100000 &lt;- 88467
+exitingsaving: mock.part1 34
+
+exiting
+---
+done making subsets! see mock.part1.subset.*.pmap
+</pre></div></div></div></div><div tabindex="2" class="cell border-box-sizing code_cell vbox"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[6]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5.71664px; left: 5.71667px;"><textarea style="position: absolute; padding: 0pt; width: 1px; height: 1em;" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 29.6px;"><div style="position: relative; top: 0px;"><div style="display: none;" class="CodeMirror-gutter"><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div draggable="true" style="position: relative; z-index: 0; outline: medium none;"><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre style="top: 0px; left: 0px;" class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1; display: none;"></div><div style=""><pre><span class="cm-operator">!/</span><span class="cm-variable">usr</span><span class="cm-operator">/</span><span class="cm-variable">local</span><span class="cm-operator">/</span><span class="cm-variable">src</span><span class="cm-operator">/</span><span class="cm-variable">khmer</span><span class="cm-operator">/</span><span class="cm-variable">scripts</span><span class="cm-operator">/</span><span class="cm-variable">merge</span><span class="cm-operator">-</span><span class="cm-variable">partitions.py</span> <span class="cm-variable">mock.part1</span></pre></div></div></div></div></div></div></div></div></div><div style="display: -moz-box; height: 504px; overflow: scroll; border: 2px solid rgb(204, 204, 204);" class="output vbox"><div class="hbox output_area"><div class="prompt"></div><div class="box_flex1 output_subarea output_text output_stream output_stdout"><pre>loading 36 pmap files (first one: mock.part1.subset.30.pmap)
+merging mock.part1.subset.30.pmap
+merging mock.part1.subset.0.pmap
+merging mock.part1.subset.34.pmap
+merging mock.part1.subset.32.pmap
+merging mock.part1.subset.31.pmap
+merging mock.part1.subset.17.pmap
+merging mock.part1.subset.10.pmap
+merging mock.part1.subset.25.pmap
+merging mock.part1.subset.23.pmap
+merging mock.part1.subset.1.pmap
+merging mock.part1.subset.8.pmap
+merging mock.part1.subset.3.pmap
+merging mock.part1.subset.22.pmap
+merging mock.part1.subset.7.pmap
+merging mock.part1.subset.26.pmap
+merging mock.part1.subset.6.pmap
+merging mock.part1.subset.13.pmap
+merging mock.part1.subset.21.pmap
+merging mock.part1.subset.9.pmap
+merging mock.part1.subset.20.pmap
+merging mock.part1.subset.28.pmap
+merging mock.part1.subset.27.pmap
+merging mock.part1.subset.24.pmap
+merging mock.part1.subset.16.pmap
+merging mock.part1.subset.2.pmap
+merging mock.part1.subset.35.pmap
+merging mock.part1.subset.4.pmap
+merging mock.part1.subset.14.pmap
+merging mock.part1.subset.18.pmap
+merging mock.part1.subset.11.pmap
+merging mock.part1.subset.12.pmap
+merging mock.part1.subset.19.pmap
+merging mock.part1.subset.29.pmap
+merging mock.part1.subset.5.pmap
+merging mock.part1.subset.33.pmap
+merging mock.part1.subset.15.pmap
+saving merged to mock.part1.pmap.merged
+removing pmap files
+</pre></div></div></div></div><div tabindex="2" class="cell border-box-sizing code_cell vbox"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[7]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5.71664px; left: 5.71667px;"><textarea style="position: absolute; padding: 0pt; width: 1px; height: 1em;" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 29.6px;"><div style="position: relative; top: 0px;"><div style="display: none;" class="CodeMirror-gutter"><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div draggable="true" style="position: relative; z-index: 0; outline: medium none;"><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre style="top: 0px; left: 0px;" class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1; display: none;"></div><div style=""><pre><span class="cm-operator">!/</span><span class="cm-variable">usr</span><span class="cm-operator">/</span><span class="cm-variable">local</span><span class="cm-operator">/</span><span class="cm-variable">src</span><span class="cm-operator">/</span><span class="cm-variable">khmer</span><span class="cm-operator">/</span><span class="cm-variable">scripts</span><span class="cm-operator">/</span><span class="cm-variable">annotate</span><span class="cm-operator">-</span><span class="cm-variable">partitions.py</span> <span class="cm-variable">mock.part1</span> <span class="cm-operator">*</span><span class="cm-variable">.below.keep</span></pre></div></div></div></div></div></div></div></div></div><div style="display: -moz-box; height: 504px; overflow: scroll; border: 2px solid rgb(204, 204, 204);" class="output vbox"><div class="hbox output_area"><div class="prompt"></div><div class="box_flex1 output_subarea output_text output_stream output_stdout"><pre>loading partition map from: mock.part1.pmap.merged
+outputting partitions for SRR172902.fastq.gz.keep.abundfilt.below.keep
+... output_partitions 100000 0
+... output_partitions 200000 0
+... output_partitions 300000 0
+... output_partitions 400000 0
+... output_partitions 500000 0
+... output_partitions 600000 0
+... output_partitions 700000 0
+... output_partitions 800000 0
+... output_partitions 900000 0
+... output_partitions 1000000 0
+... output_partitions 1100000 0
+... output_partitions 1200000 0
+... output_partitions 1300000 0
+... output_partitions 1400000 0
+... output_partitions 1500000 0
+... output_partitions 1600000 0
+... output_partitions 1700000 0
+... output_partitions 1800000 0
+... output_partitions 1900000 0
+... output_partitions 2000000 0
+... output_partitions 2100000 0
+... output_partitions 2200000 0
+... output_partitions 2300000 0
+... output_partitions 2400000 0
+... output_partitions 2500000 0
+... output_partitions 2600000 0
+... output_partitions 2700000 0
+... output_partitions 2800000 0
+... output_partitions 2900000 0
+... output_partitions 3000000 0
+... output_partitions 3100000 0
+output 168737 partitions for SRR172902.fastq.gz.keep.abundfilt.below.keep
+partitions are in SRR172902.fastq.gz.keep.abundfilt.below.keep.part
+outputting partitions for SRR172903.fastq.gz.keep.abundfilt.below.keep
+... output_partitions 100000 0
+... output_partitions 200000 0
+... output_partitions 300000 0
+... output_partitions 400000 0
+... output_partitions 500000 0
+... output_partitions 600000 0
+... output_partitions 700000 0
+... output_partitions 800000 0
+... output_partitions 900000 0
+... output_partitions 1000000 0
+... output_partitions 1100000 0
+... output_partitions 1200000 0
+... output_partitions 1300000 0
+... output_partitions 1400000 0
+... output_partitions 1500000 0
+output 97681 partitions for SRR172903.fastq.gz.keep.abundfilt.below.keep
+partitions are in SRR172903.fastq.gz.keep.abundfilt.below.keep.part
+</pre></div></div></div></div><div tabindex="2" class="cell border-box-sizing code_cell vbox"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[8]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5.71667px; left: 5.71667px;"><textarea style="position: absolute; padding: 0pt; width: 1px; height: 1em;" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 29.6px;"><div style="position: relative; top: 0px;"><div style="display: none;" class="CodeMirror-gutter"><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div draggable="true" style="position: relative; z-index: 0; outline: medium none;"><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre style="top: 0px; left: 0px;" class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1; display: none;"></div><div style=""><pre><span class="cm-operator">!/</span><span class="cm-variable">usr</span><span class="cm-operator">/</span><span class="cm-variable">local</span><span class="cm-operator">/</span><span class="cm-variable">src</span><span class="cm-operator">/</span><span class="cm-variable">khmer</span><span class="cm-operator">/</span><span class="cm-variable">scripts</span><span class="cm-operator">/</span><span class="cm-variable">extract</span><span class="cm-operator">-</span><span class="cm-variable">partitions.py</span> <span class="cm-variable">mock.part1</span> <span class="cm-operator">*</span><span class="cm-variable">.below.keep.part</span></pre></div></div></div></div></div></div></div></div></div><div style="display: -moz-box; height: 504px; overflow: scroll; border: 2px solid rgb(204, 204, 204);" class="output vbox"><div class="hbox output_area"><div class="prompt"></div><div class="box_flex1 output_subarea output_text output_stream output_stdout"><pre>---
+reading partitioned files: ['SRR172902.fastq.gz.keep.abundfilt.below.keep.part', 'SRR172903.fastq.gz.keep.abundfilt.below.keep.part']
+outputting to files named "mock.part1.groupN.fa"
+min reads to keep a partition: 5
+max size of a group file: 1000000
+partition size distribution will go to mock.part1.dist
+---
+... 0
+... 100000
+... 200000
+... 300000
+... 400000
+... 500000
+... 600000
+... 700000
+... 800000
+... 900000
+... 1000000
+... 1100000
+... 1200000
+... 1300000
+... 1400000
+... 1500000
+... 1600000
+... 1700000
+... 1800000
+... 1900000
+... 2000000
+... 2100000
+... 2200000
+... 2300000
+... 2400000
+... 2500000
+... 2600000
+... 2700000
+... 2800000
+... 2900000
+... 3000000
+... 0
+... 100000
+... 200000
+... 300000
+... 400000
+... 500000
+... 600000
+... 700000
+... 800000
+... 900000
+... 1000000
+... 1100000
+... 1200000
+... 1300000
+... 1400000
+5 groups
+...x2 0
+...x2 100000
+...x2 200000
+...x2 300000
+...x2 400000
+...x2 500000
+...x2 600000
+...x2 700000
+...x2 800000
+...x2 900000
+...x2 1000000
+...x2 1100000
+...x2 1200000
+...x2 1300000
+...x2 1400000
+...x2 1500000
+...x2 1600000
+...x2 1700000
+...x2 1800000
+...x2 1900000
+...x2 2000000
+...x2 2100000
+...x2 2200000
+...x2 2300000
+...x2 2400000
+...x2 2500000
+...x2 2600000
+...x2 2700000
+...x2 2800000
+...x2 2900000
+...x2 3000000
+...x2 0
+...x2 100000
+...x2 200000
+...x2 300000
+...x2 400000
+...x2 500000
+...x2 600000
+...x2 700000
+...x2 800000
+...x2 900000
+...x2 1000000
+...x2 1100000
+...x2 1200000
+...x2 1300000
+...x2 1400000
+</pre></div></div></div></div><div tabindex="2" class="cell text_cell border-box-sizing"><div style="display: none;" class="text_cell_input border-box-sizing"><div class="CodeMirror CodeMirror-wrap"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 59.9167px; left: 485.717px;"><textarea style="position: absolute; padding: 0pt; width: 1px; height: 1em;" wrap="off" autocorrect="off" autocapitalize="off">(</textarea></div><div class="CodeMirror-scroll cm-s-default" tabindex="-1"><div style="position: relative; height: 82.4px;"><div style="position: relative; top: 0px;"><div style="display: none;" class="CodeMirror-gutter"><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div draggable="true" style="position: relative; z-index: 0; outline: medium none;"><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"><pre>If the file sizes are small, you can just move on with the group*.fa files from here; below, we're going to deal with some Illumina nastiness that may cause assemblies to be worse than they otherwise should be.  (<span id="CodeMirror-temp-a147db">T</span>he</pre></div><pre style="top: 54.2px; left: 480px;" class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1; display: none;"><div class="CodeMirror-selected" style="position: absolute; left: 0px; top: 36.2px; right: 1283px; height: 17.6px"></div></div><div style=""><pre>### Partitioning (round 1) is done -- now do another round of repeat/artifact removal</pre><pre> </pre><pre>If the file sizes are small, you can just move on with the group*.fa files from here; below, we're going to deal with some Illumina nastiness that may cause assemblies to be worse than they otherwise should be.  (The paper draft on this is not yet available, sorry!)</pre></div></div></div></div></div></div></div></div><div style="display: block;" tabindex="-1" class="text_cell_render border-box-sizing rendered_html"><h3>Partitioning (round 1) is done -- now do another round of repeat/artifact removal</h3>
+
+<p>If the file sizes are small, you can just move on with the group*.fa 
+files from here; below, we're going to deal with some Illumina nastiness
+ that may cause assemblies to be worse than they otherwise should be.  
+(The paper draft on this is not yet available, sorry!)</p></div></div><div tabindex="2" class="cell border-box-sizing code_cell vbox"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[9]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5.71664px; left: 99.7167px;"><textarea style="position: absolute; padding: 0pt; width: 1px; height: 1em;" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 47.2px;"><div style="position: relative; top: 0px;"><div style="display: none;" class="CodeMirror-gutter"><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div draggable="true" style="position: relative; z-index: 0; outline: medium none;"><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"><pre><span class="cm-keyword">import</span> <span class="cm-variable">glob</span><span id="CodeMirror-temp-8a2852"> </span></pre></div><pre style="top: 0px; left: 94px;" class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1; display: none;"></div><div style=""><pre><span class="cm-keyword">import</span> <span class="cm-variable">glob</span></pre><pre><span class="cm-variable">partition_files</span> = <span class="cm-builtin">sorted</span>(<span class="cm-variable">glob.glob</span>(<span class="cm-string">'mock.part1.group????.fa'</span>))</pre></div></div></div></div></div></div></div></div></div><div style="display: none;" class="output vbox"></div></div><div tabindex="2" class="cell border-box-sizing code_cell vbox"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[10]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5.71667px; left: 5.71667px;"><textarea style="position: absolute; padding: 0pt; width: 1px; height: 1em;" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 64.8px;"><div style="position: relative; top: 0px;"><div style="display: none;" class="CodeMirror-gutter"><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div draggable="true" style="position: relative; z-index: 0; outline: medium none;"><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre style="top: 0px; left: 0px;" class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1; display: none;"></div><div style=""><pre><span class="cm-variable">last_partition_file</span> = <span class="cm-variable">partition_files</span>[<span class="cm-operator">-</span><span class="cm-number">1</span>]</pre><pre><span class="cm-keyword">print</span> <span class="cm-variable">last_partition_file</span></pre><pre><span class="cm-operator">!</span><span class="cm-variable">mv</span> <span class="cm-error">$</span><span class="cm-variable">last_partition_file</span> <span class="cm-variable">lump.fa</span></pre></div></div></div></div></div></div></div></div></div><div style="display: -moz-box;" class="output vbox"><div class="hbox output_area"><div class="prompt"></div><div class="box_flex1 output_subarea output_text output_stream output_stdout"><pre>mock.part1.group0004.fa
+</pre></div></div></div></div><div tabindex="2" class="cell border-box-sizing code_cell vbox"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[11]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5.71667px; left: 5.71667px;"><textarea style="position: absolute; padding: 0pt; width: 1px; height: 1em;" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 29.6px;"><div style="position: relative; top: 0px;"><div style="display: none;" class="CodeMirror-gutter"><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div draggable="true" style="position: relative; z-index: 0; outline: medium none;"><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre style="top: 0px; left: 0px;" class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1; display: none;"></div><div style=""><pre><span class="cm-operator">!</span><span class="cm-variable">python</span> <span class="cm-operator">/</span><span class="cm-variable">usr</span><span class="cm-operator">/</span><span class="cm-variable">local</span><span class="cm-operator">/</span><span class="cm-variable">src</span><span class="cm-operator">/</span><span class="cm-variable">khmer</span><span class="cm-operator">/</span><span class="cm-variable">scripts</span><span class="cm-operator">/</span><span class="cm-variable">load</span><span class="cm-operator">-</span><span class="cm-variable">graph.py</span> <span class="cm-operator">-</span><span class="cm-variable">k</span> <span class="cm-number">32</span> <span class="cm-operator">-</span><span class="cm-variable">N</span> <span class="cm-number">4</span> <span class="cm-operator">-</span><span class="cm-variable">x</span> <span class="cm-number">1e9</span> <span class="cm-variable">lump</span> <span class="cm-variable">lump.fa</span></pre></div></div></div></div></div></div></div></div></div><div style="display: -moz-box;" class="output vbox"><div class="hbox output_area"><div class="prompt"></div><div class="box_flex1 output_subarea output_text output_stream output_stdout"><pre>
+PARAMETERS:
+ - kmer size =    32 		(-k)
+ - n hashes =     4 		(-N)
+ - min hashsize = 1e+09 	(-x)
+
+Estimated memory usage is 5e+08 bytes (n_hashes x min_hashsize / 8)
+--------
+Saving hashtable to lump
+Loading kmers from sequences in ['lump.fa']
+We WILL build the tagset (for partitioning/traversal).
+making hashtable
+consuming input lump.fa
+n tags: 104685
+... consume_fasta_and_tag 100000 1844633
+n tags: 157812
+... consume_fasta_and_tag 200000 2297149
+saving hashtable in lump.ht
+saving tagset in lump.tagset
+fp rate estimated to be 0.000
+</pre></div></div></div></div><div tabindex="2" class="cell border-box-sizing code_cell vbox"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[12]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5.71667px; left: 5.71667px;"><textarea style="position: absolute; padding: 0pt; width: 1px; height: 1em;" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 29.6px;"><div style="position: relative; top: 0px;"><div style="display: none;" class="CodeMirror-gutter"><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div draggable="true" style="position: relative; z-index: 0; outline: medium none;"><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre style="top: 0px; left: 0px;" class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1; display: none;"></div><div style=""><pre><span class="cm-operator">!/</span><span class="cm-variable">usr</span><span class="cm-operator">/</span><span class="cm-variable">local</span><span class="cm-operator">/</span><span class="cm-variable">src</span><span class="cm-operator">/</span><span class="cm-variable">khmer</span><span class="cm-operator">/</span><span class="cm-variable">scripts</span><span class="cm-operator">/</span><span class="cm-variable">partition</span><span class="cm-operator">-</span><span class="cm-variable">graph.py</span> <span class="cm-operator">--</span><span class="cm-variable">threads</span> <span class="cm-number">8</span> <span class="cm-variable">lump</span></pre></div></div></div></div></div></div></div></div></div><div style="display: -moz-box;" class="output vbox"><div class="hbox output_area"><div class="prompt"></div><div class="box_flex1 output_subarea output_text output_stream output_stdout"><pre>--
+SUBSET SIZE 100000
+N THREADS 8
+--
+loading ht lump.ht
+** Traverse all the things: stop_big_traversals is false.
+enqueued 2 subset tasks
+starting 2 threads
+---
+starting: lump 0
+done starting threads
+starting: lump 1
+saving: lump 1
+exiting
+...subset-part 11453312538-4636386486858044496: 100000 &lt;- 33741
+saving: lump 0
+exiting
+---
+done making subsets! see lump.subset.*.pmap
+</pre></div></div></div></div><div tabindex="2" class="cell border-box-sizing code_cell vbox"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[13]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5.71667px; left: 5.71667px;"><textarea style="position: absolute; padding: 0pt; width: 1px; height: 1em;" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 29.6px;"><div style="position: relative; top: 0px;"><div style="display: none;" class="CodeMirror-gutter"><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div draggable="true" style="position: relative; z-index: 0; outline: medium none;"><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre style="top: 0px; left: 0px;" class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1; display: none;"></div><div style=""><pre><span class="cm-operator">!/</span><span class="cm-variable">usr</span><span class="cm-operator">/</span><span class="cm-variable">local</span><span class="cm-operator">/</span><span class="cm-variable">src</span><span class="cm-operator">/</span><span class="cm-variable">khmer</span><span class="cm-operator">/</span><span class="cm-variable">scripts</span><span class="cm-operator">/</span><span class="cm-variable">find</span><span class="cm-operator">-</span><span class="cm-variable">knots.py</span> <span class="cm-variable">lump</span></pre></div></div></div></div></div></div></div></div></div><div style="display: -moz-box;" class="output vbox"><div class="hbox output_area"><div class="prompt"></div><div class="box_flex1 output_subarea output_text output_stream output_stdout"><pre>loading ht lump.ht
+loading tagset lump.tagset...
+loading 2 pmap files (first one: lump.subset.1.pmap)
+---
+output stoptags will be in lump.stoptags
+---
+&lt;- lump.subset.1.pmap
+** repartitioning subset... lump.subset.1.pmap
+** merging subset... lump.subset.1.pmap
+** repartitioning, round 2... lump.subset.1.pmap
+** repartitioned size: 67
+saving stoptags binary
+(0 of 2)
+
+&lt;- lump.subset.0.pmap
+** repartitioning subset... lump.subset.0.pmap
+** merging subset... lump.subset.0.pmap
+** repartitioning, round 2... lump.subset.0.pmap
+** repartitioned size: 8249
+saving stoptags binary
+(1 of 2)
+
+done!
+</pre></div></div></div></div><div tabindex="2" class="cell border-box-sizing code_cell vbox"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[14]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5.71667px; left: 5.71667px;"><textarea style="position: absolute; padding: 0pt; width: 1px; height: 1em;" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 29.6px;"><div style="position: relative; top: 0px;"><div style="display: none;" class="CodeMirror-gutter"><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div draggable="true" style="position: relative; z-index: 0; outline: medium none;"><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre style="top: 0px; left: 0px;" class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1; display: none;"></div><div style=""><pre><span class="cm-operator">!/</span><span class="cm-variable">usr</span><span class="cm-operator">/</span><span class="cm-variable">local</span><span class="cm-operator">/</span><span class="cm-variable">src</span><span class="cm-operator">/</span><span class="cm-variable">khmer</span><span class="cm-operator">/</span><span class="cm-variable">scripts</span><span class="cm-operator">/</span><span class="cm-builtin">filter</span><span class="cm-operator">-</span><span class="cm-variable">stoptags.py</span> <span class="cm-variable">lump.stoptags</span> <span class="cm-variable">lump.fa</span></pre></div></div></div></div></div></div></div></div></div><div style="display: -moz-box;" class="output vbox"><div class="hbox output_area"><div class="prompt"></div><div class="box_flex1 output_subarea output_text output_stream output_stdout"><pre>loading stop tags, with K 32
+filtering lump.fa
+starting threads
+starting writer
+loading...
+... filtering 0
+... filtering 100000
+... filtering 200000
+done loading in sequences
+DONE writing.
+processed 249337 / wrote 249358 / removed -21
+processed 17170117 bp / wrote 17156054 bp / removed 14063 bp
+discarded 0.1%
+output in lump.fa.stopfilt
+</pre></div></div></div></div><div tabindex="2" class="cell border-box-sizing code_cell vbox"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[15]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5.71667px; left: 5.71667px;"><textarea style="position: absolute; padding: 0pt; width: 1px; height: 1em;" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 29.6px;"><div style="position: relative; top: 0px;"><div style="display: none;" class="CodeMirror-gutter"><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div draggable="true" style="position: relative; z-index: 0; outline: medium none;"><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre style="top: 0px; left: 0px;" class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1; display: none;"></div><div style=""><pre><span class="cm-operator">!/</span><span class="cm-variable">usr</span><span class="cm-operator">/</span><span class="cm-variable">local</span><span class="cm-operator">/</span><span class="cm-variable">src</span><span class="cm-operator">/</span><span class="cm-variable">khmer</span><span class="cm-operator">/</span><span class="cm-variable">scripts</span><span class="cm-operator">/</span><span class="cm-variable">load</span><span class="cm-operator">-</span><span class="cm-variable">graph.py</span> <span class="cm-operator">-</span><span class="cm-variable">x</span> <span class="cm-number">1e9</span> <span class="cm-operator">-</span><span class="cm-variable">k</span> <span class="cm-number">32</span> <span class="cm-operator">-</span><span class="cm-variable">N</span> <span class="cm-number">4</span> <span class="cm-variable">lumpfilt</span> <span class="cm-variable">lump.fa.stopfilt</span></pre></div></div></div></div></div></div></div></div></div><div style="display: -moz-box;" class="output vbox"><div class="hbox output_area"><div class="prompt"></div><div class="box_flex1 output_subarea output_text output_stream output_stdout"><pre>
+PARAMETERS:
+ - kmer size =    32 		(-k)
+ - n hashes =     4 		(-N)
+ - min hashsize = 1e+09 	(-x)
+
+Estimated memory usage is 5e+08 bytes (n_hashes x min_hashsize / 8)
+--------
+Saving hashtable to lumpfilt
+Loading kmers from sequences in ['lump.fa.stopfilt']
+We WILL build the tagset (for partitioning/traversal).
+making hashtable
+consuming input lump.fa.stopfilt
+n tags: 104664
+... consume_fasta_and_tag 100000 1844058
+n tags: 157763
+... consume_fasta_and_tag 200000 2296266
+saving hashtable in lumpfilt.ht
+saving tagset in lumpfilt.tagset
+fp rate estimated to be 0.000
+</pre></div></div></div></div><div tabindex="2" class="cell border-box-sizing code_cell vbox"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[16]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5.71667px; left: 5.71667px;"><textarea style="position: absolute; padding: 0pt; width: 1px; height: 1em;" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 29.6px;"><div style="position: relative; top: 0px;"><div style="display: none;" class="CodeMirror-gutter"><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div draggable="true" style="position: relative; z-index: 0; outline: medium none;"><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre style="top: 0px; left: 0px;" class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1; display: none;"></div><div style=""><pre><span class="cm-operator">!/</span><span class="cm-variable">usr</span><span class="cm-operator">/</span><span class="cm-variable">local</span><span class="cm-operator">/</span><span class="cm-variable">src</span><span class="cm-operator">/</span><span class="cm-variable">khmer</span><span class="cm-operator">/</span><span class="cm-variable">scripts</span><span class="cm-operator">/</span><span class="cm-variable">partition</span><span class="cm-operator">-</span><span class="cm-variable">graph.py</span> <span class="cm-variable">lumpfilt</span></pre></div></div></div></div></div></div></div></div></div><div style="display: -moz-box;" class="output vbox"><div class="hbox output_area"><div class="prompt"></div><div class="box_flex1 output_subarea output_text output_stream output_stdout"><pre>--
+SUBSET SIZE 100000
+N THREADS 4
+--
+loading ht lumpfilt.ht
+** Traverse all the things: stop_big_traversals is false.
+enqueued 2 subset tasks
+starting 2 threads
+---
+starting: lumpfilt 0
+starting: lumpfilt 1
+done starting threads
+saving: lumpfilt 1
+exiting
+...subset-part 11453312538-4637182602440491942: 100000 &lt;- 33736
+saving: lumpfilt 0
+exiting
+---
+done making subsets! see lumpfilt.subset.*.pmap
+</pre></div></div></div></div><div tabindex="2" class="cell border-box-sizing code_cell vbox"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[17]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5.71661px; left: 5.71667px;"><textarea style="position: absolute; padding: 0pt; width: 1px; height: 1em;" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 29.6px;"><div style="position: relative; top: 0px;"><div style="display: none;" class="CodeMirror-gutter"><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div draggable="true" style="position: relative; z-index: 0; outline: medium none;"><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre style="top: 0px; left: 0px;" class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1; display: none;"></div><div style=""><pre><span class="cm-operator">!/</span><span class="cm-variable">usr</span><span class="cm-operator">/</span><span class="cm-variable">local</span><span class="cm-operator">/</span><span class="cm-variable">src</span><span class="cm-operator">/</span><span class="cm-variable">khmer</span><span class="cm-operator">/</span><span class="cm-variable">scripts</span><span class="cm-operator">/</span><span class="cm-variable">merge</span><span class="cm-operator">-</span><span class="cm-variable">partitions.py</span> <span class="cm-variable">lumpfilt</span></pre></div></div></div></div></div></div></div></div></div><div style="display: -moz-box;" class="output vbox"><div class="hbox output_area"><div class="prompt"></div><div class="box_flex1 output_subarea output_text output_stream output_stdout"><pre>loading 2 pmap files (first one: lumpfilt.subset.1.pmap)
+merging lumpfilt.subset.1.pmap
+merging lumpfilt.subset.0.pmap
+saving merged to lumpfilt.pmap.merged
+removing pmap files
+</pre></div></div></div></div><div tabindex="2" class="cell border-box-sizing code_cell vbox"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[18]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5.71667px; left: 5.71667px;"><textarea style="position: absolute; padding: 0pt; width: 1px; height: 1em;" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 29.6px;"><div style="position: relative; top: 0px;"><div style="display: none;" class="CodeMirror-gutter"><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div draggable="true" style="position: relative; z-index: 0; outline: medium none;"><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre style="top: 0px; left: 0px;" class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1; display: none;"></div><div style=""><pre><span class="cm-operator">!/</span><span class="cm-variable">usr</span><span class="cm-operator">/</span><span class="cm-variable">local</span><span class="cm-operator">/</span><span class="cm-variable">src</span><span class="cm-operator">/</span><span class="cm-variable">khmer</span><span class="cm-operator">/</span><span class="cm-variable">scripts</span><span class="cm-operator">/</span><span class="cm-variable">annotate</span><span class="cm-operator">-</span><span class="cm-variable">partitions.py</span> <span class="cm-variable">lumpfilt</span> <span class="cm-operator">*</span><span class="cm-variable">.stopfilt</span></pre></div></div></div></div></div></div></div></div></div><div style="display: -moz-box;" class="output vbox"><div class="hbox output_area"><div class="prompt"></div><div class="box_flex1 output_subarea output_text output_stream output_stdout"><pre>loading partition map from: lumpfilt.pmap.merged
+outputting partitions for lump.fa.stopfilt
+... output_partitions 100000 0
+... output_partitions 200000 0
+output 78 partitions for lump.fa.stopfilt
+partitions are in lump.fa.stopfilt.part
+</pre></div></div></div></div><div tabindex="2" class="cell border-box-sizing code_cell vbox"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[19]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5.71661px; left: 5.71667px;"><textarea style="position: absolute; padding: 0pt; width: 1px; height: 1em;" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 29.6px;"><div style="position: relative; top: 0px;"><div style="display: none;" class="CodeMirror-gutter"><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div draggable="true" style="position: relative; z-index: 0; outline: medium none;"><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre style="top: 0px; left: 0px;" class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1; display: none;"></div><div style=""><pre><span class="cm-operator">!/</span><span class="cm-variable">usr</span><span class="cm-operator">/</span><span class="cm-variable">local</span><span class="cm-operator">/</span><span class="cm-variable">src</span><span class="cm-operator">/</span><span class="cm-variable">khmer</span><span class="cm-operator">/</span><span class="cm-variable">scripts</span><span class="cm-operator">/</span><span class="cm-variable">extract</span><span class="cm-operator">-</span><span class="cm-variable">partitions.py</span> <span class="cm-variable">lumpfilt</span> <span class="cm-operator">*</span><span class="cm-variable">.stopfilt.part</span></pre></div></div></div></div></div></div></div></div></div><div style="display: -moz-box;" class="output vbox"><div class="hbox output_area"><div class="prompt"></div><div class="box_flex1 output_subarea output_text output_stream output_stdout"><pre>---
+reading partitioned files: ['lump.fa.stopfilt.part']
+outputting to files named "lumpfilt.groupN.fa"
+min reads to keep a partition: 5
+max size of a group file: 1000000
+partition size distribution will go to lumpfilt.dist
+---
+... 0
+... 100000
+... 200000
+1 groups
+...x2 0
+...x2 100000
+...x2 200000
+</pre></div></div></div></div><div tabindex="2" class="cell border-box-sizing code_cell vbox"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[20]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5.71667px; left: 5.71667px;"><textarea style="position: absolute; padding: 0pt; width: 1px; height: 1em;" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 47.2px;"><div style="position: relative; top: 0px;"><div style="display: none;" class="CodeMirror-gutter"><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div draggable="true" style="position: relative; z-index: 0; outline: medium none;"><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre style="top: 0px; left: 0px;" class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1; display: none;"></div><div style=""><pre><span class="cm-operator">!</span><span class="cm-variable">ls</span> <span class="cm-operator">*</span><span class="cm-variable">.dist</span></pre><pre><span class="cm-operator">!</span><span class="cm-variable">ls</span> <span class="cm-operator">*</span><span class="cm-variable">.group</span><span class="cm-operator">????</span><span class="cm-variable">.fa</span></pre></div></div></div></div></div></div></div></div></div><div style="display: -moz-box;" class="output vbox"><div class="hbox output_area"><div class="prompt"></div><div class="box_flex1 output_subarea output_text output_stream output_stdout"><pre>lumpfilt.dist  mock.part1.dist
+lumpfilt.group0000.fa	 mock.part1.group0001.fa  mock.part1.group0003.fa
+mock.part1.group0000.fa  mock.part1.group0002.fa
+</pre></div></div></div></div><div tabindex="2" class="cell text_cell border-box-sizing"><div style="display: none;" class="text_cell_input border-box-sizing"><div class="CodeMirror CodeMirror-wrap"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 41.9167px; left: 202.717px;"><textarea style="position: absolute; padding: 0pt; width: 1px; height: 1em;" wrap="off" autocorrect="off" autocapitalize="off">\</textarea></div><div class="CodeMirror-scroll cm-s-default" tabindex="-1"><div style="position: relative; height: 64.8px;"><div style="position: relative; top: 0px;"><div style="display: none;" class="CodeMirror-gutter"><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div draggable="true" style="position: relative; z-index: 0; outline: medium none;"><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"><pre>Now take the '\*.group\<span id="CodeMirror-temp-2e3f4d">*</span>.fa'</pre></div><pre style="top: 36.2px; left: 197px;" class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1; display: none;"><div class="CodeMirror-selected" style="position: absolute; left: 0px; top: 0px; right: 0px; height: 36.2px"></div><div class="CodeMirror-selected" style="position: absolute; left: 0px; top: 36.2px; right: 1103px; height: 17.6px"></div></div><div style=""><pre>### Done!</pre><pre> </pre><pre>Now take the '\*.group\*.fa' files and proceed to assembly.</pre></div></div></div></div></div></div></div></div><div style="display: block;" tabindex="-1" class="text_cell_render border-box-sizing rendered_html"><h3>Done!</h3>
+
+<p>Now take the '*.group*.fa' files and proceed to assembly.</p></div></div><div style="height: 30%;" class="end_space"></div></div>
+<div style="" title="Click to Show/Hide pager area" class="border-box-sizing ui-widget ui-state-default" id="pager_splitter"></div>
+<div style="height: 280.4px;" class="border-box-sizing ui-widget" id="pager"></div>
+</div>
+</div>
+
+</div>
+<script src="92-mock-partition_files/jquery-1.js" type="text/javascript" charset="utf-8"></script>
+<script src="92-mock-partition_files/jquery-ui.js" type="text/javascript" charset="utf-8"></script>
+<script src="92-mock-partition_files/namespace.js" type="text/javascript" charset="utf-8"></script>
+<script src="92-mock-partition_files/page.js" type="text/javascript" charset="utf-8"></script>
+<script src="92-mock-partition_files/loginwidget.js" type="text/javascript" charset="utf-8"></script>
+
+<script src="92-mock-partition_files/codemirror.js" charset="utf-8"></script>
+<script src="92-mock-partition_files/python.js" charset="utf-8"></script>
+<script src="92-mock-partition_files/htmlmixed.js" charset="utf-8"></script>
+<script src="92-mock-partition_files/xml.js" charset="utf-8"></script>
+<script src="92-mock-partition_files/javascript.js" charset="utf-8"></script>
+<script src="92-mock-partition_files/css.js" charset="utf-8"></script>
+<script src="92-mock-partition_files/rst.js" charset="utf-8"></script>
+<script src="92-mock-partition_files/markdown.js" charset="utf-8"></script>
+<script src="92-mock-partition_files/Markdown.js" charset="utf-8"></script>
+<script src="92-mock-partition_files/prettify.js" charset="utf-8"></script>
+<script src="92-mock-partition_files/date.js" charset="utf-8"></script>
+<script src="92-mock-partition_files/events.js" type="text/javascript" charset="utf-8"></script>
+<script src="92-mock-partition_files/utils.js" type="text/javascript" charset="utf-8"></script>
+<script src="92-mock-partition_files/layoutmanager.js" type="text/javascript" charset="utf-8"></script>
+<script src="92-mock-partition_files/initmathjax.js" type="text/javascript" charset="utf-8"></script>
+<script src="92-mock-partition_files/cell.js" type="text/javascript" charset="utf-8"></script>
+<script src="92-mock-partition_files/codecell.js" type="text/javascript" charset="utf-8"></script>
+<script src="92-mock-partition_files/textcell.js" type="text/javascript" charset="utf-8"></script>
+<script src="92-mock-partition_files/kernel.js" type="text/javascript" charset="utf-8"></script>
+<script src="92-mock-partition_files/savewidget.js" type="text/javascript" charset="utf-8"></script>
+<script src="92-mock-partition_files/quickhelp.js" type="text/javascript" charset="utf-8"></script>
+<script src="92-mock-partition_files/pager.js" type="text/javascript" charset="utf-8"></script>
+<script src="92-mock-partition_files/menubar.js" type="text/javascript" charset="utf-8"></script>
+<script src="92-mock-partition_files/toolbar.js" type="text/javascript" charset="utf-8"></script>
+<script src="92-mock-partition_files/notebook.js" type="text/javascript" charset="utf-8"></script>
+<script src="92-mock-partition_files/notificationwidget.js" type="text/javascript" charset="utf-8"></script>
+<script src="92-mock-partition_files/notebookmain.js" type="text/javascript" charset="utf-8"></script>
+
+
+
+<div style="position: absolute; visibility: hidden; top: 0pt; left: 0pt; width: auto; padding: 0pt; border: 0pt none; margin: 0pt; text-align: left; text-indent: 0pt; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; font-size: 40px; font-weight: normal; font-style: normal; font-family: 'STIXSizeOneSym',sans-serif;">ˆ</div></body></html>

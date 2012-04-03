@@ -41,13 +41,23 @@ on Amazon EC2, and check out `this Youtube video
 <http://www.youtube.com/watch?v=HaS4NXxL5Qc>`__ for more info on
 ipython notebook.
 
-You can also see static versions of the ipython notebook tutorials here: @@
+The khmer software is available at http://github.com/ctb/khmer/ and
+the scripts are `documented here
+<http://lyorn.idyll.org/~t/khmer/scripts.html>`__.
+
+You can also see static versions of the ipython notebook tutorials here:
+
+ 1. XXX
+ 2. `Partitioning the HMP mock data set <files/92-mock-partition.html>`__
+ 3. `Assembling the partitioned HMP mock data set <files/93-mock-assembly.html>`__
 
 Older tutorials
 ---------------
 
 :doc:`../diginorm-2012/index` -- The paper notes and data analysis pipeline
-for the digital normalization paper.
+for the digital normalization paper.  The data analysis pipeline stuff
+is not for metagenomes, however; it describes microbial genome assembly
+and eukaryotic transcriptome assembly.
 
 :doc:`../metag-assembly-2011/index` -- A slightly older (but more
 comprehensive) introduction to metagenome assembly, from an MSU-local workshop.
