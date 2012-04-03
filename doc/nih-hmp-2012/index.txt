@@ -7,9 +7,50 @@ Metagenomic assembly in the cloud
 
 `Introductory slides for the demo <files/2012-nih-workshop-knight-demointro.pptx.pdf>`__
 
+Contact Adina Howe or Titus Brown to discuss!
+
+Paper drafts
+------------
+
 `Partitioning/probabilistic de Bruijn graph paper draft <http://ivory.idyll.org/blog/dec-11/kmer-percolation-posted.html>`__
 
 `Digital normalization paper draft <http://ivory.idyll.org/blog/mar-12/diginorm-paper-posted.html>`__
+
+Current tutorials and useful links
+----------------------------------
+
+Briefly:
+
+1. Start up ami-e9a57c80 on EC2, with ~16gb of RAM or more; I suggest
+   using m2.xlarge machine.
+
+2. Make sure HTTPS is open on the firewall.
+
+3. Use your Web browser to connect to 'https://' + hostname; use the password
+   gadzooks.
+
+4. Click on 'clusters' tab, put '4' into the nbserver '# of engines', and click
+   'start'.
+
+5. Go back to 'notebooks' tab and start at 91-mock-dataset-diginorm.  Open it
+   up, and select 'Cell' menu and then 'Run all'.  Alternatively, start at
+   the top and hit 'SHIFT-Enter' on each cell to run it.
+
+See :doc:`../tutorials-2011/creating-an-ec2-instance` for some details
+on Amazon EC2, and check out `this Youtube video
+<http://www.youtube.com/watch?v=HaS4NXxL5Qc>`__ for more info on
+ipython notebook.
+
+You can also see static versions of the ipython notebook tutorials here: @@
+
+Older tutorials
+---------------
+
+:doc:`../diginorm-2012/index` -- The paper notes and data analysis pipeline
+for the digital normalization paper.
+
+:doc:`../metag-assembly-2011/index` -- A slightly older (but more
+comprehensive) introduction to metagenome assembly, from an MSU-local workshop.
 
 .. links to tutorials for ipynb stuff
 .. surely tut
