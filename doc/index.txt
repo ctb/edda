@@ -30,6 +30,8 @@ Contents:
 .. toctree::
    :maxdepth: 1
 
+   nih-hmp-2012/index
+
    diginorm-2012/index
 
    metag-assembly-2011/index

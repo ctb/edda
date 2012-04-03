@@ -1,0 +1,15 @@
+========================================
+NIH HMP Workshop / Knight Lab - Apr 2012
+========================================
+
+Metagenomic assembly in the cloud
+=================================
+
+`Introductory slides for the demo <files/2012-nih-workshop-knight-demointro.pptx.pdf>`__
+
+`Partitioning/probabilistic de Bruijn graph paper draft <http://ivory.idyll.org/blog/dec-11/kmer-percolation-posted.html>`__
+
+`Digital normalization paper draft <http://ivory.idyll.org/blog/mar-12/diginorm-paper-posted.html>`__
+
+.. links to tutorials for ipynb stuff
+.. surely tut
