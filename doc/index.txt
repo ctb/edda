@@ -30,6 +30,8 @@ Contents:
 .. toctree::
    :maxdepth: 1
 
+   git-intro
+
    nih-hmp-2012/index
 
    diginorm-2012/index

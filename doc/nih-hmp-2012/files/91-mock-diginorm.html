@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<title>91-mock-dataset-diginorm</title>
+<link rel="stylesheet" href="91-mock-diginorm_files/jquery-ui.css" type="text/css">
+<link rel="stylesheet" href="91-mock-diginorm_files/boilerplate.css" type="text/css">
+<link rel="stylesheet" href="91-mock-diginorm_files/fbm.css" type="text/css">
+<link rel="stylesheet" href="91-mock-diginorm_files/page.css" type="text/css">
+
+
+<script type="text/javascript" src="91-mock-diginorm_files/MathJax.js" charset="utf-8"></script>
+
+<script type="text/javascript">
+// MathJax disabled, set as null to distingish from *missing* MathJax,
+// where it will be undefined, and should prompt a dialog later.
+window.mathjax_url = "/static/mathjax/MathJax.js";
+</script>
+<link rel="stylesheet" href="91-mock-diginorm_files/codemirror.css">
+<link rel="stylesheet" href="91-mock-diginorm_files/ipython.css">
+<link rel="stylesheet" href="91-mock-diginorm_files/prettify.css">
+<link rel="stylesheet" href="91-mock-diginorm_files/notebook.css" type="text/css">
+<link rel="stylesheet" href="91-mock-diginorm_files/renderedhtml.css" type="text/css">
+
+
+
+<style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-family: serif; font-size: 85%; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 5px 0px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -khtml-border-radius: 5px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 1px 2em; background: transparent}
+.MathJax_MenuTitle {background-color: #CCCCCC; margin: -5px 0 0 0; text-align: center; font-style: italic; font-size: 80%; color: #444444; padding: 2px 0; overflow: hidden}
+.MathJax_MenuArrow {position: absolute; right: .5em; color: #666666}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuRadioCheck {position: absolute; left: .7em}
+.MathJax_MenuLabel {padding: 1px 2em 3px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #DDDDDD; margin: 4px 3px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: #606872; color: white}
+</style><style type="text/css">#MathJax_Message {position: fixed; left: 1px; bottom: 2px; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MathJax_Display {text-align: center; margin: 0; position: relative; display: block; width: 100%}
+.MathJax .merror {color: black; border: 1px solid; padding: 1px 3px; font-family: serif; font-size: 80%; vertical-align: ; text-align: left}
+.MathJax_Preview {color: #888888}
+#MathJax_Tooltip {background-color: InfoBackground; color: InfoText; border: 1px solid black; box-shadow: 2px 2px 5px #AAAAAA; -webkit-box-shadow: 2px 2px 5px #AAAAAA; -moz-box-shadow: 2px 2px 5px #AAAAAA; -khtml-box-shadow: 2px 2px 5px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true'); padding: 3px 4px; position: absolute; left: 0; top: 0; width: auto; height: auto; display: none}
+.MathJax {display: inline; font-family: serif; font-style: normal; font-weight: normal; line-height: normal; font-size: 100%; font-size-adjust: none; text-indent: 0; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; border: 0; padding: 0; margin: 0}
+.MathJax img, .MathJax nobr, .MathJax a {border: 0; padding: 0; margin: 0; max-width: none; max-height: none; vertical-align: 0; line-height: normal; text-decoration: none}
+img.MathJax_strut {border: 0 !important; padding: 0 !important; margin: 0 !important; vertical-align: 0 !important}
+.MathJax span {display: inline; position: static; border: 0; padding: 0; margin: 0; vertical-align: 0; line-height: normal; text-decoration: none}
+.MathJax nobr {white-space: nowrap}
+.MathJax_Processing {visibility: hidden; position: fixed; width: 0; height: 0; overflow: hidden}
+.MathJax .MathJax_HitBox {cursor: text}
+#MathJax_Tooltip * {filter: none; background: transparent}
+#MathJax_getScales {font-family: STIXGeneral,STIXNonUnicode,STIXSizeOneSym}
+.MathJax .math span {font-family: STIXGeneral,STIXNonUnicode,STIXSizeOneSym}
+</style></head>
+<body data-project="/usr/local/ipython/notebooks" data-base-project-url="/" data-base-kernel-url="/" data-read-only="False" data-notebook-id="6c5428b1-f4b6-4a19-882d-db5abf396cbb"><div style="visibility: hidden; overflow: hidden; position: absolute; top: 0pt; height: 1px; width: auto; padding: 0pt; border: 0pt none; margin: 0pt; text-align: left; text-indent: 0pt; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal;"><div id="MathJax_Hidden"></div></div><div style="display: none;" id="MathJax_Message"></div>
+<div class="border-box-sizing ui-widget ui-widget-content" style="border-style: none; display: none;" id="header">
+<span id="ipython_notebook"><h1><a href="https://ec2-107-21-165-105.compute-1.amazonaws.com/" alt="dashboard"><img src="91-mock-diginorm_files/ipynblogo.png" alt="IPython Notebook"></a></h1></span>
+
+<span id="login_widget">
+
+<button aria-disabled="false" role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" id="logout"><span class="ui-button-text">Logout</span></button>
+
+</span>
+
+
+<span id="save_widget">
+<span class="ui-widget ui-widget-content" id="notebook_name">91-mock-dataset-diginorm</span>
+<span style="border: medium none; margin-left: 20px;" class="ui-widget ui-widget-content" id="save_status">Last saved: Apr 03 7:17 PM</span>
+</span>
+
+</div>
+<div style="display: block;" class="border-box-sizing" id="site">
+
+<div id="menubar_container">
+<div style="" class="border-box-sizing" id="menubar">
+<ul role="menubar" class="ui-menubar ui-widget-header ui-helper-clearfix" id="menus">
+<li role="presentation" class="ui-menubar-item"><a aria-haspopup="true" role="menuitem" class="ui-button ui-widget ui-button-text-only ui-menubar-link" href="#"><span class="ui-button-text">File</span></a>
+<ul aria-expanded="false" aria-hidden="true" style="display: none;" tabindex="0" role="menu" id="ui-menu-0" class="ui-menu ui-widget ui-widget-content ui-corner-all">
+<li role="presentation" class="ui-menu-item" id="new_notebook"><a id="ui-menu-0-0" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">New</a></li>
+<li role="presentation" class="ui-menu-item" id="open_notebook"><a id="ui-menu-0-1" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Open...</a></li>
+<hr>
+<li role="presentation" class="ui-menu-item" id="copy_notebook"><a id="ui-menu-0-2" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Make a Copy...</a></li>
+<li role="presentation" class="ui-menu-item" id="rename_notebook"><a id="ui-menu-0-3" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Rename...</a></li>
+<li role="presentation" class="ui-menu-item" id="save_notebook"><a id="ui-menu-0-4" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Save</a></li>
+<hr>
+<li role="presentation" class="ui-menu-item"><a aria-haspopup="true" id="ui-menu-0-5" role="menuitem" tabindex="-1" class="ui-corner-all" href="#"><span class="ui-menu-icon ui-icon ui-icon-carat-1-e"></span>Download as</a>
+<ul aria-labelledby="ui-menu-0-5" aria-expanded="false" aria-hidden="true" style="display: none;" role="menu" class="ui-menu ui-widget ui-widget-content ui-corner-all">
+<li role="presentation" class="ui-menu-item" id="download_ipynb"><a id="ui-menu-0-7" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">IPython (.ipynb)</a></li>
+<li role="presentation" class="ui-menu-item" id="download_py"><a id="ui-menu-0-8" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Python (.py)</a></li>
+</ul>
+</li>
+<hr>
+<li role="presentation" class="ui-menu-item" id="print_notebook"><a id="ui-menu-0-6" role="menuitem" tabindex="-1" class="ui-corner-all" href="https://ec2-107-21-165-105.compute-1.amazonaws.com/6c5428b1-f4b6-4a19-882d-db5abf396cbb/print" target="_blank">Print View</a></li>
+</ul>
+</li>
+<li role="presentation" class="ui-menubar-item"><a aria-haspopup="true" role="menuitem" class="ui-button ui-widget ui-button-text-only ui-menubar-link" tabindex="-1" href="#"><span class="ui-button-text">Edit</span></a>
+<ul aria-expanded="false" aria-hidden="true" style="display: none;" tabindex="0" role="menu" id="ui-menu-1" class="ui-menu ui-widget ui-widget-content ui-corner-all">
+<li role="presentation" class="ui-menu-item" id="cut_cell"><a id="ui-menu-1-0" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Cut Cell</a></li>
+<li role="presentation" class="ui-menu-item" id="copy_cell"><a id="ui-menu-1-1" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Copy Cell</a></li>
+<li role="presentation" id="paste_cell" class="ui-state-disabled ui-menu-item"><a id="ui-menu-1-2" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Paste Cell</a></li>
+<li role="presentation" id="paste_cell_above" class="ui-state-disabled ui-menu-item"><a id="ui-menu-1-3" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Paste Cell Above</a></li>
+<li role="presentation" id="paste_cell_below" class="ui-state-disabled ui-menu-item"><a id="ui-menu-1-4" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Paste Cell Below</a></li>
+<li role="presentation" class="ui-menu-item" id="delete_cell"><a id="ui-menu-1-5" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Delete</a></li>
+<hr>
+<li role="presentation" class="ui-menu-item" id="split_cell"><a id="ui-menu-1-6" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Split Cell</a></li>
+<li role="presentation" class="ui-menu-item" id="merge_cell_above"><a id="ui-menu-1-7" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Merge Cell Above</a></li>
+<li role="presentation" class="ui-menu-item" id="merge_cell_below"><a id="ui-menu-1-8" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Merge Cell Below</a></li>
+<hr>
+<li role="presentation" class="ui-menu-item" id="move_cell_up"><a id="ui-menu-1-9" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Move Cell Up</a></li>
+<li role="presentation" class="ui-menu-item" id="move_cell_down"><a id="ui-menu-1-10" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Move Cell Down</a></li>
+<hr>
+<li role="presentation" class="ui-menu-item" id="select_previous"><a id="ui-menu-1-11" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Select Previous Cell</a></li>
+<li role="presentation" class="ui-menu-item" id="select_next"><a id="ui-menu-1-12" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Select Next Cell</a></li>
+</ul>
+</li>
+<li role="presentation" class="ui-menubar-item"><a aria-haspopup="true" role="menuitem" class="ui-button ui-widget ui-button-text-only ui-menubar-link" href="#"><span class="ui-button-text">View</span></a>
+<ul aria-hidden="true" aria-activedescendant="ui-menu-2-1" aria-expanded="false" style="display: none; top: 32px; left: 110px;" tabindex="0" role="menu" id="ui-menu-2" class="ui-menu ui-widget ui-widget-content ui-corner-all">
+<li role="presentation" class="ui-menu-item" id="toggle_header"><a id="ui-menu-2-0" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Toggle Header</a></li>
+<li role="presentation" class="ui-menu-item" id="toggle_toolbar"><a id="ui-menu-2-1" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Toggle Toolbar</a></li>
+</ul>
+</li>
+<li role="presentation" class="ui-menubar-item"><a aria-haspopup="true" role="menuitem" class="ui-button ui-widget ui-button-text-only ui-menubar-link" tabindex="-1" href="#"><span class="ui-button-text">Insert</span></a>
+<ul aria-expanded="false" aria-hidden="true" style="display: none;" tabindex="0" role="menu" id="ui-menu-3" class="ui-menu ui-widget ui-widget-content ui-corner-all">
+<li role="presentation" class="ui-menu-item" id="insert_cell_above"><a id="ui-menu-3-0" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Insert Cell Above</a></li>
+<li role="presentation" class="ui-menu-item" id="insert_cell_below"><a id="ui-menu-3-1" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Insert Cell Below</a></li>
+</ul>
+</li>
+<li role="presentation" class="ui-menubar-item"><a aria-haspopup="true" role="menuitem" class="ui-button ui-widget ui-button-text-only ui-menubar-link" tabindex="-1" href="#"><span class="ui-button-text">Cell</span></a>
+<ul aria-expanded="false" aria-hidden="true" style="display: none;" tabindex="0" role="menu" id="ui-menu-4" class="ui-menu ui-widget ui-widget-content ui-corner-all">
+<li role="presentation" class="ui-menu-item" id="run_cell"><a id="ui-menu-4-0" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Run</a></li>
+<li role="presentation" class="ui-menu-item" id="run_cell_in_place"><a id="ui-menu-4-1" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Run in Place</a></li>
+<li role="presentation" class="ui-menu-item" id="run_all_cells"><a id="ui-menu-4-2" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Run All</a></li>
+<hr>
+<li role="presentation" class="ui-menu-item" id="to_code"><a id="ui-menu-4-3" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Code</a></li>
+<li role="presentation" class="ui-menu-item" id="to_markdown"><a id="ui-menu-4-4" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Markdown </a></li>
+<li role="presentation" class="ui-menu-item" id="to_plaintext"><a id="ui-menu-4-5" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Plaintext</a></li>
+<li role="presentation" class="ui-menu-item" id="to_heading1"><a id="ui-menu-4-6" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Heading 1</a></li>
+<li role="presentation" class="ui-menu-item" id="to_heading2"><a id="ui-menu-4-7" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Heading 2</a></li>
+<li role="presentation" class="ui-menu-item" id="to_heading3"><a id="ui-menu-4-8" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Heading 3</a></li>
+<li role="presentation" class="ui-menu-item" id="to_heading4"><a id="ui-menu-4-9" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Heading 4</a></li>
+<li role="presentation" class="ui-menu-item" id="to_heading5"><a id="ui-menu-4-10" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Heading 5</a></li>
+<li role="presentation" class="ui-menu-item" id="to_heading6"><a id="ui-menu-4-11" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Heading 6</a></li>
+<hr>
+<li role="presentation" class="ui-menu-item" id="toggle_output"><a id="ui-menu-4-12" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Toggle Output</a></li>
+<li role="presentation" class="ui-menu-item" id="clear_all_output"><a id="ui-menu-4-13" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Clear All Output</a></li>
+</ul>
+</li>
+<li role="presentation" class="ui-menubar-item"><a aria-haspopup="true" role="menuitem" class="ui-button ui-widget ui-button-text-only ui-menubar-link" href="#"><span class="ui-button-text">Kernel</span></a>
+<ul aria-hidden="true" aria-activedescendant="ui-menu-5-0" aria-expanded="false" style="display: none; top: 32px; left: 294px;" tabindex="0" role="menu" id="ui-menu-5" class="ui-menu ui-widget ui-widget-content ui-corner-all">
+<li role="presentation" class="ui-menu-item" id="int_kernel"><a id="ui-menu-5-0" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Interrupt</a></li>
+<li role="presentation" class="ui-menu-item" id="restart_kernel"><a id="ui-menu-5-1" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Restart</a></li>
+</ul>
+</li>
+<li role="presentation" class="ui-menubar-item"><a aria-haspopup="true" role="menuitem" class="ui-button ui-widget ui-button-text-only ui-menubar-link" tabindex="-1" href="#"><span class="ui-button-text">Help</span></a>
+<ul aria-expanded="false" aria-hidden="true" style="display: none;" tabindex="0" role="menu" id="ui-menu-6" class="ui-menu ui-widget ui-widget-content ui-corner-all">
+<li role="presentation" class="ui-menu-item"><a id="ui-menu-6-0" role="menuitem" tabindex="-1" class="ui-corner-all" href="http://ipython.org/documentation.html" target="_blank">IPython Help</a></li>
+<li role="presentation" class="ui-menu-item"><a id="ui-menu-6-1" role="menuitem" tabindex="-1" class="ui-corner-all" href="http://ipython.org/ipython-doc/stable/interactive/htmlnotebook.html" target="_blank">Notebook Help</a></li>
+<li role="presentation" class="ui-menu-item" id="keyboard_shortcuts"><a id="ui-menu-6-2" role="menuitem" tabindex="-1" class="ui-corner-all" href="#">Keyboard Shortcuts</a></li>
+<hr>
+<li role="presentation" class="ui-menu-item"><a id="ui-menu-6-3" role="menuitem" tabindex="-1" class="ui-corner-all" href="http://docs.python.org/" target="_blank">Python</a></li>
+<li role="presentation" class="ui-menu-item"><a id="ui-menu-6-4" role="menuitem" tabindex="-1" class="ui-corner-all" href="http://docs.scipy.org/doc/numpy/reference/" target="_blank">NumPy</a></li>
+<li role="presentation" class="ui-menu-item"><a id="ui-menu-6-5" role="menuitem" tabindex="-1" class="ui-corner-all" href="http://docs.scipy.org/doc/scipy/reference/" target="_blank">SciPy</a></li>
+<li role="presentation" class="ui-menu-item"><a id="ui-menu-6-6" role="menuitem" tabindex="-1" class="ui-corner-all" href="http://docs.sympy.org/dev/index.html" target="_blank">SymPy</a></li>
+<li role="presentation" class="ui-menu-item"><a id="ui-menu-6-7" role="menuitem" tabindex="-1" class="ui-corner-all" href="http://matplotlib.sourceforge.net/" target="_blank">Matplotlib</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div style="display: none;" class="ui-widget ui-widget-content ui-corner-all border-box-sizing" id="notification"></div>
+</div>
+<div style="border-top-style: none; border-left-style: none; border-right-style: none; display: none;" class="border-box-sizing ui-widget ui-widget-content" id="toolbar">
+<span>
+<button title="Save" aria-disabled="false" role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only" id="save_b"><span class="ui-button-icon-primary ui-icon ui-icon-disk"></span><span class="ui-button-text">Save</span></button>
+</span>
+<span class="ui-buttonset" id="cut_copy_paste">
+<button aria-disabled="false" role="button" class="ui-button ui-widget ui-state-default ui-button-icon-only ui-corner-left" id="cut_b" title="Cut Cell"><span class="ui-button-icon-primary ui-icon ui-icon-scissors"></span><span class="ui-button-text">Cut Cell</span></button>
+<button aria-disabled="false" role="button" class="ui-button ui-widget ui-state-default ui-button-icon-only" id="copy_b" title="Copy Cell"><span class="ui-button-icon-primary ui-icon ui-icon-copy"></span><span class="ui-button-text">Copy Cell</span></button>
+<button aria-disabled="false" role="button" class="ui-button ui-widget ui-state-default ui-button-icon-only ui-corner-right" id="paste_b" title="Paste Cell"><span class="ui-button-icon-primary ui-icon ui-icon-clipboard"></span><span class="ui-button-text">Paste Cell</span></button>
+</span>
+<span class="ui-buttonset" id="move_up_down">
+<button aria-disabled="false" role="button" class="ui-button ui-widget ui-state-default ui-button-icon-only ui-corner-left" id="move_up_b" title="Move Cell Up"><span class="ui-button-icon-primary ui-icon ui-icon-arrowthick-1-n"></span><span class="ui-button-text">Move Cell Up</span></button>
+<button aria-disabled="false" role="button" class="ui-button ui-widget ui-state-default ui-button-icon-only ui-corner-right" id="move_down_b" title="Move Cell Down"><span class="ui-button-icon-primary ui-icon ui-icon-arrowthick-1-s"></span><span class="ui-button-text">Move Down</span></button>
+</span>
+<span class="ui-buttonset" id="insert_above_below">
+<button aria-disabled="false" role="button" class="ui-button ui-widget ui-state-default ui-button-icon-only ui-corner-left" id="insert_above_b" title="Insert Cell Above"><span class="ui-button-icon-primary ui-icon ui-icon-arrowthickstop-1-n"></span><span class="ui-button-text">Insert Cell Above</span></button>
+<button aria-disabled="false" role="button" class="ui-button ui-widget ui-state-default ui-button-icon-only ui-corner-right" id="insert_below_b" title="Insert Cell Below"><span class="ui-button-icon-primary ui-icon ui-icon-arrowthickstop-1-s"></span><span class="ui-button-text">Insert Cell Below</span></button>
+</span>
+<span class="ui-buttonset" id="run_int">
+<button aria-disabled="false" role="button" class="ui-button ui-widget ui-state-default ui-button-icon-only ui-corner-left" id="run_b" title="Run Cell"><span class="ui-button-icon-primary ui-icon ui-icon-play"></span><span class="ui-button-text">Run Cell</span></button>
+<button aria-disabled="false" role="button" class="ui-button ui-widget ui-state-default ui-button-icon-only ui-corner-right" id="interrupt_b" title="Interrupt"><span class="ui-button-icon-primary ui-icon ui-icon-stop"></span><span class="ui-button-text">Interrupt</span></button>
+</span>
+<span>
+<select class="ui-widget ui-widget-content" id="cell_type">
+<option value="code">Code</option>
+<option selected="selected" value="markdown">Markdown</option>
+<option value="plaintext">Plaintext</option>
+<option value="heading1">Heading 1</option>
+<option value="heading2">Heading 2</option>
+<option value="heading3">Heading 3</option>
+<option value="heading4">Heading 4</option>
+<option value="heading5">Heading 5</option>
+<option value="heading6">Heading 6</option>
+</select>
+</span>
+</div>
+<div style="height: 701px;" class="border-box-sizing ui-widget" id="main_app">
+<div class="border-box-sizing ui-widget" id="notebook_panel">
+<div style="height: 693px;" class="border-box-sizing" id="notebook"><div tabindex="2" class="cell text_cell border-box-sizing ui-widget-content ui-corner-all"><div style="display: none;" class="text_cell_input border-box-sizing"><div class="CodeMirror CodeMirror-wrap"><div style="overflow: hidden; position: relative; width: 3px; height: 0px;"><textarea style="position: absolute; padding: 0pt; width: 1px; height: 1em;" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-default" tabindex="-1"><div style="position: relative"><div style="position: relative"><div style="display: none;" class="CodeMirror-gutter"><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div draggable="true" style="position: relative; z-index: 0; outline: medium none;"><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"><pre><span>x</span></pre></div><pre class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1"></div><div></div></div></div></div></div></div></div></div><div tabindex="-1" class="text_cell_render border-box-sizing rendered_html"><h2>Running digital normalization on the HMP mock data set</h2>
+
+<p>This notebook runs 'digital normalization' (see <a href="http://ged.msu.edu/papers/2012-diginorm/">http://ged.msu.edu/papers/2012-diginorm/</a>) on the HMP Illumina mock data set.</p>
+
+<p>Basically, it starts with two gzipped fastq files and runs a four-pass approach:</p>
+
+<ol>
+<li>Normalize to coverage = 20</li>
+<li>Trim low-abundance (likely erroneous) k-mers</li>
+<li>Trim high-abundance (likely Illumina artifacts)</li>
+<li>Normalize to coverage = 5</li>
+</ol>
+
+<p>At the end, the fraction of reads tossed are graphed.</p>
+
+<p>This produces files that can be used as input into the partitioning algorithm (see the next notebook!)</p>
+
+<p>Here we are starting with the two fastq.gz files, raw, untrimmed, etc. etc.</p></div></div><div tabindex="2" class="cell border-box-sizing code_cell vbox"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[1]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5.71667px; left: 5.71667px;"><textarea style="position: absolute; padding: 0pt; width: 1px; height: 1em;" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 47.2px;"><div style="position: relative; top: 0px;"><div style="display: none;" class="CodeMirror-gutter"><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div draggable="true" style="position: relative; z-index: 0; outline: medium none;"><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre style="top: 0px; left: 0px;" class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1; display: none;"></div><div style=""><pre><span class="cm-comment"># copy data to working directory</span></pre><pre><span class="cm-operator">!</span><span class="cm-variable">rsync</span> <span class="cm-operator">-</span><span class="cm-variable">av</span> <span class="cm-operator">/</span><span class="cm-variable">usr</span><span class="cm-operator">/</span><span class="cm-variable">local</span><span class="cm-operator">/</span><span class="cm-variable">data</span><span class="cm-operator">/</span><span class="cm-variable">mock</span><span class="cm-operator">-</span><span class="cm-variable">diginorm</span> <span class="cm-operator">/</span><span class="cm-variable">mnt</span></pre></div></div></div></div></div></div></div></div></div><div style="display: -moz-box;" class="output vbox"><div class="hbox output_area"><div class="prompt"></div><div class="box_flex1 output_subarea output_text output_stream output_stdout"><pre>sending incremental file list
+
+sent 101 bytes  received 13 bytes  76.00 bytes/sec
+total size is 1112568388  speedup is 9759371.82
+</pre></div></div></div></div><div tabindex="2" class="cell border-box-sizing code_cell vbox"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[2]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5.71667px; left: 5.71667px;"><textarea style="position: absolute; padding: 0pt; width: 1px; height: 1em;" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 29.6px;"><div style="position: relative; top: 0px;"><div style="display: none;" class="CodeMirror-gutter"><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div draggable="true" style="position: relative; z-index: 0; outline: medium none;"><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre style="top: 0px; left: 0px;" class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1; display: none;"></div><div style=""><pre><span class="cm-variable">cd</span> <span class="cm-operator">/</span><span class="cm-variable">mnt</span><span class="cm-operator">/</span><span class="cm-variable">mock</span><span class="cm-operator">-</span><span class="cm-variable">diginorm</span></pre></div></div></div></div></div></div></div></div></div><div style="display: -moz-box;" class="output vbox"><div class="hbox output_area"><div class="prompt"></div><div class="box_flex1 output_subarea output_text output_stream output_stdout"><pre>/mnt/mock-diginorm
+</pre></div></div></div></div><div tabindex="2" class="cell border-box-sizing code_cell vbox"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[3]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5.71667px; left: 5.71667px;"><textarea style="position: absolute; padding: 0pt; width: 1px; height: 1em;" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 29.6px;"><div style="position: relative; top: 0px;"><div style="display: none;" class="CodeMirror-gutter"><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div draggable="true" style="position: relative; z-index: 0; outline: medium none;"><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre style="top: 0px; left: 0px;" class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1; display: none;"></div><div style=""><pre><span class="cm-operator">!</span><span class="cm-variable">ls</span> <span class="cm-variable">SRR</span><span class="cm-operator">*</span><span class="cm-variable">.fastq.gz</span></pre></div></div></div></div></div></div></div></div></div><div style="display: -moz-box;" class="output vbox"><div class="hbox output_area"><div class="prompt"></div><div class="box_flex1 output_subarea output_text output_stream output_stdout"><pre>SRR172902.fastq.gz  SRR172903.fastq.gz
+</pre></div></div></div></div><div tabindex="2" class="cell border-box-sizing code_cell vbox"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[4]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5.71667px; left: 5.71667px;"><textarea style="position: absolute; padding: 0pt; width: 1px; height: 1em;" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 82.4px;"><div style="position: relative; top: 0px;"><div style="display: none;" class="CodeMirror-gutter"><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div draggable="true" style="position: relative; z-index: 0; outline: medium none;"><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre style="top: 0px; left: 0px;" class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1; display: none;"></div><div style=""><pre><span class="cm-keyword">import</span> <span class="cm-variable">glob</span></pre><pre><span class="cm-variable">filenames</span> = <span class="cm-variable">glob.glob</span>(<span class="cm-string">'SRR*.fastq.gz'</span>)</pre><pre><span class="cm-variable">filenames</span> = <span class="cm-string">" "</span><span class="cm-variable">.join</span>(<span class="cm-variable">filenames</span>)</pre><pre><span class="cm-keyword">print</span> <span class="cm-string">'filenames are:'</span>, <span class="cm-variable">filenames</span></pre></div></div></div></div></div></div></div></div></div><div style="display: -moz-box;" class="output vbox"><div class="hbox output_area"><div class="prompt"></div><div class="box_flex1 output_subarea output_text output_stream output_stdout"><pre>filenames are: SRR172902.fastq.gz SRR172903.fastq.gz
+</pre></div></div></div></div><div tabindex="2" class="cell text_cell border-box-sizing"><div style="display: none;" class="text_cell_input border-box-sizing"><div class="CodeMirror CodeMirror-wrap"><div style="overflow: hidden; position: relative; width: 3px; height: 0px;"><textarea style="position: absolute; padding: 0pt; width: 1px; height: 1em;" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-default" tabindex="-1"><div style="position: relative"><div style="position: relative"><div style="display: none;" class="CodeMirror-gutter"><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div draggable="true" style="position: relative; z-index: 0; outline: medium none;"><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"><pre><span>x</span></pre></div><pre class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1"></div><div></div></div></div></div></div></div></div></div><div tabindex="-1" class="text_cell_render border-box-sizing rendered_html"><h3>Pass 1: normalize to C=20.</h3>
+
+<p>The only parameter to change here is the memory, which is fixed at 4gb (multiply the -N and -x parameters).</p>
+
+<p>This should take 30-45 minutes.</p></div></div><div tabindex="2" class="cell border-box-sizing code_cell vbox"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[5]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5.71667px; left: 5.71667px;"><textarea style="position: absolute; padding: 0pt; width: 1px; height: 1em;" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 29.6px;"><div style="position: relative; top: 0px;"><div style="display: none;" class="CodeMirror-gutter"><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div draggable="true" style="position: relative; z-index: 0; outline: medium none;"><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre style="top: 0px; left: 0px;" class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1; display: none;"></div><div style=""><pre><span class="cm-operator">!/</span><span class="cm-variable">usr</span><span class="cm-operator">/</span><span class="cm-variable">local</span><span class="cm-operator">/</span><span class="cm-variable">src</span><span class="cm-operator">/</span><span class="cm-variable">khmer</span><span class="cm-operator">/</span><span class="cm-variable">scripts</span><span class="cm-operator">/</span><span class="cm-variable">normalize</span><span class="cm-operator">-</span><span class="cm-variable">by</span><span class="cm-operator">-</span><span class="cm-variable">median.py</span> <span class="cm-operator">-</span><span class="cm-variable">k</span> <span class="cm-number">20</span> <span class="cm-operator">-</span><span class="cm-variable">C</span> <span class="cm-number">20</span> <span class="cm-operator">-</span><span class="cm-variable">N</span> <span class="cm-number">4</span> <span class="cm-operator">-</span><span class="cm-variable">x</span> <span class="cm-number">1e9</span> <span class="cm-operator">-</span><span class="cm-variable">s</span> <span class="cm-variable">mock</span><span class="cm-operator">-</span><span class="cm-variable">pass1.kh</span> <span class="cm-operator">-</span><span class="cm-variable">R</span> <span class="cm-variable">pass1.report</span> <span class="cm-error">$</span><span class="cm-variable">filenames</span></pre></div></div></div></div></div></div></div></div></div><div style="display: -moz-box; height: 504px; overflow: scroll; border: 2px solid rgb(204, 204, 204);" class="output vbox"><div class="hbox output_area"><div class="prompt"></div><div class="box_flex1 output_subarea output_text output_stream output_stdout"><pre>
+PARAMETERS:
+ - kmer size =    20 		(-k)
+ - n hashes =     4 		(-N)
+ - min hashsize = 1e+09 	(-x)
+
+Estimated memory usage is 4e+09 bytes (n_hashes x min_hashsize)
+--------
+making hashtable
+... kept 99884 of 100000 , or 99 %
+... in file SRR172902.fastq.gz
+... kept 199672 of 200000 , or 99 %
+... in file SRR172902.fastq.gz
+... kept 299058 of 300000 , or 99 %
+... in file SRR172902.fastq.gz
+... kept 398045 of 400000 , or 99 %
+... in file SRR172902.fastq.gz
+... kept 496720 of 500000 , or 99 %
+... in file SRR172902.fastq.gz
+... kept 595257 of 600000 , or 99 %
+... in file SRR172902.fastq.gz
+... kept 693570 of 700000 , or 99 %
+... in file SRR172902.fastq.gz
+... kept 791714 of 800000 , or 98 %
+... in file SRR172902.fastq.gz
+... kept 889693 of 900000 , or 98 %
+... in file SRR172902.fastq.gz
+... kept 987550 of 1000000 , or 98 %
+... in file SRR172902.fastq.gz
+... kept 1085122 of 1100000 , or 98 %
+... in file SRR172902.fastq.gz
+... kept 1182352 of 1200000 , or 98 %
+... in file SRR172902.fastq.gz
+... kept 1279383 of 1300000 , or 98 %
+... in file SRR172902.fastq.gz
+... kept 1376167 of 1400000 , or 98 %
+... in file SRR172902.fastq.gz
+... kept 1472451 of 1500000 , or 98 %
+... in file SRR172902.fastq.gz
+... kept 1568507 of 1600000 , or 98 %
+... in file SRR172902.fastq.gz
+... kept 1663890 of 1700000 , or 97 %
+... in file SRR172902.fastq.gz
+... kept 1758885 of 1800000 , or 97 %
+... in file SRR172902.fastq.gz
+... kept 1853850 of 1900000 , or 97 %
+... in file SRR172902.fastq.gz
+... kept 1948330 of 2000000 , or 97 %
+... in file SRR172902.fastq.gz
+... kept 2042075 of 2100000 , or 97 %
+... in file SRR172902.fastq.gz
+... kept 2135017 of 2200000 , or 97 %
+... in file SRR172902.fastq.gz
+... kept 2227326 of 2300000 , or 96 %
+... in file SRR172902.fastq.gz
+... kept 2319057 of 2400000 , or 96 %
+... in file SRR172902.fastq.gz
+... kept 2409800 of 2500000 , or 96 %
+... in file SRR172902.fastq.gz
+... kept 2500099 of 2600000 , or 96 %
+... in file SRR172902.fastq.gz
+... kept 2592655 of 2700000 , or 96 %
+... in file SRR172902.fastq.gz
+... kept 2682071 of 2800000 , or 95 %
+... in file SRR172902.fastq.gz
+... kept 2771161 of 2900000 , or 95 %
+... in file SRR172902.fastq.gz
+... kept 2857993 of 3000000 , or 95 %
+... in file SRR172902.fastq.gz
+... kept 2944428 of 3100000 , or 94 %
+... in file SRR172902.fastq.gz
+... kept 3030727 of 3200000 , or 94 %
+... in file SRR172902.fastq.gz
+... kept 3116412 of 3300000 , or 94 %
+... in file SRR172902.fastq.gz
+... kept 3200476 of 3400000 , or 94 %
+... in file SRR172902.fastq.gz
+... kept 3283575 of 3500000 , or 93 %
+... in file SRR172902.fastq.gz
+... kept 3365534 of 3600000 , or 93 %
+... in file SRR172902.fastq.gz
+... kept 3446561 of 3700000 , or 93 %
+... in file SRR172902.fastq.gz
+... kept 3526680 of 3800000 , or 92 %
+... in file SRR172902.fastq.gz
+... kept 3607547 of 3900000 , or 92 %
+... in file SRR172902.fastq.gz
+... kept 3686458 of 4000000 , or 92 %
+... in file SRR172902.fastq.gz
+... kept 3764094 of 4100000 , or 91 %
+... in file SRR172902.fastq.gz
+... kept 3841343 of 4200000 , or 91 %
+... in file SRR172902.fastq.gz
+... kept 3917990 of 4300000 , or 91 %
+... in file SRR172902.fastq.gz
+... kept 3995065 of 4400000 , or 90 %
+... in file SRR172902.fastq.gz
+... kept 4072828 of 4500000 , or 90 %
+... in file SRR172902.fastq.gz
+... kept 4147820 of 4600000 , or 90 %
+... in file SRR172902.fastq.gz
+... kept 4222407 of 4700000 , or 89 %
+... in file SRR172902.fastq.gz
+... kept 4296338 of 4800000 , or 89 %
+... in file SRR172902.fastq.gz
+... kept 4368928 of 4900000 , or 89 %
+... in file SRR172902.fastq.gz
+... kept 4441061 of 5000000 , or 88 %
+... in file SRR172902.fastq.gz
+... kept 4512044 of 5100000 , or 88 %
+... in file SRR172902.fastq.gz
+... kept 4584130 of 5200000 , or 88 %
+... in file SRR172902.fastq.gz
+... kept 4656425 of 5300000 , or 87 %
+... in file SRR172902.fastq.gz
+... kept 4726284 of 5400000 , or 87 %
+... in file SRR172902.fastq.gz
+... kept 4795489 of 5500000 , or 87 %
+... in file SRR172902.fastq.gz
+... kept 4865055 of 5600000 , or 86 %
+... in file SRR172902.fastq.gz
+... kept 4934529 of 5700000 , or 86 %
+... in file SRR172902.fastq.gz
+... kept 5003268 of 5800000 , or 86 %
+... in file SRR172902.fastq.gz
+... kept 5072118 of 5900000 , or 85 %
+... in file SRR172902.fastq.gz
+... kept 5140756 of 6000000 , or 85 %
+... in file SRR172902.fastq.gz
+... kept 5209072 of 6100000 , or 85 %
+... in file SRR172902.fastq.gz
+... kept 5277459 of 6200000 , or 85 %
+... in file SRR172902.fastq.gz
+... kept 5345609 of 6300000 , or 84 %
+... in file SRR172902.fastq.gz
+... kept 5413575 of 6400000 , or 84 %
+... in file SRR172902.fastq.gz
+... kept 5481846 of 6500000 , or 84 %
+... in file SRR172902.fastq.gz
+DONE with SRR172902.fastq.gz ; kept 5523922 of 6562065 or 84 %
+output in SRR172902.fastq.gz.keep
+... kept 5615715 of 6662065 , or 84 %
+... in file SRR172903.fastq.gz
+... kept 5707235 of 6762065 , or 84 %
+... in file SRR172903.fastq.gz
+... kept 5798472 of 6862065 , or 84 %
+... in file SRR172903.fastq.gz
+... kept 5889909 of 6962065 , or 84 %
+... in file SRR172903.fastq.gz
+... kept 5981280 of 7062065 , or 84 %
+... in file SRR172903.fastq.gz
+... kept 6072758 of 7162065 , or 84 %
+... in file SRR172903.fastq.gz
+... kept 6164187 of 7262065 , or 84 %
+... in file SRR172903.fastq.gz
+... kept 6255556 of 7362065 , or 84 %
+... in file SRR172903.fastq.gz
+... kept 6347080 of 7462065 , or 85 %
+... in file SRR172903.fastq.gz
+... kept 6438637 of 7562065 , or 85 %
+... in file SRR172903.fastq.gz
+... kept 6530757 of 7662065 , or 85 %
+... in file SRR172903.fastq.gz
+... kept 6621721 of 7762065 , or 85 %
+... in file SRR172903.fastq.gz
+... kept 6712186 of 7862065 , or 85 %
+... in file SRR172903.fastq.gz
+... kept 6802956 of 7962065 , or 85 %
+... in file SRR172903.fastq.gz
+... kept 6893719 of 8062065 , or 85 %
+... in file SRR172903.fastq.gz
+... kept 6984041 of 8162065 , or 85 %
+... in file SRR172903.fastq.gz
+... kept 7073983 of 8262065 , or 85 %
+... in file SRR172903.fastq.gz
+... kept 7163862 of 8362065 , or 85 %
+... in file SRR172903.fastq.gz
+... kept 7255013 of 8462065 , or 85 %
+... in file SRR172903.fastq.gz
+... kept 7344606 of 8562065 , or 85 %
+... in file SRR172903.fastq.gz
+... kept 7433943 of 8662065 , or 85 %
+... in file SRR172903.fastq.gz
+... kept 7524605 of 8762065 , or 85 %
+... in file SRR172903.fastq.gz
+... kept 7614481 of 8862065 , or 85 %
+... in file SRR172903.fastq.gz
+... kept 7705052 of 8962065 , or 85 %
+... in file SRR172903.fastq.gz
+... kept 7795531 of 9062065 , or 86 %
+... in file SRR172903.fastq.gz
+... kept 7883612 of 9162065 , or 86 %
+... in file SRR172903.fastq.gz
+... kept 7971099 of 9262065 , or 86 %
+... in file SRR172903.fastq.gz
+... kept 8058251 of 9362065 , or 86 %
+... in file SRR172903.fastq.gz
+... kept 8145364 of 9462065 , or 86 %
+... in file SRR172903.fastq.gz
+... kept 8234714 of 9562065 , or 86 %
+... in file SRR172903.fastq.gz
+... kept 8321577 of 9662065 , or 86 %
+... in file SRR172903.fastq.gz
+... kept 8412129 of 9762065 , or 86 %
+... in file SRR172903.fastq.gz
+... kept 8498689 of 9862065 , or 86 %
+... in file SRR172903.fastq.gz
+... kept 8585874 of 9962065 , or 86 %
+... in file SRR172903.fastq.gz
+... kept 8670011 of 10062065 , or 86 %
+... in file SRR172903.fastq.gz
+... kept 8753373 of 10162065 , or 86 %
+... in file SRR172903.fastq.gz
+... kept 8835981 of 10262065 , or 86 %
+... in file SRR172903.fastq.gz
+... kept 8916362 of 10362065 , or 86 %
+... in file SRR172903.fastq.gz
+... kept 8996237 of 10462065 , or 85 %
+... in file SRR172903.fastq.gz
+... kept 9075482 of 10562065 , or 85 %
+... in file SRR172903.fastq.gz
+... kept 9153127 of 10662065 , or 85 %
+... in file SRR172903.fastq.gz
+... kept 9229741 of 10762065 , or 85 %
+... in file SRR172903.fastq.gz
+... kept 9305625 of 10862065 , or 85 %
+... in file SRR172903.fastq.gz
+... kept 9380155 of 10962065 , or 85 %
+... in file SRR172903.fastq.gz
+... kept 9454202 of 11062065 , or 85 %
+... in file SRR172903.fastq.gz
+... kept 9533877 of 11162065 , or 85 %
+... in file SRR172903.fastq.gz
+... kept 9609038 of 11262065 , or 85 %
+... in file SRR172903.fastq.gz
+... kept 9681400 of 11362065 , or 85 %
+... in file SRR172903.fastq.gz
+... kept 9758237 of 11462065 , or 85 %
+... in file SRR172903.fastq.gz
+... kept 9836278 of 11562065 , or 85 %
+... in file SRR172903.fastq.gz
+... kept 9905208 of 11662065 , or 84 %
+... in file SRR172903.fastq.gz
+... kept 9971896 of 11762065 , or 84 %
+... in file SRR172903.fastq.gz
+... kept 10038655 of 11862065 , or 84 %
+... in file SRR172903.fastq.gz
+... kept 10103488 of 11962065 , or 84 %
+... in file SRR172903.fastq.gz
+... kept 10167099 of 12062065 , or 84 %
+... in file SRR172903.fastq.gz
+... kept 10229800 of 12162065 , or 84 %
+... in file SRR172903.fastq.gz
+... kept 10291113 of 12262065 , or 83 %
+... in file SRR172903.fastq.gz
+... kept 10351978 of 12362065 , or 83 %
+... in file SRR172903.fastq.gz
+... kept 10412009 of 12462065 , or 83 %
+... in file SRR172903.fastq.gz
+... kept 10470578 of 12562065 , or 83 %
+... in file SRR172903.fastq.gz
+... kept 10528294 of 12662065 , or 83 %
+... in file SRR172903.fastq.gz
+... kept 10585350 of 12762065 , or 82 %
+... in file SRR172903.fastq.gz
+... kept 10641492 of 12862065 , or 82 %
+... in file SRR172903.fastq.gz
+... kept 10696763 of 12962065 , or 82 %
+... in file SRR172903.fastq.gz
+... kept 10751517 of 13062065 , or 82 %
+... in file SRR172903.fastq.gz
+... kept 10805261 of 13162065 , or 82 %
+... in file SRR172903.fastq.gz
+... kept 10857968 of 13262065 , or 81 %
+... in file SRR172903.fastq.gz
+... kept 10910079 of 13362065 , or 81 %
+... in file SRR172903.fastq.gz
+... kept 10961795 of 13462065 , or 81 %
+... in file SRR172903.fastq.gz
+... kept 11012757 of 13562065 , or 81 %
+... in file SRR172903.fastq.gz
+... kept 11062862 of 13662065 , or 80 %
+... in file SRR172903.fastq.gz
+... kept 11112732 of 13762065 , or 80 %
+... in file SRR172903.fastq.gz
+... kept 11161725 of 13862065 , or 80 %
+... in file SRR172903.fastq.gz
+... kept 11210188 of 13962065 , or 80 %
+... in file SRR172903.fastq.gz
+... kept 11258113 of 14062065 , or 80 %
+... in file SRR172903.fastq.gz
+... kept 11305924 of 14162065 , or 79 %
+... in file SRR172903.fastq.gz
+... kept 11353148 of 14262065 , or 79 %
+... in file SRR172903.fastq.gz
+... kept 11402507 of 14362065 , or 79 %
+... in file SRR172903.fastq.gz
+... kept 11451499 of 14462065 , or 79 %
+... in file SRR172903.fastq.gz
+DONE with SRR172903.fastq.gz ; kept 11466371 of 14494884 or 79 %
+output in SRR172903.fastq.gz.keep
+Saving hashfile through SRR172903.fastq.gz
+...saving to mock-pass1.kh
+fp rate estimated to be 0.001
+</pre></div></div></div></div><div tabindex="2" class="cell text_cell border-box-sizing"><div style="display: none;" class="text_cell_input border-box-sizing"><div class="CodeMirror CodeMirror-wrap"><div style="overflow: hidden; position: relative; width: 3px; height: 0px;"><textarea style="position: absolute; padding: 0pt; width: 1px; height: 1em;" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-default" tabindex="-1"><div style="position: relative"><div style="position: relative"><div style="display: none;" class="CodeMirror-gutter"><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div draggable="true" style="position: relative; z-index: 0; outline: medium none;"><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"><pre><span>x</span></pre></div><pre class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1"></div><div></div></div></div></div></div></div></div></div><div tabindex="-1" class="text_cell_render border-box-sizing rendered_html"><h3>Pass 2: Trim off low-abundance k-mers</h3>
+
+<p>These are likely to be the results of substitution errors.  You might want to skip this step for low-coverage samples.</p>
+
+<p>This should take about 10-15 minutes.</p></div></div><div tabindex="2" class="cell border-box-sizing code_cell vbox"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[15]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5.71667px; left: 459.717px;"><textarea style="position: absolute; padding: 0pt; width: 1px; height: 1em;" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 29.6px;"><div style="position: relative; top: 0px;"><div style="display: none;" class="CodeMirror-gutter"><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div draggable="true" style="position: relative; z-index: 0; outline: medium none;"><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"><pre><span class="cm-operator">!/</span><span class="cm-variable">usr</span><span class="cm-operator">/</span><span class="cm-variable">local</span><span class="cm-operator">/</span><span class="cm-variable">src</span><span class="cm-operator">/</span><span class="cm-variable">khmer</span><span class="cm-operator">/</span><span class="cm-variable">scripts</span><span class="cm-operator">/</span><span class="cm-builtin">filter</span><span class="cm-operator">-</span><span class="cm-variable">abund.py</span> <span class="cm-variable">mock</span><span class="cm-operator">-</span><span class="cm-variable">pa</span><span id="CodeMirror-temp-a739cb">s</span></pre></div><pre style="top: 0px; left: 454px;" class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1; display: none;"></div><div style=""><pre><span class="cm-operator">!/</span><span class="cm-variable">usr</span><span class="cm-operator">/</span><span class="cm-variable">local</span><span class="cm-operator">/</span><span class="cm-variable">src</span><span class="cm-operator">/</span><span class="cm-variable">khmer</span><span class="cm-operator">/</span><span class="cm-variable">scripts</span><span class="cm-operator">/</span><span class="cm-builtin">filter</span><span class="cm-operator">-</span><span class="cm-variable">abund.py</span> <span class="cm-variable">mock</span><span class="cm-operator">-</span><span class="cm-variable">pass1.kh</span> <span class="cm-operator">*</span><span class="cm-variable">.keep</span></pre></div></div></div></div></div></div></div></div></div><div style="display: -moz-box; height: 504px; overflow: scroll; border: 2px solid rgb(204, 204, 204);" class="output vbox"><div class="hbox output_area"><div class="prompt"></div><div class="box_flex1 output_subarea output_text output_stream output_stdout"><pre>file with ht: mock-pass1.kh
+loading hashtable
+K: 20
+filtering SRR172902.fastq.gz.keep
+starting threads
+starting writer
+loading...
+... filtering 0
+... filtering 100000
+... filtering 200000
+... filtering 300000
+... filtering 400000
+... filtering 500000
+processed 500000 / wrote 470361 / removed 29639
+processed 37507500 bp / wrote 31080297 bp / removed 6427203 bp
+discarded 17.1%
+... filtering 600000
+... filtering 700000
+... filtering 800000
+... filtering 900000
+... filtering 1000000
+processed 1000000 / wrote 943808 / removed 56192
+processed 75022500 bp / wrote 62665668 bp / removed 12356832 bp
+discarded 16.5%
+... filtering 1100000
+... filtering 1200000
+... filtering 1300000
+... filtering 1400000
+... filtering 1500000
+processed 1500000 / wrote 1383760 / removed 116240
+processed 112515000 bp / wrote 92086100 bp / removed 20428900 bp
+discarded 18.2%
+... filtering 1600000
+... filtering 1700000
+... filtering 1800000
+... filtering 1900000
+... filtering 2000000
+processed 2000000 / wrote 1835809 / removed 164191
+processed 150030000 bp / wrote 121845196 bp / removed 28184804 bp
+discarded 18.8%
+... filtering 2100000
+... filtering 2200000
+... filtering 2300000
+... filtering 2400000
+... filtering 2500000
+processed 2500000 / wrote 2267730 / removed 232270
+processed 187537500 bp / wrote 150878563 bp / removed 36658937 bp
+discarded 19.5%
+... filtering 2600000
+... filtering 2700000
+... filtering 2800000
+... filtering 2900000
+... filtering 3000000
+processed 3000000 / wrote 2694883 / removed 305117
+processed 225045000 bp / wrote 177875330 bp / removed 47169670 bp
+discarded 21.0%
+... filtering 3100000
+... filtering 3200000
+... filtering 3300000
+... filtering 3400000
+... filtering 3500000
+processed 3500000 / wrote 3146327 / removed 353673
+processed 262575000 bp / wrote 207911191 bp / removed 54663809 bp
+discarded 20.8%
+... filtering 3600000
+... filtering 3700000
+... filtering 3800000
+... filtering 3900000
+... filtering 4000000
+processed 4000000 / wrote 3578737 / removed 421263
+processed 300075000 bp / wrote 236367547 bp / removed 63707453 bp
+discarded 21.2%
+... filtering 4100000
+... filtering 4200000
+... filtering 4300000
+... filtering 4400000
+... filtering 4500000
+processed 4500000 / wrote 4028766 / removed 471234
+processed 337590000 bp / wrote 265594085 bp / removed 71995915 bp
+discarded 21.3%
+... filtering 4600000
+... filtering 4700000
+... filtering 4800000
+... filtering 4900000
+... filtering 5000000
+processed 5000000 / wrote 4460463 / removed 539537
+processed 375082500 bp / wrote 293999080 bp / removed 81083420 bp
+discarded 21.6%
+... filtering 5100000
+... filtering 5200000
+... filtering 5300000
+... filtering 5400000
+... filtering 5500000
+processed 5500000 / wrote 4922612 / removed 577388
+processed 412590000 bp / wrote 324313239 bp / removed 88276761 bp
+discarded 21.4%
+done loading in sequences
+DONE writing.
+processed 5520722 / wrote 4941699 / removed 579023
+processed 414144150 bp / wrote 325559617 bp / removed 88584533 bp
+discarded 21.4%
+output in SRR172902.fastq.gz.keep.abundfilt
+filtering SRR172902.fastq.gz.keep.abundfilt.below.keep
+starting threads
+starting writer
+loading...
+... filtering 0
+... filtering 100000
+... filtering 200000
+... filtering 300000
+... filtering 400000
+... filtering 500000
+processed 500000 / wrote 500158 / removed -158
+processed 32849411 bp / wrote 32835867 bp / removed 13544 bp
+discarded 0.0%
+... filtering 600000
+... filtering 700000
+... filtering 800000
+... filtering 900000
+... filtering 1000000
+processed 1000000 / wrote 999714 / removed 286
+processed 66067046 bp / wrote 66028710 bp / removed 38336 bp
+discarded 0.1%
+... filtering 1100000
+... filtering 1200000
+... filtering 1300000
+... filtering 1400000
+... filtering 1500000
+processed 1500000 / wrote 1499401 / removed 599
+processed 99061568 bp / wrote 99025535 bp / removed 36033 bp
+discarded 0.0%
+... filtering 1600000
+... filtering 1700000
+... filtering 1800000
+... filtering 1900000
+... filtering 2000000
+processed 2000000 / wrote 1999206 / removed 794
+processed 131593203 bp / wrote 131553270 bp / removed 39933 bp
+discarded 0.0%
+... filtering 2100000
+... filtering 2200000
+... filtering 2300000
+... filtering 2400000
+... filtering 2500000
+processed 2500000 / wrote 2498661 / removed 1339
+processed 164876575 bp / wrote 164833722 bp / removed 42853 bp
+discarded 0.0%
+... filtering 2600000
+... filtering 2700000
+... filtering 2800000
+... filtering 2900000
+... filtering 3000000
+processed 3000000 / wrote 2998497 / removed 1503
+processed 197590266 bp / wrote 197544133 bp / removed 46133 bp
+discarded 0.0%
+... filtering 3100000
+... filtering 3200000
+done loading in sequences
+DONE writing.
+processed 3291535 / wrote 3290046 / removed 1489
+processed 216715413 bp / wrote 216674335 bp / removed 41078 bp
+discarded 0.0%
+output in SRR172902.fastq.gz.keep.abundfilt.below.keep.abundfilt
+filtering SRR172903.fastq.gz.keep
+starting threads
+starting writer
+loading...
+... filtering 0
+... filtering 100000
+... filtering 200000
+... filtering 300000
+... filtering 400000
+... filtering 500000
+processed 500000 / wrote 470835 / removed 29165
+processed 37522500 bp / wrote 29769246 bp / removed 7753254 bp
+discarded 20.7%
+... filtering 600000
+... filtering 700000
+... filtering 800000
+... filtering 900000
+... filtering 1000000
+processed 1000000 / wrote 909891 / removed 90109
+processed 75037500 bp / wrote 57315092 bp / removed 17722408 bp
+discarded 23.6%
+... filtering 1100000
+... filtering 1200000
+... filtering 1300000
+... filtering 1400000
+... filtering 1500000
+processed 1500000 / wrote 1356119 / removed 143881
+processed 112537500 bp / wrote 85285061 bp / removed 27252439 bp
+discarded 24.2%
+... filtering 1600000
+... filtering 1700000
+... filtering 1800000
+... filtering 1900000
+... filtering 2000000
+processed 2000000 / wrote 1793311 / removed 206689
+processed 150015000 bp / wrote 111840719 bp / removed 38174281 bp
+discarded 25.4%
+... filtering 2100000
+... filtering 2200000
+... filtering 2300000
+... filtering 2400000
+... filtering 2500000
+processed 2500000 / wrote 2242411 / removed 257589
+processed 187530000 bp / wrote 137933352 bp / removed 49596648 bp
+discarded 26.4%
+... filtering 2600000
+... filtering 2700000
+... filtering 2800000
+... filtering 2900000
+... filtering 3000000
+processed 3000000 / wrote 2628285 / removed 371715
+processed 225045000 bp / wrote 160522194 bp / removed 64522806 bp
+discarded 28.7%
+... filtering 3100000
+... filtering 3200000
+... filtering 3300000
+... filtering 3400000
+... filtering 3500000
+processed 3500000 / wrote 3050773 / removed 449227
+processed 262515000 bp / wrote 187012696 bp / removed 75502304 bp
+discarded 28.8%
+... filtering 3600000
+... filtering 3700000
+... filtering 3800000
+... filtering 3900000
+... filtering 4000000
+processed 4000000 / wrote 3512972 / removed 487028
+processed 300015000 bp / wrote 215670071 bp / removed 84344929 bp
+discarded 28.1%
+... filtering 4100000
+... filtering 4200000
+... filtering 4300000
+... filtering 4400000
+... filtering 4500000
+processed 4500000 / wrote 3938208 / removed 561792
+processed 337530000 bp / wrote 240031582 bp / removed 97498418 bp
+discarded 28.9%
+... filtering 4600000
+... filtering 4700000
+... filtering 4800000
+... filtering 4900000
+... filtering 5000000
+processed 5000000 / wrote 4399943 / removed 600057
+processed 375030000 bp / wrote 268321461 bp / removed 106708539 bp
+discarded 28.5%
+... filtering 5100000
+... filtering 5200000
+... filtering 5300000
+... filtering 5400000
+... filtering 5500000
+processed 5500000 / wrote 4858420 / removed 641580
+processed 412537500 bp / wrote 296241195 bp / removed 116296305 bp
+discarded 28.2%
+... filtering 5600000
+... filtering 5700000
+... filtering 5800000
+... filtering 5900000
+done loading in sequences
+DONE writing.
+processed 5938849 / wrote 5227576 / removed 711273
+processed 445488675 bp / wrote 318047114 bp / removed 127441561 bp
+discarded 28.6%
+output in SRR172903.fastq.gz.keep.abundfilt
+filtering SRR172903.fastq.gz.keep.abundfilt.below.keep
+starting threads
+starting writer
+loading...
+... filtering 0
+... filtering 100000
+... filtering 200000
+... filtering 300000
+... filtering 400000
+... filtering 500000
+processed 500000 / wrote 500082 / removed -82
+processed 30786732 bp / wrote 30776037 bp / removed 10695 bp
+discarded 0.0%
+... filtering 600000
+... filtering 700000
+... filtering 800000
+... filtering 900000
+... filtering 1000000
+processed 1000000 / wrote 999825 / removed 175
+processed 59546361 bp / wrote 59534150 bp / removed 12211 bp
+discarded 0.0%
+... filtering 1100000
+... filtering 1200000
+... filtering 1300000
+... filtering 1400000
+... filtering 1500000
+processed 1500000 / wrote 1499724 / removed 276
+processed 87994806 bp / wrote 87966279 bp / removed 28527 bp
+discarded 0.0%
+... filtering 1600000
+done loading in sequences
+DONE writing.
+processed 1690120 / wrote 1689951 / removed 169
+processed 98692517 bp / wrote 98651695 bp / removed 40822 bp
+discarded 0.0%
+output in SRR172903.fastq.gz.keep.abundfilt.below.keep.abundfilt
+</pre></div></div></div></div><div tabindex="2" class="cell text_cell border-box-sizing"><div style="display: none;" class="text_cell_input border-box-sizing"><div class="CodeMirror CodeMirror-wrap"><div style="overflow: hidden; position: relative; width: 3px; height: 0px;"><textarea style="position: absolute; padding: 0pt; width: 1px; height: 1em;" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-default" tabindex="-1"><div style="position: relative"><div style="position: relative"><div style="display: none;" class="CodeMirror-gutter"><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div draggable="true" style="position: relative; z-index: 0; outline: medium none;"><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"><pre><span>x</span></pre></div><pre class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1"></div><div></div></div></div></div></div></div></div></div><div tabindex="-1" class="text_cell_render border-box-sizing rendered_html"><h3>Pass 3: Trim off high-abundance k-mers</h3>
+
+<p>These are likely to be the results of Illumina crap.  Partitioning is
+ much harder if you don't do this, and the assemblies may be less good.</p>
+
+<p>This should take ~10-15 minutes.</p></div></div><div tabindex="2" class="cell border-box-sizing code_cell vbox"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[*]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5.71667px; left: 5.71667px;"><textarea style="position: absolute; padding: 0pt; width: 1px; height: 1em;" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 29.6px;"><div style="position: relative; top: 0px;"><div style="display: none;" class="CodeMirror-gutter"><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div draggable="true" style="position: relative; z-index: 0; outline: medium none;"><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre style="top: 0px; left: 0px; visibility: hidden;" class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1; display: none;"></div><div style=""><pre><span class="cm-operator">!</span><span class="cm-variable">python</span> <span class="cm-operator">/</span><span class="cm-variable">usr</span><span class="cm-operator">/</span><span class="cm-variable">local</span><span class="cm-operator">/</span><span class="cm-variable">src</span><span class="cm-operator">/</span><span class="cm-variable">khmer</span><span class="cm-operator">/</span><span class="cm-variable">sandbox</span><span class="cm-operator">/</span><span class="cm-builtin">filter</span><span class="cm-operator">-</span><span class="cm-variable">below</span><span class="cm-operator">-</span><span class="cm-variable">abund.py</span> <span class="cm-variable">mock</span><span class="cm-operator">-</span><span class="cm-variable">pass1.kh</span> <span class="cm-operator">*</span><span class="cm-variable">.abundfilt</span></pre></div></div></div></div></div></div></div></div></div><div style="display: -moz-box;" class="output vbox"><div class="hbox output_area"><div class="prompt"></div><div class="box_flex1 output_subarea output_text output_stream output_stdout"><pre>file with ht: mock-pass1.kh
+-- settings:
+N THREADS 8
+--
+making hashtable
+filtering SRR172902.fastq.gz.keep.abundfilt
+starting threads
+starting writer
+loading...
+... filtering 0
+... filtering 100000
+... filtering 200000
+... filtering 300000
+</pre></div></div></div></div><div tabindex="2" class="cell text_cell border-box-sizing"><div style="display: none;" class="text_cell_input border-box-sizing"><div class="CodeMirror CodeMirror-wrap"><div style="overflow: hidden; position: relative; width: 3px; height: 0px;"><textarea style="position: absolute; padding: 0pt; width: 1px; height: 1em;" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-default" tabindex="-1"><div style="position: relative"><div style="position: relative"><div style="display: none;" class="CodeMirror-gutter"><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div draggable="true" style="position: relative; z-index: 0; outline: medium none;"><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"><pre><span>x</span></pre></div><pre class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1"></div><div></div></div></div></div></div></div></div></div><div tabindex="-1" class="text_cell_render border-box-sizing rendered_html"><h3>Pass 4: Normalize to C=5</h3>
+
+<p>See the digital normalization paper for why this is done a second 
+time.  You can probably not bother doing this but it DOES help a lot 
+with assembly speed/memory usage.</p></div></div><div tabindex="2" class="cell border-box-sizing code_cell vbox"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[*]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5.71667px; left: 5.71667px;"><textarea style="position: absolute; padding: 0pt; width: 1px; height: 1em;" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 29.6px;"><div style="position: relative; top: 0px;"><div style="display: none;" class="CodeMirror-gutter"><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div draggable="true" style="position: relative; z-index: 0; outline: medium none;"><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre style="top: 0px; left: 0px;" class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1; display: none;"></div><div style=""><pre><span class="cm-operator">!/</span><span class="cm-variable">usr</span><span class="cm-operator">/</span><span class="cm-variable">local</span><span class="cm-operator">/</span><span class="cm-variable">src</span><span class="cm-operator">/</span><span class="cm-variable">khmer</span><span class="cm-operator">/</span><span class="cm-variable">scripts</span><span class="cm-operator">/</span><span class="cm-variable">normalize</span><span class="cm-operator">-</span><span class="cm-variable">by</span><span class="cm-operator">-</span><span class="cm-variable">median.py</span> <span class="cm-operator">-</span><span class="cm-variable">k</span> <span class="cm-number">20</span> <span class="cm-operator">-</span><span class="cm-variable">C</span> <span class="cm-number">5</span> <span class="cm-operator">-</span><span class="cm-variable">x</span> <span class="cm-number">1e9</span> <span class="cm-operator">-</span><span class="cm-variable">R</span> <span class="cm-variable">pass2.report</span> <span class="cm-operator">*</span><span class="cm-variable">.abundfilt.below</span></pre></div></div></div></div></div></div></div></div></div><div style="display: -moz-box;" class="output vbox"></div></div><div tabindex="2" class="cell text_cell border-box-sizing"><div style="display: none;" class="text_cell_input border-box-sizing"><div class="CodeMirror CodeMirror-wrap"><div style="overflow: hidden; position: relative; width: 3px; height: 0px;"><textarea style="position: absolute; padding: 0pt; width: 1px; height: 1em;" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-default" tabindex="-1"><div style="position: relative"><div style="position: relative"><div style="display: none;" class="CodeMirror-gutter"><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div draggable="true" style="position: relative; z-index: 0; outline: medium none;"><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"><pre><span>x</span></pre></div><pre class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1"></div><div></div></div></div></div></div></div></div></div><div tabindex="-1" class="text_cell_render border-box-sizing rendered_html"><h3>Graphs!</h3>
+
+<p>Load the report files and graph the number of reads discarded by the two normalization steps.</p></div></div><div tabindex="2" class="cell border-box-sizing code_cell vbox"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[*]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5.71667px; left: 5.71667px;"><textarea style="position: absolute; padding: 0pt; width: 1px; height: 1em;" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 205.6px;"><div style="position: relative; top: 0px;"><div style="display: none;" class="CodeMirror-gutter"><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div draggable="true" style="position: relative; z-index: 0; outline: medium none;"><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre style="top: 0px; left: 0px;" class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1; display: none;"></div><div style=""><pre><span class="cm-variable">x</span> = [ <span class="cm-variable">line</span> <span class="cm-keyword">for</span> <span class="cm-variable">line</span> <span class="cm-operator">in</span> <span class="cm-builtin">open</span>(<span class="cm-string">'pass1.report'</span>) ]</pre><pre><span class="cm-variable">y</span> = [ <span class="cm-variable">line.split</span>() <span class="cm-keyword">for</span> <span class="cm-variable">line</span> <span class="cm-operator">in</span> <span class="cm-variable">x</span> ]</pre><pre><span class="cm-variable">y</span> = [ (<span class="cm-builtin">int</span>(<span class="cm-variable">a</span>), <span class="cm-builtin">int</span>(<span class="cm-variable">b</span>), <span class="cm-builtin">float</span>(<span class="cm-variable">c</span>)) <span class="cm-keyword">for</span> (<span class="cm-variable">a</span>,<span class="cm-variable">b</span>,<span class="cm-variable">c</span>) <span class="cm-operator">in</span> <span class="cm-variable">y</span> ]</pre><pre> </pre><pre><span class="cm-variable">x1</span> = [ <span class="cm-variable">line</span> <span class="cm-keyword">for</span> <span class="cm-variable">line</span> <span class="cm-operator">in</span> <span class="cm-builtin">open</span>(<span class="cm-string">'pass2.report'</span>) ]</pre><pre><span class="cm-variable">y1</span> = [ <span class="cm-variable">line.split</span>() <span class="cm-keyword">for</span> <span class="cm-variable">line</span> <span class="cm-operator">in</span> <span class="cm-variable">x1</span> ]</pre><pre><span class="cm-variable">y1</span> = [ (<span class="cm-builtin">int</span>(<span class="cm-variable">a</span>), <span class="cm-builtin">int</span>(<span class="cm-variable">b</span>), <span class="cm-builtin">float</span>(<span class="cm-variable">c</span>)) <span class="cm-keyword">for</span> (<span class="cm-variable">a</span>,<span class="cm-variable">b</span>,<span class="cm-variable">c</span>) <span class="cm-operator">in</span> <span class="cm-variable">y1</span> ]</pre><pre> </pre><pre><span class="cm-keyword">import</span> <span class="cm-variable">numpy</span></pre><pre><span class="cm-variable">y</span> = <span class="cm-variable">numpy.array</span>(<span class="cm-variable">y</span>)</pre><pre><span class="cm-variable">y1</span> = <span class="cm-variable">numpy.array</span>(<span class="cm-variable">y1</span>)</pre></div></div></div></div></div></div></div></div></div><div style="display: -moz-box;" class="output vbox"></div></div><div tabindex="2" class="cell border-box-sizing code_cell vbox"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[*]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5.71667px; left: 5.71667px;"><textarea style="position: absolute; padding: 0pt; width: 1px; height: 1em;" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 29.6px;"><div style="position: relative; top: 0px;"><div style="display: none;" class="CodeMirror-gutter"><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div draggable="true" style="position: relative; z-index: 0; outline: medium none;"><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre style="top: 0px; left: 0px;" class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1; display: none;"></div><div style=""><pre><span class="cm-variable">ls</span></pre></div></div></div></div></div></div></div></div></div><div style="display: -moz-box;" class="output vbox"></div></div><div tabindex="2" class="cell border-box-sizing code_cell vbox"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[*]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5.71667px; left: 5.71667px;"><textarea style="position: absolute; padding: 0pt; width: 1px; height: 1em;" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 117.6px;"><div style="position: relative; top: 0px;"><div style="display: none;" class="CodeMirror-gutter"><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div draggable="true" style="position: relative; z-index: 0; outline: medium none;"><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre style="top: 0px; left: 0px;" class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1; display: none;"></div><div style=""><pre><span class="cm-variable">plot</span>(<span class="cm-variable">y</span>[:,<span class="cm-number">0</span>], <span class="cm-variable">y</span>[:,<span class="cm-number">2</span>])</pre><pre><span class="cm-variable">plot</span>(<span class="cm-variable">y1</span>[:,<span class="cm-number">0</span>], <span class="cm-variable">y1</span>[:,<span class="cm-number">2</span>])</pre><pre><span class="cm-variable">title</span>(<span class="cm-string">'Data reduction for mock data set (pair of files)'</span>)</pre><pre><span class="cm-variable">xlabel</span>(<span class="cm-string">'millions of reads'</span>)</pre><pre><span class="cm-variable">ylabel</span>(<span class="cm-string">'percent kept'</span>)</pre><pre><span class="cm-variable">legend</span>([<span class="cm-string">'first pass'</span>, <span class="cm-string">'second pass'</span>])</pre></div></div></div></div></div></div></div></div></div><div style="display: -moz-box;" class="output vbox"></div></div><div tabindex="2" class="cell border-box-sizing code_cell vbox"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[*]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5.71661px; left: 5.71667px;"><textarea style="position: absolute; padding: 0pt; width: 1px; height: 1em;" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 29.6px;"><div style="position: relative; top: 0px;"><div style="display: none;" class="CodeMirror-gutter"><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div draggable="true" style="position: relative; z-index: 0; outline: medium none;"><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre style="top: 0px; left: 0px;" class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1; display: none;"></div><div style=""><pre> </pre></div></div></div></div></div></div></div></div></div><div style="display: -moz-box;" class="output vbox"></div></div><div style="height: 30%;" class="end_space"></div></div>
+<div style="" title="Click to Show/Hide pager area" class="border-box-sizing ui-widget ui-state-default" id="pager_splitter"></div>
+<div style="height: 280.4px;" class="border-box-sizing ui-widget" id="pager"></div>
+</div>
+</div>
+
+</div>
+<script src="91-mock-diginorm_files/jquery-1.js" type="text/javascript" charset="utf-8"></script>
+<script src="91-mock-diginorm_files/jquery-ui.js" type="text/javascript" charset="utf-8"></script>
+<script src="91-mock-diginorm_files/namespace.js" type="text/javascript" charset="utf-8"></script>
+<script src="91-mock-diginorm_files/page.js" type="text/javascript" charset="utf-8"></script>
+<script src="91-mock-diginorm_files/loginwidget.js" type="text/javascript" charset="utf-8"></script>
+
+<script src="91-mock-diginorm_files/codemirror.js" charset="utf-8"></script>
+<script src="91-mock-diginorm_files/python.js" charset="utf-8"></script>
+<script src="91-mock-diginorm_files/htmlmixed.js" charset="utf-8"></script>
+<script src="91-mock-diginorm_files/xml.js" charset="utf-8"></script>
+<script src="91-mock-diginorm_files/javascript.js" charset="utf-8"></script>
+<script src="91-mock-diginorm_files/css.js" charset="utf-8"></script>
+<script src="91-mock-diginorm_files/rst.js" charset="utf-8"></script>
+<script src="91-mock-diginorm_files/markdown.js" charset="utf-8"></script>
+<script src="91-mock-diginorm_files/Markdown.js" charset="utf-8"></script>
+<script src="91-mock-diginorm_files/prettify.js" charset="utf-8"></script>
+<script src="91-mock-diginorm_files/date.js" charset="utf-8"></script>
+<script src="91-mock-diginorm_files/events.js" type="text/javascript" charset="utf-8"></script>
+<script src="91-mock-diginorm_files/utils.js" type="text/javascript" charset="utf-8"></script>
+<script src="91-mock-diginorm_files/layoutmanager.js" type="text/javascript" charset="utf-8"></script>
+<script src="91-mock-diginorm_files/initmathjax.js" type="text/javascript" charset="utf-8"></script>
+<script src="91-mock-diginorm_files/cell.js" type="text/javascript" charset="utf-8"></script>
+<script src="91-mock-diginorm_files/codecell.js" type="text/javascript" charset="utf-8"></script>
+<script src="91-mock-diginorm_files/textcell.js" type="text/javascript" charset="utf-8"></script>
+<script src="91-mock-diginorm_files/kernel.js" type="text/javascript" charset="utf-8"></script>
+<script src="91-mock-diginorm_files/savewidget.js" type="text/javascript" charset="utf-8"></script>
+<script src="91-mock-diginorm_files/quickhelp.js" type="text/javascript" charset="utf-8"></script>
+<script src="91-mock-diginorm_files/pager.js" type="text/javascript" charset="utf-8"></script>
+<script src="91-mock-diginorm_files/menubar.js" type="text/javascript" charset="utf-8"></script>
+<script src="91-mock-diginorm_files/toolbar.js" type="text/javascript" charset="utf-8"></script>
+<script src="91-mock-diginorm_files/notebook.js" type="text/javascript" charset="utf-8"></script>
+<script src="91-mock-diginorm_files/notificationwidget.js" type="text/javascript" charset="utf-8"></script>
+<script src="91-mock-diginorm_files/notebookmain.js" type="text/javascript" charset="utf-8"></script>
+
+
+
+<div style="position: absolute; visibility: hidden; top: 0pt; left: 0pt; width: auto; padding: 0pt; border: 0pt none; margin: 0pt; text-align: left; text-indent: 0pt; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; font-size: 40px; font-weight: normal; font-style: normal; font-family: 'STIXSizeOneSym',sans-serif;">ˆ</div></body></html>

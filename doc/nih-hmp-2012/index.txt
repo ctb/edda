@@ -21,14 +21,14 @@ A demo, and some useful links
 
 You can see static versions of the ipython notebooks for the demo here:
 
- 1. XXX
+ 1. `Digital normalization of the HMP mock data set <files/91-mock-diginorm.html>`__
  2. `Partitioning the HMP mock data set <files/92-mock-partition.html>`__
- 3. `Assembling the partitioned HMP mock data set <files/93-mock-assembly.html>`__
+ 3. `Assembling the partitioned HMP mock data set <files/93-mock-assemble.html>`__
 
 **To run the demo yourself**, do the following:
 
-1. Start up ami-e9a57c80 on EC2, with ~16gb of RAM or more; I suggest
-   using m2.xlarge machine.
+1. Start up ami-f525fc9c on EC2, with ~16gb of RAM or more; I suggest
+   using an m2.xlarge machine.
 
 2. Make sure HTTPS is open on the firewall.
 
