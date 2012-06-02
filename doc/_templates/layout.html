@@ -1,18 +1,25 @@
 {% extends "sphinxdoc/layout.html" %}
 
-{% block extrahead %}
-<LINK HREF="/c/commentary.css" TYPE="text/css" REL="stylesheet">
+{% macro comments() %}
 
-<script type="text/javascript" src="/c/divclick.js"></script>
-
+<div id="disqus_thread"></div>
 <script type="text/javascript">
-  commentary_base = './';
-  commentary_id = 1135057886;
-  commentary_this_page = '{{ pagename }}';
-  commentary_edit_uri = "/comments/edit";
-  commentary_add_uri = "/comments/add";
-</script>
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'titus-ged'; // required: replace example with your forum shortname
 
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+{% endmacro %}
+
+{% block extrahead %}
 <script type="text/javascript">
 
   var _gaq = _gaq || [];
@@ -27,28 +34,26 @@
 </script>
 {% endblock %}
 
-{% block header %}
-<div style="display: none">
+{%- block content %}
+    <div class="document">
+  {%- block document %}
+      <div class="documentwrapper">
+      {%- if render_sidebar %}
+        <div class="bodywrapper" style="margin: 0 0 0 0">
+      {%- endif %}
+          <div class="body">
+            {% block body %} {% endblock %}
+  <hr>
+            {{ comments() }}
+          </div>
+      {%- if render_sidebar %}
+        </div>
+      {%- endif %}
+      </div>
 
-<form method="POST" id="commentary-form" action='/comments/add' onsubmit='function() { return false; }'>
- <input type=hidden name='msg_id' value='5'>
+  {%- endblock %}
 
- <input type="hidden" name="page" value="">
- <input type="hidden" name="position_id">
- <input type="text" name="username" style="width: 49%" id='username'>
- <input type="text" name="email" style="width: 49%" id='email'
-  title="Your email will not be displayed publicly">
- <br>
- <textarea name="comment" id='comment' style="width: 100%" rows="6" cols="60"></textarea>
+      <div class="clearer"></div>
+    </div>
 
- <br>
- <input type='button' id='commentary-save' name='Save' value='Save'>
- <input type='button' id="commentary-cancel" name='Cancel' value='Cancel'>
-</form>
-
-</div>
-
-<div id='commentary-display' width='100%'>
-</div>
-
-{% endblock %}
+{%- endblock %}
