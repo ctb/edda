@@ -19,8 +19,8 @@ Installing khmer
 
 You'll need to install both screed and khmer::
 
- % git clone git://github.com/ctb/screed.git
- % git clone git://github.com/ctb/khmer.git
+ % git clone git://github.com/ged-lab/screed.git
+ % git clone git://github.com/ged-lab/khmer.git
 
  % cd screed
  % python setup.py install

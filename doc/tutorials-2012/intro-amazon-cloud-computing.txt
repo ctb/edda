@@ -1,0 +1,35 @@
+Introducing Amazon Cloud Computing
+==================================
+
+Amazon offers a lot of different services.  We're mostly going to be using
+Amazon EC2, which offers rental computing and hard disk space.
+
+In Amazon vernacular, "instance" means a computer.
+
+See `pricing for EC2 <http://aws.amazon.com/ec2/#pricing>`__,
+`disk rental via Elastic Block Store <http://aws.amazon.com/ebs/>`__,
+and `EC2 instance types <http://aws.amazon.com/ec2/#instance>`__.
+
+Stopping the charges
+--------------------
+
+Amazon will happily charge you by the hour whether or not you're using
+your computer.  There are a couple of ways to tell them you're not
+using the computer.
+
+The first way is to terminate your instance.  This deletes everything on
+your computer, so anything you haven't saved goes away!
+
+This year we're using EBS-backed EC2 instances (acronyms!)  This means
+that you can **also** shut down your computer, which preserves your
+configuration and other information, but discards temporary data --
+basically, anything under /mnt.  We'll show you some uses for this later.
+Note: when you shut down your computer and restart, you're still getting
+charged for the information that's being saved -- it should only be about 
+$1 / month.  Terminate your computer if you don't want this.  Also note
+that when you shut it down and then restart it later, you will get a
+different computer name.
+
+Rebooting is like powering off your laptop and powering it back on.  It
+stops all the running programs and restarts the computer, but it doesn't
+delete any information.

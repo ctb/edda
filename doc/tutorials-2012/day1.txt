@@ -1,0 +1,16 @@
+=====================================
+Day 1: EC2, SSH, and ipython notebook
+=====================================
+
+Monday, June 4, 2012
+
+.. toctree::
+   :maxdepth: 1
+
+   start-up-an-ec2-instance
+   log-in-with-ssh-mac
+   log-in-with-ssh-win
+   introducing-ipython-notebook
+   intro-amazon-cloud-computing
+   copying-via-dropbox
+

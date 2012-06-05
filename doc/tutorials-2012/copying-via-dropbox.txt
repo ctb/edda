@@ -1,0 +1,26 @@
+How to copy things to and from your local computer
+==================================================
+
+It used to be annoying to copy things back and forth from remote EC2 instances
+to your laptop.  Dropbox (www.dropbox.com) has solved this problem for you!
+
+If you go through the dropbox ipython notebook (ngs-01-install-dropbox) you
+can link the directory '/root/Dropbox' to your dropbox account.
+
+To copy things FROM dropbox out onto the EC2 machine, do::
+
+  %% cp /root/Dropbox/filename.txt /mnt
+
+(We'll discuss directory paths over the next few days.)
+To copy things TO dropbox FROM the EC2 machine, do::
+
+  %% cp /path/to/file /root/Dropbox
+
+I would generally suggest avoiding using Dropbox to transfer files that
+are more than ~100mb in size.
+
+Note, you can see what's in Dropbox on your EC2 machine by doing ::
+
+  %% ls /root/Dropbox/
+
+at either the shell, or in the ipython notebook.

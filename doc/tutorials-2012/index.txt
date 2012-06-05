@@ -1,0 +1,11 @@
+==========================================
+Next-Gen Sequence Analysis Workshop (2012)
+==========================================
+
+Your AMI is **ami-b21cbddb** and the ipython notebook password is 'ngs'.
+
+.. toctree::
+   :maxdepth: 2
+
+   day1
+   day2

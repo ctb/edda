@@ -2,7 +2,7 @@
 Running the diginorm paper script pipeline
 ==========================================
 
-:Date: March 25, 2012
+:Date: May 21, 2012
 
 Here are some brief notes on how to run the pipeline for our 2012 paper
 on digital normalization on an Amazon EC2 rental instance.
@@ -11,10 +11,12 @@ The instructions below will reproduce all of the figures in the paper,
 and will then compile the paper from scratch using the new figures.
 
 (Note that you can also start with ami-61885608, which has all the
-below software installed; and the EC2 snapshot snap-09d7f173 has all
-of the data on it.  If you mount that volume and then cp -r everything
-into /mnt, you will have all the software and files below installed in
-the right place to run the pipline 'make' near the bottom.)
+below software installed.)
+
+.. and the EC2 snapshot snap-09d7f173 has all
+.. of the data on it.  If you mount that volume and then cp -r everything
+.. into /mnt, you will have all the software and files below installed in
+.. the right place to run the pipline 'make' near the bottom.)
 
 .. put in sofwtare version .tgz download?
 .. https://github.com/ctb/khmer/tarball/2012-paper-diginorm
@@ -44,13 +46,13 @@ In this case we're going to use the versions tagged for the paper sub.::
 
  % cd /usr/local/src
 
- % git clone git://github.com/ctb/screed.git
+ % git clone git://github.com/ged-lab/screed.git
  % cd screed
  % git checkout 2012-paper-diginorm
  % python setup.py install
  % cd ..
 
- % git clone git://github.com/ctb/khmer.git
+ % git clone git://github.com/ged-lab/khmer.git
  % cd khmer
  % git checkout 2012-paper-diginorm
  % make test
@@ -88,11 +90,11 @@ Running the pipeline
 First, check out the source repository and grab the (...large) initial data
 sets::
 
- % git clone git://github.com/ctb/2012-paper-diginorm.git
+ % git clone git://github.com/ged-lab/2012-paper-diginorm.git
  % cd 2012-paper-diginorm
 
- % curl -O https://s3.amazonaws.com/public.ged.msu.edu/2012-paper-diginorm/pipeline-data.tar.gz
- % tar xzf pipeline-data.tar.gz
+ % curl -O https://s3.amazonaws.com/public.ged.msu.edu/2012-paper-diginorm/pipeline-data-new.tar.gz
+ % tar xzf pipeline-data-new.tar.gz
 
 Now go into the pipeline directory and run the pipeline.  This will take
 4-8 hours, so you might want to do it in 'screen' (see :doc:`../tutorials-2011/unix_long_jobs`). ::

@@ -1,0 +1,8 @@
+==================================
+Day 2: BLAST, Python, and graphing
+==================================
+
+Tuesday, June 5th, 2012
+
+We'll look at the 'ngs-10-blast' and 'ngs-11-python-and-graph' notebooks
+for the first two tutorials.

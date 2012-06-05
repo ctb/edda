@@ -30,6 +30,8 @@ Contents:
 .. toctree::
    :maxdepth: 1
 
+   tutorials-2012/index
+
    git-intro
 
    nih-hmp-2012/index

@@ -1,0 +1,26 @@
+Introducing ipython notebook
+============================
+
+ipython notebook is something that we're trying out for the first time.
+
+Briefly, connect into your machine by using 'https://' plus your
+machine name, and accept the "broken certificate" message.
+
+Now you're at the ipython notebook console.
+
+Here, you can select existing notebooks, or create new ones.  These notebooks
+intermingle code and results, and serve as a log of what you've been doing.
+
+The rules within a notebook are pretty straightforward: shift-ENTER will
+"execute" a snippet of code, or a cell.  When you see [*], that means
+it's running.  And output should show up!
+
+By default, ipython notebook assumes you're writing Python code.
+You can also run shell commands ('%%' in the tutorial) with '!'
+in the ipython notebook.
+
+You can download ipynbs files, and also drag and drop new ones from
+your file system onto the list.
+
+If this works out, we'll be using ipython notebook for running most things...
+we'll see tomorrow!
