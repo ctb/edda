@@ -172,7 +172,7 @@ already performed the indexing step (it takes about 7 minutes), so if
 you want to try it yourself, index a copy so you don't over-write the
 one we've pre-run for you::
 
-%%  bowtie-build /mnt/dmel-all-chromosome-r5.37.fasta  drosophila_bowtie  
+  %%  bowtie-build /mnt/dmel-all-chromosome-r5.37.fasta  drosophila_bowtie  
 
 Now we get to map! We are going to use the default options for bowtie
 for the moment.  Let's go through this. there are a couple of flags
@@ -278,12 +278,6 @@ the course.
 
 Viewing the output with TView
 -----------------------------
-
-Before we can use TView to compare Bowtie and BWA mappings, we need to
-sort the Bowtie BAM file, and generate an index for it.::
-
-  %% samtools sort RAL357_bowtie.bam RAL357_bowtie.sorted
-  %% samtools index RAL357_bowtie.sorted.bam
 
 Now that we've generated the files, we can view the output with
 TView. We'll compare two different sorted::
