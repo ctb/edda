@@ -20,7 +20,7 @@ you can keep working on the same machine. Otherwise, launch an EC2
 instance, make a volume out of the same snapshot that we did before,
 and mount it. The data for this tutorial are in /data/drosophila.
 
-First, go to the working directory:
+First, go to the working directory::
 
   %% cd /mnt
 
@@ -63,7 +63,7 @@ your shell search path::
 
 Now there are several steps involved in mapping our sequence reads and
 getting the output into a usable form. First we need to tell bwa to
-make an index of the reference genome; this will take a few minutes.
+make an index of the reference genome; this will take a few minutes.::
 
   %% cd /mnt
   %% bwa index dmel-all-chromosome-r5.37.fasta
