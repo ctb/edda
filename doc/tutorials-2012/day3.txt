@@ -1,11 +1,14 @@
 ==============
-Day 2: Mapping
+Day 3: Mapping
 ==============
 
-Tuesday, June 6th, 2012
+Wednesday, June 6th, 2012
 
 .. toctree::
    :maxdepth: 2
 
    fastqc_tutorial
    bwa_tutorial
+
+   ../tutorials-2011/installing-dropbox
+
