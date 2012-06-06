@@ -23,7 +23,7 @@ and mount it. The data for this tutorial are in /data/drosophila.
 First, go to the working directory:
 
   %% cd /mnt
-  
+
 For this example, you'll also need the Drosophila reference genome::
 
   %% curl -O ftp://ftp.flybase.net/genomes/Drosophila_melanogaster/dmel_r5.37_FB2011_05/fasta/dmel-all-chromosome-r5.37.fasta.gz
@@ -65,6 +65,7 @@ Now there are several steps involved in mapping our sequence reads and
 getting the output into a usable form. First we need to tell bwa to
 make an index of the reference genome; this will take a few minutes.
 
+  %% cd /mnt
   %% bwa index dmel-all-chromosome-r5.37.fasta
 
 Next, we do the actual mapping. These were paired-end reads, which
@@ -233,18 +234,18 @@ Download and install Samtools::
   %% cp samtools /usr/local/bin
   %% cd misc/
   %% cp *.pl maq2sam-long maq2sam-short md5fa md5sum-lite wgsim /usr/local/bin/
-  %% cd /mnt/drosophila_bowtie
+  %% cd /mnt
   
 Like bwa, Samtools also requires us to go through several steps before
 we have our data in usable form. First, we need to have Samtools
 generate its own index of the reference genome::
 
-  %% samtools faidx ../dmel-all-chromosome-r5.37.fasta
+  %% samtools faidx dmel-all-chromosome-r5.37.fasta
 
 Next, we need to convert the SAM file into a BAM file. (A BAM file is
 just a binary version of a SAM file.)::
 
-  %% samtools import ../dmel-all-chromosome-r5.37.fasta.fai RAL357_bwa.sam RAL357_bwa.bam
+  %% samtools import dmel-all-chromosome-r5.37.fasta.fai RAL357_bwa.sam RAL357_bwa.bam
 
 Now, we need to sort the BAM file::
 
@@ -281,9 +282,8 @@ Viewing the output with TView
 Before we can use TView to compare Bowtie and BWA mappings, we need to
 sort the Bowtie BAM file, and generate an index for it.::
 
-  %% cd drosophila_bowtie
-  %% samtools sort RAL357_full_bowtie.bam RAL357_full_bowtie.sorted
-  %% samtools index RAL357_full_bowtie.sorted.bam
+  %% samtools sort RAL357_bowtie.bam RAL357_bowtie.sorted
+  %% samtools index RAL357_bowtie.sorted.bam
 
 Now that we've generated the files, we can view the output with
 TView. We'll compare two different sorted::
@@ -295,6 +295,6 @@ Now open an additional terminal window, and load the Bowtie mapping
 file there as well.::
   
   %% cd /mnt/drosophila_bowtie
-  %% samtools tview RAL357_full_bowtie.sorted.bam ../dmel-all-chromosome-r5.37.fasta
+  %% samtools tview RAL357_bowtie.sorted.bam ../dmel-all-chromosome-r5.37.fasta
 
 To view the tview help, type '?'
