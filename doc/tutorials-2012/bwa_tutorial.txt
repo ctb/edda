@@ -28,6 +28,7 @@ For this example, you'll also need the Drosophila reference genome::
 
   %% curl -O ftp://ftp.flybase.net/genomes/Drosophila_melanogaster/dmel_r5.37_FB2011_05/fasta/dmel-all-chromosome-r5.37.fasta.gz
   %% gunzip -f dmel-all-chromosome-r5.37.fasta.gz
+  %% md5sum dmel-all-chromosome-r5.37.fasta
 
 Installing and running bwa
 --------------------------
