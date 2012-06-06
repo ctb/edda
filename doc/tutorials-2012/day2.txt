@@ -4,5 +4,10 @@ Day 2: BLAST, Python, and graphing
 
 Tuesday, June 5th, 2012
 
-We'll look at the 'ngs-10-blast' and 'ngs-11-python-and-graph' notebooks
-for the first two tutorials.
+We'll look at the 'ngs-10-blast' and 'ngs-11-python-and-graphing' notebooks
+for the first two tutorials.  'ngs-12-python-rundown' is the evening
+Python reference.
+
+You can also look at static versions of `ngs-10-blast <files/static-ngs-10-blast.html>`__,
+`ngs-11-python-and-graphing <files/static-ngs-11-python-and-graphing.html>`__, and `ngs-12-python-rundown <files/static-ngs-12-python-rundown.html>`__ if
+you're interested.

@@ -1,0 +1,140 @@
+=================================
+Checking read quality with FastQC
+=================================
+
+When you get your sequences back from a sequencing facility, it's
+important to check that they are high quality (garbage in, garbage
+out). In this tutorial, we'll use software called FastQC which checks
+whether a set of sequence reads in a .fastq file exhibit any unusual
+qualities (which might indicate either low sequence quality, or
+interesting biological features in your sample).
+
+Getting the data
+----------------
+
+The data we're using in this tutorial is stored as a snapshot with
+Amazon. We need to make an EBS volume out of this snapshot and then
+mount it on our instance, which will make it very easy to access our
+data.
+
+Log into Amazon Web Services, and click on "Snapshots" at the
+left. Where it says "Viewing:", click on the drop-down box and select
+"All Snapshots". In the search box, paste the name of the snapshot
+that you want to make a volume from (that's snap-000d346e in this
+case). When the snapshot shows up in the list, select it and then
+click the "Create Volume" button. In the box that pops up, make sure
+to take note of which availability zone you are using -- you will need
+to launch your AMI instance in the same availability zone, or else you
+won't be able to attach the volume to the instance!
+
+Now go launch your AMI instance. But again, when it asks you which
+availability zone to launch it in, change the selection from "No
+preference" to whatever availability zone your volume is in. Now you
+need to attach your volume. Click on "Volumes" in the bar at the left,
+and select the one that you just created from the snapshot. Click on
+the "Attach Volume" button, and then select your instance. In the box
+that pops up, type "sdf" (minus the quotes).  (This should be the
+default.)
+
+Now it's time to connect to your instance using ssh. Once you are
+connected, we'll mount the drive to the /data directory. When you
+first launch your instance, you'll need to create it.
+
+  %% mkdir /data
+  %% cd /data
+  %% ls
+  
+Next, run the following line::
+
+  %% mount /dev/xvdf /data
+
+And compare now::
+
+  %% cd /data
+  %% ls
+
+Now that we've got the drive mounted, the data files we'll be working with are in the /data/fastqc/::
+
+  %% cd /data/fastqc
+
+Running FastQC
+--------------
+
+Now we need to download and set up FastQC::
+
+  %% curl -O http://www.bioinformatics.babraham.ac.uk/projects/fastqc/fastqc_v0.10.1.zip
+  %% unzip fastqc_v0.10.1.zip
+  %% cd FastQC
+  %% chmod +x fastqc
+  %% cd ..
+
+Running FastQC is pretty simple. It is written in Java, but our
+machine should already have Java run-times installed::
+
+  %% ./FastQC/fastqc fastq_data.fastq
+
+Note: If you ever want to check if Java is installed on your machine,
+one way to do it is just check if there's a 'man' page available for
+it::
+
+  %% man java
+
+Inspecting the output
+---------------------
+
+That's it! FastQC generates its output as an HTML file and associated
+image files in a fully self-contained subdirectory. To view it, copy
+the subdirectory to your local machine and view it in a web browser.
+The easiest way to do this is to mount your Dropbox folder on your
+Amazon instance, copy the output folders there (using the cp command),
+and then easily view it on your local machine (see
+:doc:`../tutorials-2011/installing-dropbox` or use the ipython notebook
+approach)::
+
+  %% cp -r fastq_data_fastqc ~/Dropbox/
+
+To view it from Dropbox, go to your Dropbox folder, find the
+fastq_data_fastqc folder, and open 'fastqc_report.html'.
+
+Your output should look like this:
+
+.. image:: images/fastqc_basicstats.png
+
+The basic statistics look ok! Per-base sequence quality, on the other hand...:
+
+.. image:: images/fastqc_perbaseseqqual.png
+
+Not so good. It looks like the base calls after about 50 or so bases
+aren't very good. We could write a script that will chop those off
+from the fastq file if we wanted to get rid of them.
+
+Another potential problem area is the per-sequence GC content:
+
+.. image:: images/fastqc_perseqgc.png
+
+This should look like a nice smooth distribution, but the presence of a spike around 40% indicates that sequences with 40% GC-content are over-represented in our sample. Let's move on for now...
+
+There's also a warning about over-represented sequences:
+
+.. image:: images/fastqc_overrepresentedseq.png
+
+If we look at the sequences that are over-represented in our sample,
+they seem to consist of repeated runs of "AGAGA" -- which has 40%
+GC-content. That probably explains the peak we saw above!
+
+Last, there is another warning for Kmer content. This is basically
+telling us almost the same thing as the over-represented sequences;
+these 5-bp sequences are over-represented in our dataset (and some of
+them are even over-represented at certain positions within reads).
+
+Don't forget -- FastQC can tell us that the sequences in the .fastq
+file have these unusual features, but it can't necessarily explain
+why; the causes are open to interpretation. It could be due to poor
+sequencing quality or bad base calling, or maybe we accidentally
+contaminated our sequencing library with PCR-amplified microsatellite
+sequences, or maybe our study species just has a lot of repetitive
+sequences in its genome.
+
+If you want more information on what each piece of FastQC's output
+means, the documentation is available online at
+http://www.bioinformatics.bbsrc.ac.uk/projects/fastqc/Help/

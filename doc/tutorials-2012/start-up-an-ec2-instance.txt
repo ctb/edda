@@ -20,7 +20,7 @@ and select "Download".  Then select "More Amazon machine images" and
 .. image:: images/ec2-1.png
    :width: 90%
 
-Next, enter **ami-b21cbddb** in the search box. (you might want to
+Next, enter **ami-00ca6a69** in the search box. (you might want to
 copy/paste!) Continue.
 
 .. image:: images/ec2-2.png
