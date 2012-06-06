@@ -85,7 +85,7 @@ dataset). Run::
 
 These .sai files aren't very useful to us, so we need to convert them into SAM files. In this step, bwa takes the information from the two separate ends of each sequence and combines everything together. Here's how you do it (this may take around 10 minutes)::
 
-  %% bwa sampe dmel-all-chromosome-r5.37.fasta RAL357_1.sai RAL357_2.sai RAL357_1.fastq RAL357_2.fastq > RAL357_bwa.sam
+  %% bwa sampe dmel-all-chromosome-r5.37.fasta RAL357_1.sai RAL357_2.sai /data/drosophila/RAL357_1.fastq /data/drosophila/RAL357_2.fastq > RAL357_bwa.sam
   
 The SAM file is technically human-readable; take a look at it with::
 
