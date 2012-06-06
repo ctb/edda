@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<!-- saved from url=(0086)https://ec2-107-22-71-56.compute-1.amazonaws.com/434a6351-0a9b-4b8b-985d-f34a565d6e73# -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<title>ngs-12-python-rundown</title>
+<link rel="stylesheet" href="./static-ngs-12-python-rundown_files/jquery-ui.min.css" type="text/css">
+<link rel="stylesheet" href="./static-ngs-12-python-rundown_files/boilerplate.css" type="text/css">
+<link rel="stylesheet" href="./static-ngs-12-python-rundown_files/fbm.css" type="text/css">
+<link rel="stylesheet" href="./static-ngs-12-python-rundown_files/page.css" type="text/css">
+
+
+<script type="text/javascript" src="./static-ngs-12-python-rundown_files/MathJax.js" charset="utf-8"></script>
+
+<script type="text/javascript">
+// MathJax disabled, set as null to distingish from *missing* MathJax,
+// where it will be undefined, and should prompt a dialog later.
+window.mathjax_url = "/static/mathjax/MathJax.js";
+</script>
+<link rel="stylesheet" href="https://ec2-107-22-71-56.compute-1.amazonaws.com/static/codemirror/lib/codemirror.css?v=63efb">
+<link rel="stylesheet" href="https://ec2-107-22-71-56.compute-1.amazonaws.com/static/codemirror/theme/ipython.css?v=fa49d">
+<link rel="stylesheet" href="https://ec2-107-22-71-56.compute-1.amazonaws.com/static/prettify/prettify.css?v=83f40">
+<link rel="stylesheet" href="./static-ngs-12-python-rundown_files/notebook.css" type="text/css">
+<link rel="stylesheet" href="./static-ngs-12-python-rundown_files/tooltip.css" type="text/css">
+<link rel="stylesheet" href="./static-ngs-12-python-rundown_files/renderedhtml.css" type="text/css">
+
+
+
+<style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-family: serif; font-size: 85%; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 5px 0px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -khtml-border-radius: 5px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 1px 2em; background: transparent}
+.MathJax_MenuTitle {background-color: #CCCCCC; margin: -5px 0 0 0; text-align: center; font-style: italic; font-size: 80%; color: #444444; padding: 2px 0; overflow: hidden}
+.MathJax_MenuArrow {position: absolute; right: .5em; color: #666666}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuRadioCheck {position: absolute; left: .7em}
+.MathJax_MenuLabel {padding: 1px 2em 3px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #DDDDDD; margin: 4px 3px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: #606872; color: white}
+</style><style type="text/css">#MathJax_Message {position: fixed; left: 1em; bottom: 1.5em; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MathJax_Display {text-align: center; margin: 0; position: relative; display: block; width: 100%}
+.MathJax .merror {color: black; border: 1px solid; padding: 1px 3px; font-family: serif; font-size: 80%; vertical-align: ; text-align: left}
+.MathJax_Preview {color: #888888}
+#MathJax_Tooltip {background-color: InfoBackground; color: InfoText; border: 1px solid black; box-shadow: 2px 2px 5px #AAAAAA; -webkit-box-shadow: 2px 2px 5px #AAAAAA; -moz-box-shadow: 2px 2px 5px #AAAAAA; -khtml-box-shadow: 2px 2px 5px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true'); padding: 3px 4px; position: absolute; left: 0; top: 0; width: auto; height: auto; display: none}
+.MathJax {display: inline; font-family: serif; font-style: normal; font-weight: normal; line-height: normal; font-size: 100%; font-size-adjust: none; text-indent: 0; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; border: 0; padding: 0; margin: 0}
+.MathJax img, .MathJax nobr, .MathJax a {border: 0; padding: 0; margin: 0; max-width: none; max-height: none; vertical-align: 0; line-height: normal; text-decoration: none}
+img.MathJax_strut {border: 0 !important; padding: 0 !important; margin: 0 !important; vertical-align: 0 !important}
+.MathJax span {display: inline; position: static; border: 0; padding: 0; margin: 0; vertical-align: 0; line-height: normal; text-decoration: none}
+.MathJax nobr {white-space: nowrap}
+.MathJax_Processing {visibility: hidden; position: fixed; width: 0; height: 0; overflow: hidden}
+.MathJax .MathJax_HitBox {cursor: text}
+#MathJax_Tooltip * {filter: none; background: transparent}
+#MathJax_getScales {font-family: STIXGeneral,STIXNonUnicode,STIXSizeOneSym}
+.MathJax .math span {font-family: STIXGeneral,STIXNonUnicode,STIXSizeOneSym}
+</style></head>
+<body data-project="/usr/local/notebooks" data-base-project-url="/" data-base-kernel-url="/" data-read-only="False" data-notebook-id="434a6351-0a9b-4b8b-985d-f34a565d6e73"><div style="visibility: hidden; overflow: hidden; position: absolute; top: 0px; height: 1px; width: auto; padding: 0px; border: 0px; margin: 0px; text-align: left; text-indent: 0px; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; "><div id="MathJax_Hidden"></div></div><div id="MathJax_Message" style="display: none; "></div>
+<div id="header" style="border-style: none; display: block; " class="border-box-sizing ui-widget ui-widget-content">
+<span id="ipython_notebook"><h1><a href="https://ec2-107-22-71-56.compute-1.amazonaws.com/" alt="dashboard"><img src="./static-ngs-12-python-rundown_files/ipynblogo.png" alt="IPython Notebook"></a></h1></span>
+
+<span id="login_widget">
+
+<button id="logout" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" aria-disabled="false"><span class="ui-button-text">Logout</span></button>
+
+</span>
+
+
+<span id="save_widget">
+<span id="notebook_name" class="ui-widget ui-widget-content">ngs-12-python-rundown</span>
+<span id="save_status" class="ui-widget ui-widget-content" style="border: none; margin-left: 20px; ">Last saved: Jun 05 11:52 PM</span>
+</span>
+
+</div>
+<div id="site" class="border-box-sizing" style="display: block; ">
+
+<div id="menubar_container">
+<div id="menubar" class="border-box-sizing" style="">
+<ul id="menus" class="ui-menubar ui-widget-header ui-helper-clearfix" role="menubar">
+<li class="ui-menubar-item" role="presentation"><a href="./static-ngs-12-python-rundown_files/static-ngs-12-python-rundown.html" class="ui-button ui-widget ui-button-text-only ui-menubar-link" role="menuitem" aria-haspopup="true"><span class="ui-button-text">File</span></a>
+<ul class="ui-menu ui-widget ui-widget-content ui-corner-all" id="ui-menu-0" role="menu" tabindex="0" style="top: 30px; left: 1px; display: none; " aria-expanded="false" aria-activedescendant="ui-menu-0-6" aria-hidden="true">
+<li id="new_notebook" class="ui-menu-item" role="presentation"><a href="./static-ngs-12-python-rundown_files/static-ngs-12-python-rundown.html" class="ui-corner-all" tabindex="-1" role="menuitem" id="ui-menu-0-0">New</a></li>
+<li id="open_notebook" class="ui-menu-item" role="presentation"><a href="./static-ngs-12-python-rundown_files/static-ngs-12-python-rundown.html" class="ui-corner-all" tabindex="-1" role="menuitem" id="ui-menu-0-1">Open...</a></li>
+<hr>
+<li id="copy_notebook" class="ui-menu-item" role="presentation"><a href="./static-ngs-12-python-rundown_files/static-ngs-12-python-rundown.html" class="ui-corner-all" tabindex="-1" role="menuitem" id="ui-menu-0-2">Make a Copy...</a></li>
+<li id="rename_notebook" class="ui-menu-item" role="presentation"><a href="./static-ngs-12-python-rundown_files/static-ngs-12-python-rundown.html" class="ui-corner-all" tabindex="-1" role="menuitem" id="ui-menu-0-3">Rename...</a></li>
+<li id="save_notebook" class="ui-menu-item" role="presentation"><a href="./static-ngs-12-python-rundown_files/static-ngs-12-python-rundown.html" class="ui-corner-all" tabindex="-1" role="menuitem" id="ui-menu-0-4">Save</a></li>
+<hr>
+<li class="ui-menu-item" role="presentation"><a href="./static-ngs-12-python-rundown_files/static-ngs-12-python-rundown.html" class="ui-corner-all" tabindex="-1" role="menuitem" id="ui-menu-0-5" aria-haspopup="true"><span class="ui-menu-icon ui-icon ui-icon-carat-1-e"></span>Download as</a>
+<ul class="ui-menu ui-widget ui-widget-content ui-corner-all" role="menu" style="top: 149px; left: 202px; display: none; " aria-expanded="false" aria-labelledby="ui-menu-0-5" aria-hidden="true">
+<li id="download_ipynb" class="ui-menu-item" role="presentation"><a href="./static-ngs-12-python-rundown_files/static-ngs-12-python-rundown.html" class="ui-corner-all" tabindex="-1" role="menuitem" id="ui-menu-0-8">IPython (.ipynb)</a></li>
+<li id="download_py" class="ui-menu-item" role="presentation"><a href="./static-ngs-12-python-rundown_files/static-ngs-12-python-rundown.html" class="ui-corner-all" tabindex="-1" role="menuitem" id="ui-menu-0-9">Python (.py)</a></li>
+</ul>
+</li>
+<hr>
+<li id="print_notebook" class="ui-menu-item" role="presentation"><a href="https://ec2-107-22-71-56.compute-1.amazonaws.com/434a6351-0a9b-4b8b-985d-f34a565d6e73/print" target="_blank" class="ui-corner-all" tabindex="-1" role="menuitem" id="ui-menu-0-6">Print View</a></li>
+<hr>
+<li id="kill_and_exit" class="ui-menu-item" role="presentation"><a href="./static-ngs-12-python-rundown_files/static-ngs-12-python-rundown.html" class="ui-corner-all" tabindex="-1" role="menuitem" id="ui-menu-0-7">Close and halt</a></li>
+</ul>
+</li>
+<li class="ui-menubar-item" role="presentation"><a href="./static-ngs-12-python-rundown_files/static-ngs-12-python-rundown.html" tabindex="-1" class="ui-button ui-widget ui-button-text-only ui-menubar-link" role="menuitem" aria-haspopup="true"><span class="ui-button-text">Edit</span></a>
+<ul class="ui-menu ui-widget ui-widget-content ui-corner-all" id="ui-menu-1" role="menu" tabindex="0" style="display: none; " aria-hidden="true" aria-expanded="false">
+<li id="cut_cell" class="ui-menu-item" role="presentation"><a href="./static-ngs-12-python-rundown_files/static-ngs-12-python-rundown.html" class="ui-corner-all" tabindex="-1" role="menuitem" id="ui-menu-1-0">Cut Cell</a></li>
+<li id="copy_cell" class="ui-menu-item" role="presentation"><a href="./static-ngs-12-python-rundown_files/static-ngs-12-python-rundown.html" class="ui-corner-all" tabindex="-1" role="menuitem" id="ui-menu-1-1">Copy Cell</a></li>
+<li id="paste_cell" class="ui-state-disabled ui-menu-item" role="presentation"><a href="./static-ngs-12-python-rundown_files/static-ngs-12-python-rundown.html" class="ui-corner-all" tabindex="-1" role="menuitem" id="ui-menu-1-2">Paste Cell</a></li>
+<li id="paste_cell_above" class="ui-state-disabled ui-menu-item" role="presentation"><a href="./static-ngs-12-python-rundown_files/static-ngs-12-python-rundown.html" class="ui-corner-all" tabindex="-1" role="menuitem" id="ui-menu-1-3">Paste Cell Above</a></li>
+<li id="paste_cell_below" class="ui-state-disabled ui-menu-item" role="presentation"><a href="./static-ngs-12-python-rundown_files/static-ngs-12-python-rundown.html" class="ui-corner-all" tabindex="-1" role="menuitem" id="ui-menu-1-4">Paste Cell Below</a></li>
+<li id="delete_cell" class="ui-menu-item" role="presentation"><a href="./static-ngs-12-python-rundown_files/static-ngs-12-python-rundown.html" class="ui-corner-all" tabindex="-1" role="menuitem" id="ui-menu-1-5">Delete</a></li>
+<hr>
+<li id="split_cell" class="ui-menu-item" role="presentation"><a href="./static-ngs-12-python-rundown_files/static-ngs-12-python-rundown.html" class="ui-corner-all" tabindex="-1" role="menuitem" id="ui-menu-1-6">Split Cell</a></li>
+<li id="merge_cell_above" class="ui-menu-item" role="presentation"><a href="./static-ngs-12-python-rundown_files/static-ngs-12-python-rundown.html" class="ui-corner-all" tabindex="-1" role="menuitem" id="ui-menu-1-7">Merge Cell Above</a></li>
+<li id="merge_cell_below" class="ui-menu-item" role="presentation"><a href="./static-ngs-12-python-rundown_files/static-ngs-12-python-rundown.html" class="ui-corner-all" tabindex="-1" role="menuitem" id="ui-menu-1-8">Merge Cell Below</a></li>
+<hr>
+<li id="move_cell_up" class="ui-menu-item" role="presentation"><a href="./static-ngs-12-python-rundown_files/static-ngs-12-python-rundown.html" class="ui-corner-all" tabindex="-1" role="menuitem" id="ui-menu-1-9">Move Cell Up</a></li>
+<li id="move_cell_down" class="ui-menu-item" role="presentation"><a href="./static-ngs-12-python-rundown_files/static-ngs-12-python-rundown.html" class="ui-corner-all" tabindex="-1" role="menuitem" id="ui-menu-1-10">Move Cell Down</a></li>
+<hr>
+<li id="select_previous" class="ui-menu-item" role="presentation"><a href="./static-ngs-12-python-rundown_files/static-ngs-12-python-rundown.html" class="ui-corner-all" tabindex="-1" role="menuitem" id="ui-menu-1-11">Select Previous Cell</a></li>
+<li id="select_next" class="ui-menu-item" role="presentation"><a href="./static-ngs-12-python-rundown_files/static-ngs-12-python-rundown.html" class="ui-corner-all" tabindex="-1" role="menuitem" id="ui-menu-1-12">Select Next Cell</a></li>
+</ul>
+</li>
+<li class="ui-menubar-item" role="presentation"><a href="./static-ngs-12-python-rundown_files/static-ngs-12-python-rundown.html" tabindex="-1" class="ui-button ui-widget ui-button-text-only ui-menubar-link" role="menuitem" aria-haspopup="true"><span class="ui-button-text">View</span></a>
+<ul class="ui-menu ui-widget ui-widget-content ui-corner-all" id="ui-menu-2" role="menu" tabindex="0" style="display: none; " aria-hidden="true" aria-expanded="false">
+<li id="toggle_header" class="ui-menu-item" role="presentation"><a href="./static-ngs-12-python-rundown_files/static-ngs-12-python-rundown.html" class="ui-corner-all" tabindex="-1" role="menuitem" id="ui-menu-2-0">Toggle Header</a></li>
+<li id="toggle_toolbar" class="ui-menu-item" role="presentation"><a href="./static-ngs-12-python-rundown_files/static-ngs-12-python-rundown.html" class="ui-corner-all" tabindex="-1" role="menuitem" id="ui-menu-2-1">Toggle Toolbar</a></li>
+</ul>
+</li>
+<li class="ui-menubar-item" role="presentation"><a href="./static-ngs-12-python-rundown_files/static-ngs-12-python-rundown.html" tabindex="-1" class="ui-button ui-widget ui-button-text-only ui-menubar-link" role="menuitem" aria-haspopup="true"><span class="ui-button-text">Insert</span></a>
+<ul class="ui-menu ui-widget ui-widget-content ui-corner-all" id="ui-menu-3" role="menu" tabindex="0" style="display: none; " aria-hidden="true" aria-expanded="false">
+<li id="insert_cell_above" class="ui-menu-item" role="presentation"><a href="./static-ngs-12-python-rundown_files/static-ngs-12-python-rundown.html" class="ui-corner-all" tabindex="-1" role="menuitem" id="ui-menu-3-0">Insert Cell Above</a></li>
+<li id="insert_cell_below" class="ui-menu-item" role="presentation"><a href="./static-ngs-12-python-rundown_files/static-ngs-12-python-rundown.html" class="ui-corner-all" tabindex="-1" role="menuitem" id="ui-menu-3-1">Insert Cell Below</a></li>
+</ul>
+</li>
+<li class="ui-menubar-item" role="presentation"><a href="./static-ngs-12-python-rundown_files/static-ngs-12-python-rundown.html" class="ui-button ui-widget ui-button-text-only ui-menubar-link" role="menuitem" aria-haspopup="true"><span class="ui-button-text">Cell</span></a>
+<ul class="ui-menu ui-widget ui-widget-content ui-corner-all" id="ui-menu-4" role="menu" tabindex="0" style="top: 30px; left: 234px; display: none; " aria-expanded="false" aria-activedescendant="ui-menu-4-2" aria-hidden="true">
+<li id="run_cell" class="ui-menu-item" role="presentation"><a href="./static-ngs-12-python-rundown_files/static-ngs-12-python-rundown.html" class="ui-corner-all" tabindex="-1" role="menuitem" id="ui-menu-4-0">Run</a></li>
+<li id="run_cell_in_place" class="ui-menu-item" role="presentation"><a href="./static-ngs-12-python-rundown_files/static-ngs-12-python-rundown.html" class="ui-corner-all" tabindex="-1" role="menuitem" id="ui-menu-4-1">Run in Place</a></li>
+<li id="run_all_cells" class="ui-menu-item" role="presentation"><a href="./static-ngs-12-python-rundown_files/static-ngs-12-python-rundown.html" class="ui-corner-all" tabindex="-1" role="menuitem" id="ui-menu-4-2">Run All</a></li>
+<hr>
+<li id="to_code" class="ui-menu-item" role="presentation"><a href="./static-ngs-12-python-rundown_files/static-ngs-12-python-rundown.html" class="ui-corner-all" tabindex="-1" role="menuitem" id="ui-menu-4-3">Code</a></li>
+<li id="to_markdown" class="ui-menu-item" role="presentation"><a href="./static-ngs-12-python-rundown_files/static-ngs-12-python-rundown.html" class="ui-corner-all" tabindex="-1" role="menuitem" id="ui-menu-4-4">Markdown </a></li>
+<li id="to_raw" class="ui-menu-item" role="presentation"><a href="./static-ngs-12-python-rundown_files/static-ngs-12-python-rundown.html" class="ui-corner-all" tabindex="-1" role="menuitem" id="ui-menu-4-5">Raw Text</a></li>
+<li id="to_heading1" class="ui-menu-item" role="presentation"><a href="./static-ngs-12-python-rundown_files/static-ngs-12-python-rundown.html" class="ui-corner-all" tabindex="-1" role="menuitem" id="ui-menu-4-6">Heading 1</a></li>
+<li id="to_heading2" class="ui-menu-item" role="presentation"><a href="./static-ngs-12-python-rundown_files/static-ngs-12-python-rundown.html" class="ui-corner-all" tabindex="-1" role="menuitem" id="ui-menu-4-7">Heading 2</a></li>
+<li id="to_heading3" class="ui-menu-item" role="presentation"><a href="./static-ngs-12-python-rundown_files/static-ngs-12-python-rundown.html" class="ui-corner-all" tabindex="-1" role="menuitem" id="ui-menu-4-8">Heading 3</a></li>
+<li id="to_heading4" class="ui-menu-item" role="presentation"><a href="./static-ngs-12-python-rundown_files/static-ngs-12-python-rundown.html" class="ui-corner-all" tabindex="-1" role="menuitem" id="ui-menu-4-9">Heading 4</a></li>
+<li id="to_heading5" class="ui-menu-item" role="presentation"><a href="./static-ngs-12-python-rundown_files/static-ngs-12-python-rundown.html" class="ui-corner-all" tabindex="-1" role="menuitem" id="ui-menu-4-10">Heading 5</a></li>
+<li id="to_heading6" class="ui-menu-item" role="presentation"><a href="./static-ngs-12-python-rundown_files/static-ngs-12-python-rundown.html" class="ui-corner-all" tabindex="-1" role="menuitem" id="ui-menu-4-11">Heading 6</a></li>
+<hr>
+<li id="toggle_output" class="ui-menu-item" role="presentation"><a href="./static-ngs-12-python-rundown_files/static-ngs-12-python-rundown.html" class="ui-corner-all" tabindex="-1" role="menuitem" id="ui-menu-4-12">Toggle Output</a></li>
+<li id="clear_all_output" class="ui-menu-item" role="presentation"><a href="./static-ngs-12-python-rundown_files/static-ngs-12-python-rundown.html" class="ui-corner-all" tabindex="-1" role="menuitem" id="ui-menu-4-13">Clear All Output</a></li>
+</ul>
+</li>
+<li class="ui-menubar-item" role="presentation"><a href="./static-ngs-12-python-rundown_files/static-ngs-12-python-rundown.html" tabindex="-1" class="ui-button ui-widget ui-button-text-only ui-menubar-link" role="menuitem" aria-haspopup="true"><span class="ui-button-text">Kernel</span></a>
+<ul class="ui-menu ui-widget ui-widget-content ui-corner-all" id="ui-menu-5" role="menu" tabindex="0" style="display: none; " aria-hidden="true" aria-expanded="false">
+<li id="int_kernel" class="ui-menu-item" role="presentation"><a href="./static-ngs-12-python-rundown_files/static-ngs-12-python-rundown.html" class="ui-corner-all" tabindex="-1" role="menuitem" id="ui-menu-5-0">Interrupt</a></li>
+<li id="restart_kernel" class="ui-menu-item" role="presentation"><a href="./static-ngs-12-python-rundown_files/static-ngs-12-python-rundown.html" class="ui-corner-all" tabindex="-1" role="menuitem" id="ui-menu-5-1">Restart</a></li>
+</ul>
+</li>
+<li class="ui-menubar-item" role="presentation"><a href="./static-ngs-12-python-rundown_files/static-ngs-12-python-rundown.html" tabindex="-1" class="ui-button ui-widget ui-button-text-only ui-menubar-link" role="menuitem" aria-haspopup="true"><span class="ui-button-text">Help</span></a>
+<ul class="ui-menu ui-widget ui-widget-content ui-corner-all" id="ui-menu-6" role="menu" tabindex="0" style="display: none; " aria-hidden="true" aria-expanded="false">
+<li class="ui-menu-item" role="presentation"><a href="http://ipython.org/documentation.html" target="_blank" class="ui-corner-all" tabindex="-1" role="menuitem" id="ui-menu-6-0">IPython Help</a></li>
+<li class="ui-menu-item" role="presentation"><a href="http://ipython.org/ipython-doc/stable/interactive/htmlnotebook.html" target="_blank" class="ui-corner-all" tabindex="-1" role="menuitem" id="ui-menu-6-1">Notebook Help</a></li>
+<li id="keyboard_shortcuts" class="ui-menu-item" role="presentation"><a href="./static-ngs-12-python-rundown_files/static-ngs-12-python-rundown.html" class="ui-corner-all" tabindex="-1" role="menuitem" id="ui-menu-6-2">Keyboard Shortcuts</a></li>
+<hr>
+<li class="ui-menu-item" role="presentation"><a href="http://docs.python.org/" target="_blank" class="ui-corner-all" tabindex="-1" role="menuitem" id="ui-menu-6-3">Python</a></li>
+<li class="ui-menu-item" role="presentation"><a href="http://docs.scipy.org/doc/numpy/reference/" target="_blank" class="ui-corner-all" tabindex="-1" role="menuitem" id="ui-menu-6-4">NumPy</a></li>
+<li class="ui-menu-item" role="presentation"><a href="http://docs.scipy.org/doc/scipy/reference/" target="_blank" class="ui-corner-all" tabindex="-1" role="menuitem" id="ui-menu-6-5">SciPy</a></li>
+<li class="ui-menu-item" role="presentation"><a href="http://docs.sympy.org/dev/index.html" target="_blank" class="ui-corner-all" tabindex="-1" role="menuitem" id="ui-menu-6-6">SymPy</a></li>
+<li class="ui-menu-item" role="presentation"><a href="http://matplotlib.sourceforge.net/" target="_blank" class="ui-corner-all" tabindex="-1" role="menuitem" id="ui-menu-6-7">Matplotlib</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div id="notification" class="ui-widget ui-widget-content ui-corner-all border-box-sizing" style="display: none; "></div>
+</div>
+<div id="toolbar" class="border-box-sizing ui-widget ui-widget-content" style="border-top-style: none; border-left-style: none; border-right-style: none; ">
+<span>
+<button id="save_b" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only" role="button" aria-disabled="false" title="Save"><span class="ui-button-icon-primary ui-icon ui-icon-disk"></span><span class="ui-button-text">Save</span></button>
+</span>
+<span id="cut_copy_paste" class="ui-buttonset">
+<button id="cut_b" title="Cut Cell" class="ui-button ui-widget ui-state-default ui-button-icon-only ui-corner-left" role="button" aria-disabled="false"><span class="ui-button-icon-primary ui-icon ui-icon-scissors"></span><span class="ui-button-text">Cut Cell</span></button>
+<button id="copy_b" title="Copy Cell" class="ui-button ui-widget ui-state-default ui-button-icon-only" role="button" aria-disabled="false"><span class="ui-button-icon-primary ui-icon ui-icon-copy"></span><span class="ui-button-text">Copy Cell</span></button>
+<button id="paste_b" title="Paste Cell" class="ui-button ui-widget ui-state-default ui-button-icon-only ui-corner-right" role="button" aria-disabled="false"><span class="ui-button-icon-primary ui-icon ui-icon-clipboard"></span><span class="ui-button-text">Paste Cell</span></button>
+</span>
+<span id="move_up_down" class="ui-buttonset">
+<button id="move_up_b" title="Move Cell Up" class="ui-button ui-widget ui-state-default ui-button-icon-only ui-corner-left" role="button" aria-disabled="false"><span class="ui-button-icon-primary ui-icon ui-icon-arrowthick-1-n"></span><span class="ui-button-text">Move Cell Up</span></button>
+<button id="move_down_b" title="Move Cell Down" class="ui-button ui-widget ui-state-default ui-button-icon-only ui-corner-right" role="button" aria-disabled="false"><span class="ui-button-icon-primary ui-icon ui-icon-arrowthick-1-s"></span><span class="ui-button-text">Move Down</span></button>
+</span>
+<span id="insert_above_below" class="ui-buttonset">
+<button id="insert_above_b" title="Insert Cell Above" class="ui-button ui-widget ui-state-default ui-button-icon-only ui-corner-left" role="button" aria-disabled="false"><span class="ui-button-icon-primary ui-icon ui-icon-arrowthickstop-1-n"></span><span class="ui-button-text">Insert Cell Above</span></button>
+<button id="insert_below_b" title="Insert Cell Below" class="ui-button ui-widget ui-state-default ui-button-icon-only ui-corner-right" role="button" aria-disabled="false"><span class="ui-button-icon-primary ui-icon ui-icon-arrowthickstop-1-s"></span><span class="ui-button-text">Insert Cell Below</span></button>
+</span>
+<span id="run_int" class="ui-buttonset">
+<button id="run_b" title="Run Cell" class="ui-button ui-widget ui-state-default ui-button-icon-only ui-corner-left" role="button" aria-disabled="false"><span class="ui-button-icon-primary ui-icon ui-icon-play"></span><span class="ui-button-text">Run Cell</span></button>
+<button id="interrupt_b" title="Interrupt" class="ui-button ui-widget ui-state-default ui-button-icon-only ui-corner-right" role="button" aria-disabled="false"><span class="ui-button-icon-primary ui-icon ui-icon-stop"></span><span class="ui-button-text">Interrupt</span></button>
+</span>
+<span>
+<select id="cell_type" class="ui-widget ui-widget-content">
+<option value="code">Code</option>
+<option value="markdown">Markdown</option>
+<option value="raw">Raw Text</option>
+<option value="heading1">Heading 1</option>
+<option value="heading2">Heading 2</option>
+<option value="heading3">Heading 3</option>
+<option value="heading4">Heading 4</option>
+<option value="heading5">Heading 5</option>
+<option value="heading6">Heading 6</option>
+</select>
+</span>
+</div>
+<div id="main_app" class="border-box-sizing ui-widget" style="height: 555px; ">
+<div id="notebook_panel" class="border-box-sizing ui-widget">
+<div id="notebook" class="border-box-sizing" style="height: 547px; "><div class="cell text_cell border-box-sizing" tabindex="2"><div class="text_cell_input border-box-sizing" style="display: none; "><div class="CodeMirror CodeMirror-wrap"><div style="overflow: hidden; position: relative; width: 3px; height: 0px;"><textarea style="position: absolute; padding: 0; width: 1px; height: 1em" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-default" tabindex="-1"><div style="position: relative"><div style="position: relative"><div class="CodeMirror-gutter" style="display: none; "><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div style="position: relative; z-index: 0; outline: none; "><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"><pre><span>x</span></pre></div><pre class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1"></div><div></div></div></div></div></div></div></div></div><div class="text_cell_render border-box-sizing rendered_html" tabindex="-1" style=""><h1>Python</h1></div></div><div class="cell border-box-sizing code_cell vbox" tabindex="2"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[1]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5px; left: 5px; "><textarea style="position: absolute; padding: 0; width: 1px; height: 1em" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 299px; "><div style="position: relative; top: 0px; "><div class="CodeMirror-gutter" style="display: none; "><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div style="position: relative; z-index: 0; outline: none; "><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre class="CodeMirror-cursor" style="top: 0px; left: 0px; ">&nbsp;</pre><div style="position: relative; z-index: -1; display: none; "></div><div style=""><pre><span class="cm-variable">a</span> = <span class="cm-number">5</span></pre><pre><span class="cm-variable">b</span> = <span class="cm-string">'hello, world'</span></pre><pre><span class="cm-variable">c</span> = <span class="cm-string">'5'</span></pre><pre><span class="cm-keyword">print</span> <span class="cm-variable">a</span></pre><pre><span class="cm-keyword">print</span> <span class="cm-variable">b</span></pre><pre><span class="cm-keyword">print</span> <span class="cm-variable">c</span></pre><pre> </pre><pre><span class="cm-variable">a</span> = <span class="cm-string">"five"</span></pre><pre><span class="cm-variable">d</span> = <span class="cm-string">"someone else's problem"</span></pre><pre> </pre><pre><span class="cm-variable">e</span> = <span class="cm-number">10.5</span></pre><pre><span class="cm-keyword">print</span> <span class="cm-variable">e</span></pre><pre> </pre><pre><span class="cm-variable">f</span> = <span class="cm-string">"""this is a triple quote.</span></pre><pre> </pre><pre><span class="cm-string">It actually supports multiple lines</span></pre><pre><span class="cm-string">"""</span></pre></div></div></div></div></div></div></div></div></div><div class="output vbox" style=""><div class="hbox output_area"><div class="prompt"></div><div class="box-flex1 output_subarea output_text output_stream output_stdout"><pre>5
+hello, world
+5
+10.5
+</pre></div></div></div></div><div class="cell border-box-sizing code_cell vbox" tabindex="2"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[2]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5px; left: 5px; "><textarea style="position: absolute; padding: 0; width: 1px; height: 1em" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 95px; "><div style="position: relative; top: 0px; "><div class="CodeMirror-gutter" style="display: none; "><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div style="position: relative; z-index: 0; outline: none; "><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre class="CodeMirror-cursor" style="top: 0px; left: 0px; ">&nbsp;</pre><div style="position: relative; z-index: -1; display: none; "></div><div style=""><pre><span class="cm-comment"># list</span></pre><pre><span class="cm-variable">x</span> = [<span class="cm-variable">a</span>, <span class="cm-variable">b</span>, <span class="cm-variable">c</span>, <span class="cm-variable">d</span>, <span class="cm-number">20</span>, <span class="cm-number">30</span>, <span class="cm-number">40</span>]</pre><pre><span class="cm-keyword">print</span> <span class="cm-variable">x</span></pre><pre><span class="cm-keyword">print</span> <span class="cm-variable">x</span>[<span class="cm-number">0</span>]</pre><pre><span class="cm-keyword">print</span> <span class="cm-variable">x</span>[<span class="cm-number">4</span>]</pre></div></div></div></div></div></div></div></div></div><div class="output vbox" style=""><div class="hbox output_area"><div class="prompt"></div><div class="box-flex1 output_subarea output_text output_stream output_stdout"><pre>['five', 'hello, world', '5', "someone else's problem", 20, 30, 40]
+five
+20
+</pre></div></div></div></div><div class="cell border-box-sizing code_cell vbox" tabindex="2"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[3]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5px; left: 5px; "><textarea style="position: absolute; padding: 0; width: 1px; height: 1em" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 112px; "><div style="position: relative; top: 0px; "><div class="CodeMirror-gutter" style="display: none; "><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div style="position: relative; z-index: 0; outline: none; "><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre class="CodeMirror-cursor" style="top: 0px; left: 0px; ">&nbsp;</pre><div style="position: relative; z-index: -1; display: none; "></div><div style=""><pre><span class="cm-variable">y</span> = [<span class="cm-number">10</span>, <span class="cm-number">20</span>, <span class="cm-number">30</span>]</pre><pre><span class="cm-variable">z</span> = [<span class="cm-number">15</span>, <span class="cm-number">25</span>, <span class="cm-number">35</span>, <span class="cm-number">45</span>]</pre><pre><span class="cm-variable">x</span> = [<span class="cm-variable">y</span>, <span class="cm-variable">z</span>]</pre><pre><span class="cm-keyword">print</span> <span class="cm-variable">x</span></pre><pre><span class="cm-keyword">print</span> <span class="cm-variable">x</span>[<span class="cm-number">0</span>]</pre><pre><span class="cm-keyword">print</span> <span class="cm-variable">x</span>[<span class="cm-number">0</span>][<span class="cm-number">2</span>]</pre></div></div></div></div></div></div></div></div></div><div class="output vbox" style=""><div class="hbox output_area"><div class="prompt"></div><div class="box-flex1 output_subarea output_text output_stream output_stdout"><pre>[[10, 20, 30], [15, 25, 35, 45]]
+[10, 20, 30]
+30
+</pre></div></div></div></div><div class="cell border-box-sizing code_cell vbox" tabindex="2"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[4]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5px; left: 5px; "><textarea style="position: absolute; padding: 0; width: 1px; height: 1em" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 112px; "><div style="position: relative; top: 0px; "><div class="CodeMirror-gutter" style="display: none; "><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div style="position: relative; z-index: 0; outline: none; "><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre class="CodeMirror-cursor" style="top: 0px; left: 0px; ">&nbsp;</pre><div style="position: relative; z-index: -1; display: none; "></div><div style=""><pre><span class="cm-keyword">print</span> <span class="cm-number">5</span><span class="cm-operator">*</span><span class="cm-number">5</span></pre><pre><span class="cm-keyword">print</span> <span class="cm-number">30</span><span class="cm-operator">/</span><span class="cm-number">2</span></pre><pre><span class="cm-keyword">print</span> <span class="cm-number">10</span><span class="cm-operator">+</span><span class="cm-number">10</span></pre><pre><span class="cm-keyword">print</span> <span class="cm-number">52</span><span class="cm-operator">-</span><span class="cm-number">5</span></pre><pre><span class="cm-variable">a</span> = <span class="cm-number">10</span></pre><pre><span class="cm-keyword">print</span> <span class="cm-variable">a</span><span class="cm-operator">*</span><span class="cm-number">40</span></pre></div></div></div></div></div></div></div></div></div><div class="output vbox" style=""><div class="hbox output_area"><div class="prompt"></div><div class="box-flex1 output_subarea output_text output_stream output_stdout"><pre>25
+15
+20
+47
+400
+</pre></div></div></div></div><div class="cell border-box-sizing code_cell vbox" tabindex="2"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[5]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5px; left: 5px; "><textarea style="position: absolute; padding: 0; width: 1px; height: 1em" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 231px; "><div style="position: relative; top: 0px; "><div class="CodeMirror-gutter" style="display: none; "><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div style="position: relative; z-index: 0; outline: none; "><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre class="CodeMirror-cursor" style="top: 0px; left: 0px; ">&nbsp;</pre><div style="position: relative; z-index: -1; display: none; "></div><div style=""><pre><span class="cm-variable">a</span> = <span class="cm-builtin">True</span></pre><pre> </pre><pre><span class="cm-keyword">if</span> <span class="cm-variable">a</span>:</pre><pre>    <span class="cm-keyword">print</span> <span class="cm-string">'a is True'</span></pre><pre><span class="cm-keyword">else</span>:</pre><pre>    <span class="cm-keyword">print</span> <span class="cm-string">'a is False'</span></pre><pre> </pre><pre><span class="cm-variable">b</span> = <span class="cm-builtin">False</span></pre><pre><span class="cm-keyword">if</span> <span class="cm-operator">not</span> <span class="cm-variable">b</span>:</pre><pre>    <span class="cm-keyword">print</span> <span class="cm-string">'b is False'</span></pre><pre><span class="cm-keyword">else</span>:</pre><pre>    <span class="cm-keyword">print</span> <span class="cm-string">'b is True'</span></pre><pre> </pre></div></div></div></div></div></div></div></div></div><div class="output vbox" style=""><div class="hbox output_area"><div class="prompt"></div><div class="box-flex1 output_subarea output_text output_stream output_stdout"><pre>a is True
+b is False
+</pre></div></div></div></div><div class="cell border-box-sizing code_cell vbox" tabindex="2"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[6]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5px; left: 5px; "><textarea style="position: absolute; padding: 0; width: 1px; height: 1em" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 333px; "><div style="position: relative; top: 0px; "><div class="CodeMirror-gutter" style="display: none; "><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div style="position: relative; z-index: 0; outline: none; "><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre class="CodeMirror-cursor" style="top: 0px; left: 0px; ">&nbsp;</pre><div style="position: relative; z-index: -1; display: none; "></div><div style=""><pre><span class="cm-variable">x</span> = <span class="cm-number">0</span></pre><pre><span class="cm-variable">y</span> = <span class="cm-number">1</span></pre><pre> </pre><pre><span class="cm-variable">a</span> = <span class="cm-string">""</span></pre><pre><span class="cm-variable">b</span> = <span class="cm-string">"something"</span></pre><pre> </pre><pre><span class="cm-keyword">if</span> <span class="cm-variable">a</span>:</pre><pre>    <span class="cm-keyword">print</span> <span class="cm-string">'a evaluates to True'</span></pre><pre><span class="cm-keyword">if</span> <span class="cm-variable">b</span>:</pre><pre>    <span class="cm-keyword">print</span> <span class="cm-string">'b evaluates to True'</span></pre><pre><span class="cm-keyword">if</span> <span class="cm-variable">x</span>:</pre><pre>    <span class="cm-keyword">print</span> <span class="cm-string">'x evaluates to True'</span></pre><pre><span class="cm-keyword">if</span> <span class="cm-variable">y</span>:</pre><pre>    <span class="cm-keyword">print</span> <span class="cm-string">'y evaluates to True'</span></pre><pre>    </pre><pre><span class="cm-keyword">if</span> <span class="cm-variable">x</span> <span class="cm-operator">==</span> <span class="cm-number">0</span>:</pre><pre>    <span class="cm-keyword">print</span> <span class="cm-string">'x is zero'</span></pre><pre> </pre><pre> </pre></div></div></div></div></div></div></div></div></div><div class="output vbox" style=""><div class="hbox output_area"><div class="prompt"></div><div class="box-flex1 output_subarea output_text output_stream output_stdout"><pre>b evaluates to True
+y evaluates to True
+x is zero
+</pre></div></div></div></div><div class="cell border-box-sizing code_cell vbox" tabindex="2"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[7]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5px; left: 5px; "><textarea style="position: absolute; padding: 0; width: 1px; height: 1em" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 95px; "><div style="position: relative; top: 0px; "><div class="CodeMirror-gutter" style="display: none; "><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div style="position: relative; z-index: 0; outline: none; "><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre class="CodeMirror-cursor" style="top: 0px; left: 0px; ">&nbsp;</pre><div style="position: relative; z-index: -1; display: none; "></div><div style=""><pre><span class="cm-variable">x</span> = <span class="cm-number">5</span></pre><pre><span class="cm-keyword">if</span> <span class="cm-variable">x</span> <span class="cm-operator">&gt;</span> <span class="cm-number">5</span>:</pre><pre>    <span class="cm-keyword">print</span> <span class="cm-string">'x is greater than 5'</span></pre><pre><span class="cm-keyword">if</span> <span class="cm-variable">x</span> <span class="cm-operator">&lt;=</span> <span class="cm-number">5</span>:</pre><pre>    <span class="cm-keyword">print</span> <span class="cm-string">'x is less than or equal to 5'</span></pre></div></div></div></div></div></div></div></div></div><div class="output vbox" style=""><div class="hbox output_area"><div class="prompt"></div><div class="box-flex1 output_subarea output_text output_stream output_stdout"><pre>x is less than or equal to 5
+</pre></div></div></div></div><div class="cell border-box-sizing code_cell vbox" tabindex="2"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[8]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5px; left: 5px; "><textarea style="position: absolute; padding: 0; width: 1px; height: 1em" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 180px; "><div style="position: relative; top: 0px; "><div class="CodeMirror-gutter" style="display: none; "><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div style="position: relative; z-index: 0; outline: none; "><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre class="CodeMirror-cursor" style="top: 0px; left: 0px; ">&nbsp;</pre><div style="position: relative; z-index: -1; display: none; "></div><div style=""><pre><span class="cm-variable">x</span> = []</pre><pre><span class="cm-variable">y</span> = [<span class="cm-string">'not empty'</span>, <span class="cm-number">1</span>, <span class="cm-number">2</span>, <span class="cm-number">3</span>]</pre><pre><span class="cm-variable">z</span> = [<span class="cm-number">5</span>, <span class="cm-number">6</span>, <span class="cm-number">7</span>]</pre><pre> </pre><pre><span class="cm-keyword">if</span> <span class="cm-variable">x</span>:</pre><pre>    <span class="cm-keyword">print</span> <span class="cm-string">'x is True'</span></pre><pre><span class="cm-keyword">if</span> <span class="cm-variable">y</span>:</pre><pre>    <span class="cm-keyword">print</span> <span class="cm-string">'y is True'</span></pre><pre><span class="cm-keyword">if</span> <span class="cm-variable">z</span>:</pre><pre>    <span class="cm-keyword">print</span> <span class="cm-string">'z is True'</span></pre></div></div></div></div></div></div></div></div></div><div class="output vbox" style=""><div class="hbox output_area"><div class="prompt"></div><div class="box-flex1 output_subarea output_text output_stream output_stdout"><pre>y is True
+z is True
+</pre></div></div></div></div><div class="cell border-box-sizing code_cell vbox" tabindex="2"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[9]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5px; left: 5px; "><textarea style="position: absolute; padding: 0; width: 1px; height: 1em" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 27px; "><div style="position: relative; top: 0px; "><div class="CodeMirror-gutter" style="display: none; "><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div style="position: relative; z-index: 0; outline: none; "><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre class="CodeMirror-cursor" style="top: 0px; left: 0px; ">&nbsp;</pre><div style="position: relative; z-index: -1; display: none; "></div><div style=""><pre><span class="cm-number">5</span> <span class="cm-operator">/</span> <span class="cm-number">2.0</span></pre></div></div></div></div></div></div></div></div></div><div class="output vbox" style=""><div class="hbox output_area"><div class="prompt output_prompt">Out[9]:</div><div class="box-flex1 output_subarea output_text"><pre>2.5</pre></div></div></div></div><div class="cell border-box-sizing code_cell vbox" tabindex="2"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[10]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5px; left: 5px; "><textarea style="position: absolute; padding: 0; width: 1px; height: 1em" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 112px; "><div style="position: relative; top: 0px; "><div class="CodeMirror-gutter" style="display: none; "><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div style="position: relative; z-index: 0; outline: none; "><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre class="CodeMirror-cursor" style="top: 0px; left: 0px; ">&nbsp;</pre><div style="position: relative; z-index: -1; display: none; "></div><div style=""><pre><span class="cm-variable">x</span> = [ <span class="cm-string">'five'</span>, <span class="cm-number">10</span>, <span class="cm-number">2.5</span> ]</pre><pre><span class="cm-keyword">for</span> <span class="cm-variable">a</span> <span class="cm-operator">in</span> <span class="cm-variable">x</span>:</pre><pre>    <span class="cm-keyword">print</span> <span class="cm-variable">a</span></pre><pre> </pre><pre><span class="cm-keyword">for</span> <span class="cm-variable">a</span> <span class="cm-operator">in</span> <span class="cm-builtin">range</span>(<span class="cm-number">4</span>, <span class="cm-number">10</span>):</pre><pre>    <span class="cm-keyword">print</span> <span class="cm-variable">a</span><span class="cm-operator">*</span><span class="cm-number">2</span></pre></div></div></div></div></div></div></div></div></div><div class="output vbox" style=""><div class="hbox output_area"><div class="prompt"></div><div class="box-flex1 output_subarea output_text output_stream output_stdout"><pre>five
+10
+2.5
+8
+10
+12
+14
+16
+18
+</pre></div></div></div></div><div class="cell border-box-sizing code_cell vbox" tabindex="2"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[11]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5px; left: 5px; "><textarea style="position: absolute; padding: 0; width: 1px; height: 1em" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 265px; "><div style="position: relative; top: 0px; "><div class="CodeMirror-gutter" style="display: none; "><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div style="position: relative; z-index: 0; outline: none; "><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre class="CodeMirror-cursor" style="top: 0px; left: 0px; ">&nbsp;</pre><div style="position: relative; z-index: -1; display: none; "></div><div style=""><pre><span class="cm-variable">x</span> = [<span class="cm-string">'5'</span>, <span class="cm-string">'mark'</span>, <span class="cm-string">'neal'</span>]</pre><pre><span class="cm-keyword">print</span> <span class="cm-variable">x</span></pre><pre><span class="cm-keyword">print</span> <span class="cm-builtin">len</span>(<span class="cm-variable">x</span>)</pre><pre><span class="cm-variable">x.append</span>(<span class="cm-string">'jorge'</span>)</pre><pre><span class="cm-keyword">print</span> <span class="cm-variable">x</span></pre><pre><span class="cm-keyword">print</span> <span class="cm-builtin">len</span>(<span class="cm-variable">x</span>)</pre><pre> </pre><pre><span class="cm-keyword">print</span> <span class="cm-variable">x</span>[<span class="cm-number">2</span>]</pre><pre> </pre><pre><span class="cm-variable">x</span> = [<span class="cm-string">'5'</span>, <span class="cm-string">'mark'</span>, <span class="cm-string">'neal'</span>, <span class="cm-string">'jorge'</span>]</pre><pre><span class="cm-variable">y</span> = []</pre><pre><span class="cm-keyword">for</span> <span class="cm-variable">a</span> <span class="cm-operator">in</span> <span class="cm-variable">x</span>:</pre><pre>    <span class="cm-keyword">if</span> <span class="cm-operator">not</span> <span class="cm-variable">a.startswith</span>(<span class="cm-string">'j'</span>):</pre><pre>        <span class="cm-variable">y.append</span>(<span class="cm-variable">a</span>)</pre><pre><span class="cm-keyword">print</span> <span class="cm-variable">y</span></pre></div></div></div></div></div></div></div></div></div><div class="output vbox" style=""><div class="hbox output_area"><div class="prompt"></div><div class="box-flex1 output_subarea output_text output_stream output_stdout"><pre>['5', 'mark', 'neal']
+3
+['5', 'mark', 'neal', 'jorge']
+4
+neal
+['5', 'mark', 'neal']
+</pre></div></div></div></div><div class="cell border-box-sizing code_cell vbox" tabindex="2"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[12]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5px; left: 5px; "><textarea style="position: absolute; padding: 0; width: 1px; height: 1em" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 197px; "><div style="position: relative; top: 0px; "><div class="CodeMirror-gutter" style="display: none; "><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div style="position: relative; z-index: 0; outline: none; "><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre class="CodeMirror-cursor" style="top: 0px; left: 0px; ">&nbsp;</pre><div style="position: relative; z-index: -1; display: none; "></div><div style=""><pre><span class="cm-variable">x</span> = [<span class="cm-string">'5'</span>, <span class="cm-string">'mark'</span>, <span class="cm-string">'neal'</span>, <span class="cm-string">'jorge'</span>]</pre><pre><span class="cm-variable">y</span> = []</pre><pre><span class="cm-keyword">for</span> <span class="cm-variable">a</span> <span class="cm-operator">in</span> <span class="cm-variable">x</span>:</pre><pre>    <span class="cm-keyword">print</span> <span class="cm-string">"I am at"</span>, <span class="cm-variable">a</span></pre><pre>    <span class="cm-keyword">if</span> <span class="cm-operator">not</span> <span class="cm-variable">a.startswith</span>(<span class="cm-string">'j'</span>):</pre><pre>        <span class="cm-keyword">print</span> <span class="cm-string">"apparently here a does not start with j"</span>, <span class="cm-variable">a</span></pre><pre>        <span class="cm-variable">y.append</span>(<span class="cm-variable">a</span>)</pre><pre>        <span class="cm-keyword">print</span> <span class="cm-variable">y</span></pre><pre>    <span class="cm-keyword">else</span>:</pre><pre>        <span class="cm-keyword">print</span> <span class="cm-string">'rejecting'</span>, <span class="cm-variable">a</span></pre><pre><span class="cm-keyword">print</span> <span class="cm-variable">y</span></pre></div></div></div></div></div></div></div></div></div><div class="output vbox" style=""><div class="hbox output_area"><div class="prompt"></div><div class="box-flex1 output_subarea output_text output_stream output_stdout"><pre>I am at 5
+apparently here a does not start with j 5
+['5']
+I am at mark
+apparently here a does not start with j mark
+['5', 'mark']
+I am at neal
+apparently here a does not start with j neal
+['5', 'mark', 'neal']
+I am at jorge
+rejecting jorge
+['5', 'mark', 'neal']
+</pre></div></div></div></div><div class="cell border-box-sizing code_cell vbox" tabindex="2"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[13]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5px; left: 5px; "><textarea style="position: absolute; padding: 0; width: 1px; height: 1em" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 44px; "><div style="position: relative; top: 0px; "><div class="CodeMirror-gutter" style="display: none; "><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div style="position: relative; z-index: 0; outline: none; "><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre class="CodeMirror-cursor" style="top: 0px; left: 0px; ">&nbsp;</pre><div style="position: relative; z-index: -1; display: none; "></div><div style=""><pre><span class="cm-variable">this_a_really_complicated_variable_name</span> = <span class="cm-number">5</span></pre><pre> </pre></div></div></div></div></div></div></div></div></div><div class="output vbox" style="display: none; "></div></div><div class="cell border-box-sizing code_cell vbox" tabindex="2"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[14]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5px; left: 5px; "><textarea style="position: absolute; padding: 0; width: 1px; height: 1em" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 61px; "><div style="position: relative; top: 0px; "><div class="CodeMirror-gutter" style="display: none; "><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div style="position: relative; z-index: 0; outline: none; "><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre class="CodeMirror-cursor" style="top: 0px; left: 0px; ">&nbsp;</pre><div style="position: relative; z-index: -1; display: none; "></div><div style=""><pre><span class="cm-variable">a</span> = <span class="cm-string">"some string"</span></pre><pre><span class="cm-keyword">if</span> <span class="cm-variable">a.startswith</span>(<span class="cm-string">'ome str'</span>, <span class="cm-number">1</span>):</pre><pre>    <span class="cm-keyword">print</span> <span class="cm-string">'yes it does'</span></pre></div></div></div></div></div></div></div></div></div><div class="output vbox" style=""><div class="hbox output_area"><div class="prompt"></div><div class="box-flex1 output_subarea output_text output_stream output_stdout"><pre>yes it does
+</pre></div></div></div></div><div class="cell border-box-sizing code_cell vbox" tabindex="2"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[15]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5px; left: 5px; "><textarea style="position: absolute; padding: 0; width: 1px; height: 1em" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 61px; "><div style="position: relative; top: 0px; "><div class="CodeMirror-gutter" style="display: none; "><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div style="position: relative; z-index: 0; outline: none; "><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre class="CodeMirror-cursor" style="top: 0px; left: 0px; ">&nbsp;</pre><div style="position: relative; z-index: -1; display: none; "></div><div style=""><pre><span class="cm-comment"># you can also Python what functions are available on a list</span></pre><pre><span class="cm-builtin">dir</span>(<span class="cm-variable">x</span>)</pre><pre><span class="cm-builtin">help</span>(<span class="cm-variable">x</span>)</pre></div></div></div></div></div></div></div></div></div><div class="output vbox" style=""><div class="hbox output_area"><div class="prompt"></div><div class="box-flex1 output_subarea output_text output_stream output_stdout"><pre>Help on list object:
+
+class list(object)
+ |  list() -&gt; new empty list
+ |  list(iterable) -&gt; new list initialized from iterable's items
+ |  
+ |  Methods defined here:
+ |  
+ |  __add__(...)
+ |      x.__add__(y) &lt;==&gt; x+y
+ |  
+ |  __contains__(...)
+ |      x.__contains__(y) &lt;==&gt; y in x
+ |  
+ |  __delitem__(...)
+ |      x.__delitem__(y) &lt;==&gt; del x[y]
+ |  
+ |  __delslice__(...)
+ |      x.__delslice__(i, j) &lt;==&gt; del x[i:j]
+ |      
+ |      Use of negative indices is not supported.
+ |  
+ |  __eq__(...)
+ |      x.__eq__(y) &lt;==&gt; x==y
+ |  
+ |  __ge__(...)
+ |      x.__ge__(y) &lt;==&gt; x&gt;=y
+ |  
+ |  __getattribute__(...)
+ |      x.__getattribute__('name') &lt;==&gt; x.name
+ |  
+ |  __getitem__(...)
+ |      x.__getitem__(y) &lt;==&gt; x[y]
+ |  
+ |  __getslice__(...)
+ |      x.__getslice__(i, j) &lt;==&gt; x[i:j]
+ |      
+ |      Use of negative indices is not supported.
+ |  
+ |  __gt__(...)
+ |      x.__gt__(y) &lt;==&gt; x&gt;y
+ |  
+ |  __iadd__(...)
+ |      x.__iadd__(y) &lt;==&gt; x+=y
+ |  
+ |  __imul__(...)
+ |      x.__imul__(y) &lt;==&gt; x*=y
+ |  
+ |  __init__(...)
+ |      x.__init__(...) initializes x; see help(type(x)) for signature
+ |  
+ |  __iter__(...)
+ |      x.__iter__() &lt;==&gt; iter(x)
+ |  
+ |  __le__(...)
+ |      x.__le__(y) &lt;==&gt; x&lt;=y
+ |  
+ |  __len__(...)
+ |      x.__len__() &lt;==&gt; len(x)
+ |  
+ |  __lt__(...)
+ |      x.__lt__(y) &lt;==&gt; x&lt;y
+ |  
+ |  __mul__(...)
+ |      x.__mul__(n) &lt;==&gt; x*n
+ |  
+ |  __ne__(...)
+ |      x.__ne__(y) &lt;==&gt; x!=y
+ |  
+ |  __repr__(...)
+ |      x.__repr__() &lt;==&gt; repr(x)
+ |  
+ |  __reversed__(...)
+ |      L.__reversed__() -- return a reverse iterator over the list
+ |  
+ |  __rmul__(...)
+ |      x.__rmul__(n) &lt;==&gt; n*x
+ |  
+ |  __setitem__(...)
+ |      x.__setitem__(i, y) &lt;==&gt; x[i]=y
+ |  
+ |  __setslice__(...)
+ |      x.__setslice__(i, j, y) &lt;==&gt; x[i:j]=y
+ |      
+ |      Use  of negative indices is not supported.
+ |  
+ |  __sizeof__(...)
+ |      L.__sizeof__() -- size of L in memory, in bytes
+ |  
+ |  append(...)
+ |      L.append(object) -- append object to end
+ |  
+ |  count(...)
+ |      L.count(value) -&gt; integer -- return number of occurrences of value
+ |  
+ |  extend(...)
+ |      L.extend(iterable) -- extend list by appending elements from the iterable
+ |  
+ |  index(...)
+ |      L.index(value, [start, [stop]]) -&gt; integer -- return first index of value.
+ |      Raises ValueError if the value is not present.
+ |  
+ |  insert(...)
+ |      L.insert(index, object) -- insert object before index
+ |  
+ |  pop(...)
+ |      L.pop([index]) -&gt; item -- remove and return item at index (default last).
+ |      Raises IndexError if list is empty or index is out of range.
+ |  
+ |  remove(...)
+ |      L.remove(value) -- remove first occurrence of value.
+ |      Raises ValueError if the value is not present.
+ |  
+ |  reverse(...)
+ |      L.reverse() -- reverse *IN PLACE*
+ |  
+ |  sort(...)
+ |      L.sort(cmp=None, key=None, reverse=False) -- stable sort *IN PLACE*;
+ |      cmp(x, y) -&gt; -1, 0, 1
+ |  
+ |  ----------------------------------------------------------------------
+ |  Data and other attributes defined here:
+ |  
+ |  __hash__ = None
+ |  
+ |  __new__ = &lt;built-in method __new__ of type object&gt;
+ |      T.__new__(S, ...) -&gt; a new object with type S, a subtype of T
+
+</pre></div></div></div></div><div class="cell border-box-sizing code_cell vbox" tabindex="2"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[16]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5px; left: 5px; "><textarea style="position: absolute; padding: 0; width: 1px; height: 1em" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 44px; "><div style="position: relative; top: 0px; "><div class="CodeMirror-gutter" style="display: none; "><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div style="position: relative; z-index: 0; outline: none; "><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre class="CodeMirror-cursor" style="top: 0px; left: 0px; ">&nbsp;</pre><div style="position: relative; z-index: -1; display: none; "></div><div style=""><pre><span class="cm-keyword">import</span> <span class="cm-variable">math</span></pre><pre><span class="cm-keyword">print</span> <span class="cm-variable">math.factorial</span>(<span class="cm-number">10</span>)</pre></div></div></div></div></div></div></div></div></div><div class="output vbox" style=""><div class="hbox output_area"><div class="prompt"></div><div class="box-flex1 output_subarea output_text output_stream output_stdout"><pre>3628800
+</pre></div></div></div></div><div class="cell text_cell border-box-sizing" tabindex="2"><div class="text_cell_input border-box-sizing" style="display: none; "><div class="CodeMirror CodeMirror-wrap"><div style="overflow: hidden; position: relative; width: 3px; height: 0px;"><textarea style="position: absolute; padding: 0; width: 1px; height: 1em" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-default" tabindex="-1"><div style="position: relative"><div style="position: relative"><div class="CodeMirror-gutter" style="display: none; "><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div style="position: relative; z-index: 0; outline: none; "><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"><pre><span>x</span></pre></div><pre class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1"></div><div></div></div></div></div></div></div></div></div><div class="text_cell_render border-box-sizing rendered_html" tabindex="-1" style=""><h1>Other Python resources</h1>
+
+<p>Introductory Python tutorial:
+<a href="http://docs.python.org/tutorial/index.html" target="_blank">http://docs.python.org/tutorial/index.html</a></p>
+
+<p>Head First Python
+<a href="http://www.headfirstlabs.com/books/hfpython/" target="_blank">http://www.headfirstlabs.com/books/hfpython/</a></p>
+
+<p>Software Carpentry:
+<a href="http://software-carpentry.org/" target="_blank">http://software-carpentry.org/</a></p>
+
+<p>Python Standard Library:
+<a href="http://docs.python.org/library/index.html" target="_blank">http://docs.python.org/library/index.html</a></p>
+
+<p>Python Cookbook:
+<a href="http://code.activestate.com/recipes/langs/python/" target="_blank">http://code.activestate.com/recipes/langs/python/</a></p>
+
+<p>Dive Into Python:
+<a href="http://www.diveintopython.net/" target="_blank">http://www.diveintopython.net/</a></p>
+
+<p>Intermediate and Advanced Software Carpentry:
+<a href="http://ivory.idyll.org/articles/advanced-swc/" target="_blank">http://ivory.idyll.org/articles/advanced-swc/</a></p></div></div><div class="cell text_cell border-box-sizing" tabindex="2"><div class="text_cell_input border-box-sizing" style="display: none; "><div class="CodeMirror CodeMirror-wrap"><div style="overflow: hidden; position: relative; width: 3px; height: 0px;"><textarea style="position: absolute; padding: 0; width: 1px; height: 1em" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-default" tabindex="-1"><div style="position: relative"><div style="position: relative"><div class="CodeMirror-gutter" style="display: none; "><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div style="position: relative; z-index: 0; outline: none; "><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"><pre><span>x</span></pre></div><pre class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1"></div><div></div></div></div></div></div></div></div></div><div class="text_cell_render border-box-sizing rendered_html" tabindex="-1" style=""><h1>Bioinformatics resources</h1>
+
+<p>Q&amp;A site: <a href="http://www.biostars.org/" target="_blank">http://www.biostars.org/</a></p>
+
+<p>seqanswers.com</p></div></div><div class="cell border-box-sizing code_cell vbox" tabindex="2"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[17]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5px; left: 5px; "><textarea style="position: absolute; padding: 0; width: 1px; height: 1em" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 44px; "><div style="position: relative; top: 0px; "><div class="CodeMirror-gutter" style="display: none; "><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div style="position: relative; z-index: 0; outline: none; "><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre class="CodeMirror-cursor" style="top: 0px; left: 0px; ">&nbsp;</pre><div style="position: relative; z-index: -1; display: none; "></div><div style=""><pre><span class="cm-variable">cd</span> <span class="cm-operator">/</span><span class="cm-variable">mnt</span></pre><pre> </pre></div></div></div></div></div></div></div></div></div><div class="output vbox" style=""><div class="hbox output_area"><div class="prompt"></div><div class="box-flex1 output_subarea output_text output_stream output_stdout"><pre>/mnt
+</pre></div></div></div></div><div class="cell border-box-sizing code_cell vbox" tabindex="2"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[18]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5px; left: 5px; "><textarea style="position: absolute; padding: 0; width: 1px; height: 1em" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 27px; "><div style="position: relative; top: 0px; "><div class="CodeMirror-gutter" style="display: none; "><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div style="position: relative; z-index: 0; outline: none; "><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre class="CodeMirror-cursor" style="top: 0px; left: 0px; ">&nbsp;</pre><div style="position: relative; z-index: -1; display: none; "></div><div style=""><pre><span class="cm-variable">ls</span></pre></div></div></div></div></div></div></div></div></div><div class="output vbox" style=""><div class="hbox output_area"><div class="prompt"></div><div class="box-flex1 output_subarea output_text output_stream output_stdout"><pre><span class="ansibold ansiblue">blast-2.2.24</span>/                   mouse.protein.faa.psi
+blast-2.2.24-ia32-linux.tar.gz  mouse.protein.faa.psq
+formatdb.log                    out.txt
+<span class="ansibold ansiblue">lost+found</span>/                     zebrafish.protein.faa
+mm-first.fa                     zebrafish.protein.faa.phr
+mouse.protein.faa               zebrafish.protein.faa.pin
+mouse.protein.faa.phr           zebrafish.protein.faa.pnd
+mouse.protein.faa.pin           zebrafish.protein.faa.pni
+mouse.protein.faa.pnd           zebrafish.protein.faa.psd
+mouse.protein.faa.pni           zebrafish.protein.faa.psi
+mouse.protein.faa.psd           zebrafish.protein.faa.psq
+</pre></div></div></div></div><div class="cell border-box-sizing code_cell vbox" tabindex="2"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[19]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5px; left: 5px; "><textarea style="position: absolute; padding: 0; width: 1px; height: 1em" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 44px; "><div style="position: relative; top: 0px; "><div class="CodeMirror-gutter" style="display: none; "><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div style="position: relative; z-index: 0; outline: none; "><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre class="CodeMirror-cursor" style="top: 0px; left: 0px; ">&nbsp;</pre><div style="position: relative; z-index: -1; display: none; "></div><div style=""><pre><span class="cm-operator">!</span><span class="cm-variable">head</span> <span class="cm-operator">-</span><span class="cm-number">11</span> <span class="cm-variable">mouse.protein.faa</span> <span class="cm-operator">&gt;</span><span class="cm-variable">mm</span><span class="cm-operator">-</span><span class="cm-variable">first.fa</span></pre><pre><span class="cm-operator">!</span><span class="cm-variable">cat</span> <span class="cm-variable">mm</span><span class="cm-operator">-</span><span class="cm-variable">first.fa</span></pre></div></div></div></div></div></div></div></div></div><div class="output vbox" style=""><div class="hbox output_area"><div class="prompt"></div><div class="box-flex1 output_subarea output_text output_stream output_stdout"><pre>&gt;gi|83029092|ref|XP_357633.3| PREDICTED: similar to Ig kappa chain V-V region L7 precursor [Mus musculus]
+MRSLPASELSLPYHQDFRPDSSCPGLTDNHLLCEPTQKPRYPDLGRKRSGENRHRYRDVCISFIRRSFSALCHNPQKLRE
+NLKMVSTSQLLGLLLFWTSASRCDIVMTQSPATLSVTPGDRVSLSCRASQSISDYLHWYQQKSHESPRLLIKYASQSISG
+IPSRFSGSGSGSDFTLSINSVEPEDVGVYYCQNGHSFPPTMMQTIAKTSRKAEVRG
+&gt;gi|70778726|ref|NP_067474.2| WD repeat domain 8 [Mus musculus]
+MNFSESFKLSGLLCRFSPDGKYLASCVQYRLVIRDVTTLQILQLYTCLDQIQHIEWSADSLFILCAMYRRGLVQVWSLEQ
+PEWHCKIDEGSAGLVASCWSPDGRHILNTTEFHLRITVWSLCTKSVSYIKYPKACQQGLTFTRDGRYLALAERRDCRDYV
+SIFVCSDWQLLRHFDTDTQDLTGIEWAPNGCVLAAWDTCLEYKVLLYSLDGRLLSAYCAYEWSLGIKSVAWSPSSQFLAI
+GSYDGKVRLLNHVTWKMITEFGHPATINNPKTVVYKEAEKSPLLGLGHLSFPPPRAMAGALSTSESKYEIASGPVSLQTL
+KPVADRANPRMGVGMLAFSSDSYFLASRNDNVPNAVWIWDIQKLKLFVVLEHMSPVRSFQWDPQQPRLAICTGGSKVYLW
+SPAGCVSVQVPGEGDFPVLGLCWHLSGDSLALLSKDHFCLCFLETKERVGTAYEQRDGMPRT
+</pre></div></div></div></div><div class="cell border-box-sizing code_cell vbox" tabindex="2"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[20]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5px; left: 5px; "><textarea style="position: absolute; padding: 0; width: 1px; height: 1em" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 27px; "><div style="position: relative; top: 0px; "><div class="CodeMirror-gutter" style="display: none; "><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div style="position: relative; z-index: 0; outline: none; "><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre class="CodeMirror-cursor" style="top: 0px; left: 0px; ">&nbsp;</pre><div style="position: relative; z-index: -1; display: none; "></div><div style=""><pre><span class="cm-operator">!</span><span class="cm-variable">head</span> <span class="cm-operator">-</span><span class="cm-number">9</span> <span class="cm-variable">zebrafish.protein.faa</span>  <span class="cm-operator">&gt;</span> <span class="cm-variable">zfin</span><span class="cm-operator">-</span><span class="cm-variable">first.fa</span></pre></div></div></div></div></div></div></div></div></div><div class="output vbox" style="display: none; "></div></div><div class="cell border-box-sizing code_cell vbox" tabindex="2"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[21]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5px; left: 5px; "><textarea style="position: absolute; padding: 0; width: 1px; height: 1em" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 27px; "><div style="position: relative; top: 0px; "><div class="CodeMirror-gutter" style="display: none; "><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div style="position: relative; z-index: 0; outline: none; "><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre class="CodeMirror-cursor" style="top: 0px; left: 0px; ">&nbsp;</pre><div style="position: relative; z-index: -1; display: none; "></div><div style=""><pre><span class="cm-variable">ls</span></pre></div></div></div></div></div></div></div></div></div><div class="output vbox" style=""><div class="hbox output_area"><div class="prompt"></div><div class="box-flex1 output_subarea output_text output_stream output_stdout"><pre><span class="ansibold ansiblue">blast-2.2.24</span>/                   mouse.protein.faa.psq
+blast-2.2.24-ia32-linux.tar.gz  out.txt
+formatdb.log                    zebrafish.protein.faa
+<span class="ansibold ansiblue">lost+found</span>/                     zebrafish.protein.faa.phr
+mm-first.fa                     zebrafish.protein.faa.pin
+mouse.protein.faa               zebrafish.protein.faa.pnd
+mouse.protein.faa.phr           zebrafish.protein.faa.pni
+mouse.protein.faa.pin           zebrafish.protein.faa.psd
+mouse.protein.faa.pnd           zebrafish.protein.faa.psi
+mouse.protein.faa.pni           zebrafish.protein.faa.psq
+mouse.protein.faa.psd           zfin-first.fa
+mouse.protein.faa.psi
+</pre></div></div></div></div><div class="cell border-box-sizing code_cell vbox" tabindex="2"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[22]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5px; left: 5px; "><textarea style="position: absolute; padding: 0; width: 1px; height: 1em" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 112px; "><div style="position: relative; top: 0px; "><div class="CodeMirror-gutter" style="display: none; "><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div style="position: relative; z-index: 0; outline: none; "><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre class="CodeMirror-cursor" style="top: 0px; left: 0px; ">&nbsp;</pre><div style="position: relative; z-index: -1; display: none; "></div><div style=""><pre><span class="cm-keyword">import</span> <span class="cm-variable">os</span></pre><pre><span class="cm-keyword">for</span> <span class="cm-variable">filename</span> <span class="cm-operator">in</span> [<span class="cm-string">'mm-first.fa'</span>, <span class="cm-string">'zfin-first.fa'</span>]:</pre><pre>    <span class="cm-operator">!</span><span class="cm-variable">echo</span> {<span class="cm-variable">filename</span>}<span class="cm-variable">.out</span></pre><pre>    <span class="cm-operator">!</span><span class="cm-variable">blastall</span> <span class="cm-operator">-</span><span class="cm-variable">i</span> {<span class="cm-variable">filename</span>} <span class="cm-operator">-</span><span class="cm-variable">o</span> {<span class="cm-variable">filename</span>}<span class="cm-variable">.out</span> <span class="cm-operator">-</span><span class="cm-variable">d</span> <span class="cm-variable">zebrafish.protein.faa</span> <span class="cm-operator">-</span><span class="cm-variable">e</span> <span class="cm-number">1e-10</span> <span class="cm-operator">-</span><span class="cm-variable">p</span> <span class="cm-variable">blastp</span></pre><pre>    <span class="cm-comment">#os.system('blastall -i %s -o %s.out -d zebrafish.protein.faa -p blastp' % (filename, filename))</span></pre><pre> </pre></div></div></div></div></div></div></div></div></div><div class="output vbox" style=""><div class="hbox output_area"><div class="prompt"></div><div class="box-flex1 output_subarea output_text output_stream output_stdout"><pre>mm-first.fa.out
+zfin-first.fa.out
+</pre></div></div></div></div><div class="cell border-box-sizing code_cell vbox ui-widget-content ui-corner-all" tabindex="2"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[22]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5px; left: 5px; "><textarea style="position: absolute; padding: 0; width: 1px; height: 1em" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 27px; "><div style="position: relative; top: 0px; "><div class="CodeMirror-gutter" style="display: none; "><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div style="position: relative; z-index: 0; outline: none; "><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre class="CodeMirror-cursor" style="top: 0px; left: 0px; ">&nbsp;</pre><div style="position: relative; z-index: -1; display: none; "></div><div style=""><pre> </pre></div></div></div></div></div></div></div></div></div><div class="output vbox" style="display: none; "></div></div><div class="end_space" style="height: 30%; "></div></div>
+<div id="pager_splitter" class="ui-draggable border-box-sizing ui-widget ui-state-default" title="Click to Show/Hide pager area, drag to Resize" style=""></div>
+<div id="pager" class="border-box-sizing ui-widget" style="height: 222px; "></div>
+</div>
+</div>
+<div id="tooltip" class="tooltip ui-corner-all" style="display:none"><div class="tooltipbuttons"><a href="./static-ngs-12-python-rundown_files/static-ngs-12-python-rundown.html" role="button" class="ui-button"><span class="ui-icon ui-icon-close">Close</span></a><a href="./static-ngs-12-python-rundown_files/static-ngs-12-python-rundown.html" class="ui-corner-all" role="button" id="expanbutton" title="Grow the tooltip vertically (press tab 2 times)" style=""><span class="ui-icon ui-icon-plus">Expand</span></a><a href="./static-ngs-12-python-rundown_files/static-ngs-12-python-rundown.html" role="button" class="ui-button" title="show the current docstring in pager (press tab 4 times)"><span class="ui-icon ui-icon-arrowstop-l-n">Open in Pager</span></a><a href="./static-ngs-12-python-rundown_files/static-ngs-12-python-rundown.html" role="button" class="ui-button" title="Tootip is not dismissed while typing for 10 seconds" style="display: none; "><span class="ui-icon ui-icon-clock">Close</span></a></div><div class="pretooltiparrow"></div><div class="tooltiptext smalltooltip"></div></div>
+
+</div>
+<script src="./static-ngs-12-python-rundown_files/jquery-1.7.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="./static-ngs-12-python-rundown_files/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="./static-ngs-12-python-rundown_files/namespace.js" type="text/javascript" charset="utf-8"></script>
+<script src="./static-ngs-12-python-rundown_files/page.js" type="text/javascript" charset="utf-8"></script>
+<script src="./static-ngs-12-python-rundown_files/loginwidget.js" type="text/javascript" charset="utf-8"></script>
+
+<script src="./static-ngs-12-python-rundown_files/codemirror.js" charset="utf-8"></script>
+<script src="./static-ngs-12-python-rundown_files/python.js" charset="utf-8"></script>
+<script src="./static-ngs-12-python-rundown_files/htmlmixed.js" charset="utf-8"></script>
+<script src="./static-ngs-12-python-rundown_files/xml.js" charset="utf-8"></script>
+<script src="./static-ngs-12-python-rundown_files/javascript.js" charset="utf-8"></script>
+<script src="./static-ngs-12-python-rundown_files/css.js" charset="utf-8"></script>
+<script src="./static-ngs-12-python-rundown_files/rst.js" charset="utf-8"></script>
+<script src="./static-ngs-12-python-rundown_files/markdown.js" charset="utf-8"></script>
+<script src="./static-ngs-12-python-rundown_files/Markdown.Converter.js" charset="utf-8"></script>
+<script src="./static-ngs-12-python-rundown_files/prettify.js" charset="utf-8"></script>
+<script src="./static-ngs-12-python-rundown_files/date.format.js" charset="utf-8"></script>
+<script src="./static-ngs-12-python-rundown_files/events.js" type="text/javascript" charset="utf-8"></script>
+<script src="./static-ngs-12-python-rundown_files/utils.js" type="text/javascript" charset="utf-8"></script>
+<script src="./static-ngs-12-python-rundown_files/layoutmanager.js" type="text/javascript" charset="utf-8"></script>
+<script src="./static-ngs-12-python-rundown_files/initmathjax.js" type="text/javascript" charset="utf-8"></script>
+<script src="./static-ngs-12-python-rundown_files/outputarea.js" type="text/javascript" charset="utf-8"></script>
+<script src="./static-ngs-12-python-rundown_files/cell.js" type="text/javascript" charset="utf-8"></script>
+<script src="./static-ngs-12-python-rundown_files/codecell.js" type="text/javascript" charset="utf-8"></script>
+<script src="./static-ngs-12-python-rundown_files/completer.js" type="text/javascript" charset="utf-8"></script>
+<script src="./static-ngs-12-python-rundown_files/textcell.js" type="text/javascript" charset="utf-8"></script>
+<script src="./static-ngs-12-python-rundown_files/kernel.js" type="text/javascript" charset="utf-8"></script>
+<script src="./static-ngs-12-python-rundown_files/savewidget.js" type="text/javascript" charset="utf-8"></script>
+<script src="./static-ngs-12-python-rundown_files/quickhelp.js" type="text/javascript" charset="utf-8"></script>
+<script src="./static-ngs-12-python-rundown_files/pager.js" type="text/javascript" charset="utf-8"></script>
+<script src="./static-ngs-12-python-rundown_files/menubar.js" type="text/javascript" charset="utf-8"></script>
+<script src="./static-ngs-12-python-rundown_files/toolbar.js" type="text/javascript" charset="utf-8"></script>
+<script src="./static-ngs-12-python-rundown_files/notebook.js" type="text/javascript" charset="utf-8"></script>
+<script src="./static-ngs-12-python-rundown_files/notificationwidget.js" type="text/javascript" charset="utf-8"></script>
+<script src="./static-ngs-12-python-rundown_files/tooltip.js" type="text/javascript" charset="utf-8"></script>
+<script src="./static-ngs-12-python-rundown_files/notebookmain.js" type="text/javascript" charset="utf-8"></script>
+<script src="./static-ngs-12-python-rundown_files/contexthint.js" utf-8"=""></script>
+
+
+
+<div style="position: absolute; visibility: hidden; top: 0px; left: 0px; width: auto; padding: 0px; border: 0px; margin: 0px; text-align: left; text-indent: 0px; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; font-size: 40px; font-weight: normal; font-style: normal; font-family: STIXSizeOneSym, sans-serif; ">ˆ</div></body></html>
