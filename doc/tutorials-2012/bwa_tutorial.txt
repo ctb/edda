@@ -289,7 +289,7 @@ Now that we've generated the files, we can view the output with
 TView. We'll compare two different sorted::
 
   %% cd ..
-  %% samtools tview RAL357_full_bwa.sorted.bam
+  %% samtools tview RAL357_bwa.sorted.bam
 
 Now open an additional terminal window, and load the Bowtie mapping
 file there as well.::
