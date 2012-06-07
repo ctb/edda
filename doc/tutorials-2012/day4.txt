@@ -1,0 +1,22 @@
+==============
+Day 4: Assembly
+==============
+
+Thursday, June 7th, 2012
+
+.. toctree::
+   :maxdepth: 2
+
+For today,
+
+1. Create a new instance, or start up an old one using the current AMI.
+
+2. Connect to ipython notebook and run the 'ngs-00-update-notebooks' nb.
+
+3. Quit that, and then run 'ngs-02-install-screed' and 'ngs-03-install-khmer'.
+
+4. Now open 'ngs-41-velvet-genome-assembly'.
+
+We'll also work through 'ngs-42-oases-mRNAseq-assembly' and
+'ngs-43-trinity-mRNAseq-assembly'.  Trinity will take an hour or more,
+note.

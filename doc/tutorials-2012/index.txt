@@ -10,3 +10,4 @@ Your AMI is **ami-00ca6a69** and the ipython notebook password is 'ngs'.
    day1
    day2
    day3
+   day4
