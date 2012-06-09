@@ -1,0 +1,44 @@
+############################################
+#  Syntax highlighting for R               #
+#  by Stephen Haptonstahl                  #
+#  March 15, 2009                          #
+#  http://srh.ucdavis.edu/drupal/node/20   #
+#  edited by Mike Miller                   #
+############################################
+
+syntax "R" "\.R$"
+
+# reserved words
+color brightyellow "\b(if|else|repeat|while|function|for|in|next|break|TRUE|T|FALSE|F|NULL|Inf|NaN|NA|NA_integer_|NA_real_|NA_complex_|NA_character_|\.\.\.)\b"
+color brightyellow "\.\.[0-9]"
+color brightred "\b(require|library)\b"
+
+# logicals
+color brightgreen "(==|<=|>=|!=|!|<|>|\||\|\||&|&&|%in%|%%|%\*%|%/%|%o%|%x%)"
+
+# strings
+color cyan "'[^']*'"
+color cyan ""[^"]*""
+# "
+
+# variable definitions
+color blue "^.*?<-"
+
+color yellow start="[$@%]" end="[[:alnum:]]*"
+
+# function definitions
+color magenta "\<([A-Za-z0-9\.]+)\>\("
+
+# parameters -- not working yet
+# icolor brightblue "[^,\(=]*=(?:[^=])"
+
+# danger!
+color black,red "(stop|warning|return)"
+color red " = "
+
+color yellow "[(){}[;|<>]"
+color yellow "\]"
+color brightred "<-"
+
+## Comment highlighting
+color brightblack "#.*$"
