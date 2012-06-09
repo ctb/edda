@@ -8,4 +8,6 @@ Friday, June 7th, 2012
    :maxdepth: 2
 
    R_tutorial_1
-..   allele_freq_plots_R
+   allele_freq_plots_R
+
+   long-running-processes-and-assembly

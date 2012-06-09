@@ -12,7 +12,13 @@ download button on the right side and follow the instructions for
 either Mac OS X or Windows.
 
 If you would like to run this on an Amazon EC2 instance, sign in and
-start up an instance.
+start up an instance.  You'll want to mount snap XXX on /data: briefly,
+create a volume from snap-000d346e, attach it as /dev/sdf, and then do ::
+
+  %% mkdir /data
+  %% mount /dev/xvdf /data
+
+(See the :doc:`fastqc_tutorial` for more detailed instructions.)
 
 R generally does not come pre-installed on most Linux distributions
 (including Debian Linux, which we are using) but it is very easy to

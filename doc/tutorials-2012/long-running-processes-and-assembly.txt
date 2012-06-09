@@ -1,0 +1,225 @@
+Running processes (like assemblers) for a long time
+===================================================
+
+In this tutorial, we'll do two things:
+
+first, we'll introduce a program called 'screen' that lets you run
+programs "in the background" -- you can start stuff, then detach
+and log out.  At some later point you can "reattach" and see how
+things are going.
+
+'screen' and related software is how many, many people run their
+programs.
+
+second, we'll run through a more extended version of the assembly notebook
+(ngs-41-velvet-genome-assembly) that uses 5m reads instead of 1m, and
+measures the degree to which the reference genome is covered by the
+assembly.
+
+---
+
+Getting started
+---------------
+
+First, let's get the data.
+
+Start up an instance, create a volume from snapshot snap-9d295ee7,
+and then attach it as /ecoli. ::
+
+   %% mkdir /ecoli
+   %% mount /dev/xvdf /ecoli
+
+Now, download and install Velvet, screed, and khmer. ::
+
+   %% cd /mnt
+   %% curl -O http://www.ebi.ac.uk/~zerbino/velvet/velvet_1.2.06.tgz
+   %% tar xzf velvet_1.2.06.tgz
+   %% cd velvet_1.2.06
+   %% make MAXKMERLENGTH=51 OPENMP=2
+   %% cd ..
+   %% cp velvet_1.2.06/velvet? /usr/local/bin
+
+   %% cd /usr/local/src
+   %% git clone git://github.com/ged-lab/screed.git
+   %% easy_install screed/
+
+   %% git clone git://github.com/ged-lab/khmer.git
+   %% cd khmer
+   %% make test
+   %% easy_install python/
+
+And, finally, copy the data over: this is a 5m read subset of a 31m
+read data set from an E. coli colony sequencing run.  (See `Chitsaz et
+al., 2011 <http://www.ncbi.nlm.nih.gov/pubmed/21926975>`__).
+
+   %% cd /mnt
+
+   %% mkdir assemble
+   %% cd assemble
+   %% cp /ecoli/ecoli_ref.fq.gz .
+
+Starting screen
+---------------
+
+Type 'screen' and hit space at the next window.
+
+Voila!  You're back at the shell prompt.  No biggy, right?
+
+What's actually happened is that you're now running inside of a screen
+session.
+
+The two basic commands are ``CTRL-A d`` (to detach from the screen session)
+and 'screen -r' to reattach.  Try doing these a few times.  Still no biggy,
+right?
+
+The big deal is this: whatever you're running inside of screen when
+you detach **stays running**.  So if you run screen on your Amazon
+instance, you can detach from it and log out.  At some later point,
+you can log back in (potentially from somewhere else) and reattach.
+While you're away, whatever you're running will continue running.
+
+OK -- reattach to the screen and let's continue.
+
+Preprocessing the data
+----------------------
+
+You almost always want to start an assembly from reads that have been
+error-trimmed in some way.  Here we'll do it using khmer to trim at
+low-abundance k-mers.
+
+First, load the reads into a counting data structure::
+
+  %% python /usr/local/src/khmer/scripts/load-into-counting.py -x 2e8 -N 4 -k 20 ecoli.kh ecoli_ref.fq.gz
+
+Now wait a while.  It will end, and then you should see ::
+
+   ... consume_fasta 4600000 372600000
+   saving ecoli.kh
+   fp rate estimated to be 0.001
+
+Next, do the actual filtering::
+
+  %%  python /usr/local/src/khmer/scripts/filter-abund.py ecoli.kh ecoli_ref.fq.gz
+
+That, too, will take a while -- you'll see this: ::
+
+   ... filtering 4900000
+   done loading in sequences
+   DONE writing.
+   processed 4993100 / wrote 4620260 / removed 372840
+   processed 499880000 bp / wrote 424276896 bp / removed 75603104 bp
+   discarded 15.1%
+   output in ecoli_ref.fq.gz.abundfilt
+
+OK, now this file 'ecoli_ref.fq.gz.abundfilt' should have your trimmed
+reads in it.  One big problem, though!
+
+If you look at the original files ::
+
+  %% gunzip -c ecoli_ref.fq.gz | head
+
+you'll note that the original sequences are paired-ended and interleaved --
+there's a /1 and a /2.  After trimming, not so much... ::
+
+  %% head ecoli_ref.fq.gz.abundfilt
+
+A lot of single sequences (here, mostly /2) have been removed.
+
+...but Velvet requires that things be either paired or single, not
+"some of each".  What next?
+
+We can use a script included with khmer to split them out into pairs
+of reads where both /1 and /2 are present, and orphaned singletons. ::
+
+  %% python /usr/local/src/khmer/sandbox/strip-and-split-for-assembly.py ecoli_ref.fq.gz.abundfilt
+
+
+This script ends with a whimper::
+
+... 4400000
+... 4500000
+... 4600000
+
+If you now look at the directory, you'll see a '.pe' file and a '.se' file.
+If you look at them with 'head' you'll see that the first one has the
+paired reads and the second one has singleton reads.::
+
+  %% ls *.abundfilt.*
+
+Now, let's assemble with multiple k.  copy and paste all five lines below,
+omitting only the %%::
+
+   %% for k in {31..35..2}
+   do
+     velveth ecoli.$k $k -fasta -shortPaired *.pe -short *.se
+     velvetg ecoli.$k -exp_cov auto -cov_cutoff auto
+   done
+
+Now... walk away.  This will take a while!
+
+Once it finishes, you should have a bunch of contigs files; take a look
+at them::
+
+  %% python /usr/local/src/khmer/sandbox/assemstats3.py 1000 ecoli.*/contigs.fa
+
+Here's what I get::
+
+  ** cutoff: 1000
+  N       sum     max     filename
+  99      4537274 209419  ecoli.31/contigs.fa
+  100     4538461 243193  ecoli.33/contigs.fa
+  97      4538971 238330  ecoli.35/contigs.fa
+  --
+  TOTAL: 1.36147e+07 in 296 contigs (mean size 45996)
+
+How do we do further analysis??
+
+Analyzing assemblies
+--------------------
+
+In this case we actually have a reference genome, so let's see how well
+our assembler did!  We'll do this using BLAST.
+
+Start by downloading and installing BLAST::
+
+   %% curl -O ftp://ftp.ncbi.nih.gov/blast/executables/release/2.2.24/blast-2.2.24-ia32-linux.tar.gz
+
+   %% tar xzf blast-2.2.24-ia32-linux.tar.gz
+   %% cp blast-2.2.24/bin/* /usr/local/bin
+   %% cp -r blast-2.2.24/data /usr/local/blast-data
+
+Now get the reference genome and format it for BLAST::
+
+   %% curl -O http://ged.msu.edu/angus/tutorials-2012/files/ecoliMG1655.fa.gz
+   %% gunzip ecoliMG1655.fa.gz 
+
+   %% formatdb -i ecoliMG1655.fa -o T -p F
+
+Grab the long contigs (> 1kb) from E. coli::
+
+   %% python /usr/local/src/khmer/sandbox/extract-long-sequences.py 1000 ecoli.35/contigs.fa > ecoli-k35-1k.fa
+
+Now let's BLAST all of these contigs against the reference genome::
+
+   %% blastall -i ecoli-k35-1k.fa -d ecoliMG1655.fa -p blastn -e 1e-20 -o contigs.x.genome.blastn
+
+Next, we want to see **how much** of the reference genome is covered by this
+assembly.  Conveniently I've written a script for this that you can grab
+from the digital normalization paper repository::
+
+   %% curl -O https://raw.github.com/ged-lab/2012-paper-diginorm/master/pipeline/calc-blast-cover.py
+
+Now, run the script.  You need to feed it the reference genome, the
+BLAST output file, the minimum match length consider "valid", and the set
+of (query) contigs. ::
+
+   %% python calc-blast-cover.py ecoliMG1655.fa contigs.x.genome.blastn 200 ecoli-k35-1k.fa
+
+The output you get should look something like this.
+
+   4588970 4639675 0.989071432805 ecoliMG1655.fa contigs.x.genome.blastn 200
+
+Here, the first column is the number of bases in the reference genome covered
+by the contigs; the second column is the total number of bases.  The third
+is the ratio.  In this case, you can see that almost 99% of the bases in the
+reference genome are covered by the assembled contigs -- pretty cool, eh?

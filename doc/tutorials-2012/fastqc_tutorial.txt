@@ -38,7 +38,7 @@ default.)
 
 Now it's time to connect to your instance using ssh. Once you are
 connected, we'll mount the drive to the /data directory. When you
-first launch your instance, you'll need to create it.
+first launch your instance, you'll need to create it. ::
 
   %% mkdir /data
   %% cd /data
