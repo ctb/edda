@@ -20,3 +20,6 @@ For today,
 We'll also work through 'ngs-42-oases-mRNAseq-assembly' and
 'ngs-43-trinity-mRNAseq-assembly'.  Trinity will take an hour or more,
 note.
+
+We'll finish with `ngs-44-kmer-distributions <files/ngs-44-kmer-distributions.html>`__.
+

@@ -1,9 +1,10 @@
-=============
-Day 5: Istvan
-=============
+===============
+Day 5: ChIP-Seq
+===============
 
 Friday, June 7th, 2012
 
 .. toctree::
    :maxdepth: 2
 
+`Lecture -- ChIP-Seq <files/chip-seq-presentation.pdf>`__.
