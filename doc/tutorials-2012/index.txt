@@ -7,7 +7,12 @@ Your AMI is **ami-00ca6a69** and the ipython notebook password is 'ngs'.
 .. toctree::
    :maxdepth: 2
 
+   lectures
+   sites
+
    day1
    day2
    day3
    day4
+   day5
+   day6

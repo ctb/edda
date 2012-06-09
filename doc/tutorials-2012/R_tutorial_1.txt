@@ -1,0 +1,99 @@
+===========================
+R Tutorial (part I)
+===========================
+
+To introduce R, you can do this first part of the tutorial on either your local machine (if you have R installed, or would like to install it), or on an Amazon EC2 Instance.
+
+If you would like to do it locally on your machine, and do not have R installed already go to 
+http://www.r-project.org/
+click on the download button on the right side and follow the instructions for either Mac OS X or Windows.
+
+If you would like to run this on an Amazon EC2 instance, sign in and install Dropbox as we did in the earlier tutorials, or use the shell scripts we developed yesterday.
+
+R generally does not come pre-installed on most Linux distributions (including Debian Linux, which we are using) but it is very easy to install::
+
+  %% apt-get install r-base
+
+If it is not installed already you will see (as we have done with earlier software) some messages showing the progress of the install, or update.
+
+To view the R tutorial directly, we are going to use the nano text editor. The script should display just fine, but by default nano does not include syntax highlighting for R. So we are going to set out nano profile file (.nanorc) to include R syntax highlighting.
+First, we will copy and rename the nano profile file (note how we rename it to .nanorc)::
+
+  %% cp ~/Dropbox/ngs-scripts/nano.rc ~/.nanorc
+
+
+(If you want to see what is in the .nanorc file just type)::
+
+  %% nano ~/.nanorc
+
+Now we copy the R tutorial from dropbox to a new folder::
+
+  %% mkdir ~/Rish
+  %% cp ~/Dropbox/ngs-scripts/RSatMorning/NGS2011_R_Introductory_tutorial_part_1.R ~/Rish
+
+If you would like to run the tutorial and examine it at the same time you can open a second terminal window in the same instance, or you can even open the R script on your local machine and copy and paste instructions for this tutorial. This is not efficient, but will work for today.
+
+To open the R script in nano for viewing::
+
+  %% cd ~/Rish
+  %% nano NGS2011_R_Introductory_tutorial_part_1.R
+
+And to run R in your other terminal window::
+
+  %% cd ~/Rish
+  %% R
+
+You will see something that looks like::
+
+	R version 2.13.0 alpha (2011-03-19 r54880)
+	Copyright (C) 2011 The R Foundation for Statistical Computing
+	ISBN 3-900051-07-0
+	Platform: x86_64-apple-darwin9.8.0/x86_64 (64-bit)
+	
+	R is free software and comes with ABSOLUTELY NO WARRANTY.
+	You are welcome to redistribute it under certain conditions.
+	Type 'license()' or 'licence()' for distribution details.
+	
+	  Natural language support but running in an English locale
+	
+	R is a collaborative project with many contributors.
+	Type 'contributors()' for more information and
+	'citation()' on how to cite R or R packages in publications.
+	
+	Type 'demo()' for some demos, 'help()' for on-line help, or
+	'help.start()' for an HTML browser interface to help.
+	Type 'q()' to quit R.
+	
+	> 
+
+From here you can follow along with the tutorial in the R script!
+
+
+For the second part of the tutorial (importing data, subsetting and some basic plotting) we will do exactly as above, with the next tutorial script::
+
+  %% cp ~/Dropbox/ngs-scripts/RSatMorning/NGS2011_R_introduction_II.R ~/Rish
+  %% cd ~/Rish
+  %% nano NGS2011_R_introduction_II.R
+
+(and open your second terminal window and open R)::
+
+  %% cd ~/Rish
+  %% R
+
+Finally, for the final part of the R tutorial today, we will examine some DGE sequence tags (that have already been mapped and counted). The data is currently in dropbox, so we will make a copy of the zipped file, and unzip it::
+
+  %% cp ~/Dropbox/ngs-scripts/RSatMorning/DGE_data.zip ~/Rish
+  %% unzip DGE_data.zip
+  %% cp ~/Dropbox/ngs-scripts/sd_DGE_script.R
+  %% nano sd_DGE_script.R
+
+(and open your second terminal window and open R)::
+
+  %% cd ~/Rish
+  %% R
+
+In our next discussion of R we will learn how to submit the script directly, without having to work with R interactively (for those of you wanting to make a guess at it)::
+
+  %% cd ~/Rish
+  %% R CMD BATCH sd_DGE_script.R
+

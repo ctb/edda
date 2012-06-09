@@ -1,0 +1,51 @@
+==================================
+Presentations and associated links
+==================================
+
+Lecture 1: `Welcome! <files/lecture1-welcome.pptx.pdf>`__
+
+Lecture 2: `BLAST is a Microcosm of All that is Wrong in Bioinformatics <files/lecture2-blast.pptx.pdf>`__
+
+Lecture 3: `Mapping <files/lecture3-mapping.pptx.pdf>`__.  References::
+
+   Flicek, P., & Birney, E. (2009). Sense from sequence reads: methods
+   for alignment and assembly. Nature Methods, 6(11 Suppl), S6?S12.
+   doi:10.1038/nmeth.1376
+   http://www.ncbi.nlm.nih.gov/pubmed?term=19844229
+   
+   Glenn, T. C. (2011). Field guide to next-generation DNA sequencers.
+   Molecular Ecology Resources. doi:10.1111/j.1755-0998.2011.03024.x
+   http://www.ncbi.nlm.nih.gov/pubmed/21592312
+   
+   Hudson, M. E. (2008). Sequencing breakthroughs for genomic ecology and
+   evolutionary biology. Molecular Ecology Resources, 8(1), 3?17.
+   doi:10.1111/j.1471-8286.2007.02019.x
+   http://www.ncbi.nlm.nih.gov/pubmed?term=21585713    
+   
+   Li, H., & Homer, N. (2010). A survey of sequence alignment algorithms
+   for next-generation sequencing. Briefings in bioinformatics, 11(5),
+   473?483. doi:10.1093/bib/bbq015
+   http://www.ncbi.nlm.nih.gov/pubmed?term=20460430
+   
+   
+Lecture 4: `Assembly <files/lecture4-assembly.pptx.pdf>`__.  Reference:
+
+    `Assembly algorithms for next-generation sequencing data, Miller et al. <http://www.ncbi.nlm.nih.gov/pubmed/20211242>`__.
+
+    `Scaffolding a Caenorhabditis nematode genome with RNA-seq, Mortazavi et al. <http://www.ncbi.nlm.nih.gov/pubmed/20980554>`__.
+
+    `Assemblathon (comparing assemblers) <http://assemblathon.org>`__
+
+Lecture 5: `ChIP-Seq Studies <files/chip-seq-presentation.pdf>`__.
+
+Lecture 6: `Designing experiments and thinking about statistics <files/statistics-and-design.pptx.pdf>`__::
+
+    Paul L. Auer and R.W. Doerge 2010. Statistical Design and Analysis of
+    RNA-Seq Data. Genetics. 10.1534/genetics.110.114983
+    PMID: 20439781
+
+    Bullard, J. H., Purdom, E., Hansen, K. D., & Dudoit, S. (2010).
+    Evaluation of statistical methods for normalization and differential
+    expression in mRNA-Seq experiments. BMC Bioinformatics, 11, 94.
+    doi:10.1186/1471-2105-11-94
+

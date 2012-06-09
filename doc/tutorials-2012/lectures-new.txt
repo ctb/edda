@@ -1,0 +1,19 @@
+Lecture 5: `Computation <files/lecture5-computation.pptx.pdf>`__.
+
+Lecture 7: `mRNAseq <files/lecture7-mrnaseq.pptx.pdf>`__
+
+Lecture 8: `ChIP-seq <files/lecture-chipseq.pdf>`__
+
+Lecture 9: `Resequencing analysis in flies <files/dworkin-resequencing.pdf>`__
+
+Other references:
+
+    `Local De Novo Assembly of RAD Paired-End Contigs Using Short
+    Sequencing Reads <http://www.ncbi.nlm.nih.gov/pubmed?term=21541009>`__
+
+    `Computational methods for transcriptome annotation and quantification
+    using RNA-seq <http://www.ncbi.nlm.nih.gov/pubmed?term=21623353>`__
+
+    `Microarrays, deep sequencing, and the true measure of the
+    transcriptome
+    <http://www.ncbi.nlm.nih.gov/pubmed?term=21627854>`__

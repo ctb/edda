@@ -1,0 +1,11 @@
+============================
+Day 6: Statistics & Plotting
+============================
+
+Friday, June 7th, 2012
+
+.. toctree::
+   :maxdepth: 2
+
+   R_tutorial_1
+   allele_freq_plots_R
