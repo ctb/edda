@@ -23,8 +23,8 @@ Getting started
 
 First, let's get the data.
 
-Start up an instance, create a volume from snapshot snap-9d295ee7,
-and then attach it as /ecoli. ::
+Start up an instance, create a volume from snapshot snap-9d295ee7, attach
+it, and then mount it as /ecoli. ::
 
    %% mkdir /ecoli
    %% mount /dev/xvdf /ecoli
@@ -50,7 +50,7 @@ Now, download and install Velvet, screed, and khmer. ::
 
 And, finally, copy the data over: this is a 5m read subset of a 31m
 read data set from an E. coli colony sequencing run.  (See `Chitsaz et
-al., 2011 <http://www.ncbi.nlm.nih.gov/pubmed/21926975>`__).
+al., 2011 <http://www.ncbi.nlm.nih.gov/pubmed/21926975>`__). ::
 
    %% cd /mnt
 
@@ -101,7 +101,7 @@ Next, do the actual filtering::
 
   %%  python /usr/local/src/khmer/scripts/filter-abund.py ecoli.kh ecoli_ref.fq.gz
 
-That, too, will take a while -- you'll see this: ::
+That, too, will take a while -- you'll see this::
 
    ... filtering 4900000
    done loading in sequences
@@ -215,7 +215,7 @@ of (query) contigs. ::
 
    %% python calc-blast-cover.py ecoliMG1655.fa contigs.x.genome.blastn 200 ecoli-k35-1k.fa
 
-The output you get should look something like this.
+The output you get should look something like this. ::
 
    4588970 4639675 0.989071432805 ecoliMG1655.fa contigs.x.genome.blastn 200
 

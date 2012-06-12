@@ -1,0 +1,734 @@
+mRNAseq and alternative splicing
+================================
+
+2012-6-10 Corbin Jones
+
+RNAseq is whole transcriptome shotgun sequencing.  As you have already
+covered, this approach can be used for inferring expression and
+annotating genomes.  One of the key advantages of RNAseq is that it
+allows you to observe different isoforms at a gene.  For example, you
+can use RNAseq data to see which exons are included in a transcript at
+a variety of stages during development or in response to a treatment,
+such as a drug.
+
+Identifying isoforms from RNAseq data has its challenges.  Here we are
+going to use MapSplice and a few related tools to explore RNAseq
+analysis.  MapSplice identifies splice junctions - the points between
+two exons.  It can also identify exons as well, although we won't be
+focusing on this. MapSplice has the advantages that is doesn't need a
+reference transcriptome (only a reference genome) and it is agnostic
+as to the types of splice junctions it identifies (e.g. good for
+non-canonical splice junctions, fusion genes, etc).  Nor does it rely
+on assembling the transcripts in their entirety, which is loaded with
+potential problems.
+
+Today we'll focus on getting and running MapSplice and discuss a few other related tools.  
+
+Content:
+
+* Getting the software
+* Example data
+* Running MapSplice
+* Viewing results
+* Config files and other options
+* FDM - detecting differences in splice diversity
+* MultiSplice - detecting differences in abundance
+
+
+Getting the software and data
+*****************************
+
+You can download the MapSplice 1.15.2 release package from `here
+<http://www.netlab.uky.edu/p/bioinfo/MapSpliceDownload>`__.
+
+MapSplice uses Bowtie in MapSplice pipeline for segment mapping. The
+bowtie and bowtie-build are in the path of MapSplice/bin/. The bowtie
+version tested with MapSplice 1.15.2 is 0.12.7. MapSplice also uses
+SAMTOOLS for some reporting and analysis.  Version 0.1.9 is included.
+
+Today we will launch an instance and then install MapSplice into it.
+
+Launch an instance:
+
+To simplify downloading of MapSplice, we'll use cURL::
+
+  %% curl -O -L http://protocols.netlab.uky.edu/~kai/downloads/MapSplice_1.15.2.tar.gz
+
+Un-tar and uncompress the software. ::
+
+  %% tar -xvf MapSplice_1.15.2.tar.gz
+
+Now change directories into the MapSplice directory ::
+
+  %% cd MapSplice_1.15.2
+
+Check version of g++, must be 4.1.2 or greater (wc2 4.6.1). ::
+
+  %% g++ --version
+
+To compile MapSplice, use make ::
+
+  %% make
+
+A lot will go by, ::
+
+  g++ -O3 -o bin/check_reads_format src/check_reads_format/check_reads_format.cpp 2>log
+  ...
+  g++ -O3 -o bin/bowtie2sam src/bowtie2sam/bowtie2sam.cpp 2>log
+
+Check for any errors, by looking at the end of the 'log' file (the
+'2>log”'is redirecting anything from stderr -- 'standard error output'
+-- to this log file)::
+
+  %% tail log
+
+Hopefully this is empty. (on ec2 you get some warnings) ::
+
+  src/bowtie2sam/bowtie2sam.cpp: In function ‘void sortbowtie(const char*, const char*, int)’:
+  src/bowtie2sam/bowtie2sam.cpp:208:154: warning: format ‘%llu’ expects argument of type ‘long long unsigned int*’, but argument 6 has type ‘size_t* {aka long unsigned int*}’ [-Wformat]
+  src/bowtie2sam/bowtie2sam.cpp:208:154: warning: format ‘%d’ expects argument of type ‘int*’, but argument 9 has type ‘size_t* {aka long unsigned int*}’ [-Wformat]
+
+Now let's see what we installed. ::
+
+  %% ls -l
+
+Here are the contents::
+
+ drwxr-sr-x  2 1374 1383  4096 2012-06-10 11:34 bin
+ drwxr-sr-x  7 1374 1383  4096 2011-04-11 00:30 bowtie-0.12.7
+ drwxr-sr-x  2 1374 1383 16384 2011-04-11 00:30 config
+ drwxr-sr-x  2 1374 1383  4096 2011-04-11 00:30 examples
+ -rw-r--r--  1 1374 1383 10754 2011-04-13 14:57 Fast.cfg
+ -rw-r--r--  1 1374 1383 35147 2011-04-11 00:30 GPL.txt
+ -rw-r--r--  1 1374 1383   426 2011-04-11 00:30 INSTALL
+ -rw-r--r--  1 1374 1383   468 2012-06-10 11:34 log
+ -rw-r--r--  1 1374 1383 10614 2011-04-11 00:30 Makefile
+ -rw-r--r--  1 1374 1383 12804 2011-04-11 00:30 Manual
+ -rw-r--r--  1 1374 1383 10755 2011-04-13 14:56 paired.cfg
+ -rw-r--r--  1 1374 1383   587 2011-04-11 00:30 README
+ drwxr-sr-x  6 1374 1383  4096 2012-06-10 11:32 samtools-0.1.9
+ -rw-r--r--  1 1374 1383 10755 2011-04-13 14:57 single.cfg
+ drwxr-sr-x 66 1374 1383  4096 2011-04-11 00:30 src
+ -rw-r--r--  1 1374 1383 10756 2011-04-13 14:56 Try_hard.cfg
+
+This looks good.  Make sure you have something like this.
+
+Example Data
+************
+
+We are now going get some small example data files.  Move up a directory ::
+
+  %% cd ..
+
+Make a simple directory structure to help us keep things organized. ::
+
+  %% mkdir data
+  %% mkdir output
+
+Change into the data directory ::
+
+  %% cd data
+
+Now get example data.  First the short reads. ::
+
+  %% curl -O -L http://protocols.netlab.uky.edu/~kai/downloads/1M_50bp_fastq.tgz
+
+Now the longer reads ::
+
+  %% curl -O -L http://protocols.netlab.uky.edu/~kai/downloads/1M_100bp_fastq.tgz
+	
+Now the reference.  This is a BOWTIE index file.  You should have
+covered creating one of these already.  Rather than create a new one,
+we will use a precomputed one that has only one human chromosome. ::
+
+  %% curl -O -L http://protocols.netlab.uky.edu/~kai/downloads/chr20_sequence_index.tgz
+
+Untar and uncompress these three files. ::
+
+  %% tar -xvf 1M_50bp_fastq.tgz
+  %% tar -xvf 1M_100bp_fastq.tgz
+  %% tar -xvf chr20_sequence_index.tgz 
+
+Let's check that all is there ::
+
+  %% ls -l
+
+::
+
+  -rw-r--r-- 1 root root  42093165 2012-06-10 11:38 1M_100bp_fastq.tgz
+  -rwxrwsrwx 1 1374 1383 253277296 2010-03-10 22:36 1M_100bp_fastq.txt
+  -rw-r--r-- 1 root root  28042190 2012-06-10 11:46 1M_50bp_fastq.tgz
+  -rw-r--r-- 1 8827 2003 153278196 2010-08-13 19:39 1M_50bp_fastq.txt
+  -rwxr-xr-x 1 8827 2003  63684691 2010-06-18 02:41 chr20.fa
+  -rw-r--r-- 1 root root  81525782 2012-06-10 11:50 chr20_sequence_index.tgz
+  -rw-r--r-- 1 8827 2003  21196131 2010-03-11 18:46 index.1.ebwt
+  -rw-r--r-- 1 8827 2003   7438164 2010-03-11 18:46 index.2.ebwt
+  -rw-r--r-- 1 8827 2003        62 2010-03-11 18:45 index.3.ebwt
+  -rw-r--r-- 1 8827 2003  14876314 2010-03-11 18:45 index.4.ebwt
+  -rw-r--r-- 1 8827 2003  21196131 2010-03-11 18:48 index.rev.1.ebwt
+  -rw-r--r-- 1 8827 2003   7438164 2010-03-11 18:48 index.rev.2.ebwt
+
+Neat freaks can remove the ``*.tgz`` files. 
+
+Running MapSplice
+*****************
+
+Three ways to run MapSplice.
+
+1.	Commandline with options
+2.	Commandline with config file
+3.	Commandline with options and config file.
+
+We'll begin by checking out the commandline help.  Change directories
+into the MapSplice directory ::
+
+  %% cd ../MapSplice_1.15.2
+
+To get the help we need to call the mapsplice_segments.py
+script. MapSplice uses a python script to automate its running.  We
+must invoke python and the script and the option --help ::
+
+  %% python bin/mapsplice_segments.py --help
+
+  mapsplice_segments.py: 
+  Usage:
+      mapsplice [Inputs] [options]
+
+  Inputs:
+      -u/--reads-file                <string>
+      -c/--chromosome-files-dir      <string>
+    
+  Options:
+      -o/--output-dir                <string>    [ default: ./mapsplice_out ]
+      -n/--min-anchor                <int>       [ default: 8               ]
+      -m/--splice-mismatches         <int>       [ default: 1               ]
+      -i/--min-intron-length         <int>       [ default: 1               ]
+      -x/--max-intron-length         <int>       [ default: 50000           ]
+      -w/--read-width                <int>       [ default: 100             ]
+      -S/--FASTA-files-ext           <string>    [ default: fa              ]
+      -G/--numseg                    <int>       [ default: 4               ]
+      -L/--seglen                    <int>       [ default: 25              ]
+      -B/--Bowtieidx                 <string>
+      -Q/--reads-format              <string>    [ default: fq              ]
+      --full-running
+      -X/--threads                   <int>       [ default: 1               ]
+      -E/--segment-mismatches        <int>       [ default: 1               ]
+      --pairend
+      --search-whole-chromosome
+      --map-segments-directly
+      --run-MapPER
+      --not-rem-temp
+      --non-canonical | --semi-canonical
+
+First, let's do a simple run, using essentially default parameters.
+MapSplice will take both FASTA and FASTQ format reads.  Let's confirm
+that we have FASTQ by checking the first few lines of our data files
+using 'head'. ::
+
+  %% head ../data/1M_100bp_fastq.txt
+
+  @TRAN00000105893:40:0
+  CCCCAGCTGGTGGCTGGAGCGACCCCTTGTTCTTTGGTGGCGCTGTTTTGTGTTACAGGCACACATGGCATTCAGGGATGTGGCTGTGGATTTCACCCAG
+  +TRAN00000105893:40:0
+  CBBBAAAA@@@@????????@????>>>=>=>>>==>==>>>>=<=<<<=<=================<<<========<<<<<<<<<;;;;;;::9988
+  @TRAN00000105893:39:1
+  TCCCCAGCTGGTGGCTGGAGCGACCCCTTGTTCTTTGGTGGCGCTGTTTTGTGTTACAGGCACACATGGCATTCAGGGATGTGGCTGTGGATTTCACCCA
+  +TRAN00000105893:39:1
+  CCCCBCBBBAABBAAAAAAAA@@@@@@@???@@@????@??>>>>==>======>>==>>>??>>>========>>>>>==<<;;::9::::::::::::
+  @TRAN00000105893:100:2
+  ACACATGGCATTCAGGGATGTGGCTGTGGATTTCACCCAGGATGAGTGGAGGCTGCTGAGCCCTGCTCAAAGGACTaTGTACAGAGAGGTGATGCTGGAG
+
+The '@' and the '+' in the header lines confirm this is FASTQ.
+
+We will now set the parameters for this run.  Below is the total
+command we will use, but before you use it I want to explain each
+element. ::
+
+  %% python bin/mapsplice_segments.py -Q fq --reads-file ../data/1M_100bp_fastq.txt  --all-chromosomes-files ../data/chr20.fa --Bowtieidx ../data/index --chromosome-files-dir ../data/  -o ../output
+
+Mapsplice is being run with default values for most parameters with
+this invocation.  It finds up to 40 candidate alignments for every
+read, some of which may involve spliced alignment across potential
+splice junctions.  In a second step, the true splice junctions are
+identified based on the totality of candidate alignments.
+Subsequently all reads are realigned to synthetic exonic regions
+around each putative junction so that spliced alignments that include
+complex aspects such as very short exons or very few nucleotides on a
+far side of a splice can be accurately identified. ::
+
+  -Q fq  == FASTQ format
+
+  --reads-file ../data/1M_100bp_fastq.txt  == read data, note that data needs to be comma separated with no spaces (--reads-file ../data/1M_100bp_fastq_1.txt,../data/1M_100bp_fastq_2.txt). Multiple read files can be included.
+
+  --all-chromosomes-files ../data/chr20.fa == where your reference is. 
+
+  --Bowtieidx ../data/index == BOWTIE index.  The name here (in this case “index”) needs to match the shared component of the name of all the index files (e.g. index.1.ebwt, index.2.ebwt)
+
+  --chromosome-files-dir ../data/ == a little redundant with above, but needed to point to all the chromosome data.
+
+  -o ../output == where you want it all to go.
+
+Ok, let's now run that command ::
+
+  %% python bin/mapsplice_segments.py -Q fq --reads-file ../data/1M_100bp_fastq.txt  --all-chromosomes-files ../data/chr20.fa --Bowtieidx ../data/index --chromosome-files-dir ../data/  -o ../output
+
+And slowly lots of stuff will come out: ::
+
+  [Sun Jun 10 11:57:27 2012] Preparing output location ../output/
+  
+  [Sun Jun 10 11:57:27 2012] Beginning Mapsplice run (v1.15.2)
+  -----------------------------------------------
+  bin directory: [/root/MapSplice_1.15.2/bin/] 
+  [Sun Jun 10 11:57:27 2012] Checking for chromosomes files or directory
+  [Sun Jun 10 11:57:27 2012] Checking for chromosomes files or directory passed
+  [Sun Jun 10 11:57:27 2012] Checking for Bowtie index files
+  [Sun Jun 10 11:57:27 2012] check reads format
+  [Sun Jun 10 11:57:28 2012] merge paired end reads remove short
+  [Sun Jun 10 11:57:46 2012] Mapping reads against index with Bowtie
+  [Sun Jun 10 11:58:36 2012] Converting bowtie mapped to SAM format
+  [Sun Jun 10 11:58:53 2012] divide reads
+  [Sun Jun 10 11:59:26 2012] Mapping reads against index with Bowtie
+  [Sun Jun 10 12:00:15 2012] reads all chromo sizes
+  [Sun Jun 10 12:00:15 2012] mapsplice_search
+  [Sun Jun 10 12:00:31 2012] Aligning spliced reads
+  [Sun Jun 10 12:01:04 2012] mapsplice_report
+  [Sun Jun 10 12:01:27 2012] convert sam files to junctions
+  [Sun Jun 10 12:01:30 2012] Remove duplication of sam
+  [Sun Jun 10 12:01:36 2012] Filtering junctions
+  [Sun Jun 10 12:01:36 2012] Remove duplication of sam
+  [Sun Jun 10 12:01:40 2012] Filter Reads By Canon Noncanon
+  [Sun Jun 10 12:01:40 2012] convert sam files to junctions
+  [Sun Jun 10 12:01:43 2012] convert sam files to junctions
+  [Sun Jun 10 12:01:45 2012] filter junction by min mis and min lpq
+  [Sun Jun 10 12:01:45 2012] filter junc by ROC argu noncanonical
+  [Sun Jun 10 12:01:45 2012] filter junction by min mis and min lpq
+  [Sun Jun 10 12:01:45 2012] convert junction file to bed format
+  [Sun Jun 10 12:01:45 2012] Filter Sam By junction
+  [Sun Jun 10 12:01:50 2012] Merging all sam files
+  [Sun Jun 10 12:01:55 2012] convert sam files to junctions
+  [Sun Jun 10 12:02:00 2012] convert junction file to bed format
+  [Sun Jun 10 12:02:00 2012] sort segmentbwt
+  [Sun Jun 10 12:02:02 2012] Add tags to sam file
+  [Sun Jun 10 12:02:31 2012] combine to final sam
+  
+  [Sun Jun 10 12:02:32 2012] Finishing Mapsplice run (time used: 0:05:04.437714)
+
+Now let's see what we got. ::
+
+  %% cd ../output
+  %% ls
+
+you should see ::
+
+  alignments.sam  best_junction.bed  logs
+
+Let's just quickly look at the 'logs'::
+
+  %% ls logs/
+
+  argu_log
+  best_junction2.log
+  best_junction.bed.log
+  best_junction_canon_noncanon.log
+  best_junction_filtered_by_min_mis_lpq.log
+  best_junction.log
+  best_junction_semi_non_canon.log
+  best_junction_semi_non_canon_remained_ROC.log
+  best_mapped_filterbyjunc.log
+  best_mapped.log
+  best_mapped_sortedbyidx_add_tags.log
+  best_mapped_sortedbyidx_add_tags.stat
+  bowtie2sam.log
+  checking_chromosome_file.log
+  check_reads_format.log
+  current_stats.log
+  dividereads.log
+  filterori.all_junctionsbysmalldeletion.log
+  mapsplice.log
+  mapsplice_report.log
+  mapsplice_search.log
+  merge_paired_end_reads_rmshort.log
+  original_canon_noncanon.log
+  original_canon_noncanon.stat
+  original_filter_multiple.log
+  original_filter_multiple.stat
+  original.log
+  original.stat
+  read_chromo_sizes.log
+  sam2junc.best_junction_bef_filter.log
+  sam2junc_ori.all_junctions.log
+  sam2junc.ori.filtered.canon.noncanon.junctions.log
+  unspliced_mapped_sorted.log
+  unspliced_mapped_sorted.multiple.filtered_multiple.log
+  unspliced_mapped_sorted.multiple.filtered_multiple.stat
+  unspliced_mapped_sorted.stat
+  unspliced_reads.log
+  unspliced_segments.log
+  
+These contain a lot of information about what happened during the run
+of MapSplice.  Most of it is not important on a routine basis, but may
+be worth checking if you are having problems.  For example, the
+unspliced_reads.log tells you how many of your reads mapped.  This is
+a good way to make sure you were mapping against the correct
+reference. ::
+  
+  %% less logs/unspliced_reads.log
+
+  # reads processed: 999991
+  # reads with at least one reported alignment: 624290 (62.43%)
+  # reads that failed to align: 375701 (37.57%)
+  Reported 624666 alignments to 1 output stream(s)
+
+For downstream analysis, the alignments.sam file is most useful,
+although not particularly human friendly. ::
+
+  %% head alignments.sam
+
+  @SQ	SN:chr20	LN:62435964
+  TRAN00000105893:40:0	0	chr20	18217204	0	45M17063N55M	*	0	0	CCCCAGCTGGTGGCTGGAGCGACCCCTTGTTCTTTGGTGGCGCTGTTTTGTGTTACAGGCACACATGGCATTCAGGGATGTGGCTGTGGATTTCACCCAG	CBBBAAAA@@@@????????@????>>>=>=>>>==>==>>>>=<=<<<=<=================<<<========<<<<<<<<<;;;;;;::9988	NM:i:0	IH:i:1	HI:i:1	XS:A:+
+  TRAN00000105893:39:1	0	chr20	18217203	0	46M17063N54M	*	0	0	TCCCCAGCTGGTGGCTGGAGCGACCCCTTGTTCTTTGGTGGCGCTGTTTTGTGTTACAGGCACACATGGCATTCAGGGATGTGGCTGTGGATTTCACCCA	CCCCBCBBBAABBAAAAAAAA@@@@@@@???@@@????@??>>>>==>======>>==>>>??>>>========>>>>>==<<;;::9::::::::::::	NM:i:0	IH:i:1	HI:i:1	XS:A:+
+  TRAN00000105893:100:2	0	chr20	18234327	0	100M	*	0	0	ACACATGGCATTCAGGGATGTGGCTGTGGATTTCACCCAGGATGAGTGGAGGCTGCTGAGCCCTGCTCAAAGGACTATGTACAGAGAGGTGATGCTGGAG	CCCBBBBBBBAAAABA@@@?>>>?>>>>>==<<<<<<<<<<<<<<;;::;:::99899988888776766555665555555555555554434433222	NM:i:I
+  
+The more human readable file is the best_junction.bed. This file can
+be uploaded into the UCSC browser and allows you to visualize the
+data.  First a quick look at what is in this file, ::
+
+  %% head best_junction.bed
+
+  track name=junctions description="Mapsplice junctions"
+  chr20	16350	24739	JUNC_1	126	+	16350	24739	255,0,0	2	58,94	0,8295
+  chr20	71233	74149	JUNC_2	154	+	71233	74149	255,0,0	2	94,94	0,2822
+  chr20	155900	158010	JUNC_3	55	+	155900	158010	255,0,0	2	87,92	0,2018
+  chr20	186383	187811	JUNC_4	77	+	186383	187811	255,0,0	2	94,94	0,1334
+
+The details of this format are at
+http://genome.ucsc.edu/FAQ/FAQformat#format1.
+
+Viewing results
+***************
+
+We now need to upload this file to the UCSC browser.  First let's get
+the file to our local computer using Dropbox. ::
+
+  %% cp output/best_junction.bed /root/Dropbox
+
+Launch a web browser and go to http://genome.ucsc.edu/index.html
+
+.. image:: ../UCSC1.png
+
+In the upper left hand corner click **Genomes**
+
+.. image:: ../UCSC2.png
+
+*Change the assembly!!!!* The index we used was for hg18, not hg19.
+ Then click **add custom tracks**.
+
+.. image:: ../UCSC3.png
+
+You are now going to upload your BED file 'best_junction.bed'.  Click
+**Choose File** next to 'Or upload'.  Using the dialog box, find
+best_junction.bed and upload.  If successful, you'll see the next
+screen.
+
+.. image:: ../UCSC4.png
+
+Click **go to genome browser** and this will take you to the tip of
+the 'p' arm of human chromosome 20.  This is zoomed in on the first
+predicted junction.  The predicted splice is the top-most track in the
+browser.  The black boxes indicate where MapSplice predicts the splice
+junctions are.  The connecting line indicates the intronic region. The
+arrows on the line shows the direction of transcription.
+
+.. image:: ../UCSC5.png
+
+As you can see the predicted splice matches the annotation well
+(DEFB125 is a defensin gene, which is part of the human immune
+system).  It is supported by EST and other data.  Double click on the
+junc1 track.
+
+.. image:: ../UCSC6.png
+
+This is a summary of the BED file information for this junction.  A
+key item here is the score.  This tells you how confident to be in
+this junction.  In reality, it is the posterior probability of that
+splice event as inferred from a Bayesian regression of the entropy
+(/information) of the mapping and the matching significance of the
+anchor kmer (/tag). Practically, you want this to be relatively high
+for your splices of interest (which unfortunately is somewhat
+relative). Now go back to the browser (with the back arrow or
+whatever).  Click the **zoom out 10X**.  This will give a zoomed out
+view of the same region.
+
+.. image:: ../UCSC7.png
+
+Again, you see that the splices inferred by MapSplice support those in
+the annotation.  These two genes are relatively simple, so we are
+going to move to a more complex region.  In the **position/search**
+field, type (or click max fast forward 2-3 times). ::
+
+   chr20:247,889-331,788
+
+.. image:: ../UCSC8.png
+
+Here we have three genes.  The one on the left has no predicted
+junctions.  This is not hard to interpret as this gene clearly has no
+introns. NRSN2 (a neurodevelopment gene) is clearly more complex.
+Most of the common splice forms are supported.  Additionally, at least
+one novel splice is predicted (JUNC 18).  Notice how the predicted
+junctions illustrate the diversity of isoforms at this gene.  You can
+see which exons are often skipped by some transcripts.  TRIB3, a
+homolog of one of my favorite Drosophila genes, Tribbles, shows how
+MapSplice data can be used to confirm EST data and expand annotations.
+
+
+Config files and other options
+******************************
+
+Most of what we ran was fairly 'vanilla' MapSplice.  There are another
+of other things we can make MapSplice do.  For example, it can look
+for fusion genes.  These are transcripts composed of parts of
+disparate genes **--fusion** indicates that long splices (>400kb in
+length or crossing chromosomes or strands) should also be output.
+These can be evidence of transcription across genomic
+translocations. This is for fusion detection with high sensitivity
+against translocations identified via DNA sequencing.  This is
+accomplished by default and will result in low specificity.  If no DNA
+is available then we will want higher specificity in nominated fusion
+junctions in which case we want to apply stricter filters including
+the cluster filter and the homologous gene tests.  Try it::
+
+  %% python bin/mapsplice_segments.py -Q fq --reads-file ../data/1M_100bp_fastq.txt  --all-chromosomes-files ../data/chr20.fa --Bowtieidx ../data/index --chromosome-files-dir ../data/  -o ../output --fusion
+
+When it is done, the file 'fusion.junction' will be created in the
+output directory.  This is like the BED format (but cannot work in the
+browser).  It indicates the chromosomes involved, the two genes that
+could be fused and the potentially fused read. ::
+
+ %% less ~/output/fusion.junction
+ 
+  track name=junctions description="Mapsplice fusion junctions"
+  chr20_chr20     10793   43897155        JUNC_1  2       +-      255,0,0 2       35,65   0,43886362
+        0       6       CTAC    gaggattgcttgagctcaagagtttgagaccagcctgggcaacatggcaaaaccctgtctTTGGAGGGCGGGTCCTTGACAACGTTAGCGCTGGTCACTTCGAAGAGCAGCCGCTGGGGT        1       2       1.5
+  chr20_chr20     10793   43897162        JUNC_2  2       +-      255,0,0 2       35,65   0,43886369
+        0       6       CTAC    gaggattgcttgagctcaagagtttgagaccagcctgggcaacatggcaaaaccctgtctCACGTACTTGGAGGGCGGGTCCTTGACAACGTTAGCGCTGGTCACTTCGAAGAGCAGCCG        1       1       1
+  chr20_chr20     55660   3783388 JUNC_3  2       --      255,0,0 2       26,74   0,3727728       0
+         6       CTAC    tcacttgaacccgggaggtggaggttgcagtgacccaagatcgtgccactgcactccagcCTGGTCTCTTGCTGTGAGGCAGGGCAGGTAAGGCAGAATCTCTACAACATCCACATTGCA        0       0       0
+  chr20_chr20     55685   31491538        JUNC_4  3       +-      255,0,0 2       25,75   0,31435853
+        0       5       GTAG    tttcgagacagagtcttgctctgtcaccaaccaggctggagtgcagtggcacgatcttggctcactgcaacctccgcctcctgggtccaagtgattctcctgcctcagcctcccgagtag        4       4       4
+  chr20_chr20     55685   33916475        JUNC_5  2       +-      255,0,0 2       25,75   0,33860790
+        0       5       GTAG    tttcgagacagagtcttgctctgtcaccaaccaggctggagtgcagtggcacgatcttggctcactgcaacctccgcctcctgggtttcaagcaattctcttgcctcagcctcctgagta        4       4       4
+
+*Other read sizes*
+
+While MapSplice is pretty smart, you need to tell it the read length
+it is using (there are tricks around this, but not for today). It
+defaults to 100bp reads.  We can see how to do this with the help ::
+
+  %% python bin/mapsplice_segments.py --help
+
+  -w/--read-width  == the length of read.
+
+So, let's try this on our 50 bp data (be sure to change the data file too). ::
+
+  %% python bin/mapsplice_segments.py -Q fq --reads-file ../data/1M_50bp_fastq.txt  --all-chromosomes-files ../data/chr20.fa --Bowtieidx ../data/index --chromosome-files-dir ../data/  -o ../output -w 50
+
+The output will be similar as before.  If we have time, we can take
+time to contrast what we observed using the UCSC browser.
+
+*Paired end reads*
+
+For simplicity, I did not set up any paired-end examples.  Paired ends
+give better power for detecting more complex splices.  The key
+differences are that you do the following:
+
+REMOVE 
+	--reads-file
+
+ADD
+	--pairend
+	-1 “left files” (read1,read2,etc)
+	-2 “right files” (read1,read2,etc)
+
+This will run slower, but you'll be happier with the data.
+
+*Config files*
+
+As I noted before you can run MapSplice from commandline arguments or
+from a config file or from a config file and commandline arguments.
+Commandline arguments trump config file parameters.  Config files are
+useful if you are running a variety of heterogeneous data sets on a
+cluster.  Let's take a quick look at one.  First, make sure you are in
+the MapSplice directory ::
+
+  %% cd ~/MapSplice_1.15.2/
+
+Then we'll use 'less' to take a quick peek at the single.cfg file. ::
+
+  %% less single.cfg
+
+  ######################################################################
+  #Configuration file used by MapSplice
+  # Usage Notes:
+  # Run MapSplice from the command line as follows: 
+  # Usage: python mapsplice_segments.py config_file
+  #
+  # Run MapSplice with inputs and additional options as follows: 
+  # Usage: python mapsplice_segments.py [inputs|options] config_file
+  #
+  # - Lines starting with a "#" are comments.
+  # - Some values can be 'yes' or 'no'
+  # - Value and option name are separated by ' = '
+  ######################################################################
+
+Clicking the space bar will page you through this file.  You'll see
+the parameters you are already familiar with plus a bunch more.
+Obviously, we don't have time to cover all this, but I wanted you to
+see that it is there.
+
+*Random Notes*
+
+-X gives the number of parallel threads that may be used by MapSplice.
+It is counterproductive to make this number larger than the number of
+physical cores available in the execution node.
+
+MapSplice writes progress reports to stderr which can be stored or
+tee-ed into a log file. E.g. when using bash, ``2> log`` file for stderr
+output.
+
+
+FDM - detecting differences in splice diversity
+***********************************************
+
+Splice junctions are great to know, but really biologists are
+interested in knowing when two (or more) samples really differ in
+their isoforms at a particular gene.  The Flow Difference Metric, FDM,
+is a way of measuring the diversity of isoforms at a particular
+gene. Basically, it creates Expression Weighted Splice Graphs (ESGs)
+that summarize the transcription data.  When traversing the graph
+along the available paths, you can see which paths have more reads
+'flow through them'.  This is the FDM.  This value can then be
+compared within and between treatments. If the difference between the
+treatments is much greater than the difference within samples, you can
+identify genes that are differentially transcribed. This is what FDM
+can do using a pairwise permutation approach (note: FDM also has an ad
+hoc approach for comparing just two samples).  It is written in python
+and should run on most systems.
+
+Lets start by getting the files. ::
+
+  %% cd ~
+  %% curl -OL http://csbio-linux001.cs.unc.edu/nextgen/software/FDM/FDM_dist.tar.gz
+  %% tar -xvf FDM_dist.tar.gz
+  %% cd FDM_dist/
+  %% ls -l
+
+  drwxr-xr-x 26 161963 200 4096 2012-06-10 23:08 dataout
+  drwxr-xr-x  3 161963 200 4096 2012-06-10 23:08 hg19
+  -rw-r--r--  1 161963 200  519 2011-05-27 18:43 readme
+  drwxr-xr-x  3 161963 200 4096 2012-06-10 23:08 report
+  drwxr-xr-x  9 161963 200 4096 2012-06-10 23:08 runs
+  drwxr-xr-x  2 161963 200 4096 2012-06-10 23:09 src
+
+We need to get a custom config file::
+
+  %% curl -O -L http://152.2.14.58/~cdjones/fdm_2600cdj.cfg 
+
+FDM is very particular about the directory structure.  You will often
+need to carefully spell out the entire path to the data.  Darshan
+Singh (the main author) has promised to fix this in future versions.
+Let's take a look at it. ::
+
+  %% less fdm_2600cdj.cfg
+
+On your own systems (not ec2) you'll need to edit every place where
+you see the ec2 specific paths (e.g. /root/...).
+
+Move the config file to a good spot, ::
+
+  %% mv fdm_2600cdj.cfg runs/run2600/
+
+Now let's launch FDM.   ::
+
+  %% cd src/
+  %% ./fdm_main.py --config /root/FDM_dist/runs/run2600/fdm_2600cdj.cfg
+
+Now this will take a long time to run and may cause ec2 to choke.  Let
+it run (hours due to the permutation; can use a lot of space) and then
+crtl-c to kill the job.
+
+The output is put into the reports directory.  The raw pairwise
+comparisons are put in the FDM_raw subdirectory; the final list data
+is in
+
+Here is an example output file ::
+
+  %% curl -O -L http://152.2.14.58/~cdjones/ 2600GENE_T1__2600GENE_T2__050__030_fdm.txt
+  %% curl -O -L http://152.2.14.58/~cdjones/ 2600GENE_T1__2600GENE_T2__050__050__030_fdm2.txt
+
+Let's take a quick look ::
+
+  %% less 2600GENE_T1__2600GENE_T2__050__030_fdm.txt
+  %% less 2600GENE_T1__2600GENE_T2__050__050__030_fdm2.txt
+
+FDM works well for gene-wide analyses, but does not pinpoint (1) the
+specific isoforms, exons, or splice junctions that are driving the
+signal nor does it (2) perform a general comparison of differences in
+transcript abundance between treatments.
+
+MultiSplice - detecting differences in abundance
+************************************************
+
+You need to be able to test if two sets of samples differ in their
+expression levels among genes and within genes -- that is, among
+isoforms in a gene.  While FDM is good at determining genes that
+differ in their overall isoform diversity, a way of *estimating*
+expression levels is needed.  Multisplice will do this.  It implements
+a LASSO based regression to estimate the difference in expression
+among genes and isoforms.  This is similar to least squares regression
+that we are mostly familiar with, but intuitively can be thought of a
+way of using a system of penalties to push the obviously
+non-significant genes to 'zero' difference in expression. This
+effectively allows MultiSplice to focus on the gene most likely to
+differ.
+
+Multi-splice is in early stage release and is not stable.  Yan Huang
+put a new version up Sunday night (cuz I found a bug).  However, it
+will be published soon and here is what is needed to use it.
+
+OS:     Ubuntu 9.04 (64-bit)
+Compiler:       g++ 4.3.3 or higher
+Matlab: MATLAB 2008 or higher -- **critical**
+MapSplice: 	1.x or better & MapPER or MapSplice 2.0 (in beta)
+
+This will not run on the instances of ec2 that we are using, but you
+can practice installing it.
+
+To get it, ::
+
+  %% curl -O -L http://bioinfo.cs.uky.edu/public/yan/MultiSplice/MultiSplice_v0.10.tar
+
+A few important notes about what you need to run it.
+
+1. Please make sure the input annotation file is in GFF format. Most genomes have this available.
+2. Please make sure the read alignment file is in SAM format.  If you ran MapSplice you have (??)
+3. MultiSplice only works on single-end reads. In case of paired-end reads, please use MapPER to infer the transcript fragment first.
+
+You'll need to compile (g++ on ec2 is ok). ::
+
+  %% make -f Makefile 
+
+Some simple example data, ::
+
+  %% curl -O -L http://bioinfo.cs.uky.edu/public/yan/MultiSplice/SampleData.tar 
+  %% mv SampleData.tar MultiSplice_v0.10
+  %% cd MultiSplice_v0.10/
+  %% tar -xf SampleData.tar
+
+This sample data is based on the GTF file for hg19 and a set of
+alignments that have been combined into a SAM file.  We are going to
+run with both sets begin 100 bp.  To run this example data (REMINDER:
+this won't work on ec2), ::
+
+  %% ./MultiSplice SampleData/hg19.gtf SampleData/alignments.sam result/ 100 100
+
+Check the results directory.
