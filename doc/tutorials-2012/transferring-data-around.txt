@@ -1,0 +1,15 @@
+Transferring data around
+========================
+
+Here's a command for *creating* a tar file::
+
+   %% tar czf output.tar.gz <one or more files or directories>
+
+You can copy files between UNIX servers using 'scp', which uses the
+ssh protocol as a way to copy files.  One challenge is that EC2
+instances by default don't have any passwords; you have to use keys.
+
+For Mac OS X, you can use Fugu to grab large files via the SSH connection;
+see http://rsug.itd.umich.edu/software/fugu/.
+
+For Windows, WinSCP might work well: http://winscp.net/eng/index.php

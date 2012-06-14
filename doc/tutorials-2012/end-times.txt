@@ -1,0 +1,9 @@
+The Last Day
+============
+
+.. toctree::
+   :maxdepth: 2
+
+   transferring-data-around
+   creating-a-custom-ami
+   reusing-course-materials

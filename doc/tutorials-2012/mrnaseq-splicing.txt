@@ -412,25 +412,27 @@ the file to our local computer using Dropbox. ::
 
   %% cp output/best_junction.bed /root/Dropbox
 
+(You can also grab it `here <files/best_junction.bed>`__.)
+
 Launch a web browser and go to http://genome.ucsc.edu/index.html
 
-.. image:: ../UCSC1.png
+.. image:: files/UCSC1.png
 
 In the upper left hand corner click **Genomes**
 
-.. image:: ../UCSC2.png
+.. image:: files/UCSC2.png
 
 *Change the assembly!!!!* The index we used was for hg18, not hg19.
  Then click **add custom tracks**.
 
-.. image:: ../UCSC3.png
+.. image:: files/UCSC3.png
 
 You are now going to upload your BED file 'best_junction.bed'.  Click
 **Choose File** next to 'Or upload'.  Using the dialog box, find
 best_junction.bed and upload.  If successful, you'll see the next
 screen.
 
-.. image:: ../UCSC4.png
+.. image:: files/UCSC4.png
 
 Click **go to genome browser** and this will take you to the tip of
 the 'p' arm of human chromosome 20.  This is zoomed in on the first
@@ -439,14 +441,14 @@ browser.  The black boxes indicate where MapSplice predicts the splice
 junctions are.  The connecting line indicates the intronic region. The
 arrows on the line shows the direction of transcription.
 
-.. image:: ../UCSC5.png
+.. image:: files/UCSC5.png
 
 As you can see the predicted splice matches the annotation well
 (DEFB125 is a defensin gene, which is part of the human immune
 system).  It is supported by EST and other data.  Double click on the
 junc1 track.
 
-.. image:: ../UCSC6.png
+.. image:: files/UCSC6.png
 
 This is a summary of the BED file information for this junction.  A
 key item here is the score.  This tells you how confident to be in
@@ -459,7 +461,7 @@ relative). Now go back to the browser (with the back arrow or
 whatever).  Click the **zoom out 10X**.  This will give a zoomed out
 view of the same region.
 
-.. image:: ../UCSC7.png
+.. image:: files/UCSC7.png
 
 Again, you see that the splices inferred by MapSplice support those in
 the annotation.  These two genes are relatively simple, so we are
@@ -468,7 +470,7 @@ field, type (or click max fast forward 2-3 times). ::
 
    chr20:247,889-331,788
 
-.. image:: ../UCSC8.png
+.. image:: files/UCSC8.png
 
 Here we have three genes.  The one on the left has no predicted
 junctions.  This is not hard to interpret as this gene clearly has no
@@ -662,8 +664,8 @@ is in
 
 Here is an example output file ::
 
-  %% curl -O -L http://152.2.14.58/~cdjones/ 2600GENE_T1__2600GENE_T2__050__030_fdm.txt
-  %% curl -O -L http://152.2.14.58/~cdjones/ 2600GENE_T1__2600GENE_T2__050__050__030_fdm2.txt
+  %% curl -O -L http://152.2.14.58/~cdjones/2600GENE_T1__2600GENE_T2__050__030_fdm.txt
+  %% curl -O -L http://152.2.14.58/~cdjones/2600GENE_T1__2600GENE_T2__050__050__030_fdm2.txt
 
 Let's take a quick look ::
 

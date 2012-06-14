@@ -1,0 +1,44 @@
+Creating a custom AMI
+=====================
+
+This year, I used the excellent StarCluster toolset to create custom
+AMIs.  See: http://web.mit.edu/star/cluster/
+
+Once you install and configure StarCluster, it's as simple as this:
+
+Start up an instance of the type you want to customize
+------------------------------------------------------
+
+For large instances, I start with the x86_64 AMI on the StarCluster home
+page.  That's currently ami-999d49f0.  I start it using the starcluster
+command line, from my local machine::
+
+  %% starcluster start -o -s 1 -i m1.large -n ami-999d49f0 customize_me
+
+Then, once it's started, I log in and install software, configure boot,
+etc.  (See :doc:`reusing-course-materials` for an example.)  A few notes --
+
+ - don't put anything in /root that's not in a hidden (dot) directory; the
+   script for building a new AMI will erase everything in that directory.
+
+ - don't put anything under /mnt if you want it saved as part of the
+   AMI, as this will *not* get baked into the new AMI.
+
+ - don't mount any EBS volumes as they, too, will get baked into the new
+   AMI.
+
+Generally I put things under /usr/local/src (if it's a program) or elsewhere
+under /usr if not.  These will get saved as part of the new AMI.
+
+Once you've customized things so that everything starts up on boot as you
+want -- TEST THIS!! -- tell starcluster to make a new EBS image::
+
+  %% starcluster ebsimage i-9999999 my-new-image
+
+Here you should name it something other than 'my-new-image'.  You can figure
+out the correct instance ID by logging into the AWS console and looking,
+or by doing ::
+
+  %% starcluster listclusters
+
+and voila, it will show up under your AMIs!

@@ -1,0 +1,135 @@
+Reusing course materials
+========================
+
+Please feel free to borrow, rewrite, crib, or otherwise swipe all of
+these materials!  Note that they're under the `CC-BY-SA license
+<http://creativecommons.org/licenses/by-sa/2.0/>`__.
+
+Documentation
+-------------
+
+All of the docs are written in `reStructuredText
+<http://docutils.sourceforge.net/rst.html>`__ and combined into a Web site
+using `Sphinx <http://sphinx.pocoo.org/index.html>`__.
+
+The documentation source is available via github:
+
+   http://github.com/ngs-docs/edda
+
+You can get a local copy by doing ::
+
+   %% git clone git://github.com/ngs-docs/edda.git
+
+All of the docs are under doc/, and you can see an example of the "source
+code" `here
+<https://github.com/ngs-docs/edda/blob/master/doc/tutorials-2012/bwa_tutorial.txt>`__.
+
+To build the docs, go into the 'doc/' directory and type 'make'.  This
+will (eventually) put a bunch of HTML files into _build/html/.
+
+Note that things under tutorials-2012/files/ (for example) get copied
+automatically and verbatim.
+
+I then copy this directory over to the http://ged.msu.edu/angus/ site using
+the script 'doc/update-angus.sh'.
+
+By default, the docs have the `disqus <http://disqus.com/>`__ commenting
+system enabled.  You can remove this by going into doc/_templates/layout.html
+and removing everything between ``macro comments()`` and ``endmacro``.
+
+IPython Notebooks
+-----------------
+
+All of the course notebooks are available at github under
+
+   https://github.com/ngs-docs/ngs-notebooks
+
+
+Customizing the AMI
+-------------------
+
+This is a multistep process that looks more complicated than it actually
+is :).  
+
+First, start up the AMI you want to customize (see
+:doc:`creating-a-custom-ami`).
+
+Next, log in.
+
+Upgrade ipython notebook to the latest version
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Assuming you already have all the prerequisites installed, do the following::
+
+  %% cd /tmp
+  %% git clone https://github.com/ipython/ipython.git
+  %% cd ipython
+  %% python setup.py install
+
+Configure ipython notebook
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Make the config directory if it doesn't already exist::
+
+   %% mkdir ~/.ipython
+   %% cd ~/.ipython
+
+Build a custom certificate for use with https::
+
+   %% openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout ~/.ipython/mycert.pem -out ~/.ipython/mycert.pem
+
+(Just answer the questions with whatever nonsense you want.)
+
+Then, add the following to the file
+~/.ipython/profile_default/ipython_config.py.  (This file should exist
+if you've run ipython at least once.) ::
+
+   c.NotebookApp.certfile = u'/root/.ipython/mycert.pem'
+   c.NotebookApp.ip = '*'
+   c.NotebookApp.open_browser = False
+   c.NotebookApp.password = u'sha1:6b543b7dcc9f:33d3890c64538eab5cad799d30605af314b6cb89'
+   c.NotebookApp.port = 443
+
+This basically sets things up to run under HTTPS on a public port,
+without running a local browser on your EC2 instance, using the
+password 'ngs'.  See the `notebook docs
+<http://ipython.org/ipython-doc/dev/interactive/htmlnotebook.html>`__
+for more information.
+
+Configure the notebook files
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Grab them from github::
+
+   %% cd /usr/local
+   %% git clone https://github.com/ngs-docs/ngs-notebooks.git notebooks
+
+Configure things to start up on boot
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Copy the 'run.sh' script from the notebooks directory into ~/.ipython, and
+add it to crontab::
+
+   %% cp /usr/local/notebooks/run.sh ~/.ipython
+
+and add the following two lines to your crontab::
+
+   @reboot /root/.ipython/run.sh
+   @reboot /root/.dropbox-dist/dropboxd
+
+(You can type 'crontab', paste those two lines in, and then hit CTRL-D.)
+
+Configure the root user account
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Add the following two lines to the bottom of /root/.bashrc::
+
+  export PATH=/usr/local/bin:$PATH
+  export PYTHONPATH=/usr/local/notebooks/lib
+
+---
+
+Now, reboot and make sure the notebook server starts up and everything is
+copacetic.
+
+Then freeze down the AMI!
