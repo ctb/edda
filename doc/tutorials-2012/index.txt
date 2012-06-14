@@ -19,4 +19,6 @@ Your AMI is **ami-00ca6a69** and the ipython notebook password is 'ngs'.
 
    mrnaseq-splicing
 
+   snp_tutorial
+
    end-times
