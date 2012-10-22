@@ -1,0 +1,44 @@
+Week 6 - UNIX and assembly with velvet
+======================================
+
+Reading & Pondering
+-------------------
+
+For class on Monday, please read: http://www.ncbi.nlm.nih.gov/pubmed/20211242
+
+Ponder the following questions and choose your three favorite (most reliable)
+answers... we'll rank and discuss them in class.
+
+1. Given an assembly for which we have a nearby (but not identical)
+reference genome, how do we evaluate the assembly?
+
+2. Given an assembly *without* a nearby reference genome, how can we evaluate
+the assembly?
+
+Instructions
+------------
+
+Make sure you have Dropbox (http://www.dropbox.com) installed and
+running on your machine.  Here's an invitation that you can use:
+http://db.tt/1Fblzlp.
+
+Video
+-----
+
+Here's a video run through of the homework, below: `Assembling E. coli with Velvet on EC2 <http://www.youtube.com/watch?v=E1mps9h_ov0&feature=youtu.be>`__.
+
+Homework 6
+----------
+
+Follow the instructions in
+:doc:`../tutorials-2012/start-up-an-ec2-instance` and either
+:doc:`../tutorials-2012/log-in-with-ssh-mac` or
+:doc:`../tutorials-2012/log-in-with-ssh-win`.  (You'll want to
+continue using the AMI ami-c17ec8a8, rather than the one in the
+linked-to instructions.)
+
+After logging in, install Dropbox on the remote machine by following this
+tutorial: :doc:`../tutorials-2011/installing-dropbox`.
+
+Finally, go through the instructions in :doc:`week6-velvet-ecoli`; make
+sure to follow all the way through the homework at the end!

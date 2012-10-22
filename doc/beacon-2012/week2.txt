@@ -1,0 +1,78 @@
+Week 2 - Mo' Python (strings and functions)
+===========================================
+
+Instructions
+------------
+
+Watch the videos below, and read the 'functions' tutorial on the Software
+Carpentry Web site:
+
+http://software-carpentry.org/4_0/python/func/
+
+Videos
+------
+
+1. `Strings in Python <http://www.youtube.com/watch?v=D_NflB1Fek8>`__
+
+Also see: http://software-carpentry.org/4_0/python/strings/
+
+2. `Functions in Python <http://www.youtube.com/watch?v=-ijPU3JM1pU>`__
+
+Also see: http://software-carpentry.org/4_0/python/func/
+
+3. `Aliasing and variables in Python <http://www.youtube.com/watch?v=lPIy3edt48c>`__
+
+Also see: http://software-carpentry.org/4_0/python/alias/
+
+Homework 1
+----------
+
+Due Sunday, September 16th, at midnight PST.
+
+After going through the lectures above, start up an EC2 instance, and:
+
+1. create a new notebook, 'homework2-lastname', and write the following bits
+   of code, each in a separate cell:
+
+   a. Write a function 'volume' that returns the volume of a sphere for a
+      given radius.  Note: volume = (2/3 * pi * r**3)
+
+   b. Write a function 'triple' that takes a list as an argument and returns
+      a *new* list that contains every element in the given list 3 times in
+      a row.  For example, 'triple([5, 6, 7])' should return
+      '[5, 5, 5, 6, 6, 6, 7, 7, 7]'.  Avoid side effects.
+
+   c. Write a function 'uniq' that takes a list as an argument and returns
+      a new list that contains only the unique elements of that list, e.g.
+      'uniq([5, 5, 7, 8, 9, 9])' should return [5, 7, 8, 9].  Avoid side
+      effects.
+
+      Hint: remember that you can use the operator 'in' to see if an element
+      is already in a list.
+
+   d. Write a function 'uniq_nocase' that takes a list of strings as
+      an argument and returns a new list that contains only the unique
+      strings in the input list, all lower case.  "Unique" here means
+      unique in their lowercase form,
+      e.g. 'uniq_nocase(["A", "a", "b"])' should return ["a", "b"].
+
+2. watch the `prime number video <http://www.youtube.com/watch?v=8WYnozJnJFI&feature=youtu.be>`__ and do what it says.
+
+   Specifically,
+
+    - update your notebooks using 'course-00-update-notebooks'
+
+    - open 'course-02-primes-hw'
+
+    - copy the 'primes' function into a new cell and edit it to make a
+      new function that returns a list of prime numbers, rather than
+      print them out.
+
+    - copy the 'primes' function again and edit it to use the 'sieve'
+      approach (see `the Wikipedia page for Eratosthenes
+      <http://en.wikipedia.org/wiki/Eratosthenes#Prime_numbers>`__).
+
+3. Save and download your notebooks, and e-mail them to Titus at
+   <ctb@msu.edu>.  Feel free to CC Art Covert <covertar@gmail.com>.
+
+4. Remember to shut down your instance!

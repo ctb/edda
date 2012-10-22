@@ -1,0 +1,99 @@
+Week 1 - Introducing Amazon, iPython notebook, and Python
+=========================================================
+
+Introduction and resources
+--------------------------
+
+We'll be using Python 2, running inside IPython Notebook, on Amazon
+rental machines, for the first few weeks of this class.
+
+Python 2 is different from Python 3, note.
+
+Here are some resources for you to use if you are interested in exploring on
+your own:
+
+ - `Software Carpentry site <http://software-carpentry.org/4_0/python/>`__
+
+ - `The official Python tutorial <http://docs.python.org/tutorial/>`__
+
+ - `MIT's A Gentle Introduction to Programming <http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-189-a-gentle-introduction-to-programming-using-python-january-iap-2008/>`__
+
+ - `How to think like a Computer Scientist <http://openbookproject.net/thinkcs/python/english2e/index.html>`__
+
+ - `Dive Into Python <http://www.diveintopython.net/>`__
+
+ - `Programming in Python wiki <http://en.wikibooks.org/wiki/Programming%3aPython>`__
+
+Videos
+------
+
+1. `Starting an AWS instance <http://www.youtube.com/watch?v=JMedTCa5lec&feature=youtu.be>`__
+
+Note: the AMI you are looking for is ami-c17ec8a8.
+
+Also see this page from the 2012 NGS summer course for a text version:
+:doc:`../tutorials-2012/day1`
+
+----
+
+2. `Introducing IPython Notebook <http://www.youtube.com/watch?v=pDyaUUmvWvk&feature=youtu.be>`__
+
+----
+
+3. `Variables in Python <http://www.youtube.com/watch?v=A_hpPiR72lE>`__
+
+Also see: http://software-carpentry.org/4_0/python/basics/
+
+----
+
+4. `Loops and Conditionals in Python <http://www.youtube.com/watch?v=B6MWtuKIimI>`__
+
+Also see: http://software-carpentry.org/4_0/python/flow/
+
+----
+
+5. `Lists in Python <http://www.youtube.com/watch?v=4XobVAJffYQ>`__
+
+Also see: http://software-carpentry.org/4_0/python/lists/
+
+Homework 1
+----------
+
+Due Sunday, September 9th, at midnight PST.
+
+After going through the lectures above, start up an EC2 instance, and:
+
+1. create a new notebook, and write three bits of code, each in a
+   separate cell:
+
+   a. a while loop that creates a list containing every 3rd number starting
+      at 2 and ending with the number N, but excluding those numbers
+      that are divisible by 10.  For example, if N is 21, then the
+      list would contain 2, 5, 8, 11, 14, and 17.  Put the list in
+      a variable named 'triads'.
+
+   b. a while loop that creates a list of prime numbers between 2 and N.
+      Put the list in a variable named 'primes'.
+
+   c. a for loop that creates a list of squared numbers from the odd
+      numbers between 1 and N, and puts the list in a variable named
+      'oddsquared'.  For example, if N is 6, then the 'oddsquared'
+      list would contain 1, 9, and 25 (1, 3, and 5, squared).
+
+   In all three cases, 'N' should be something you can set arbitrarily,
+   e.g. the code should work equally well for N=10 and N=100.
+
+2. create a new notebook, and go through the entire Software Carpentry
+`string tutorial
+<http://software-carpentry.org/4_0/python/strings/>`__ in the
+notebook.  Put all of the working examples in the notebook and make
+sure they function as expected (and as demonstrated in the tutorial).
+
+Save both notebooks, download them to your laptop, and send them to Titus
+at <ctb@msu.edu>.  Remember to shut down your EC2 instance!
+
+---
+
+In class survey:
+
+https://www.surveymonkey.com/s/YQKMHPM

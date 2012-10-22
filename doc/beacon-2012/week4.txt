@@ -1,0 +1,50 @@
+Week 4 - Modeling and simulations and random numbers
+====================================================
+
+Instructions
+------------
+
+Watch the video below and/or skim the notebook.
+
+Then do the homework.  The homework is due on Monday, Oct 1st, at 3am EST.
+
+Videos and notebooks
+--------------------
+
+Lecture: `Python and variable scope <http://www.youtube.com/watch?v=PZThJ_HIBT0&feature=youtu.be>`__.  Notebook is `lecture-week04-scope <http://nbviewer.ipython.org/urls/raw.github.com/beacon-center/intro-computational-science/master/lecture-week04-scope.ipynb>`__.
+
+Homework 4
+----------
+
+Hand in the below as gists, in notebook form (as for HW 3).  Note, all of the
+pre-cooked notebooks are available when you update your notebooks.
+
+1. Penny the Porpoise.
+
+   Go find the IPython notebook entitled 'hw-week4-penny' (source `here <https://raw.github.com/beacon-center/intro-computational-science/master/hw-week4-penny.ipynb>`__, HTML `here <http://nbviewer.ipython.org/urls/raw.github.com/beacon-center/intro-computational-science/master/hw-week4-penny.ipynb>`__) and follow instructions.
+
+   You may want to review the 'dictionaries' video or tutorial from
+   :doc:`week3`.
+
+2. Monty Hall Monte Carlo.
+
+   Go find the IPython notebook entitled 'hw-week4-monty-hall' (source `here <https://raw.github.com/beacon-center/intro-computational-science/master/hw-week4-monty-hall.ipynb>`__, HTML `here <http://nbviewer.ipython.org/urls/raw.github.com/beacon-center/intro-computational-science/master/hw-week4-monty-hall.ipynb>`__ and follow instructions.  Optional: boggle.
+   
+3. Go read `this set of instructions on linear regression <http://lister.dulci.duhs.duke.edu/~cliburn/summer-school/python/_build/html/statistics.html>`__ and do a linear fit (see code line 7 of the linear regression instructions, in particular) for each of the four CSV data sets from HW 3, and print out the slope and intercept of the linear fit for each one.  Optional: boggle.
+
+   For bonus pixie dust, provide new plots of each of the four data
+   sets from with the linear regression line plotted as well; adapt
+   code line 8 of the linear regression instructions as needed.
+
+   Note: you only need to look at the actual code lines, 'In [1]:' etc; the
+   commands to run python and so on are unnecessary and confusing for you.
+
+   Now, look up Anscombe's Quartet.  Moral: always plot your data.
+
+   For help with this one, you might want to revisit "Loading data from
+   files" and "Plotting in ipython notebook" from :doc:`week3`; or, see
+   the soon-to-be-posted HW 3 results.
+
+4. Look at 'hw-week4-primes-fixme' (`notebook <https://raw.github.com/beacon-center/intro-computational-science/master/hw-week4-primes-fixme.ipynb>`__, `HTML <http://nbviewer.ipython.org/urls/raw.github.com/beacon-center/intro-computational-science/master/hw-week4-primes-fixme.ipynb>`__) and diagnose; use the notebook to do so, please, and hand it in with your diagnosis.
+
+   For extra pixie dust bonuses, fix the code through refactoring.

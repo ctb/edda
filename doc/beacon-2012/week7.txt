@@ -1,0 +1,23 @@
+Week 7 - More assembly; k-mers
+==============================
+
+Reminder: a k-mer is just a fixed length word of DNA.  Re-read the Miller
+paper sections on de Bruijn graphs if you need reminding!
+
+Homework 7
+----------
+
+Start up a small instance.
+
+Go through the instructions in :doc:`week7-khmer`; then:
+
+1. Connect to the ipython notebook server, read update the notebooks,
+   and read through hw-week6-fake-genome.  Answer the questions at the
+   end.
+
+2. Also, fill in code for Problems 1 and 2 in the notebook
+   'hw-week6-data-parsing-again'.
+
+Upload both sets of answers as gists and make sure they work on
+http://nbviewer.ipython.org/.  Send your gist IDs to Titus at
+ctb@msu.edu.

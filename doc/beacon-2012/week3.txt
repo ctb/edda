@@ -1,0 +1,197 @@
+Week 3 - Python that starts to be useful
+========================================
+
+.. In-class survey: https://www.surveymonkey.com/s/YMMCSS3
+
+Instructions
+------------
+
+Watch the videos below, and do the homework.  Warning: this homework may
+take a while.  Please try to start working on it well before Sunday.
+
+This week: dictionaries, libraries, loading data, and plotting!
+
+Videos
+------
+
+1. `Using gists on github <http://www.youtube.com/watch?v=YY0Bff5PoKI>`__
+
+See http://github.com/ and http://gist.github.com/.
+
+2. `Loading data from local files <http://youtu.be/HL1Nuzog9kc>`__.
+
+3. `Using modules in Python: introducing 'math' and 'csv' <http://youtu.be/YHS9MJZTVwY>`__.
+
+See the Python stdlib `math docs
+<http://docs.python.org/library/math.html>`__ and `csv docs
+<http://docs.python.org/library/csv.html>`__.
+
+**Also** see Doug Hellmann's excellent intermediate introductions to
+these at his `Python Module of the Week (PyMOTW) site
+<http://www.doughellmann.com/PyMOTW/>`__: `math -- mathematical
+functions <http://www.doughellmann.com/PyMOTW/math/>`__ and `csv --
+comma-separated value files
+<http://www.doughellmann.com/PyMOTW/csv/>`__.  You don't *need* more
+than what I've shown in the screencast to do the homework, but you
+might consider skimming these to see what other goodies are available
+in these modules in the stdlib.
+
+4. `Introducing dictionaries <http://youtu.be/Pt0LlpDUcwk>`__.
+
+Also see the Software Carpentry lecture on dictionaries: http://software-carpentry.org/4_0/setdict/dict/
+
+5. `Plotting in ipython notebook with matplotlib <http://youtu.be/YSK3CboAOvU>`__.
+
+---
+
+Homework 3
+----------
+
+0. Put the 'hello, world' notebook on github as a 'gist', and make sure it's
+   viewable at 'http://nbviewer.ipython.org'.  Specifically.
+
+   a. Create an account on github.com
+
+   b. Go to https://raw.github.com/beacon-center/intro-computational-science/master/course-01-hello-world.ipynb, select all, 'copy'.
+
+   c. Go to gist.github.com, 'paste' into the text box, and name the file something like 'hello.ipynb'.  Then 'create public gist'.
+
+   d. Take the gist number, go to http://nbviewer.ipython.org/, and enter the gist number into the box.  Does it look like it should?
+
+   (From now on, hand in your homeworks by sending me the gist number(s).)
+
+1. After you update the notebooks repository on an EC2 instance (by
+   running the 'course-00-update-notebooks' notebook) you will have a
+   new directory '/usr/local/notebooks/quartet', containing four files:
+   q1.csv, q2.csv, q3.csv, and q4.csv.  Each of these files will be
+   available to your program as ::
+
+      '/usr/local/notebooks/quartet/q1.csv'
+
+   etc. You can see their contents here:
+
+      https://github.com/beacon-center/intro-computational-science/tree/master/quartet
+
+   Write a notebook to:
+
+   a. Load in the data in these files into two lists.  Please do this
+      using a single function that takes a filename as an argument and
+      returns two lists, x and y -- you might want to name them x1 and y1
+      for q1.csv, x2 and y2 for q2.csv, etc.
+
+   b. Calculate and print the average and standard deviation of y1,
+      y2, y3, and y4.
+
+   c. Plot the x and y points on four different plots.
+
+   Hand in the homework by uploading it as a gist.  (You may have to do
+   something tricky like opening your ipynb file in a text editor, copying
+   the contents, and then pasting into a gist.  Sorry...)
+
+2. Write a function to 'invert' dictionaries, i.e. the function should
+   take a single dictionary, and create a new dictionary that contains
+   all of the values from the first dictionary as keys in the second,
+   and all of the keys from the first dictionary as values associated with
+   the appropriate key in the second dictionary.
+
+   One possible approach:
+
+     Do (b) by hand (i.e. no functions or loops), first; just write out
+     the statements to create a new dictionary and assign the correct
+     values to it.  Then do (c), too.
+
+   Another approach:
+
+     First, write a function that takes in a dictionary and returns
+     a new, empty dictionary.
+
+     Second, modify the function so that it prints out each key/value
+     pair in the input dictionary.
+
+     Third, modify the function so that it prints out each value, key
+     pair.  (i.e. flip the order of things in the print statement.)
+
+     Fourth, modify the function so that it assigns the value/key
+     pair to the new dictionary rather than just printing the value/key.
+
+   For the homework,
+
+   a. Write the function; name it something like 'invert_d'.
+
+   b. Take the following test dictionary (you can copy/paste into the notebook)::
+
+        first_d = { 'first': 1, 'second': 2 }
+
+      and make sure your function turns it into this::
+
+        { 1: 'first', 2: 'second' }
+
+      Write this as an assert statement::
+
+        assert invert_d(first_d) == test_d
+
+      Note!  If you swipe some online code it will probably not pass this
+      test, so be careful :).
+
+   c. Observe what happens when you pass in this dictionary::
+
+        bad_d = { 'one': 1, 'uno': 1 }
+
+      Explain what happens in your own words (English, please...).
+      Is this 'expected' behavior?  Why or why not?
+
+      Bonus pixie dust: Name one or more possible alternatives to this
+      behavior.
+
+3. In 'hw-week3-3.ipynb' I've placed some code for loading DNA and protein
+   sequences in a simplified FASTA format into an in-memory
+   dictionary.  Your mission, should you choose to accept it (please
+   do!)  is to develop simple 'test' data that exercises every
+   execution path in the code and makes sure it works properly (using
+   'assert' statements). I've provided one short example for you to
+   get started with.
+
+   If you haven't seen FASTA format before, the basic format is this:
+   a text file, containing multiple records, with each record
+   consisting of a record name and an associated sequence.  The
+   slightly simplified format we're parsing here contains the record
+   name on a single line, followed by one or more lines 
+
+   You should end up with *at least* three different sets of input
+   test data; more is fine.  Please indicate somehow (in code comments
+   or a markdown box) what specific condition you're testing with each
+   set of input test data.
+
+   Specifically,
+
+   a. Write 3 or more "test cells" that test different paths through
+      the code, each with different input data.  Use assert statements
+      so that if the code is wrong, an error occurs.  Hint: you can
+      temporarily change the parsing code to be wrong, in order to
+      test your assert statements.
+
+   b. There are two serious and hopefully fairly obvious bugs in the
+      code.  You may have to use common sense to find them, or else
+      talk to someone else in the course.  Write test cases that
+      trigger at least one of them (if you haven't already done so).
+
+      Hint: study the input and output of my provided test case very
+      carefully and skeptically.
+
+      Hint 2: they are sins of omission on my part; the code that is
+      there works fine, but you will need to *add* code in order to
+      fix the bugs.  (These are very common kinds of bugs, too...)
+
+   c. Fix at least one of the bugs.
+
+   d. Extra-kudos: Find and fix the other bug.
+
+   e. Super-extra kudos if you find additional bugs (I can only find
+      two myself, but I'm the worst possible person to analyze the
+      code, because I wrote it!)
+
+   Add all this stuff in to the hw-week3-3 notebook, make sure it all
+   runs from scratch (i.e. after explicitly restarting the Python
+   kernel), save & download it, and upload it as a gist.
+
+Also see the `video walkthrough <http://youtu.be/urD635tTpXY>`__.

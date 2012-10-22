@@ -1,0 +1,143 @@
+Running the Velvet assembler on an E. coli data set
+===================================================
+
+After logging in via Terminal and ssh (on the Mac) or via puttygen (on
+Windows), you should be at a prompt that looks something like this::
+
+  root@ip-10-10-65-136:~#
+
+This is a UNIX command prompt.  Enter all of the commands *after* the %%s,
+below, to tell your remote computer what to do.
+
+---
+
+
+
+Go to a directory with lots of disk space::
+
+  %% cd /mnt
+
+Grab some test data from one of my publications::
+
+  %% curl -O https://s3.amazonaws.com/public.ged.msu.edu/ecoli_ref-5m.fastq.gz
+
+Now, uncompress the file::
+
+  %% gunzip ecoli_ref-5m.fastq.gz
+
+If you ask for a detailed file listing of it, you'll see that it's
+about 1.1 GB in size::
+
+  %% ls -la ecoli_ref-5m.fastq 
+  -rw-r--r-- 1 root root 1141494078 2012-10-10 02:17 ecoli_ref-5m.fastq
+
+Now, look at the top of the file::
+
+  %% head ecoli_ref-5m.fastq
+
+(This just prints out the first 10 lines.)
+
+Check out the format -- this is a FASTQ file for storing short read data.
+Each record is four lines: the first line, starting with @, is the
+sequence name; the second line is the sequence; the third line is a '+';
+and the fourth line is quality information about each of the bases in the
+sequence.
+
+This file contains 5m reads from an Illumina run on E. coli, taken
+from the Chitsaz et al. (2011) single-cell paper (see
+http://www.ncbi.nlm.nih.gov/pubmed/21926975).
+
+----
+
+Next, grab the source code for the Velvet assembler::
+
+  %% curl -O http://www.ebi.ac.uk/~zerbino/velvet/velvet_1.2.08.tgz
+
+Unpack it::
+
+  %% tar xvzf velvet_1.2.08.tgz
+
+And build it::
+
+  %% cd velvet_1.2.08
+  %% make MAXKMERLENGTH='51'
+
+Finally, install it in a central location::
+
+  %% cp velvetg velveth /usr/local/bin
+
+----
+
+OK.  We've got the data, and we've got the assembler.  Now what?
+
+Assemble!
+
+Assembly with velvet consists of two commands: first, the command
+velveth, which creates a graph file that stores all the reads;
+and second, the command velvetg, which traverses the graph and outputs
+an assembled genome. ::
+
+  %% cd /mnt
+  %% velveth ecoli.33 33 -short -fastq ecoli_ref-5m.fastq 
+
+(This will take a few minutes.)  Here, you're telling the 'velveth'
+program that you want to create an assemble in the directory
+'ecoli.33', with a k-mer value of 33, using the sequences in the
+short-read FASTQ file 'ecoli_ref-5m.fastq'.
+
+Once this is done, now run 'velvetg' to actually build an assembly::
+
+  %% velvetg ecoli.33
+
+This, too, will take a few minutes.
+
+The kind of output you see is typical of UNIX analysis commands: a bunch
+of semi-cryptic text output that alerts you that the program is running,
+but doesn't mean that much. If you do this enough, you'll start to
+be able to interpret it... which is kind of scary.  But the main thing is,
+there's no standard output format, so each program will spit out something
+different.  Basically... get used to it :).
+
+OK, once all this finishes, if you type 'ls' you'll see a list of files,
+which includes a directory 'ecoli.33'. ::
+
+  %% ls
+  ecoli.33  ecoli_ref-5m.fastq  lost+found  velvet_1.2.08  velvet_1.2.08.tgz
+
+If you look in that directory, ::
+
+  %% ls ecoli.33/
+  Graph  LastGraph  Log  PreGraph  Roadmaps  Sequences  contigs.fa  stats.txt
+
+you'll see a bunch of files which includes 'contigs.fa'.  That contains
+your assembled contigs.  Check it out with 'head'::
+
+  %% head ecoli.33/contigs.fa
+  >NODE_1_length_49_cov_1.020408
+  AAAAAAAAAAAAAAAAAAAAAAAAAACTGGCAGAAGAAAAATAAGAAATGTTACAAAAAA
+  AAAAAAAAAAAAAAAAAAAAA
+  >NODE_66_length_56_cov_1.107143
+  AAAAAAAAAAAAAAAGAAAAAAAAAAAAAAACAAAGGGCAAAGCAAAATAAAAAGTTTTT
+  CAAAAAAAAAAAAAAAAAAAAAAAAAAA
+  >NODE_121_length_33_cov_1.000000
+  AAAAAAAAAAAAACATAAAAAAAAAAAAAAAATACTATAAAAAAAAAAAAAAAAAAAAAA
+  AAAAA
+  >NODE_124_length_54_cov_1.055556
+
+You should see something like the above, with a bunch of FASTA sequences.
+These are your assembled contigs.  Many of them are short and rather
+crappy :).  We'll talk about this in class on Monday.
+
+In the meantime, open up the IPython Notebook via your browser, as you
+usually do.  Create a new notebook, and enter these four commands into it::
+
+  !ls /mnt
+  !ls /mnt/ecoli.33
+  !cp /mnt/ecoli.33/contigs.fa /root/Dropbox
+  !head -50 /mnt/ecoli.33/contigs.fa
+
+Save that notebook as 'hw6.ipynb', put it in a gist, and send me the
+gist ID; then, shut down your computer.
+
+Note that you should also now have a ~5mb file named 'contigs.fa' in
+your Dropbox directory on your local computer.

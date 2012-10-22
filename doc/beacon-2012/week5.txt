@@ -1,0 +1,45 @@
+Week 5 - Computational statistics!?
+===================================
+
+In class survey-let: https://www.surveymonkey.com/s/95SC6DD
+
+Instructions
+------------
+
+Watch the video below; it's not really necessary for the homework, note.
+
+Then do the homework.  The homework is due on Monday, Oct 8th, at 3am EST.
+
+Videos and notebooks
+--------------------
+
+Lecture: `Code paths, refactoring, and 'elegance' <http://youtu.be/TsnhlmqHkNc>`__.
+
+Homework 5
+----------
+
+Hand in the below as separate gists, in notebook form (as for HW 3 and
+4).  Note, all of the pre-cooked notebooks are available when you
+update your notebooks.
+
+1. Penny the Porpoise, round 2.
+
+   Go find the IPython notebook entitled 'hw-week5-penny2' (source `here <https://raw.github.com/beacon-center/intro-computational-science/master/hw-week5-penny2.ipynb>`__, HTML `here <http://nbviewer.ipython.org/urls/raw.github.com/beacon-center/intro-computational-science/master/hw-week5-penny2.ipynb>`__) and follow instructions.
+
+2. Heterogenous lists in dicts.
+
+   Create a notebook that grabs the CSV data in
+   https://raw.github.com/ctb/edda/master/doc/beacon-2011/tutorial5/short.csv
+   (see problem #1) and loads the data into a single dictionary keyed
+   on the names and with lists of the per-name info as values.  Then
+   iterate through the dictionary and print out the gender and jacket
+   color of every female under the age of 15.
+
+3. Coin flipping, round 1.
+
+   Go find the IPython notebook entitled 'hw-week5-coinflips (source `here <https://raw.github.com/beacon-center/intro-computational-science/master/hw-week5-coinflips.ipynb>`__, HTML `here <http://nbviewer.ipython.org/urls/raw.github.com/beacon-center/intro-computational-science/master/hw-week5-coinflips.ipynb>`__) and follow instructions.
+
+4. Coin flipping, round 2.
+
+   Go find the IPython notebook entitled 'hw-week5-coinflips2 (source `here <https://raw.github.com/beacon-center/intro-computational-science/master/hw-week5-coinflips2.ipynb>`__, HTML `here <http://nbviewer.ipython.org/urls/raw.github.com/beacon-center/intro-computational-science/master/hw-week5-coinflips2.ipynb>`__) and follow instructions.
+

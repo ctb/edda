@@ -1,0 +1,36 @@
+Installing khmer.
+=================
+
+So far, we've mostly been working with pre-installed software -- which
+just means that someone *else* has gone to the trouble of finding it,
+downloading it, compiling it, and installing it.  Velvet was your first
+taste of this process; this week, we're going to continue with two
+software from the Brown lab, 'screed' and 'khmer'.
+
+Log into your Amazon server, and following the instructions below to install
+these two pieces of software.
+
+First, install 'screed'.  screed is a Python library for working with
+short-read data sets.  We're going to install it directly from the
+development location on github. ::
+
+  %% cd /usr/local/share
+  %% git clone git://github.com/ged-lab/screed.git
+  %% cd screed
+  %% python setup.py install
+
+Next, install 'khmer'.  khmer is a Python library for working with large
+numbers of k-mers.  Again, we'll install it directly from the development
+location on github. ::
+
+  %% cd /usr/local/share
+  %% git clone git://github.com/ged-lab/khmer.git
+  %% cd khmer
+  %% make
+  %% cd python
+  %% python setup.py install
+
+If you're interested in what these packages do, check out
+http://screed.readthedocs.org/en/latest/ and
+http://khmer.readthedocs.org/en/latest/.  We'll cover a small bit of their
+functionality in class.
