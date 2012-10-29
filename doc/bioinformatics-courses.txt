@@ -26,3 +26,5 @@ Bioinformatics for Cancer Genomics / Toronto, CA -- http://bioinformatics.ca/wor
 Informatics on High Throughput Sequencing Data / Toronto, CA -- http://bioinformatics.ca/workshops/2012/informatics-high-throughput-sequencing-data
 
 European Sequence Data Analysis Training School -- http://www.basgen.nl/sdac/
+
+Materials for an Australian NGS workshop -- https://github.com/nathanhaigh/ngs_workshop#readme
