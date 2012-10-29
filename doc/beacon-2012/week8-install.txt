@@ -1,0 +1,39 @@
+Downloading and installing Bowtie and BLAST
+===========================================
+
+You've now worked with pre-installed software (like ipython notebook),
+and also worked with software that we have to build and install
+ourselves (like Velvet, screed, and khmer).  There's another category:
+software that is already built, but that we need to download and install.
+It's simpler than compiling it; it's just a matter of downloading,
+unpacking, and copying the files around.
+
+Here are two examples: `bowtie
+<http://bowtie-bio.sourceforge.net/manual.shtml>`__, a read mapping
+packge, ::
+
+   %% cd /mnt
+   %% curl -O -L http://sourceforge.net/projects/bowtie-bio/files/bowtie/0.12.7/bowtie-0.12.7-linux-x86_64.zip
+   %% unzip bowtie-0.12.7-linux-x86_64.zip
+   %% cp bowtie-0.12.7/bowtie* /usr/local/bin
+
+and BLAST, which I'm hoping most of you have already had some
+experience with::
+
+   %% curl -O ftp://ftp.ncbi.nih.gov/blast/executables/release/2.2.24/blast-2.2.24-ia32-linux.tar.gz
+   %% tar xzf blast-2.2.24-ia32-linux.tar.gz
+   %% cp blast-2.2.24/bin/* /usr/local/bin
+   %% cp -r blast-2.2.24/data /usr/local/blast-data
+
+In both cases we're simply grabbing binary packages that already exist
+for our platform -- you sort of learn to recognize things like
+'x86_64', which means 'binary for x86 processors (most of them),
+64-bit versions (the more recent ones)'.  'ia32' in the BLAST name
+means '32-bit or above Intel architectures (which is pretty much all
+of them)'.
+
+Also, please install Dropbox
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+After logging in, install Dropbox on the remote machine by following this
+tutorial: :doc:`../tutorials-2011/installing-dropbox`.

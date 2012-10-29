@@ -1,0 +1,154 @@
+Basic partitioning and digital normalization
+============================================
+
+First, make sure you have activated bioware and installed khmer in your
+account; see :doc:`stamps-assembly-1` for more info.
+
+If you already installed khmer in your home directory yesterday
+(Thursday), then you need to update it for today (Friday)::
+
+   %% cd ~/khmer
+   %% git pull origin master
+
+---
+
+Partitioning
+------------
+
+OK, we'll start by doing partitioning with khmer.  Our partitioning
+approach (described `here
+<http://www.ncbi.nlm.nih.gov/pubmed?term=22847406>`__) is a low-memory
+method of splitting reads into groups that belong to different
+organisms.  It does this by *graph connectivity*, which means that (in
+theory, and within certain limitations) the assembly of the reads
+before and after partitioning should be the same.  It is primarily
+intended to *scale* your assembly rather than improve it, and you can
+use it with any assembler.
+
+First, create a directory::
+
+   %% cd
+   %% mkdir pop2
+   %% cd pop2
+
+Now, load the data into a graph file; this is similar to the 'velveth'
+program. ::
+
+   %% python ~/khmer/scripts/load-graph.py -k 32 -x 1e8 -N 4 pop2 /class/shared/titus/pop2/reads.fa
+
+Traverse the graph and figure out which parts of the graph are (and are not)
+connected to each other.  This produces a bunch of partition files::
+
+   %% python ~/khmer/scripts/partition-graph.py --threads 4 -s 1e3 pop2
+
+Next, merge the partitions::
+
+   %% python ~/khmer/scripts/merge-partitions.py pop2
+
+Annotate the reads with what partition they belong to::
+
+   %% python ~/khmer/scripts/annotate-partitions.py pop2 /class/shared/titus/pop2/reads.fa
+
+Extract the reads into different partitions::
+
+   %% python ~/khmer/scripts/extract-partitions.py pop2 reads.fa.part
+
+Here, the pop2.group* files are the output partitions, and pop2.dist will
+contain the partition size distribution. ::
+
+   %% python ~/khmer/sandbox/extract-single-partition.py reads.fa.part 2 > partition-2.fa
+   %% python ~/khmer/sandbox/extract-single-partition.py reads.fa.part 3 > partition-3.fa
+
+Digital normalization
+---------------------
+
+A separate and complementary approach for assembly is *digital
+normalization*.  Digital normalization (look `here
+<http://ivory.idyll.org/blog/diginorm-paper-posted.html>`__ for the
+paper) is a very computationally efficient approach for removing
+redundant reads from shotgun sequencing data sets; essentially,
+it "normalizes" the abundance distribution of the data.  In doing so,
+it gets rid of a vast number of sequencing errors.
+
+Running digital normalization is pretty easy.  First, go to your
+'pop2' directory::
+
+   %% cd
+   %% mkdir pop2
+   %% cd pop2
+
+and then run the script 'normalize-by-median.py' on your file(s) of
+short reads.  The two key parameters below are '-C 20', which says
+to eliminate reads with a higher k-mer coverage than 20; and '-k 20',
+which says to use a k-mer size of 20. ::
+
+   %% python ~/khmer/scripts/normalize-by-median.py -k 20 -C 20 -x 1e8 -N 4 --savehash dn-pass1.kh /class/shared/titus/pop2/reads.fa
+
+For high-coverage data sets like this one, I recommend doing a3-pass
+diginorm (read the paper!) that does error elimination by removing
+low-abundance k-mers. First run 'filter-abund' to eliminate k-mers with
+an abundance of 10 or below, and then run normalize-by-median again. ::
+
+   %% python ~/khmer/scripts/filter-abund.py -C 10 dn-pass1.kh reads.fa.keep
+   %% python ~/khmer/scripts/normalize-by-median.py -k 20 -C 5 -x 1e8 -N 4 reads.fa.keep.abundfilt
+
+(The -C parameter for filter-abund can be judged by looking at the k-mer
+abundance histogram.)
+
+The output file, 'reads.fa.keep.abundfilt.keep', contains only the
+error-trimmed 5-fold non-redundant reads.
+
+---
+
+Looking at k-mer abundance distributions
+----------------------------------------
+
+Let's look at the k-mer abundance distributions of the unfiltered
+reads, the diginormed reads, and the reads in the two partitions.
+
+First, what is the distribution of the untouched reads? ::
+
+  %% python ~/khmer/scripts/load-into-counting.py -x 1e8 -N 4 -k 20 reads.kh /class/shared/titus/pop2/reads.fa
+  %% python ~/khmer/scripts/abundance-dist.py -s reads.kh /class/shared/titus/pop2/reads.fa reads.dist
+  %% python /class/shared/titus/plot-kmer-dist.py reads.dist 200
+
+.. image:: reads.dist.abund.png
+   :width: 30%
+
+Two peaks, one at a coverage of ~400 and the other at a coverage of ~3200.  OK.
+
+Now, what happens when we diginorm them? ::
+
+  %% python ~/khmer/scripts/load-into-counting.py -x 1e8 -N 4 -k 20 reads.keep.kh reads.fa.keep.abundfilt.keep
+  %% python ~/khmer/scripts/abundance-dist.py -s reads.keep.kh reads.fa.keep.abundfilt.keep reads.fa.keep.dist
+  %% python /class/shared/titus/plot-kmer-dist.py reads.fa.keep.dist 5000
+
+.. image:: reads.fa.keep.dist.abund.png
+   :width: 30%
+
+Wow -- essentially, one peak at around a coverage of 5!!
+
+OK, and what about partitioning? ::
+
+  %% python ~/khmer/scripts/load-into-counting.py -x 1e8 -N 4 -k 20 part2.kh partition-2.fa
+  %% python ~/khmer/scripts/abundance-dist.py -s part2.kh partition-2.fa part2.dist
+  %% python ~/khmer/scripts/load-into-counting.py -x 1e8 -N 4 -k 20 part3.kh partition-3.fa
+  %% python ~/khmer/scripts/abundance-dist.py -s part3.kh partition-3.fa part3.dist
+
+  %% python /class/shared/titus/plot-kmer-dist.py part2.dist 200 3500 part3.dist
+
+.. image:: part2.dist.abund.png
+   :width: 30%
+
+Yep, that's right.  The partitioning picks out the low- and high-abundance
+peaks based on graph connectivity (NOT based on abundance!) and puts them
+in separate files.  Pretty cool.
+
+Extra credit: plot the abundance distribution after the *first* round of
+digital normalization.  ...what's going on here?
+
+---
+
+Note, if you want to understand the '-x' and '-N' parameters a bit better,
+go `read the docs <http://khmer.readthedocs.org/en/latest/choosing-hash-sizes.html>`__.
+

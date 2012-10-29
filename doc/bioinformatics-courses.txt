@@ -1,0 +1,28 @@
+A list of bioinformatics courses
+================================
+
+Below is a list of bioinformatics courses that I've run across over
+time (many of them sent to me on Twitter).  They should be useful
+places to go for training materials and/or actual training :).  Please
+post any additional ones in the comments at the bottom and I'll update
+these links.  Thanks! --titus
+
+MSU NGS course -- http://bioinformatics.msu.edu/ngs-summer-course-2013
+
+NESCent Academy -- Next-generation sequencing in evolutionary biology https://academy.nescent.org/wiki/Main_Page
+
+UC Davis training -- http://bioinformatics.ucdavis.edu/services/consulting-and-training/
+
+Microbial Metagenomics 2012 @ Michigan State -- http://metagenomics.wikidot.com/
+
+Cold Spring Harbor / Advanced Sequencing Technologies -- http://meetings.cshl.edu/courses/c-seqtech12.shtml
+
+Marine Omics at Bremen -- http://www.microb3.eu/events/workshops/eu-us-training
+
+Indiana University (semester-long) - http://compbio.iupui.edu/group/1/pages/next_gen_course
+
+Bioinformatics for Cancer Genomics / Toronto, CA -- http://bioinformatics.ca/workshops/2012/bioinformatics-cancer-genomics-bicg
+
+Informatics on High Throughput Sequencing Data / Toronto, CA -- http://bioinformatics.ca/workshops/2012/informatics-high-throughput-sequencing-data
+
+European Sequence Data Analysis Training School -- http://www.basgen.nl/sdac/

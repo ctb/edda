@@ -1,0 +1,34 @@
+Week 8 - Even more assembly; mapping and BLAST
+==============================================
+
+Note: I estimate this homework should take at least 2 hours in front
+of the computer in one sitting, just to do the assembly stuff.
+
+Reading: http://ivory.idyll.org/blog/the-k-parameter.html
+
+Homework 8
+----------
+
+Start up a medium instance -- something with at least 3.7 GB of RAM.
+
+Go through the instructions in :doc:`week6-velvet-ecoli`,
+:doc:`week7-khmer` and :doc:`week8-install`.  (You should now have
+Velvet, khmer, screed, bowtie, and BLAST installed! It's gonna be a
+fun week!)
+
+Then:
+
+1. Run Velvet with k set to 31 by adapting the velveth and velvetg
+   commands in :doc:`week6-velvet-ecoli` (it's as simple as replacing
+   '33' with '31' in three different spots when running velveth and
+   velvetg).
+
+2. Connect to the ipython notebook server, update the notebooks,
+   and run & read through 'hw-week8-which-k'.  Answer the questions
+   at the end.
+
+3. Separately, work through 'hw-week8-moar-data-parsing'.
+
+Upload both sets of answers as gists and make sure they work on
+http://nbviewer.ipython.org/.  Send your gist IDs to Titus at
+ctb@msu.edu.

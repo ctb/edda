@@ -1,0 +1,46 @@
+Calculating k-mer abundance distributions
+=========================================
+
+Make sure you've got khmer installed (as in :doc:`stamps-assembly-1`) as well
+as the 'bioware' module loaded.  Log into your server and create a new
+directory::
+
+  %% cd
+  %% mkdir abund
+  %% cd abund
+
+Now, count all the k-mers in a random reads data set that I created for you;
+if you're interested in how to create random genomes, I can point you
+towards the scripts. ::
+
+  %% python ~/khmer/scripts/load-into-counting.py -x 1e8 -N 4 -k 20 counts.kh /class/shared/random/reads.fa
+
+Next, calculate the abundance distribution of the k-mers::
+
+  %% python ~/khmer/scripts/abundance-dist.py -s counts.kh /class/shared/random/reads.fa reads.dist
+
+Let's take a look at the output file, 'reads.dist'::
+
+  %% head reads.dist
+
+Here, the first column is the k-mer abundance; the second column is
+the number of k-mers with that abundance in the data set; the third
+column is the cumulative sum of column 2; and the fourth column is the
+fraction of *total* k-mers with an abundance of this or lower
+(i.e. fraction of total in column 3).
+
+Now, let's plot it -- ::
+
+  %% python /class/shared/titus/plot-kmer-dist.py reads.dist
+
+This will produce a file called 'reads.dist.abund.pdf'.  Copy it over
+via scp or Dropbox, and take a look at it -- you'll notice that it's
+abundance-1 dominated, because of the errors!
+
+You can adjust the Y max value by passing it in as the last parameter::
+
+  %% python plot-kmer-dist.py reads.dist 1000
+
+...and that's how you plot k-mer abundance distributions.  It's a good
+way to look at your data, and it will be especially important for
+people doing assembly tomorrow.

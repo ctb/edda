@@ -1,0 +1,107 @@
+Metagenomic assembly - STAMPS 2012, day 1
+=========================================
+
+C. Titus Brown
+
+**Note**: this is an adaptation of a 2011 set of tutorials, available
+at http://ged.msu.edu/angus/metag-assembly-2011/, that shows you how
+to do this in the Amazon cloud.  This tutorial is meant to work on
+the STAMPS systems at MBL, instead.
+
+---
+
+Log into your work machine, and make sure you're in your home directory.
+You'll also want to load the bioware module::
+
+  %% cd
+  %% module load bioware
+
+Now, build the 'khmer' software package from https://github.com/ged-lab/khmer::
+
+  %% git clone git://github.com/ged-lab/khmer.git
+  %% cd khmer
+  %% make
+
+  %% export PYTHONPATH=~/khmer/python:$PYTHONPATH
+
+(Note that you will probably want to install 'screed' if you're not doing
+this on the STAMPS systems; see https://github.com/ged-lab/screed.)
+
+OK, next, let's make a directory to work in::
+
+  %% cd
+  %% mkdir assembly
+  %% cd assembly
+
+Now let's try running the `Velvet assembler <http://www.ebi.ac.uk/~zerbino/velvet/>`__ on our data set.  First, use 'velveth' to build the assembly graph in
+the subdirectory 'corn.33' using a setting of k=33, taking gzipped FASTA
+reads from '/class/shared/titus/smallcorn.fa.gz'::
+
+  %% /class/shared/titus/bin/velveth corn.33 33 -fasta.gz -short /class/shared/titus/smallcorn.fa.gz
+
+Next, run the 'velvetg' component of Velvet. This is what actually generates
+contigs by traversing the graph.
+
+A few notes here: we're setting the expected coverage to automatic,
+but turning off the coverage cutoff; this will make the assembler more
+sensitive to low abundance k-mers, at the risk of introducing errors.
+We also turn off scaffolding, because at least with Velvet, we've
+found scaffolding to be very prone to introducing mis-assemblies. ::
+
+  %% /class/shared/titus/bin/velvetg corn.33 -exp_cov auto -cov_cutoff 0 -scaffolding no
+
+Now let's check out the results -- they're in corn.33/contigs.fa, as FASTA
+files.
+
+assemstats3 just does a simple counting up of the number of contigs &
+total size of contigs above the specified length::
+
+  %% python ~/khmer/sandbox/assemstats3.py 0 corn*/contigs.fa
+
+You can also try running an assembly with a longer k::
+
+  %% /class/shared/titus/bin/velveth corn.35 35 -fasta.gz -short /class/shared/titus/smallcorn.fa.gz
+  %% /class/shared/titus/bin/velvetg corn.35 -exp_cov auto -cov_cutoff 0 -scaffolding no
+
+  %% python ~/khmer/sandbox/assemstats3.py 0 corn*/contigs.fa
+
+Sooooooo... what's the true & right answer?
+
+Well, let's try subtracting the two assemblies from each other.  If one
+includes the other, mostly, then we can choose that one... right??
+
+First, extract all the "contigs" greater than 100 bases from both::
+
+  %% python ~/khmer/sandbox/extract-long-sequences.py 100 corn.33/contigs.fa > corn-33.fa
+  %% python ~/khmer/sandbox/extract-long-sequences.py 100 corn.35/contigs.fa > corn-35.fa
+
+Next, run our 'assembly diff' tool to subtract one from the other::
+
+  %% python ~/khmer/sandbox/assembly-diff-2.py corn-33.fa corn-35.fa
+  %% python ~/khmer/sandbox/assembly-diff-2.py corn-35.fa corn-33.fa
+
+Now look at the '*.uniq' files, which contain sequences unique to one
+assembly or the other.  Both 'uniq' files contain sequence.  Are they
+real?  (In many cases, yes; try BLASTing them against NCBI nr) Which
+assembly is correct?  This is the mystery you are left to ponder...
+
+As I'll tell you during the talk, the 'k' parameter is problematic for
+metagenomics -- not implicitly because of the overlap consideration,
+but because of coverage.  MetaVelvet, an adaptation of Velvet for
+metagenomic data, tries to address this by adapting coverage to the
+local sequence structure (again -- I'll talk about it :).
+
+Let's try running MetaVelvet -- it takes advantage of the information that
+was already produced by running velveth, so you don't need to run
+velveth again::
+
+  %% /class/shared/titus/bin/meta-velvetg corn.33 -cov_cutoff 0 -scaffolding no
+
+and let's look at the results. ::
+
+  %% python ~/khmer/sandbox/assemstats3.py 100 corn.33/*contigs.fa
+  %% python ~/khmer/sandbox/assemstats3.py 500 corn.33/*contigs.fa
+
+In this case, they're not that different, but that's because this data
+set is *really* low coverage.  I'll point you at some higher coverage
+data sets later today or tomorrow.

@@ -1,0 +1,47 @@
+Applying digital normalization and partitioning to real data
+============================================================
+
+Let's apply partitioning and digital normalization to real HMP data.  (Hint:
+it works...)  This will take 4-5 hours to run from start to finish.
+
+Note, if you want to understand the '-x' and '-N' parameters a bit better,
+go `read the docs <http://khmer.readthedocs.org/en/latest/choosing-hash-sizes.html>`__.
+
+I've downloaded the mock community HMP data sets onto the STAMPS system
+and put them in /class/shared/titus/mock/.  Let's start by diginorming
+them::
+
+  %% python ~/khmer/scripts/normalize-by-median.py -k 20 -C 10 -N 4 -x 1e9 -s mock-pass1.kh -R pass1.report /class/shared/titus/mock/SRR*.gz
+
+This creates *.gz.keep files.
+
+We generally don't recommend trimming low-abundance k-mers from metagenomic
+data, because they are often low coverage.
+
+The next step is specific to "real" data sets -- it eliminates high-abundance
+k-mers that come from Illumina sequencing bias, primers, etc. and cause
+false connections in the graph. ::
+
+  %% python ~/khmer/sandbox/filter-below-abund.py mock-pass1.kh SRR*.gz.keep
+
+This will produce *.gz.keep.below files.
+
+OK, now partition::
+
+  %% python ~/khmer/scripts/load-graph.py -k 32 -N 4 -x 1e9 mock.part1 *.below
+
+  %% python ~/khmer/scripts/partition-graph.py --threads 4 -s 1e5 mock.part1
+
+  %% python ~/khmer/scripts/merge-partitions.py mock.part1
+
+  %% python ~/khmer/scripts/annotate-partitions.py mock.part1 *.keep.below
+
+  %% python ~/khmer/scripts/extract-partitions.py mock.part1 *.keep.below.part
+
+...and voila, the HMP data set is ready for assembly!  The partitions will be
+in 'mock.part1.group*' and the partition size distribution will be in
+'mock.part1.dist'.
+
+Q: What does the k-mer abundance histogram look like before and after
+digital normalization?
+

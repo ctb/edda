@@ -1,0 +1,18 @@
+=============================================================================
+Strategies and Techniques for Analyzing Microbial Population Structure (2012)
+=============================================================================
+
+(This is just the metagenomics sequence assembly section of the course!
+Main course page: https://stamps.mbl.edu/index.php/Main_Page)
+
+.. toctree::
+   :maxdepth: 2
+
+   stamps-assembly-1
+   kmer-abundance-dists
+   installing-dropbox-at-mbl
+   basic-partitioning-and-diginorm
+   hmp-mock-diginorm
+
+.. mapping coverage
+

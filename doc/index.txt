@@ -30,6 +30,8 @@ Contents:
 .. toctree::
    :maxdepth: 1
 
+   bioinformatics-courses
+
    beacon-2012/index
 
    stamps-2012/index
