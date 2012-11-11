@@ -1,0 +1,33 @@
+Bioawk
+=======
+
+homepage: https://github.com/lh3/bioawk
+
+Installation goes like this::
+
+   apt-get install bison
+   git clone https://github.com/lh3/bioawk
+   cd bioawk
+   make
+
+A more readable Bioawk help file with examples can be found at:
+
+   https://github.com/ialbert/bioawk/blob/master/README.bio.rst
+
+Utilities
+=========
+
+The awk bioinformatics utilities::
+
+   https://github.com/ialbert/bioawk-tools.git
+
+The chip-fragment size estimator with detailed help::
+
+   https://github.com/ialbert/bioawk-tools/blob/master/chipfrag.awk
+
+UNIX tips
+=========
+
+More unix tips from Heng Li:
+
+http://lh3lh3.users.sourceforge.net/biounix.shtml    

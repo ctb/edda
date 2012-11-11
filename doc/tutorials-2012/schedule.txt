@@ -1,0 +1,97 @@
+Schedule
+========
+
+Monday June 4th, Day 1: getting started.
+
+   morning: arrivals!
+
+   afternoon (1:30pm): :doc:`day1`; `welcome lecture <files/lecture1-welcome.pptx.pdf>`__
+
+   evening (8pm): introductions and personal projects
+
+---
+
+Tuesday June 5th, Day 2: data transfer, scripting, and UNIX (w/BLAST)
+
+   morning (9am): `blast lecture <files/lecture2-blast.pptx.pdf>`__
+   
+   afternoon (1:30pm): data transfer, scripting, and UNIX
+
+   evening (7:15pm): lecture "don't forget about the biology!"
+
+Wednesday June 6th, Day 3: mapping
+
+   morning (9am): `mapping lecture <files/lecture3-mapping.pptx.pdf>`__
+
+   afternoon (1:30pm):
+
+   evening (7:15pm): Tools for working with short-read data.
+     see `notebook ngs-31-python-and-short-reads <http://nbviewer.ipython.org/urls/raw.github.com/ngs-docs/ngs-notebooks/master/ngs-31-python-and-short-reads.ipynb>`__
+
+     also, more presentations.
+
+Thursday June 7th, Day 4: assembly
+
+   morning (9am): `assembly lecture <files/lecture4-assembly.pptx.pdf>`__
+
+   afternoon (1:30pm): quality control
+
+   evening (7:15pm):
+
+Friday June 8th, Day 5: statistics
+
+   morning (9am): `statistics and experimental design <files/statistics-and-design.pptx.pdf>`__
+
+   afternoon (1:30pm):
+
+   evening (7:15pm): programming!
+
+Saturday June 9th, Day 6: mRNAseq
+
+   morning (9am):
+
+   afternoon (1:30pm): interval operations
+
+   evening (7:15pm): programming!
+
+Sunday is a day off!
+
+Monday June 11th, Day 8: ChIP-seq
+
+   morning (9am): Istvan lectures (see Lectures 10, 11, and 12 from `here <http://bcc.bx.psu.edu/courses/597D-2011/index-597D-2011.html>`__) and :doc:`monday-june-11-links`
+
+   afternoon (1:30pm): `genome assembly lecture <files/EMS_MSU_assembly_Jun2012.pdf>`__ (Erich Schwarz)
+
+   evening (7:15pm): `Sequencing technologies <files/Technology2012.ppt>`__ (Corbin)
+
+   `mRNAseq mapping stats on simulated data/1% error rate, from Alexis B. Pyrkosz (Brown Lab) <files/mapping-stats.pdf>`__
+
+Tuesday June 12th, Day 9: mRNAseq
+
+   morning (9am): `mRNAseq and splice variants <files/introMSU_NG.pptx>`__ (Corbin Jones)
+
+   afternoon (1:30pm): Metagenomics lecture (Istvan)
+
+   evening (7:15pm): teach me interval mapping (Titus and Istvan)
+
+Wednesday June 13th, Day 10: Reduced representation & linkage mapping
+
+   `Download the tutorial PDF <files/msu_rad_tutorial_v3.pdf>`__
+
+   morning (9am):
+
+   afternoon (1:30pm):
+
+   evening (7:15pm):
+
+Thursday June 14th, Day 11: Reduced representation & linkage mapping
+
+   morning (9am):
+
+   afternoon (1:30pm):
+
+   evening (7:15pm): student presentation
+
+Friday June 15th, Day 12:
+
+   morning (9am): final lecture & postmortem
