@@ -16,6 +16,7 @@ Contents:
    getting-data
    trimming-and-quality-evaluation
    assembly-with-velvet
+   mapping-reads
 
 .. kmer-spectra
 .. bam-sam

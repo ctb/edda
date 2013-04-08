@@ -54,3 +54,24 @@ Install the Velvet assembler::
    cd velvet
    make MAXKMERLENGTH=51
    cp velvet? /usr/local/bin
+
+Install bowtie2::
+
+   cd /root
+   curl -L -O 'http://downloads.sourceforge.net/project/bowtie-bio/bowtie2/2.1.0/bowtie2-2.1.0-source.zip?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Fbowtie-bio%2Ffiles%2Fbowtie2%2F2.1.0%2F&ts=1365392377&use_mirror=superb-dca3'
+   mv bowtie2-2.1.0-source.zip* bowtie2-2.1.0-source.zip
+   unzip bowtie2-2.1.0-source
+   cd bowtie2-2.1.0
+   make
+   cp bowtie2* /usr/local/bin
+
+Installing samtools::
+
+   cd /root
+   git clone git://github.com/samtools/samtools.git  
+   make
+   cp samtools /usr/local/bin
+
+.. Install BioPerl etc::
+
+..   apt-get install bioperl ncbi-blast+

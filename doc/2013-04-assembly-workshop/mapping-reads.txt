@@ -1,0 +1,37 @@
+Mapping reads to a reference
+----------------------------
+
+Create a new directory to do the mapping in::
+
+   cd /mnt
+   mkdir mapping
+   cd mapping
+
+For now, copy over an E. coli assembly that we just created::
+
+   cp /mnt/velvet/ecoli.31/contigs.fa ./my-assembly.fa
+
+Build an index for this assembly that bowtie can use::
+
+   bowtie2-build my-assembly.fa my-assembly
+
+Now, split the reads up again, because bowtie wants 'em split::
+
+   python /usr/local/share/khmer/sandbox/split-pe.py ../velvet/combined-trim.fq.pe
+
+Let's take a subset of the reads, just for speed reasons::
+
+   head -400000 combined-trim.fq.pe.1 > reads.1
+   head -400000 combined-trim.fq.pe.2 > reads.2
+
+Now, map the reads to the assembly and produce a SAM file::
+
+   bowtie2 -f -p 8 -x my-assembly -1 reads.1 -2 reads.2 -S my-mapping.sam
+
+and then convert the SAM file to a sorted BAM file::
+
+   samtools view -uS my-mapping.sam > my-mapping.bam
+   samtools sort my-mapping.bam my-mapping.bam.sorted
+   samtools index my-mapping.bam.sorted.bam
+
+The output will be in my-mapping.bam.sorted.bam and my-mapping.bam.sorted.bai.

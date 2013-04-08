@@ -12,7 +12,7 @@ Make a directory to store all your trimmed data in, and go there::
 
 Now, run 'Trimmomatic' to eliminate Illumina adapters -- ::
 
-  java -jar /usr/local/bin/trimmomatic-0.27.jar PE ../ecoli_ref-5m_s1.fq.gz ../ecoli_ref-5m_s2.fq.gz s1_pe s1_se s2_pe s2_se ILLUMINACLIP:../illuminaClipping.fa:2:30:10
+  java -jar /usr/local/bin/trimmomatic-0.27.jar PE ../ecoli_ref-5m_s1.fq ../ecoli_ref-5m_s2.fq s1_pe s1_se s2_pe s2_se ILLUMINACLIP:../illuminaClipping.fa:2:30:10
 
 Next, let's take a look at data quality using FastQC::
 
@@ -42,7 +42,17 @@ Let's take a look at what we have -- ::
 
    ls -la
 
-.. @@
+You should see::
+
+  drwxr-xr-x 2 root root       4096 2013-04-08 03:33 .
+  drwxr-xr-x 4 root root       4096 2013-04-08 03:21 ..
+  -rw-r--r-- 1 root root  802243778 2013-04-08 03:33 combined-trim.fq
+  -rw-r--r-- 1 root root 1140219324 2013-04-08 03:26 combined.fq
+  -rw-r--r-- 1 root root  570109662 2013-04-08 03:23 s1_pe
+  -rw-r--r-- 1 root root     407275 2013-04-08 03:23 s1_se
+  -rw-r--r-- 1 root root     319878 2013-04-08 03:33 s1_se.filt
+  -rw-r--r-- 1 root root  570109662 2013-04-08 03:23 s2_pe
+  -rw-r--r-- 1 root root          0 2013-04-08 03:22 s2_se
 
 Let's run FastQC on things again, too::
 
