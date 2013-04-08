@@ -1,0 +1,30 @@
+Getting the data
+================
+
+Start at your EC2 prompt, then type ::
+
+   cd /mnt
+
+Now, grab the 5m E. coli reads from @@::
+
+   curl -O https://s3.amazonaws.com/public.ged.msu.edu/ecoli_ref-5m.fastq.gz
+
+You can take a look at the file contents by doing::
+ 
+   gunzip -c ecoli_ref-5m.fastq.gz | less
+
+(use 'q' to quit the viewer).  This is what raw FASTQ looks like!
+
+Note that in this case we've given you the data *interleaved*, which
+means that paired ends appear next to each other in the file.  Most of
+the time sequencing facilities will give you data that is split out
+into s1 and s2 files.  We'll need to split it out into these files for
+some of the trimming steps, so let's do that -- ::
+
+   python /usr/local/share/khmer/sandbox/split-pe.py ecoli_ref-5m.fastq.gz
+   mv ecoli_ref-5m.fastq.gz.1 ecoli_ref-5m_s1.fq
+   mv ecoli_ref-5m.fastq.gz.2 ecoli_ref-5m_s2.fq
+
+We'll also need to get some Illumina adapter information -- here::
+
+   curl -O https://s3.amazonaws.com/public.ged.msu.edu/illuminaClipping.fa

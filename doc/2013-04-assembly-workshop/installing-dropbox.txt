@@ -1,0 +1,21 @@
+Installing Dropbox on your EC2 machine
+======================================
+
+Start at the login prompt on your EC2 machine::
+
+  cd /root
+
+Then, grab the latest dropbox installation package for Linux::
+
+   wget -O dropbox.tar.gz "http://www.dropbox.com/download/?plat=lnx.x86_64"
+
+Unpack it::
+
+   tar -xvzf dropbox.tar.gz
+
+and then run it::
+
+   ~/.dropbox-dist/dropboxd &
+
+When you get a message saying "this client is not linked to any account",
+copy/paste the URL into browser and go log in.  Voila!

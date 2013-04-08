@@ -1,0 +1,29 @@
+Assembling a real genome
+========================
+
+Normalize to 20::
+
+   %% cd ~/metag
+   %% python ~/khmer/scripts/normalize-by-median.py -x 1e9 -k 20 -C 20 --savehash dh10b.kh ~guest384/data/dh10b.fq
+
+Trim at abundance 1::
+
+   %% python ~/khmer/scripts/filter-abund.py -C 2 dh10b.kh dh10b.fq.keep
+
+Split into PE and SE reads::
+
+   %% python ~/khmer/sandbox/strip-and-split-for-assembly.py dh10b.fq.keep.abundfilt
+
+Normalize PE and SE successively::
+
+   %% python ~/khmer/scripts/normalize-by-median.py -x 1e9 -k 20 -C 5 dh10b.fq.keep.abundfilt.{pe,se}
+
+Split remaining into PE and SE again::
+
+   %% python ~/khmer/sandbox/strip-and-split-for-assembly.py dh10b.fq.keep.abundfilt.pe.keep
+
+Assemble! ::
+
+   %% velveth ecoli.33 33 -fasta -shortPaired dh10b.fq.keep.abundfilt.pe.keep.pe  -short dh10b.fq.keep.abundfilt.se.keep dh10b.fq.keep.abundfilt.pe.keep.se
+
+   %% velvetg ecoli.33

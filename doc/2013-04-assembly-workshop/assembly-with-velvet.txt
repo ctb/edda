@@ -1,0 +1,38 @@
+Assembling sequences with Velvet
+================================
+
+Start at the EC2 command line prompt -- ::
+
+   cd /mnt
+   mkdir velvet
+   cd velvet
+
+Separate out the remaining pairs and singletons::
+
+   python /usr/local/share/khmer/sandbox/strip-and-split-for-assembly.py ../trim/combined-trim.fq 
+
+Also grab the leftover singletons from trimming::
+
+   cp ../trim/s1_se.filt .
+
+'ls' should show you the following files::
+
+   combined-trim.fq.pe  combined-trim.fq.se  s1_se.filt
+
+Now... assemble, using the Velvet assembler for k=31! ::
+
+   velveth ecoli.31 31 -shortPaired combined-trim.fq.pe -short combined-trim.fq.se -fastq s1_se.filt
+   velvetg ecoli.31 -exp_cov auto
+
+Also try assembling with k=33 and k=35::
+
+   velveth ecoli.33 33 -shortPaired combined-trim.fq.pe -short combined-trim.fq.se -fastq s1_se.filt
+   velvetg ecoli.33 -exp_cov auto
+
+   velveth ecoli.35 35 -shortPaired combined-trim.fq.pe -short combined-trim.fq.se -fastq s1_se.filt
+   velvetg ecoli.35 -exp_cov auto
+
+Now check out the stats for the assembled contigs for a cutoff of 1000::
+
+   python /usr/local/share/khmer/sandbox/assemstats3.py 1000 ecoli.*/contigs.fa
+

@@ -1,0 +1,21 @@
+================================================
+A Short Metagenomics Workshop in Oslo (Dec 2012)
+================================================
+
+Hipchat room: https://www.hipchat.com/gSoSjn5lP
+
+Other links:
+
+`An assembly handbook <http://ivory.idyll.org/blog/an-assembly-handbook-for-khmer.html>`__
+
+`khmer docs <http://khmer.readthedocs.org>`__
+
+Workshop links:
+
+.. toctree::
+   :maxdepth: 2
+
+   installing
+   preparing-data
+   a-fake-metagenome
+   a-real-genome

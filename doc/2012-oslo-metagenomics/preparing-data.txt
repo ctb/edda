@@ -1,0 +1,17 @@
+=======================
+Preparing data from raw
+=======================
+
+I grabbed the PhiX, DH10B, and MG1655 data sets from `Illumina's
+public data repo
+<http://www.illumina.com/systems/miseq/scientific_data.ilmn>`__.
+
+Ran the following::
+
+  %% python ~/khmer/sandbox/interleave.py MiSeq_Ecoli_DH10B_110721_PF_R1.fastq.gz MiSeq_Ecoli_DH10B_110721_PF_R2.fastq.gz | gzip -9c > MiSeq_Ecoli_DH10B.pe.fq.gz
+
+  %% python ~/khmer/sandbox/interleave.py MiSeq_Ecoli_MG1655_110721_PF_R1.fastq.gz MiSeq_Ecoli_MG1655_110721_PF_R2.fastq.gz | gzip -9c > MiSeq_Ecoli_MG1655.pe.fq.gz
+
+  %% python ~/khmer/sandbox/interleave.py PhiX_S1_L001_R1_001.fastq.gz PhiX_S1_L001_R2_001.fastq.gz  | gzip -9c > PhiX_S1.pe.fq.gz
+
+  %% python ~/khmer/scripts/normalize-by-median.py -x 1e9 -N 4 -k 20 -C 50 --savehash PhiX_S1.norm50.kh PhiX_S1.pe.fq.gz

@@ -32,6 +32,10 @@ Contents:
 
    bioinformatics-courses
 
+   2013-04-assembly-workshop/index
+
+   2012-oslo-metagenomics/index
+
    beacon-2012/index
 
    stamps-2012/index

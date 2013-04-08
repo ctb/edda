@@ -1,0 +1,97 @@
+Installing the necessary software on the cod servers
+====================================================
+
+This should all run on cod3::
+
+   %% ssh guestXXX@cod3.uio.no
+
+Configuring your account (first time)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Load modules::
+
+   %% module load python2 velvet
+
+Configure locale::
+
+   %% export LC_CTYPE=C
+
+Create a virtualenv that will let you install Python packages all for
+yourself::
+
+   %% python -m virtualenv ~/env
+   %% . ~/env/bin/activate
+
+Compiling software (only once)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Install 'nose' testing framework::
+
+  %% easy_install -U nose
+
+Install 'screed' FASTA/FASTQ reader: grab
+~guest384/software/screed-master.tar.gz (this is the same as
+https://github.com/ged-lab/screed/archive/master.tar.gz)::
+
+  %% pip install ~guest384/software/screed-master.tar.gz
+
+Install khmer: Grab ~guest384/software/khmer-master.tar.gz (this is
+the same as https://github.com/ged-lab/khmer/archive/master.tar.gz,
+if you want to update it later or install it again.) ::
+
+   %% cd ~/
+   %% cp ~guest384/software/khmer-master.tar.gz .
+   %% tar xzf khmer-master.tar.gz
+   %% mv khmer-master khmer
+   %% cd khmer
+
+   %% make CFLAGS=-fPIC
+
+If this is successful, next do::
+
+   %% nosetests
+
+(You may need to do '. ~/env/bin/activate' again...)
+
+They should all pass.
+
+Optional - installing Dropbox on cod3
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If you want to be able to use Dropbox to transfer files to and from
+cod3, you can do the following.  (Note that you need to have Dropbox
+already configured and installed on your laptop!) ::
+
+  %% mkdir /tmp/$USER
+  %% cd /tmp/$USER
+  %% wget -O dropbox.tar.gz "http://www.dropbox.com/download/?plat=lnx.x86_64"
+  %% tar xzf dropbox.tar.gz
+  %% cp -r .dropbox-dist ~/
+  %% cd
+  %% ~/.dropbox-dist/dropboxd &
+
+You should now see a message like this::
+
+  This client is not linked to any account... Please visit https://www.dropbox.com/cli_link?host_id=XXXXX to link this machine.
+
+Visit that URL and log into dropbox.com.  From now on, ~/Dropbox/ on
+the cluster will be connected to your Dropbox account; if you put a
+file there on cod3, it will show up on your laptop, and vice versa.
+
+Configuring your account (each time)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In each session, you need to do the following.
+
+Load modules::
+
+   %% module load python2 velvet
+
+Activate your Python virtual environment::
+
+   %% . ~/env/bin/activate
+
+Set your PYTHONPATH to include khmer/python::
+
+   %% export PYTHONPATH=~/khmer/python
+

@@ -1,0 +1,99 @@
+A fake metagenome
+=================
+
+Let's start by playing with a little fake metagenome. ::
+
+  %% mkdir ~/metag/
+  %% cd ~/metag
+
+  %% cp ~guest384/data/mixed*.fa .
+
+Count all the k-mers in mixed-reads.fa::
+
+  %% python ~/khmer/scripts/load-into-counting.py -x 1e8 -k 20 mixed-reads.kh mixed-reads.fa
+
+Now, output the k-mer abundance distribution::
+
+  %% python ~/khmer/scripts/abundance-dist.py mixed-reads.kh mixed-reads.fa mixed-reads.dist
+
+You should see data like this in 'mixed-reads.dist'::
+
+   0 0 0 0.0
+   1 93387 93387 0.293
+   2 28560 121947 0.383
+   3 39133 161080 0.505
+   4 44776 205856 0.646
+   5 40065 245921 0.771
+   6 30189 276110 0.866
+   7 18983 295093 0.926
+   8 10572 305665 0.959
+   9 5439 311104 0.976
+
+The first column is the k-mer abundance; the second column is the number
+of k-mers with that abundance; the third column is the cumulative number
+of k-mers with that abundance or lower; and the 4th column is the fraction
+of total k-mers with that abundance or lower.
+
+You can plot this with the following python code::
+
+   import numpy
+   x = numpy.loadtxt('mixed-reads.dist')
+   axis(ymax=1000)
+   plot(x[:,0], x[:,1])
+
+Try changing around the ymax and xmax to look at low-abundance k-mers, etc.
+
+Trimming low-abundance k-mers
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To trim reads at any k-mer below 10 in abundance::
+
+   %% python ~/khmer/scripts/filter-abund.py -C 10 mixed-reads.kh mixed-reads.fa
+
+Now let's look at the abundance distribution of the trimmed data::
+
+   %% python ~/khmer/scripts/load-into-counting.py -x 1e8 -k 20 mixed-reads.fa.abundfilt.kh mixed-reads.fa.abundfilt
+
+   %% python ~/khmer/scripts/abundance-dist.py mixed-reads.fa.abundfilt.kh mixed-reads.fa.abundfilt mixed-reads.fa.abundfilt.dist
+
+
+Applying digital normalization
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Run digital normalization with a k-mer size of 20 and a coverage of 50::
+
+   %% python ~/khmer/scripts/normalize-by-median.py -C 50 -k 20 -x 1e8 --savehash mixed-reads.norm50.kh mixed-reads.fa
+
+Here, the normalize script builds the counting hash table as it runs, and
+(with --savehash) saves it for you.  To look at the abundance distribution
+of k-mers, just use that table. ::
+
+   %% python ~/khmer/scripts/abundance-dist.py mixed-reads.norm50.kh mixed-reads.fa.keep mixed-reads.fa.keep.dist
+
+Applying partitioning
+~~~~~~~~~~~~~~~~~~~~~
+
+First, load the reads into a graph::
+
+  %% python ~/khmer/scripts/load-graph.py -x 1e8 -k 32 readgraph mixed-reads.fa
+
+Then, partition the graph::
+
+  %% python ~/khmer/scripts/partition-graph.py --thread 4 -s 1e4 readgraph
+
+Next, merge the partitions::
+
+  %% python ~/khmer/scripts/merge-partitions.py readgraph
+
+Annotate the sequences with their partition ID::
+
+  %% python ~/khmer/scripts/annotate-partitions.py readgraph mixed-reads.fa
+
+This puts all the annotated sequences in mixed-reads.fa.part.
+
+You can extract these partitions en masse using
+'extract-partitions.py', but for now let's just look at the individual
+partitions. ::
+
+  %% python ~/khmer/sandbox/extract-single-partition.py mixed-reads.fa.part 2 > part2.fa
+  %% python ~/khmer/sandbox/extract-single-partition.py mixed-reads.fa.part 3 > part3.fa

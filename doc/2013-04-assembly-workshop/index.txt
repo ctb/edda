@@ -1,0 +1,27 @@
+2013 MSU Assembly Workshop
+==========================
+
+Tracy Teal <tkteal@msu.edu>
+
+Titus Brown <ctb@msu.edu>
+
+Contents:
+
+.. toctree::
+   :maxdepth: 1
+
+   installing-software
+
+   installing-dropbox
+   getting-data
+   trimming-and-quality-evaluation
+   assembly-with-velvet
+
+.. kmer-spectra
+.. bam-sam
+
+.. notes --
+
+..  - give them separated .pe files? probably.
+.. - ipython notebooks?
+
