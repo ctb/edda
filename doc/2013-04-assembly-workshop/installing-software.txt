@@ -71,7 +71,17 @@ Installing samtools::
    git clone git://github.com/samtools/samtools.git  
    make
    cp samtools /usr/local/bin
+   cd misc
+   cp *.pl maq2sam-long maq2sam-short md5fa md5sum-lite wgsim /usr/local/bin/
+   cd ../bcftools
+   cp *.pl bcftools /usr/local/bin/
 
 .. Install BioPerl etc::
 
 ..   apt-get install bioperl ncbi-blast+
+
+Install bowtie::
+
+   curl -O -L http://sourceforge.net/projects/bowtie-bio/files/bowtie/0.12.7/bowtie-0.12.7-linux-x86_64.zip
+   unzip bowtie-0.12.7-linux-x86_64.zip
+   cp bowtie-0.12.7/bowtie* /usr/local/bin

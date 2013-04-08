@@ -34,4 +34,18 @@ and then convert the SAM file to a sorted BAM file::
    samtools sort my-mapping.bam my-mapping.bam.sorted
    samtools index my-mapping.bam.sorted.bam
 
-The output will be in my-mapping.bam.sorted.bam and my-mapping.bam.sorted.bai.
+The output will be in my-mapping.bam.sorted.bam and my-mapping.bam.sorted.bam.bai.
+
+You can copy these into your dropbox::
+
+   cp my-assembly.fa my-mapping.bam.sorted.bam* ~/Dropbox
+
+and use Tablet or another viewer to look at them, OR you can call SNPs.
+
+To call SNPs, do::
+
+   samtools faidx my-assembly.fa
+   samtools mpileup -uD -f my-assembly.fa my-mapping.bam.sorted.bam | bcftools view -bvcg - > my-mapping.raw.bcf
+   bcftools view my-mapping.raw.bcf > my-mapping.vcf
+
+This gives you a VCF file that contains the SNP calls.

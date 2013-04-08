@@ -5,12 +5,19 @@ Tracy Teal <tkteal@msu.edu>
 
 Titus Brown <ctb@msu.edu>
 
+You'll need to `start up an EC2 instance
+<http://ged.msu.edu/angus/tutorials-2012/start-up-an-ec2-instance.html>`__.
+We'll walk you through this.
+
+You'll want to use the AMI ami-d6e581bf.
+
+Then, see :doc:`../tutorials-2012/log-in-with-ssh-mac` or
+:doc:`../tutorials-2012/log-in-with-ssh-win`.
+
 Contents:
 
 .. toctree::
    :maxdepth: 1
-
-   installing-software
 
    installing-dropbox
    getting-data
@@ -25,4 +32,8 @@ Contents:
 
 ..  - give them separated .pe files? probably.
 .. - ipython notebooks?
+
+
+If you want to start from scratch, follow :doc:`installing-software`.
+
 
