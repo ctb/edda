@@ -1,0 +1,82 @@
+Installing assemblers (and other necessary software)
+====================================================
+
+The first thing we need to do to make use of our Amazon machine is
+to install a bunch of assemblers.
+
+Installing khmer and screed
+---------------------------
+
+`khmer <http://khmer.readthedocs.org>`__ and `screed
+<http://screed.readthedocs.org>`__ are Python packages from the `GED
+Lab <http://ged.msu.edu/>`__ that are used for preprocessing short
+read data and evaluating assemblers.
+
+Install the screed package first::
+
+   pip install git+https://github.com/ged-lab/screed.git
+
+Let's put khmer in /usr/local/share::
+
+   cd /usr/local/share
+   git clone https://github.com/ged-lab/khmer.git -b bleeding-edge
+   cd khmer
+   make all test
+
+You'll also need to modify the PYTHONPATH so that Python can properly
+"see" khmer::
+
+   export PYTHONPATH=/usr/local/share/khmer/python
+   echo export PYTHONPATH=/usr/local/share/khmer/python >> ~/.bashrc
+
+**Note**, here we are installing the bleeding-edge branch of khmer (as of
+May 2013).  These instructions may become outdated, so if this doesn't
+work right, then try omitting the '-b bleeding-edge'.
+
+Installing Ray
+--------------
+
+Ray is `an assembler that includes Ray Meta, a metagenome assembler
+<http://denovoassembler.sourceforge.net/>`__.
+
+To install Ray, download it::
+
+   cd /root
+   curl -L 'http://downloads.sourceforge.net/project/denovoassembler/Ray-v2.2.0.tar.bz2?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Fdenovoassembler%2Ffiles%2F&ts=1367504021&use_mirror=superb-dca2'  > Ray-v2.2.0.tar.bz2
+
+Unpack it::
+
+   tar xjf Ray-v2.2.0.tar.bz2
+   cd Ray-v2.2.0
+
+and compile & copy it over::
+
+   make
+   cp Ray /usr/local/bin
+
+Installing Velvet and MetaVelvet
+--------------------------------
+
+`Velvet <http://www.ebi.ac.uk/~zerbino/velvet/>`__ is a venerable
+short-read assembler that is well documented and has a robust
+community.  `MetaVelvet <http://metavelvet.dna.bio.keio.ac.jp>`__ is a
+metagenome-specific assembler built on top of Velvet.
+
+Download, unpack, build and install Velvet::
+
+   cd /root
+   curl -O http://www.ebi.ac.uk/~zerbino/velvet/velvet_1.2.08.tgz
+   tar xvzf velvet_1.2.08.tgz
+   mv velvet velvet_1.2.08
+   cd velvet_1.2.08
+   make 'MAXKMERLENGTH=49' 'OPENMP=2'
+   cp velvet? /usr/local/bin
+
+And do the same for MetaVelvet.  Note that MetaVelvet requires Velvet,
+so you'll need to run the above commands first. ::
+
+   cd /root
+   curl -O http://metavelvet.dna.bio.keio.ac.jp/src/MetaVelvet-1.2.02.tgz
+   tar xzf MetaVelvet-1.2.02.tgz
+   make ['MAXKMERLENGTH=49'] ['CATEGORIES = cat'] ['OPENMP=2']
+   cp meta-velvetg /usr/local/bin

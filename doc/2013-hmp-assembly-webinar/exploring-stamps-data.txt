@@ -1,0 +1,182 @@
+Exploring a simple simulated data set
+=====================================
+
+Let's take a look at some k-mer abundance distributions, and the effects
+of various activities on them.
+
+In the khmer software distribution, we've provided a small data file
+containing simulated shotgun reads "sequenced" from some fake genomes.
+Totally fake, in other words.  Yet... potentially still instructive!
+
+(The file is called 'stamps-reads.fa.gz', because it was created for a
+tutorial I gave at the STAMPS course at Woods Hole in 2012.)
+
+Let's start by making a new working directory::
+
+   cd /mnt
+   mkdir stamps
+   cd stamps
+
+Now, just for convenience's sake, let's copy the files locally -- ::
+
+   cp /usr/local/share/khmer/data/stamps-reads.fa.gz .
+
+Building k-mer abundance distributions
+--------------------------------------
+
+K-mer abundance distributions are a simple way to look at shotgun data
+sets and evaluate their likely coverage and real sequence content.
+The basic idea is that short, fixed-length words that line up with
+each other are indicative of "real" content, while words that don't
+line up are probably the result of errors.  (Look at `slides 8-12 of
+my presentation for a visual depiction of this
+<http://www.slideshare.net/c.titus.brown/2013-hmpassemblywebinar>`__.)
+
+Building your basic k-mer abundance distribution with khmer is a two-step
+process.  First, load the reads into a counting hash table::
+
+   python /usr/local/share/khmer/scripts/load-into-counting.py -x 1e8 -k 20 stamps-reads.kh stamps-reads.fa.gz
+
+Here -k is the k-mer size (I usually recommend 20), and the '-x' is
+the hash table size, which is related to the complexity of your data;
+see `the khmer documentation for more info
+<http://khmer.readthedocs.org/en/latest/choosing-hash-sizes.html>`__.
+
+Next, output the distribution for the k-mers in the stamps-reads file::
+
+   python /usr/local/share/khmer/scripts/abundance-dist.py stamps-reads.kh stamps-reads.fa.gz stamps-reads.hist
+
+And, finally, graph it.
+
+.. figure:: figures/stamps-reads.png
+   :width: 500px
+
+   Fig 1. The k-mer abundance histograms from the simulated data set.
+   The peak at ~3200 represents the high abundance species, and the
+   peak at ~400 represents k-mers from the low-abundance species.  The
+   ratio of the high-coverage k-mer peaks is not perfectly 10:1 because
+   errors shift the high-coverage peak left more than the low-coverage
+   peak.
+
+
+Digital normalization
+---------------------
+
+Digital normalization ("diginorm") is a downsampling technique that discards
+high-coverage reads as redundant, reducing both the size of the data
+set and the number of errors contained within it.  (Read more
+in `the diginorm paper <http://arxiv.org/abs/1203.4802>`__.)
+
+To run digital normalization::
+
+   python /usr/local/share/khmer/scripts/normalize-by-median.py -k 20 -C 10 -x 1e8 stamps-reads.fa.gz --savehash stamps-dn.kh
+
+Here, the -k is the k-mer size; the -C is the desired k-mer coverage; and the
+-x is the hash table size, as above.  One trick is that diginorm can actually
+save the counting hash table for you, so you don't need to load the data in
+separately -- that's what '--savehash' does.
+
+Next, output the distribution to 'stamps-dn.hist'::
+
+   python /usr/local/share/khmer/scripts/abundance-dist.py stamps-dn.kh stamps-reads.fa.gz.keep stamps-dn.hist
+
+and then graph it.
+
+.. figure:: figures/diginorm.png
+   :width: 500px
+
+   Fig 2. k-mer abundance peaks after a single round of digital normalization;
+   note the shifted abundance scale (x axis).  Diginorm shifts the peaks left
+   significantly, by removing many redundant reads.  For high abundance
+   data sets like this one, erroneous reads are often recognized as "novel"
+   because more reads will have multiple errors in them; we therefore
+   recommend using a three-pass approach with the current normalization
+   strategy, normalize-by-median.  This three-pass approach (see below)
+   does a round of error trimming before normalizing again.
+
+Doing a round of error trimming, followed by more normalization
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+As explained in the caption in the figure above, diginorm runs afoul
+of errors in reads -- here, a 1% error means that, with high enough
+coverage, some reads will have enough errors in them to qualify as
+non-redundant.  One way to deal with this is to trim reads at low-abundance
+k-mers, which will get rid of most errors::
+
+   python ../scripts/filter-abund.py stamps-dn.kh stamps-reads.fa.gz.keep
+
+and then run a second round of digital normalization::
+
+   python ../scripts/normalize-by-median.py -x 1e8 -k 20 -C 10 stamps-reads.fa.gz.keep.abundfilt --savehash stamps-dn3.kh
+
+When you then build the abundance distribution::
+
+   python ../scripts/abundance-dist.py stamps-dn3.kh stamps-reads.fa.gz.keep.abundfilt.keep stamps-dn3.hist
+
+and graph it, you can see that you've changed the coverage of essentially
+all of the reads to give you a k-mer distribution peak right around 10.
+There are still plenty of errors (peak around 1 at the left), note.
+
+.. figure:: figures/diginorm-dn3.png
+   :width: 500px
+
+   Fig 3. The three-pass diginorm approach (diginorm + error trimming
+   + diginorm again) reduces even fairly high-coverage datasets to
+   a single coverage peak.
+   
+Partitioning
+------------
+
+Partitioning pulls read data sets into different "partitions", or bins,
+based on their connectivity; often these bins end up representing reads
+that come from the same species.  By binning these reads, we can decrease
+the compute time and memory necessary to do the entire assembly.
+
+The basic approach is detailed `in the partitioning paper <http://pnas.org/content/early/2012/07/25/1121464109.abstract>`__, and you can read about
+how we combined digital normalization and partitioning to assemble
+large metagenomes `here <http://arxiv.org/abs/1212.2832>`__.
+
+Partitioning is a bit more multi-step than diginorm. First, run the
+partitioning algorithm::
+
+   python /usr/local/share/khmer/scripts/do-partition.py -k 32 -x 1e8 -s 1e4 -T 8 stamps-part stamps-reads.fa.gz 
+
+Here, -k is k-mer size, -T is number of concurrent threads to run, and -s
+is the subset size to partition -- a bit dependent on the data set and
+best left alone for larger data sets.  The 'stamps-part' is the prefix
+that will be used for saving temporary files particular to this data set.
+
+This process will run for a while, and then output a file
+'stamps-reads.fa.gz.part' containing your original sequences, labelled
+with a partition.
+
+To actually extract those partitions, do::
+
+   python /usr/local/share/khmer/scripts/extract-partitions.py -X 1 stamps-part stamps-reads.fa.gz.part
+
+The '-X 1' parameter says to make a new file for each partition; normally
+you want to group the partitions a bit more, but here we only have two.
+
+This process will now output two files, 'stamps-part.group0000.fa' and
+'stamps-part.group0001.fa', containing the two partitions of the data.
+
+Now, let's load 'em up into a counting hash::
+
+   python /usr/local/share/khmer/scripts/load-into-counting.py -x 1e8 -k 20 stamps-part.g0.kh stamps-part.group0000.fa 
+   python /usr/local/share/khmer/scripts/load-into-counting.py -x 1e8 -k 20 stamps-part.g1.kh stamps-part.group0001.fa 
+
+and build distributions for each partition separately::
+
+   python /usr/local/share/khmer/scripts/abundance-dist.py stamps-part.g0.kh stamps-part.group0000.fa stamps-part.g0.hist
+   python /usr/local/share/khmer/scripts/abundance-dist.py stamps-part.g1.kh stamps-part.group0001.fa stamps-part.g1.hist
+
+...and finally, plot.
+
+.. figure:: figures/stamps-partitions.png
+   :width: 500px
+
+   Fig 4. The k-mer abundance histograms from the two partitions.  Here
+   you can see that the two peaks are completely separate, representing
+   the splitting of the two genomes from one data set into two partitions,
+   one low coverage (blue peak) and one high coverage (green peak).  These
+   partition files can now be assembled separately.

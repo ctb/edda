@@ -1,0 +1,35 @@
+Installing and running BLAST
+============================
+
+Everyone wants to BLAST!  How do we do it?
+
+First, install NCBI BLAST::
+
+   cd /root
+   curl -O http://ftp.ncbi.nlm.nih.gov/blast/executables/release/2.2.26/blast-2.2.26-x64-linux.tar.gz
+   tar xzf blast-2.2.26-x64-linux.tar.gz
+
+   cp blast-2.2.26/bin/* /usr/local/bin
+
+Now, go back to your working area::
+
+   cd /mnt
+   mkdir blast
+   cd blast
+
+Now grab a protein sequence -- ::
+
+   curl -O https://s3.amazonaws.com/public.ged.msu.edu/ecoli-prots.fa
+
+This can actually be any FASTA file with any number of protein or nucleotide sequences in it.  Here, we've just chosen CRP and RecA.
+
+First, let's format our assembly::
+
+   cp ../velvet/ecoli.31/contigs.fa .
+   formatdb -i contigs.fa -o T -p F
+
+And, now you can do a BLAST::
+
+   blastall -i ecoli-prots.fa -d contigs.fa -p tblastn | less
+
+...tada...

@@ -1,0 +1,31 @@
+
+
+Download a ~400 MB subset of the HMP mock community Illumina data::
+
+   cd /mnt
+   curl -O https://s3.amazonaws.com/public.ged.msu.edu/hmp-mock-subsets.tar
+   tar xvf hmp-mock-subsets.tar
+
+In this data set, we'll be using two partitioned sets of reads.
+'partition1.orig.fa.gz' is a big set of reads, and
+'partition4.orig.fa.gz' is a small set of reads.
+
+Let's start with the small set, partition 4, and assemble it with Ray,
+Velvet, and MetaVelvet::
+
+   mkdir p4
+   cd p4
+
+   gunzip -c ../hmp-mock-subsets/partition4.orig.fa.gz > partition4.orig.fasta
+
+   for k in {21..49..2}
+   do
+      mpiexec Ray -n 10 -k $k -s partition4.orig.fasta -o p4.ray.$k
+   done
+
+   for k in {21..49..2}
+   do
+      velveth partition4.v$k $k -short partition4.orig.fasta
+      velvetg partition4.v$k -scaffolding no -read_trkg yes
+      meta-velvetg partition4.v$k -scaffolding no
+   done

@@ -5,11 +5,16 @@ Tracy Teal <tkteal@msu.edu>
 
 Titus Brown <ctb@msu.edu>
 
+Please `enter your info into this form <https://docs.google.com/forms/d/1wkdY6vdGEfKT324xnXTfNvhjCFe7WER4qZJMS2wfyJ8/viewform?edit_requested=true>`__ if you didn't already!
+
 You'll need to `start up an EC2 instance
 <http://ged.msu.edu/angus/tutorials-2012/start-up-an-ec2-instance.html>`__.
 We'll walk you through this.
 
 You'll want to use the AMI ami-d6e581bf.
+
+For those of you without AWS accounts, pick your machine
+`from here <https://docs.google.com/document/d/1TwOLcTj39CfsW6bi_QfrzNb-RckepKEsje5fNagJs2Y/edit>`__.
 
 Then, see :doc:`../tutorials-2012/log-in-with-ssh-mac` or
 :doc:`../tutorials-2012/log-in-with-ssh-win`.
@@ -24,6 +29,10 @@ Contents:
    trimming-and-quality-evaluation
    assembly-with-velvet
    mapping-reads
+
+   running-blast
+
+   assembly-with-a5
 
 .. kmer-spectra
 .. bam-sam

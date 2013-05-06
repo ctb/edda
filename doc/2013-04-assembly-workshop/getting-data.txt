@@ -5,7 +5,8 @@ Start at your EC2 prompt, then type ::
 
    cd /mnt
 
-Now, grab the 5m E. coli reads from @@::
+Now, grab the 5m E. coli reads from our data storage (originally from
+`Chitsaz et al. <http://www.ncbi.nlm.nih.gov/pubmed/21926975>`__)::
 
    curl -O https://s3.amazonaws.com/public.ged.msu.edu/ecoli_ref-5m.fastq.gz
 

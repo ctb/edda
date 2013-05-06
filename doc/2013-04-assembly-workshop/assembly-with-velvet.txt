@@ -36,3 +36,4 @@ Now check out the stats for the assembled contigs for a cutoff of 1000::
 
    python /usr/local/share/khmer/sandbox/assemstats3.py 1000 ecoli.*/contigs.fa
 
+Also read: `What does k control in de Bruijn graph assemblers? <http://ivory.idyll.org/blog/the-k-parameter.html>`__.

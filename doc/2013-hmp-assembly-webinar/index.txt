@@ -1,0 +1,25 @@
+2013 HMP Assembly Webinar -- electronic materials
+=================================================
+
+:author: Titus Brown <ctb@msu.edu>
+:date: May 6th, 2013
+
+These are the electronic materials to accompany a webinar I gave on
+metagenome assembly, sponsored by the Human Microbiome Project Data
+Analysis Coordination Center.  A recording will be available soon.
+
+The slides are `available here <http://www.slideshare.net/c.titus.brown/2013-hmpassemblywebinar>`__.
+
+Ask questions about this on the khmer@lists.idyll.org mailing list
+(you will need to sign up `here
+<http://lists.idyll.org/listinfo/khmer>`__ first).
+
+Contents:
+
+.. toctree::
+   :maxdepth: 1
+
+   installing-assemblers
+   exploring-stamps-data
+   assembling-hmp-mock-in-cloud
+   some-simple-evaluation

@@ -2,7 +2,7 @@ Packages to install
 ===================
 
 These command should work on the default `StarCluster <http://star.mit.edu/cluster/>`__ AMI, ami-999d49f0.
-These have already been pre-installed on the course AMI, @@@@.
+These have already been pre-installed on the course AMI, ami-d6e581bf.
 
 Install screed::
 
