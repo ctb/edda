@@ -14,6 +14,19 @@ Ask questions about this on the khmer@lists.idyll.org mailing list
 (you will need to sign up `here
 <http://lists.idyll.org/listinfo/khmer>`__ first).
 
+Running tutorials
+~~~~~~~~~~~~~~~~~
+
+To run through the below tutorials, follow `these instructions for
+starting up a cloud machine
+<http://ged.msu.edu/angus/tutorials-2012/start-up-an-ec2-instance.html>`__,
+with two key alterations:
+
+1. Use the AMI ami-999d49f0, the latest `StarCluster AMI <http://star.mit.edu/cluster/>`__.
+2. Use an m2.xlarge sized machine -- or at least something with more than 10 GB of memory.
+
+Then, log in to the machine (`Mac instructions <http://ged.msu.edu/angus/tutorials-2012/log-in-with-ssh-mac.html>`__ and `Windows instructions <http://ged.msu.edu/angus/tutorials-2012/log-in-with-ssh-win.html>`__) and move on to the first link below, "installing assemblers".
+
 Contents:
 
 .. toctree::
@@ -21,5 +34,6 @@ Contents:
 
    installing-assemblers
    exploring-stamps-data
-   assembling-hmp-mock-in-cloud
-   some-simple-evaluation
+   playing-with-assemblers
+   working-with-real-volumes-of-data
+

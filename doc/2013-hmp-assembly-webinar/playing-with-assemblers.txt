@@ -1,4 +1,22 @@
+Playing with metagenome assemblers
+==================================
 
+:author: C. Titus Brown
+:date: May 7, 2013
+
+Let's try out a couple of different assemblers!  We'll be using `the
+Ray assembler (2.2.0) <http://denovoassembler.sourceforge.net/>`__ and
+`Velvet (1.2.08) <http://www.ebi.ac.uk/~zerbino/velvet/>`__ and
+`MetaVelvet (1.2.02) <http://metavelvet.dna.bio.keio.ac.jp/>`__.  I
+tried using `IDBA UD
+<http://i.cs.hku.hk/~alse/hkubrg/projects/idba_ud/>`__ but I got a
+core dump, probably because these are only single-ended reads.
+
+(See :doc:`installing-assemblers` for details on installing all of
+these assemblers on the Amazon machine.)
+
+Getting the data
+----------------
 
 Download a ~400 MB subset of the HMP mock community Illumina data::
 
@@ -6,17 +24,69 @@ Download a ~400 MB subset of the HMP mock community Illumina data::
    curl -O https://s3.amazonaws.com/public.ged.msu.edu/hmp-mock-subsets.tar
    tar xvf hmp-mock-subsets.tar
 
-In this data set, we'll be using two partitioned sets of reads.
+From this data set, we'll be using two partitioned sets of reads.
 'partition1.orig.fa.gz' is a big set of reads, and
 'partition4.orig.fa.gz' is a small set of reads.
+
+Performing some initial assemblies
+----------------------------------
 
 Let's start with the small set, partition 4, and assemble it with Ray,
 Velvet, and MetaVelvet::
 
+   cd /mnt
    mkdir p4
    cd p4
 
    gunzip -c ../hmp-mock-subsets/partition4.orig.fa.gz > partition4.orig.fasta
+
+To generate an initial assembly with Ray, you can just run it with a fixed k,
+say, 31::
+
+   mpiexec Ray -n 10 -k 31 -s partition4.orig.fasta -o p4.ray.31
+
+This assembles the single reads in 'partition4.orig.fasta' with a k of
+31 and puts the results in the directory 'p4.ray.31'.
+
+To assemble things with MetaVelvet, you need to generate a Velvet assembly
+first, and then run MetaVelvet on the results::
+
+   velveth partition4.v31 31 -short partition4.orig.fasta
+   velvetg partition4.v31 -scaffolding no -read_trkg yes
+   meta-velvetg partition4.v31 -scaffolding no
+
+Note that here we are turning off scaffolding; the other parameters are,
+basically, the k value and the read type.
+
+Let's take a quick look at the results -- we'll look at the Ray contigs
+(NOT the scaffolds), and the Velvet and MetaVelvet contigs using a khmer
+script::
+
+   python ~/khmer/sandbox/assemstats3.py 1000 p4.ray.31/Contigs.fasta partition4.v31/contigs.fa partition4.v31/meta-velvetg.contigs.fa
+
+You should see output somewhat like this::
+
+   ** cutoff: 1000
+   N       sum     max     filename
+   21      38282   4208    p4.ray.31/Contigs.fasta
+   17      46967   5506    partition4.v31/contigs.fa
+   12      46610   21239   partition4.v31/meta-velvetg.contigs.fa
+
+The first column is the number of contigs (greater than 1kb here), the
+second column is the total bases in those contigs, and the third column
+is the max contig length in the file (the 4th column).
+
+Compiling with multiple k values
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+All of these assemblers are de Bruijn graph assemblers, which means
+that they are dependent on a specific parameter, 'k'.  Often finding
+the "right" or "best" k is a serious part of the assembly optimization
+process.  How do we go about that?
+
+Well, we can run each assembler for a wide range of k -- for example,
+we can build Ray and Velvet/MetaVelvet assemblies for all odd k values
+between 21 and 49 like so::
 
    for k in {21..49..2}
    do
@@ -29,3 +99,277 @@ Velvet, and MetaVelvet::
       velvetg partition4.v$k -scaffolding no -read_trkg yes
       meta-velvetg partition4.v$k -scaffolding no
    done
+
+(Note, this will take an hour or so, I think.  You can do smaller numbers
+of assemblies by changing the '49' in two places above to something like
+'25' if you just want to see how it works.)
+
+Evaluating assemblies
+~~~~~~~~~~~~~~~~~~~~~
+
+OK, but now the problem is, we have tons of assemblies (45, I thinl)!
+How do we evaluate them??
+
+You could run assemstats on everything and then load the results into
+a spreadsheet and play with them, but that's a bit roundabout.  Here's
+a quicker way: run assemstats, then sort them based on the sum bp
+column, then take the top 25 results::
+
+   python ~/khmer/sandbox/assemstats3.py 1000 p4.ray.*/Contigs.fasta partition4.v*/*contigs.fa | sort -k2 -rn | head -25
+
+This will give you something like this::
+
+   12      53450   14446   partition4.v29/meta-velvetg.contigs.fa
+   14      53355   21235   partition4.v27/meta-velvetg.contigs.fa
+   17      52628   13867   partition4.v33/meta-velvetg.contigs.fa
+   21      52600   7000    partition4.v39/meta-velvetg.contigs.fa
+   12      52134   21231   partition4.v23/meta-velvetg.contigs.fa
+   21      51468   5341    partition4.v37/meta-velvetg.contigs.fa
+   14      50284   21192   partition4.v21/meta-velvetg.contigs.fa
+   21      49872   5239    partition4.v37/contigs.fa
+   18      47693   9861    partition4.v35/meta-velvetg.contigs.fa
+   13      47110   21233   partition4.v25/meta-velvetg.contigs.fa
+   17      46967   5506    partition4.v31/contigs.fa
+   18      46957   7794    partition4.v25/contigs.fa
+   18      46857   7794    partition4.v23/contigs.fa
+   12      46610   21239   partition4.v31/meta-velvetg.contigs.fa
+   20      46322   5241    partition4.v39/contigs.fa
+   21      45791   6369    partition4.v35/contigs.fa
+   20      45059   5451    partition4.v21/contigs.fa
+   20      45016   5207    partition4.v41/meta-velvetg.contigs.fa
+   16      44718   5747    partition4.v29/contigs.fa
+   17      43909   5745    partition4.v27/contigs.fa
+   14      43868   9547    p4.ray.23/Contigs.fasta
+   18      43797   6367    partition4.v33/contigs.fa
+   15      42980   6610    p4.ray.21/Contigs.fasta
+   20      42877   5282    p4.ray.27/Contigs.fasta
+   20      42872   4272    partition4.v41/contigs.fa
+
+Note that this is a very crude measure -- summed base pairs in contigs over
+a certain size -- and there are all sorts of reasons why it might not
+be the best measure, including issues of correctness.  But (as I said
+in my talk) truly evaluating assemblies, much less *metagenome* assemblies,
+is an extremely hard research problem.
+
+Doing assemblies on the digitally normalized data
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+I've also provided digitally normalized data sets -- done to C=10.  Let's
+assemble them::
+
+   cd /mnt
+   mkdir p4.dn
+   cd p4.dn
+   
+   gunzip -c ../hmp-mock-subsets/partition4.dn.fa.gz > partition4.dn.fasta
+   
+   for k in {21..49..2}
+   do
+      mpiexec Ray -n 10 -k $k -s partition4.dn.fasta -o p4.dn.ray.$k
+   done
+   
+   for k in {21..49..2}
+   do
+      velveth partition4.dn.v$k $k -short partition4.dn.fasta
+      velvetg partition4.dn.v$k -scaffolding no -read_trkg yes
+      meta-velvetg partition1.dn.v$k -scaffolding no
+   done
+
+These will be a tiny bit faster but will still take a while, 'cause we're
+doing lots of assemblies.
+
+To evaluate them on the basis of summed contigs > 1kb, do an even
+longer assemstats3 command that encompasses the new contigs::
+
+   cd /mnt
+   python ~/khmer/sandbox/assemstats3.py 1000 p4/p4.ray.*/Contigs.fasta p4/partition4.v*/*contigs.fa p4.dn/p4.dn.ray.*/Contigs.fasta p4.dn/partition4.dn.v*/*contigs.fa | sort -rn -k2 | head -25
+
+OK, so no big changes here -- for partition 4, you can see that digital
+normalization doesn't really help out with the assembly at all, perhaps
+because it's lower coverage.  We could probably tweak the diginorm
+parameters a bit to improve the assemblies, but in the meantime, here
+we are::
+
+   12      53450   14446   p4/partition4.v29/meta-velvetg.contigs.fa
+   14      53355   21235   p4/partition4.v27/meta-velvetg.contigs.fa
+   17      52628   13867   p4/partition4.v33/meta-velvetg.contigs.fa
+   21      52600   7000    p4/partition4.v39/meta-velvetg.contigs.fa
+   12      52134   21231   p4/partition4.v23/meta-velvetg.contigs.fa
+   21      51468   5341    p4/partition4.v37/meta-velvetg.contigs.fa
+   14      50284   21192   p4/partition4.v21/meta-velvetg.contigs.fa
+   21      49872   5239    p4/partition4.v37/contigs.fa
+   18      47693   9861    p4/partition4.v35/meta-velvetg.contigs.fa
+   13      47110   21233   p4/partition4.v25/meta-velvetg.contigs.fa
+   17      46967   5506    p4/partition4.v31/contigs.fa
+   18      46957   7794    p4/partition4.v25/contigs.fa
+   15      46932   7794    p4.dn/partition4.dn.v31/contigs.fa
+   18      46857   7794    p4/partition4.v23/contigs.fa
+   21      46647   4650    p4.dn/partition4.dn.v37/contigs.fa
+   12      46610   21239   p4/partition4.v31/meta-velvetg.contigs.fa
+   17      46493   5747    p4.dn/partition4.dn.v29/contigs.fa
+   21      46358   5241    p4.dn/partition4.dn.v39/contigs.fa
+   20      46322   5241    p4/partition4.v39/contigs.fa
+   18      46235   5745    p4.dn/partition4.dn.v27/contigs.fa
+   18      46188   7794    p4.dn/partition4.dn.v23/contigs.fa
+   21      45791   6369    p4/partition4.v35/contigs.fa
+   20      45556   5511    p4.dn/partition4.dn.v25/contigs.fa
+   18      45254   6367    p4.dn/partition4.dn.v33/contigs.fa
+   20      45059   5451    p4/partition4.v21/contigs.fa
+
+Running bigger assemblies
+-------------------------
+
+Let's run two sets of assemblies: first, of the unmodified partition1 data,
+and then, of the digitally normalized partition1 data.
+
+This will take a long time, so I suggest using 'screen' to run things.
+Briefly, type 'screen', which will give you a new prompt running inside
+of the screen program; and then run the following commands (copy/paste).
+
+To assemble partition1 original, do::
+
+   cd /mnt
+   mkdir p1
+   cd p1
+   
+   gunzip -c ../hmp-mock-subsets/partition1.orig.fa.gz > partition1.orig.fasta
+   
+   for k in {21..49..2}
+   do
+   mpiexec Ray -n 10 -k $k -s partition1.orig.fasta -o p1.ray.$k
+   done
+   
+   for k in {21..49..2}
+   do
+   velveth partition1.v$k $k -short partition1.orig.fasta
+   velvetg partition1.v$k -scaffolding no -read_trkg yes
+   meta-velvetg partition1.v$k -scaffolding no
+   done
+   
+To assemble the digitally normalized partition1, do::   
+   
+   cd /mnt
+   mkdir p1.dn
+   cd p1.dn
+      
+   gunzip -c ../hmp-mock-subsets/partition1.dn.fa.gz > partition1.dn.fasta
+      
+   for k in {21..49..2}
+   do
+      mpiexec Ray -n 10 -k $k -s partition1.dn.fasta -o p1.dn.ray.$k
+   done
+      
+   for k in {21..49..2}
+   do
+      velveth partition1.dn.v$k $k -short partition1.dn.fasta
+      velvetg partition1.dn.v$k -scaffolding no -read_trkg yes
+      meta-velvetg partition1.dn.v$k -scaffolding no
+   done
+
+Now, check out what was assembled::
+
+   python ~/khmer/sandbox/assemstats3.py 1000 p1/p1.ray*/Contigs.fasta p1/partition1.v*/{contigs.fa,meta-velvetg.contigs.fa} p1.dn/p1.dn.ray*/Contigs.fasta p1.dn/partition1.dn.v*/{contigs.fa,meta-velvetg.contigs.fa} | sort -k2 -rn | head -25
+
+This runs assemstats3 on all of the contig assembly files, both non-normalized
+and normalized, and then sorts the resulting output by column 2 (total
+bases assembled), and then takes the top 25 entries.
+
+You should see something like::
+
+   767     5936453 71251   p1/partition1.v31/meta-velvetg.contigs.fa
+   805     5911710 65106   p1.dn/partition1.dn.v31/meta-velvetg.contigs.fa
+   819     5910155 71266   p1.dn/partition1.dn.v33/meta-velvetg.contigs.fa
+   875     5902744 67816   p1.dn/partition1.dn.v29/meta-velvetg.contigs.fa
+   925     5887856 67924   p1.dn/partition1.dn.v27/meta-velvetg.contigs.fa
+   833     5861857 65900   p1.dn/partition1.dn.v35/meta-velvetg.contigs.fa
+   1017    5845081 49829   p1.dn/partition1.dn.v25/meta-velvetg.contigs.fa
+   1072    5814256 63200   p1/partition1.v25/meta-velvetg.contigs.fa
+   879     5795589 83096   p1.dn/partition1.dn.v37/meta-velvetg.contigs.fa
+   939     5723429 58161   p1.dn/partition1.dn.v39/meta-velvetg.contigs.fa
+   1235    5693989 40748   p1.dn/partition1.dn.v23/meta-velvetg.contigs.fa
+   652     5667629 65900   p1/partition1.v35/meta-velvetg.contigs.fa
+   1005    5659787 65908   p1/partition1.v39/contigs.fa
+   1104    5659697 45358   p1.dn/partition1.dn.v39/contigs.fa
+   1417    5633758 36829   p1.dn/partition1.dn.v21/meta-velvetg.contigs.fa
+   1218    5623851 48403   p1.dn/partition1.dn.v37/contigs.fa
+   1107    5623339 40481   p1.dn/partition1.dn.v41/meta-velvetg.contigs.fa
+   1063    5619412 53716   p1/partition1.v37/contigs.fa
+   979     5594832 58271   p1/partition1.v41/contigs.fa
+   722     5572996 62583   p1/partition1.v41/meta-velvetg.contigs.fa
+   635     5569908 102610  p1/partition1.v37/meta-velvetg.contigs.fa
+   1461    5565877 36829   p1/partition1.v21/meta-velvetg.contigs.fa
+   1227    5565533 30811   p1.dn/partition1.dn.v41/contigs.fa
+   610     5552493 102067  p1/partition1.v33/meta-velvetg.contigs.fa
+   1219    5530669 36712   p1/partition1.v35/contigs.fa
+
+Some thoughts on these statistics
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The main thing you should note here is that you can get rather wildly
+different results in terms of number of contigs (first column),
+total bases assembled (second column), and longest contig, simply
+by varying the k parameter.  It is reassuring that the first 5 or so
+assemblies, when ranked by sum bp, are all fairly similar.  But still,
+this variability is surprising, ne c'est pas?
+
+First, note that this is the kind of parameter sweep you should run for
+any serious metagenome project, until you get a sense for how the
+assembly parameters interact with the kind of data you're producing.
+It's just computer time, and our experience has been that it's pretty
+easy to assemble normalized & partitioned data.
+
+Next -- you might try to reach a few conclusions from these statistics.
+
+1. You should go with p1/partition1.v33/meta-velvetg, because it has the
+   longest max contig in the top 25 (102kb!)
+
+   But this may be a misassembly; and you don't know anything about the
+   other contigs. The contig size distribution may drop off rapidly from
+   that big one!
+
+2. You should go with p1/partition1.v31/meta-velvetg, because it has
+   the largest total sum of bases > 1kb.
+
+   But if you go down to look at contigs > 300 bases, you might find
+   that another assembly looks better.  (Hint:
+   p1.dn/partition1.dn.v33/meta-velvetg).  If you're looking for
+   super-sensitive assemblies -- ones that represent more of the raw
+   data -- you might want to go with the 300 bp cutoff.  If you're
+   looking for more specific results -- ones with better gene signal,
+   for example -- you might want to go with 1kb cutoffs.
+
+3. You should go with p1/partition1.v33/meta-velvetg, because it
+   has the fewest contigs, indicating the greatest contiguity.
+   
+   Sure, but some of these may be missassemblies!
+
+So as you can see it's complicated :).  I would generally go for the
+one that is most sensitive myself, but it really depends on how
+complex your sample is expected to be, how much you trust (say) Velvet
+vs Ray, and how sensitive your downstream analysis is to contig length
+and the like.
+   
+What's next?
+------------
+
+And... that's all, folks.  At this point, you have a bunch of
+assemblies, and your next job is to figure out which one(s) to pay
+attention to, and/or to work with, and/or merge.  For this data set,
+you could --
+
+1. Map the contigs against the known genomes to evaluate correctness
+   and "true" coverage, because we know the source genomes.
+
+2. Map the raw or filtered reads against the assembled contigs to count
+   the abundances of the contigs.
+
+3. Compare the assemblies by BLASTing or otherwise mapping them to
+   each other, to see which ones are redundant.
+
+4. Try to merge assemblies using minimus2.
+
+Other suggestions welcome!
+
+For the `2013 MBL STAMPS course <http://hermes.mbl.edu/education/courses/special_topics/stamps.html>`__
+in August I'll probably put together some videos and instructions on
+mapping reads, calling variants, etc.

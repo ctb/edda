@@ -1,0 +1,120 @@
+Preparing the data you just used - filtering, normalizing, partitiong
+=====================================================================
+
+:author: C. Titus Brown
+:date: May 7, 2013
+
+On the previous pages, I was just showing you how to work with subsets
+of the HMP mock Illumina metagenome.  How would you work with many
+millions of reads? What kind of up-front filtering should be done?
+
+Here are my notes from preparing the partitions used in previous pages.
+They may not be quite as copy & paste as the previous pages, because
+they take a long time.  Corrections welcome!
+
+You'll need to install FASTX; see
+:doc:`../2013-04-assembly-workshop/installing-software`.
+
+First, grab the two data sets from the Short Read Archive.  Protip:
+EBI/ENA lets you download SRA files directly as FASTQ!!!! ::
+
+   wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR172/SRR172903/SRR172903.fastq.gz
+   wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR172/SRR172902/SRR172902.fastq.gz
+
+Now, trim them nicely with the FASTX quality filter::
+
+   gunzip -c SRR172902.fastq.gz | fastq_quality_filter -Q33 -q 30 -p 50 > SRR172902-trim.fastq
+   gunzip -c SRR172903.fastq.gz | fastq_quality_filter -Q33 -q 30 -p 50 > SRR172903-trim.fastq
+
+Next, apply digital normalization; normalize them together, because they
+come from the same underlying genomes::
+
+   python ~/khmer/scripts/normalize-by-median.py -k 20 -C 10 -x 2e9 -N 4 --savehash trim.kh *-trim.fastq
+
+Take the output files and trim them at highly connected graph regions::
+
+   python ~/khmer/sandbox/filter-below-abund.py trim.kh *-trim.fastq.keep
+
+Rename them to '.fq' files because khmer is currently stoooopid and
+doesn't know how to figure out file types without looking at the filename::
+
+   for i in *.below; do mv $i $i.fq; done
+
+Now, run partitioning::
+
+   python ~/khmer/scripts/do-partition.py -x 4e9 -N 4 -T 16 both *.below.fq
+
+This will take a while.
+
+After partitioning is done, exactract the partitions::
+
+   python ~/khmer/scripts/extract-partitions.py both SRR*.part
+
+Rename the partitions and compress::
+
+   mv both.group0000.fa collection1.dn.fa
+   mv both.group0001.fa collection2.dn.fa
+   mv both.group0002.fa collection3.dn.fa
+   mv both.group0003.fa collection4.dn.fa
+   gzip collection*.fa
+
+Now, put them in a nice subdirectory and extract out specific
+partitions just for the heck of it (well, really, so that we have some
+smaller files to work with)::
+
+   mkdir datasets
+   python ~/khmer/sandbox/extract-single-partition.py collection4.dn.fa.gz 126039 > datasets/partition1.fa &
+   python ~/khmer/sandbox/extract-single-partition.py collection4.dn.fa.gz 130241 > datasets/partition2.fa &
+   python ~/khmer/sandbox/extract-single-partition.py collection4.dn.fa.gz 67910 > datasets/partition3.fa &
+   python ~/khmer/sandbox/extract-single-partition.py collection4.dn.fa.gz 71690 > datasets/partition4.fa &
+
+These collection and partition files are now things that you can work with
+and assemble independently, etc.
+
+Pulling out the original, unnormalized sequences
+------------------------------------------------
+
+Let's suppose you want to pull out the original reads to produce
+partitions that reflect non- diginormed data, i.e. that contain their
+original abundances.  How do you this?
+
+Briefly, use the 'sweep-reads3' script::
+
+   cd datasets
+
+   mkdir 1
+   cd 1
+   ln -fs ../*.fa .
+   python ~/khmer/sandbox/sweep-reads3.py -x 1e9 -k 20 *.fa ../../SRR172902-trim.fastq
+   cd ../
+
+   mkdir 2
+   cd 2
+   ln -fs ../*.fa .
+   python ~/khmer/sandbox/sweep-reads3.py -x 1e9 -k 20 *.fa ../../SRR172902-trim.fastq
+   cd ../
+
+Now, combine the resulting files::
+
+   for i in 1 2 3 4
+   do
+     cat 1/partition$i.fa 2/partition$i.fa | gzip -c > partition$i.orig.fa.gz
+   done
+
+and while we're at it, rename the dn files::
+
+   for i in 1 2 3 4
+   do
+      mv partition$i.fa partition$i.dn.fa
+      gzip partition$i.dn.fa &
+   done
+
+And these are the files we used previously.
+
+Finally, you can calculate k-mer abundance histograms for everything, like so::
+
+   for i in *.fa.gz
+   do
+     python ~/khmer/scripts/load-into-counting.py -x 3e8 $i.kh $i 
+     python ~/khmer/scripts/abundance-dist.py $i.kh $i $i.hist
+   done

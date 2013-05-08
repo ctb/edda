@@ -32,7 +32,7 @@ Install FastQC::
    unzip fastqc_v0.10.1.zip
    chmod +x FastQC/fastqc
 
-Install libgtextutils::
+Install libgtextutils and fastx::
 
    cd /root
    curl -O http://hannonlab.cshl.edu/fastx_toolkit/libgtextutils-0.6.1.tar.bz2
