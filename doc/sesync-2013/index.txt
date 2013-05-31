@@ -1,0 +1,21 @@
+Software Carpentry and BIO at SESYNC, July 8-9
+==============================================
+
+`Read the grant proposal
+<http://ged.msu.edu/downloads/2012-beacon-education-suppl-pub.pdf>`__
+and the `much shorter blog post
+<http://ivory.idyll.org/blog/bio-ci-needs.html>`__ -- basically, what
+should biologists know about cyberinfrastructure, and how do we train
+them for/on it?
+
+Contents:
+
+.. toctree::
+
+   schedule
+   links
+
+Miscellany:
+
+ - `travel arrangements <https://docs.google.com/document/d/1tQ91oJBEM72MMZ2O9MeP8JQcJov1IJzIysTPNlYizzs/edit#heading=h.vy7ujjs4ct19>`__
+ - `travel reimbursement form <https://docs.google.com/forms/d/1yrCug8OEg8tmHh3TJA0ISS9Lb-qWJNGZq7B8Hqz4bbA/viewform>`__

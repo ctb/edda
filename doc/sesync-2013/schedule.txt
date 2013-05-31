@@ -1,0 +1,75 @@
+A tentative schedule
+====================
+
+Day 1 - July 8
+~~~~~~~~~~~~~~
+
+*Morning:*
+
+Framing the problem: short intro presentations by
+
+ - Titus Brown (welcome/overview)
+ - Greg Wilson (teaching and motivating compute)
+ - Julie Libarkin (the trials and tribulations of assessment)
+ - Karthik Ram (data!)
+
+1-2 minute raps by everyone else, introducing themselves and bringing out
+keywords and concepts that they want to explore.
+
+To ground broader discussion, we will design and write user stories,
+such as:
+
+   Jane is a marine ecologist. She's just found a paper that claims
+   such and such, and she wants to play.  She'll download the data,
+   load it into Excel, extract two columns by cut-and-paste into an
+   editor, etc.
+
+We will then followed these stories by, "And here's what we'd like her
+to do!" => motivate specific education.
+
+**Lunch**
+
+*Afternoon:*
+
+Afternoon session 1: Pair or group: now we want to tell (a) how much
+of this topic does Jane already know (if any), and (b) how can we tell
+afterward if she's learned it?  i.e. what are assessment
+methods/modalities/topics?
+
+(pair- or group-ing to outline lesson plans or narratives; redundancy
+allowed; links to relevant material/plans (or search terms thereto)
+requested)
+
+**Break**
+
+Afternoon session 2: present & discuss.  Map out additional topics, in
+less depth.
+
+Day 2 - July 9
+~~~~~~~~~~~~~~
+
+*Morning day 2:*
+
+Show and tell & discuss.
+
+Everyone gives at least one five minute intro to something they think
+scientists ought to be using that most other people in the room won't
+already know about (or at least, won't be using).  For each, we work
+backward to ask what someone needs to understand in order to use that
+thing, which could be Travis CI, a coverage tool to see what parts of
+code are being exercised, OData, etc. (This encourages everyone to do a
+bit of thinking in advance, which is good, and gives us something
+concrete to give back in the white paper ("In order to use cool thing
+XYZ, people need to learn PQR", rather than, "We think people ought to
+learn PQR").)
+
+*Afternoon:*
+
+Afternoon session 1:
+
+BREAKOUT: pair- or group- hack on lesson plans, this time based on
+disjoint/nonoverlap concepts; rejoin, discuss
+
+**Break**
+
+Afternoon session 2: TBD.  Probably focused on outputs.

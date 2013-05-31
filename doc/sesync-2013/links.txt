@@ -1,0 +1,25 @@
+References/interesting sites
+============================
+
+Please add your own using the comments box at the bottom!
+
+----
+
+http://www.dataone.org/news/data-management-guide-citizen-scientists-released
+
+http://datapub.cdlib.org/wanted-better-tools-and-websites-for-data-management-help/
+
+http://creativecommons.org/weblog/entry/37146
+
+http://jabberwocky.weecology.org/2013/04/11/preprint-nine-simple-ways-to-make-it-easier-to-reuse-your-data/
+
+http://www.dcc.ac.uk/sites/default/files/documents/publications/case-studies/Monash-RDM-case-study.pdf
+
+humor? on data sharing:
+
+http://www.youtube.com/watch?v=N2zK3sAtr-4&feature=youtu.be
+
+http://www.opensciencetraining.com/content.php
+
+Use hackpad to coordinate?
+https://hackpad.com/
