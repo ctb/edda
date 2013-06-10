@@ -32,6 +32,8 @@ Contents:
 
    bioinformatics-courses
 
+   tutorials-2013/index
+
    2013-hmp-assembly-webinar/index
 
    2013-04-assembly-workshop/index

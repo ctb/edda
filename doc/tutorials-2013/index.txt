@@ -1,0 +1,13 @@
+==========================================
+Next-Gen Sequence Analysis Workshop (2013)
+==========================================
+
+This is a placeholder until we put the schedule in later today.
+Until then, visit :doc:`day1`.
+
+Cheat sheet:
+
+ - use Amazon Machine Instance "ami-c17ec8a8";
+ - m1.large or larger;
+ - make sure you are in the US East zone (Virgina) -- see upper right;
+ - make sure the security group you use has SSH and HTTPS enabled for inbound;
