@@ -3,7 +3,7 @@ Next-Gen Sequence Analysis Workshop (2013)
 ==========================================
 
 This is a placeholder until we put the schedule in later today.
-Until then, visit :doc:`day1`.
+Until then, visit :doc:`day1` and :doc:`day2`.
 
 Cheat sheet:
 
