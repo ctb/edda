@@ -5,6 +5,8 @@ Next-Gen Sequence Analysis Workshop (2013)
 This is a placeholder until we put the schedule in later today.
 Until then, visit :doc:`day1` and :doc:`day2`.
 
+Also see :doc:`day3`.
+
 Cheat sheet:
 
  - use Amazon Machine Instance "ami-c17ec8a8";
