@@ -337,12 +337,27 @@ TView. We'll compare two different sorted::
   samtools tview RAL357_bwa.sorted.bam dmel-all-chromosome-r5.37.fasta
 
 Now open an additional terminal window, and load the Bowtie mapping
-file there as well.::
+file there as well::
   
   cd /mnt
   samtools tview RAL357_bowtie.sorted.bam dmel-all-chromosome-r5.37.fasta
 
-To view the tview help, type '?'
+To view the tview help, type '?'.  You can go see one particular mapping
+location by typing 'g' and then enter '3L:23378032' to go that location
+in the SAM file.
+
+Some other data and exercises
+=============================
+
+For :doc:`day2`, we did a lot of work with some E. coli data.
+Try using BWA to map the E. coli data to the reference genome, which
+is available at this URL::
+
+  https://s3.amazonaws.com/public.ged.msu.edu/ecoliMG1655.fa.gz
+
+Hint: use curl to download it, gunzip to uncompress it, bwa index or
+bowtie-build to index it, and then apply the above BAM stuff to it.
+Then use tview to visualize.
 
 .. @@ Tablet
-.. @@ ecoli mapping/ref download
+.. @@ mismatch profiles/ipython notebook
