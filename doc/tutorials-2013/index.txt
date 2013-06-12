@@ -2,12 +2,42 @@
 Next-Gen Sequence Analysis Workshop (2013)
 ==========================================
 
-This is a placeholder until we put the schedule in later today.
-Until then, visit :doc:`day1` and :doc:`day2`.
+===============  =============================================================
+Day              Schedule
+===============  =============================================================
+                 * 1:30pm tutorial: :doc:`day1` (Adina)
+                 * 7pm: research presentations
+Tuesday 6/11     * :doc:`day2`
+		 * 9:30am: lecture, Welcome! (Titus)
+                 * 10:45am: tutorial, :doc:`running-command-line-blast`
+		 * 1:15pm: tutorial, :doc:`short-read-quality-evaluation`
+		 * Evening: *firepit social*
+Wednesday 6/12   * :doc:`day3`
+	  	 * 9:30am: lecture, Mapping. (Titus)
+                 * 10:45am: tutorial, :doc:`bwa-tutorial` (Likit)
+		 * 1:15pm: tutorial cont'd
+		 * 8pm: General bioinformatics overview (Istvan)
+Thursday 6/13	 * 9:15am: lecture, Assembly. (Titus)
+	 	 * 10:45am: tutorial, Running assemblers on E. coli.
+   	 	 * 1:15pm: tutorial, Evaluating assemblies (I)
+		 * Evening: *brew pub in Kalamazoo.*
+Friday 6/14	 * 9:15am: lecture, Interval data in Bioinformatics. (Istvan)
+       		 * 10:45am: tutorial, Application of intervals (Istvan)
+		 * 1:15pm: lecture/tutorial, Statistics (Ian)
+		 * 8: Teach me X. (Istvan)
+Saturday 6/15	 * 9:15am: lecture, Pipelines and Automation (Titus)
+	 	 * 10:45am: tutorial: Git, shell scripts, and pipelines.
+		 * 1:15pm: tutorial, R (Josh)
+Sunday 6/16	 Day of rest.
+Monday 6/17	 mRNAseq (Ian and Chris)
+Tuesday 6/18	 mRNAseq (Ian and Chris)
+Wednesday 6/19	 Genome assembly and analysis (Erich)
+Thursday 6/20	 Assembly tech (Rayan); khmer (Titus)
+Friday 6/21	 Summative experience.
+===============  =============================================================
 
-Also see :doc:`day3`.
-
-Cheat sheet:
+Cheat sheet for starting up an EC2 instance
+===========================================
 
  - use Amazon Machine Instance "ami-c17ec8a8";
  - m1.large or larger;
