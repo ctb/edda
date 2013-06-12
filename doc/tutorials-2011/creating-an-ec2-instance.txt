@@ -99,7 +99,7 @@ Click "View your instances on the Instances page".
 Hooray!
 
 Important note: shutting down your instance
----------------------------
+-------------------------------------------
 
 When you're not using your rented system, you should shut it off.  Amazon
 only charges you for the periods that your system is up.

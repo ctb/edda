@@ -61,12 +61,12 @@ Lecture 7 -- Scripting
 Lecture 12 -- Serial transfers of critters
 ------------------------------------------
 
-See :doc:`running-serial-transfers` and :doc:`transferring-files`.
+.. See :doc:`running-serial-transfers` and :doc:`transferring-files`.
 
 Lecture 13 -- Mutation analysis
 -------------------------------
 
-See :doc:`mutation-analysis`.
+.. See :doc:`mutation-analysis`.
 
 Lecture 17 -- Mapping short reads
 ---------------------------------
@@ -86,11 +86,6 @@ All BEACON-specific ANGUS materials
    retrieving-dominant-organism
 
    avida-with-scripts
-
-   running-serial-transfers
-   mutation-analysis
-
-   transferring-files
 
    avida-image
 
