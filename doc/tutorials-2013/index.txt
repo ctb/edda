@@ -15,7 +15,7 @@ Tuesday 6/11     * :doc:`day2`
 Wednesday 6/12   * :doc:`day3`
 	  	 * 9:30am: lecture, Mapping. (Titus)
                  * 10:45am: tutorial, :doc:`bwa-tutorial` (Likit)
-		 * 1:15pm: tutorial cont'd
+		 * 1:15pm: tutorial cont'd; also, :doc:`plot-mapping-mismatches`
 		 * 8pm: General bioinformatics overview (Istvan)
 Thursday 6/13	 * 9:15am: lecture, Assembly. (Titus)
 	 	 * 10:45am: tutorial, Running assemblers on E. coli.
