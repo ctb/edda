@@ -5,7 +5,7 @@ Next-Gen Sequence Analysis Workshop (2013)
 ===============  =============================================================
 Day              Schedule
 ===============  =============================================================
-                 * 1:30pm tutorial: :doc:`day1` (Adina)
+Monday 6/10      * 1:30pm tutorial: :doc:`day1` (Adina)
                  * 7pm: research presentations
 Tuesday 6/11     * :doc:`day2`
 		 * 9:30am: lecture, Welcome! (Titus)
@@ -28,10 +28,12 @@ Friday 6/14	 * 9:15am: lecture, Interval data in Bioinformatics. (Istvan)
 Saturday 6/15	 * 9:15am: lecture, Pipelines and Automation (Titus)
 	 	 * 10:45am: tutorial: Git, shell scripts, and pipelines.
 		 * 1:15pm: tutorial, R (Josh)
-Sunday 6/16	 Day of rest.
+		 * Evening: BBQ/dinner.
+Sunday 6/16	 Day of rest.  Brunch in the morning;
+       		 takeout dinner in evening.
 Monday 6/17	 mRNAseq (Ian and Chris)
 Tuesday 6/18	 mRNAseq (Ian and Chris)
-Wednesday 6/19	 Genome assembly and analysis (Erich)
+Wednesday 6/19	 Genome assembly and analysis (Erich); BBQ, gin & firepit social.
 Thursday 6/20	 Assembly tech (Rayan); khmer (Titus)
 Friday 6/21	 Summative experience.
 ===============  =============================================================
