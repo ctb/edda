@@ -72,7 +72,7 @@ Now check out the stats for the assembled contigs for a cutoff of 1000::
 Over lunch, run an assembly of the larger read data set.  (You might want to
 do this in screen.) ::
 
-   velveth ecoli-full.31 31 -shortPaired -fastq.gz ecoli_ref-5m-trim.fastq.gz
+   velveth ecoli-full.31 31 -short -fastq.gz ecoli_ref-5m-trim.fastq.gz
    velvetg ecoli-full.31 -exp_cov auto
 
 Comparing and evaluating assemblies - Mapping
@@ -226,13 +226,75 @@ that possible??
 
 What's going on?  Any ideas?
 
-.. Comparing and evaluating assemblies -- contig size distributions
-.. ================================================================
+.. @CTB
 
+Comparing and evaluating assemblies -- contig size distributions
+================================================================
 
+Go to IPython Notebook (https:// + machine name), and enter the code
+below in different cells.  Use SHIFT-Enter to execute the Python code.
 
+First, write a function to load in the lengths of sequences in an
+assembly::
 
-.. @blast cover
-.. @contig size distribution
-.. @multiple
+   import screed
+
+   def get_length_distribution(filename):
+       x = []
+       for record in screed.open(filename):
+           x.append(len(record.sequence))
+       return x
+
+Then load the data from E. coli 31 and E. coli 33. ::
+
+   ecoli31 = get_length_distribution('/mnt/assembly/ecoli-31.fa')
+   ecoli33 = get_length_distribution('/mnt/assembly/ecoli-33.fa')
+
+Now look at a histogram of the length distribution::
+
+   hist(ecoli31)
+
+The problem with this graph is that it shows the *number of contigs*
+by bin, not the *number of bases*.  Let's fix::
+
+   def generate_cumulative_above(contig_sizes):
+       sizes = list(reversed(sorted(contig_sizes)))
+    
+       sizesum = []
+       sofar = 0
+       for size in sizes:
+           sofar += size
+           sizesum.append((size, sofar))
+        
+       sizesum.sort()
+
+       return numpy.array(sizesum)
+
+Now, plot::
+
+   cum31 = generate_cumulative_above(ecoli31)
+   cum33 = generate_cumulative_above(ecoli33)
+
+   plot(cum31[:,0], cum31[:,1], label='k=31')
+   plot(cum33[:,0], cum33[:,1], label='k=33')
+   legend()
+
 .. @SGA
+
+Suggested exercises
+-------------------
+
+1. Plot the above graphs for k=35 on the digitally normalized data, as well
+   on the ecoli-full.31 data set.
+
+2. For the digitally normalized data, find the "best" k value.  Why is it
+   the best? :)
+
+3. Note that the 'ecoli_ref-5m-trim.fastq.gz' is interleaved but contains
+   both pairs and orphans.  Use::
+
+      python /usr/local/share/khmer/sandbox/strip-and-split-for-assembly.py
+
+   to split things up into a .pe and .se file, and then modify the velveth
+   command to use '-shortPaired' on the .pe file, and '-short' on the .se
+   file.
