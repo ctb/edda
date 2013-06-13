@@ -18,8 +18,8 @@ Wednesday 6/12   * :doc:`day3`
 		 * 1:15pm: tutorial cont'd; also, :doc:`plot-mapping-mismatches`
 		 * 8pm: General bioinformatics overview (Istvan)
 Thursday 6/13	 * 9:15am: lecture, Assembly. (Titus)
-	 	 * 10:45am: tutorial, Running assemblers on E. coli.
-   	 	 * 1:15pm: tutorial, Evaluating assemblies (I)
+	 	 * 10:45am: tutorial, :doc:`assembling-ecoli-with-velvet`
+   	 	 * 1:15pm: tutorial, cont'd, evaluating assemblies.
 		 * Evening: *brew pub in Kalamazoo.*
 Friday 6/14	 * 9:15am: lecture, Interval data in Bioinformatics. (Istvan)
        		 * 10:45am: tutorial, Application of intervals (Istvan)

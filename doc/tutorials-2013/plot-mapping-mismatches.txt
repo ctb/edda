@@ -37,3 +37,10 @@ In the new notebook, paste::
    axis(ymax=50000, xmax=50)
 
 and hit "shift-ENTER" to execute this code.
+
+Exercise
+--------
+
+Note the spike around 12 -- try using the 'map-profile-N.py' script
+(in the same place as the map-profile script) to plot the distribution
+of mismatches where N is in the read.  Do the spikes align?
