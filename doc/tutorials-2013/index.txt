@@ -8,16 +8,16 @@ Day              Schedule
 Monday 6/10      * 1:30pm tutorial: :doc:`day1` (Adina)
                  * 7pm: research presentations
 Tuesday 6/11     * :doc:`day2`
-		 * 9:30am: lecture, Welcome! (Titus)
+		 * 9:30am: lecture, `Welcome! <files/lecture1-welcome.pptx.pdf>`__ (Titus)
                  * 10:45am: tutorial, :doc:`running-command-line-blast`
 		 * 1:15pm: tutorial, :doc:`short-read-quality-evaluation`
 		 * Evening: *firepit social*
 Wednesday 6/12   * :doc:`day3`
-	  	 * 9:30am: lecture, Mapping. (Titus)
+	  	 * 9:30am: lecture, `Mapping. <files/lecture2-mapping.pptx.pdf>`__ (Titus)
                  * 10:45am: tutorial, :doc:`bwa-tutorial` (Likit)
 		 * 1:15pm: tutorial cont'd; also, :doc:`plot-mapping-mismatches`
 		 * 8pm: General bioinformatics overview (Istvan)
-Thursday 6/13	 * 9:15am: lecture, Assembly. (Titus)
+Thursday 6/13	 * 9:15am: lecture, `Assembly. <files/lecture3-assembly.pptx.pdf>`__ (Titus)
 	 	 * 10:45am: tutorial, :doc:`assembling-ecoli-with-velvet`
    	 	 * 1:15pm: tutorial, cont'd, evaluating assemblies.
 		 * Evening: *brew pub in Kalamazoo.*

@@ -152,9 +152,9 @@ Install BLAST::
    cp blast-2.2.24/bin/* /usr/local/bin
    cp -r blast-2.2.24/data /usr/local/blast-data
 
-   cd /mnt/assembly
-
 Build BLAST databases for the assemblies you've done::
+
+   cd /mnt/assembly
 
    for i in 31 33 35
    do
@@ -169,10 +169,10 @@ Also download the true reference genome::
 
 And now do a few pairwise BLASTs::
 
-   blastall -i ecoli-31.fa -d ecoliMG1655.fa -p blastn -e 1e-20 -o 31.x.mg.blastn
-   blastall -d ecoli-31.fa -i ecoliMG1655.fa -p blastn -e 1e-20 -o mg.x.31.blastn
-   blastall -i ecoli-31.fa -d ecoli-33.fa -p blastn -e 1e-20 -o 31.x.33.blastn
-   blastall -d ecoli-31.fa -i ecoli-33.fa -p blastn -e 1e-20 -o 33.x.31.blastn
+   blastall -i ecoli-31.fa -d ecoliMG1655.fa -p blastn -e 1e-20 -o 31.x.mg.blastn &
+   blastall -d ecoli-31.fa -i ecoliMG1655.fa -p blastn -e 1e-20 -o mg.x.31.blastn &
+   blastall -i ecoli-31.fa -d ecoli-33.fa -p blastn -e 1e-20 -o 31.x.33.blastn &
+   blastall -d ecoli-31.fa -i ecoli-33.fa -p blastn -e 1e-20 -o 33.x.31.blastn &
 
 Compute overlaps::
 
@@ -184,24 +184,47 @@ Compute overlaps::
 
 You should see::
 
-   4232257 4588331 0.92239574695 ecoli-33.fa 31.x.33.blastn 300
+   total bases in reference: 4588331
+   total ref bases covered : 4232257
+   fraction                : 0.92239574695
+   reference               : ecoli-33.fa
+   blast file              : 31.x.33.blastn
+   query sequences         : ecoli-31.fa
 
 which tells you that 4.23 mb of the 4.58 mb (92.2% of the bases) in
 ecoli-33 have an alignment in ecoli-31.  Similarly, ::
 
-   4223094 4606276 0.916813061137 ecoli-31.fa 33.x.31.blastn 300
+   total bases in reference: 4606276
+   total ref bases covered : 4223094
+   fraction                : 0.916813061137
+   reference               : ecoli-31.fa
+   blast file              : 33.x.31.blastn
+   query sequences         : ecoli-33.fa
 
 tells you that 91.6% (4.22/4.61 mb) of the bases in ecoli-31.fa have an
 alignment in ecoli-33.
 
 The numbers for the reference genome are a bit strange, though -- ::
 
-   4409820 4639675 0.950458814464 ecoliMG1655.fa 31.x.mg.blastn 300
-   896964 4606276 0.194726499237 ecoli-31.fa mg.x.31.blastn 300
+   total bases in reference: 4639675
+   total ref bases covered : 4409820
+   fraction                : 0.950458814464
+   reference               : ecoliMG1655.fa
+   blast file              : 31.x.mg.blastn
+   query sequences         : ecoli-31.fa
+
+   total bases in reference: 4606276
+   total ref bases covered : 896964
+   fraction                : 0.194726499237
+   reference               : ecoli-31.fa
+   blast file              : mg.x.31.blastn
+   query sequences         : ecoliMG1655.fa
 
 What?  So, 95% of the reference genome is covered by ecoli-31, but
 only 19.4% of ecoli-31.fa is covered by the E. coli genome?  How is
 that possible??
+
+What's going on?  Any ideas?
 
 .. Comparing and evaluating assemblies -- contig size distributions
 .. ================================================================
@@ -210,7 +233,6 @@ that possible??
 
 
 .. @blast cover
-.. @mapping
 .. @contig size distribution
 .. @multiple
-
+.. @SGA

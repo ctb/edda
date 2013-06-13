@@ -40,6 +40,7 @@ html:
 	rsync -av files/ $(BUILDDIR)/html/files
 	rsync -av tutorials-2011/files/ $(BUILDDIR)/html/tutorials-2011/files
 	rsync -av tutorials-2012/files/ $(BUILDDIR)/html/tutorials-2012/files
+	rsync -av tutorials-2013/files/ $(BUILDDIR)/html/tutorials-2013/files
 	rsync -av nih-hmp-2012/files/ $(BUILDDIR)/html/nih-hmp-2012/files
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
