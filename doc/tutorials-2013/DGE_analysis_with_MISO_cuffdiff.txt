@@ -1,0 +1,44 @@
+=======================================================
+Differential Expression Analysis with CuffDiff and MISO
+=======================================================
+
+Requirements
+------------
+
+Installation::
+
+    # install bowtie2
+    cd ~
+    wget -O bowtie2-2.1.0-linux-x86_64.zip http://sourceforge.net/projects/bowtie-bio/files/bowtie2/2.1.0/bowtie2-2.1.0-linux-x86_64.zip/download
+    unzip bowtie2-2.1.0-linux-x86_64.zip
+    cp bowtie2 bowtie2-build bowtie2-inspect /usr/local/bin/
+
+
+    # install tophat2
+    cd ~
+    wget http://tophat.cbcb.umd.edu/downloads/tophat-2.0.8b.Linux_x86_64.tar.gz
+    tar xvfz tophat-2.0.8b.Linux_x86_64.tar.gz
+    ln -s ~/tophat-2.0.8b.Linux_x86_64/tophat2 /usr/local/bin
+
+    # install cufflinks
+    cd ~
+    wget http://cufflinks.cbcb.umd.edu/downloads/cufflinks-2.1.1.Linux_x86_64.tar.gz
+    tar xvfz cufflinks-2.1.1.Linux_x86_64.tar.gz
+    cp cufflinks cuffdiff cuffcompare /usr/local/bin
+
+    # install MISO
+
+
+First we need to sort and index BAM files::
+
+    # go to tophat directory
+    cd /data/tophat
+
+    # sort two BAM files from two samples
+    # this could take a while
+    samtools sort vg1_005/accepted_hits.bam accepted_hits.sorted
+    samtools sort w_006/accepted_hits.bam accepted_hits.sorted
+
+    # index BAM files
+    samtools index vg1_005/accepted_hits.sorted.bam
+    samtools index w_006/accepted_hits.sorted.bam
