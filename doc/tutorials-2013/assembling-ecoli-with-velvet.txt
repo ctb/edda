@@ -226,7 +226,21 @@ that possible??
 
 What's going on?  Any ideas?
 
-.. @CTB
+It turns out that, by default, BLAST only shows the first 200-250 matches
+for each query sequence!  In the case where you have one query
+sequence (the E. coli genome) and many query contigs (ecoli-31.fa)
+there are several thousand hits; BLAST is only showing you the first
+few hundred.
+
+To fix this, re-run BLAST with different -b and -v parameters, to
+increase the number of hits reported, and then re-run the
+calc-blast-cover command::
+
+   blastall -d ecoli-31.fa -i ecoliMG1655.fa -p blastn -e 1e-20 -o mg.x.31.blastn -b 5000 -v 5000
+   python /root/ngs-scripts/blast/calc-blast-cover.py ecoli-31.fa mg.x.31.blastn 300 ecoliMG1655.fa
+
+
+
 
 Comparing and evaluating assemblies -- contig size distributions
 ================================================================
