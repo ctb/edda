@@ -239,8 +239,16 @@ calc-blast-cover command::
    blastall -d ecoli-31.fa -i ecoliMG1655.fa -p blastn -e 1e-20 -o mg.x.31.blastn -b 5000 -v 5000
    python /root/ngs-scripts/blast/calc-blast-cover.py ecoli-31.fa mg.x.31.blastn 300 ecoliMG1655.fa
 
+and you should get this::
 
+   total bases in reference: 4606276
+   total ref bases covered : 4354561
+   fraction                : 0.945353904108
+   reference               : ecoli-31.fa
+   blast file              : mg.x.31.blastn
+   query sequences         : ecoliMG1655.fa
 
+Much better!
 
 Comparing and evaluating assemblies -- contig size distributions
 ================================================================
