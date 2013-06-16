@@ -24,8 +24,8 @@ Thursday 6/13	 * 9:15am: lecture, `Assembly. <files/lecture3-assembly.pptx.pdf>`
 Friday 6/14	 * 9:15am: lecture, Interval data in Bioinformatics. (Istvan)
        		 * 10:45am: tutorial, :doc:`interval-analysis-tutorial` (Istvan)
 		 * 1:15pm: lecture/tutorial, Statistics (Ian)
-		 * 8: Teach me X. (Istvan)
-Saturday 6/15	 * 9:15am: lecture, Pipelines and Automation (Titus)
+		 * 8 Tutorial: :doc:`teach-me-intervals` (Istvan)
+Saturday 6/15	 * 9:15am: lecture, `Pipelines and Automation <files/lecture5-pipelines.pptx.pdf>`__ (Titus)
 	 	 * 10:45am: tutorial: Git, shell scripts, and pipelines.
 		 * 1:15pm: tutorial, R (Josh)
 		 * Evening: BBQ/dinner.
