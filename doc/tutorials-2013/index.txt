@@ -16,7 +16,7 @@ Wednesday 6/12   * :doc:`day3`
 	  	 * 9:30am: lecture, `Mapping. <files/lecture2-mapping.pptx.pdf>`__ (Titus)
                  * 10:45am: tutorial, :doc:`bwa-tutorial` (Likit)
 		 * 1:15pm: tutorial cont'd; also, :doc:`plot-mapping-mismatches`
-		 * 8pm: General bioinformatics overview (Istvan)
+		 * 8pm: `General bioinformatics overview <files/challenges-bioinfo-ngs.pdf>`__ (Istvan)
 Thursday 6/13	 * 9:15am: lecture, `Assembly. <files/lecture3-assembly.pptx.pdf>`__ (Titus)
 	 	 * 10:45am: tutorial, :doc:`assembling-ecoli-with-velvet`
    	 	 * 1:15pm: tutorial, cont'd, evaluating assemblies.
@@ -40,10 +40,12 @@ Monday 6/17	 * 9:15am: lecture, mRNAseq I (Ian Dworkin)
 		 4. :doc:`transcriptome_de_novo_assembly`
 
 		 * 7:30pm: Computing without Amazon (Michael Crusoe)
+		 * 8-9pm: look busy
 		 * 9pm: firepit
 Tuesday 6/18	 * 9:15am: lecture, mRNAseq II (Ian Dworkin)
        		 * Tutorials 10:45am, 1:15pm as usual; mRNAseq, continued.
 		 * 7:30pm: Pipelines, scripting, and git (Titus)
+		 * 8-11pm: look busy
 Wednesday 6/19	 * 9:15am: Advanced assembly (Rayan)
 	  	 * 10:45am: Preprocessing sequence data (Titus)
 		 * 1:15pm: Variant calling (Likit)
@@ -52,6 +54,7 @@ Thursday 6/20	 * 9:15am: lecture, Genome assembly and analysis (Erich Schwarz)
 	 	 * 10:45am: Genome assembly and analysis tools
 		 * 1:15pm: Building gene annotations; posting annotations to UCSC (Likit)
 		 * 7:30pm: tutorial, TBD
+		 * 8-11pm: look busy
 Friday 6/21	 Summative experience.
 ===============  =============================================================
 
