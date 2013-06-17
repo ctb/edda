@@ -26,15 +26,31 @@ Friday 6/14	 * 9:15am: lecture, Interval data in Bioinformatics. (Istvan)
 		 * 1:15pm: lecture/tutorial, Statistics (Ian)
 		 * 8 Tutorial: :doc:`teach-me-intervals` (Istvan)
 Saturday 6/15	 * 9:15am: lecture, `Pipelines and Automation <files/lecture5-pipelines.pptx.pdf>`__ (Titus)
-	 	 * 10:45am: tutorial: Git, shell scripts, and pipelines.
-		 * 1:15pm: tutorial, R (Josh)
+	 	 * 10:45am: tutorial: Shell scripts and pipelines.
+		 * 1:15pm: tutorial, R (`text <https://github.com/jrherr/quick_basic_R_tutorial/blob/master/R_tutorial.md>`__ | `code <https://github.com/jrherr/quick_basic_R_tutorial/blob/master/basic_R_tutorial.R>`__) (Josh)
 		 * Evening: BBQ/dinner.
 Sunday 6/16	 Day of rest.  Brunch in the morning;
        		 takeout dinner in evening.
-Monday 6/17	 mRNAseq (Ian and Chris)
-Tuesday 6/18	 mRNAseq (Ian and Chris)
-Wednesday 6/19	 Genome assembly and analysis (Erich); BBQ, gin & firepit social.
-Thursday 6/20	 Assembly tech (Rayan); khmer (Titus)
+Monday 6/17	 * 9:15am: lecture, mRNAseq I (Ian Dworkin)
+       		 * Tutorials 10:45am, 1:15pm as usual; topics:
+
+                 1. :doc:`rnaseq_bwa`
+		 2. :doc:`rnaseq_tophat`
+		 3. :doc:`DGE_analysis_with_MISO_cuffdiff`
+
+		 * 7:30pm: Computing without Amazon (Michael Crusoe)
+		 * 9pm: firepit
+Tuesday 6/18	 * 9:15am: lecture, mRNAseq II (Ian Dworkin)
+       		 * Tutorials 10:45am, 1:15pm as usual; mRNAseq, continued.
+		 * 7:30pm: Pipelines, scripting, and git (Titus)
+Wednesday 6/19	 * 9:15am: Advanced assembly (Rayan)
+	  	 * 10:45am: Preprocessing sequence data (Titus)
+		 * 1:15pm: Variant calling (Likit)
+		 * 7:30pm: BBQ, gin, and firepit social
+Thursday 6/20	 * 9:15am: lecture, Genome assembly and analysis (Erich Schwarz)
+	 	 * 10:45am: Genome assembly and analysis tools
+		 * 1:15pm: Building gene annotations; posting annotations to UCSC (Likit)
+		 * 7:30pm: tutorial, TBD
 Friday 6/21	 Summative experience.
 ===============  =============================================================
 
