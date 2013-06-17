@@ -52,8 +52,7 @@ Now for Oases::
     git clone git://github.com/dzerbino/oases.git
     cd oases
     make
-    make 'VELVET_DIR=/path/to/velvet'
-    make 'MAXKMERLENGTH=92'
+    make 'VELVET_DIR=/path/to/velvet' 'MAXKMERLENGTH=92'
     cp oases /usr/local/bin
     
 To run Velvet/Oases the base commands are::
@@ -67,7 +66,7 @@ Where you would replace 'k' with the k overlap value, and you must use the '-rea
 When using Velvet/Oases you may want to assemble multiple k values, a quick way to do that without have to retype the command yourselve is::
 
     velveth directory 21,33,2 -short reads.fa
-    for((n=21; n<=33; n=n+2)); do velveth directory_"$n" -read_trkg yes; done
+    for((n=21; n<=33; n=n+2)); do velvetg directory_"$n" -read_trkg yes; done
 
 And you can run Oases the same way:::
 
