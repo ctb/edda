@@ -37,6 +37,7 @@ Monday 6/17	 * 9:15am: lecture, mRNAseq I (Ian Dworkin)
                  1. :doc:`rnaseq_bwa`
 		 2. :doc:`rnaseq_tophat`
 		 3. :doc:`DGE_analysis_with_MISO_cuffdiff`
+		 4. :doc:`transcriptome_de_novo_assembly.txt`
 
 		 * 7:30pm: Computing without Amazon (Michael Crusoe)
 		 * 9pm: firepit
