@@ -21,7 +21,7 @@ Thursday 6/13	 * 9:15am: lecture, `Assembly. <files/lecture3-assembly.pptx.pdf>`
 	 	 * 10:45am: tutorial, :doc:`assembling-ecoli-with-velvet`
    	 	 * 1:15pm: tutorial, cont'd, evaluating assemblies.
 		 * Evening: *brew pub in Kalamazoo.*
-Friday 6/14	 * 9:15am: lecture, Interval data in Bioinformatics. (Istvan)
+Friday 6/14	 * 9:15am: lecture, `Intervals <files/interval-datatypes.pdf>`__ (Istvan)
        		 * 10:45am: tutorial, :doc:`interval-analysis-tutorial` (Istvan)
 		 * 1:15pm: lecture/tutorial, `Statistics <files/stats-lecture.pptx.pdf>`__ (Ian)
 		 * 8 Tutorial: :doc:`teach-me-intervals` (Istvan)
@@ -63,6 +63,31 @@ Cheat sheet for starting up an EC2 instance
  - make sure you are in the US East zone (Virgina) -- see upper right;
  - make sure the security group you use has SSH and HTTPS enabled for inbound;
 
+Dramatis personae
+=================
+
+Instructors:
+
+* Istvan Albert
+* C. Titus Brown
+* Ian Dworkin
+
+TAs:
+
+* Amanda Charbonneau
+* Michael Crusoe
+* Tristan De Buysscher
+* Joshua Herr
+* Elijah Lowe
+* Likit Preeyanon
+
+Lecturers:
+
+* Rayan Chaikhi
+* Chris Chandler
+* Adina Chuang Howe
+* Erich Schwarz
+
 Papers and References
 =====================
 
@@ -99,10 +124,18 @@ RNA-seq experiments <http://www.ncbi.nlm.nih.gov/pubmed/?term=22998089>`__ Vijay
 
 * `Evaluation of statistical methods for normalization and differential expression in mRNA-Seq experiments. <http://www.ncbi.nlm.nih.gov/pubmed/?term=20167110>`__, Bullard et al., 2010.
 
-Computing
----------
+* `A comparison of methods for differential expression analysis of RNA-seq data <http://www.biomedcentral.com/1471-2105/14/91>`__, Soneson and Delorenzi, BMC Bioinformatics, 2013.
+
+* `Measurement of mRNA abundance using RNA-seq data: RPKM measure is inconsistent among samples. <http://www.ncbi.nlm.nih.gov/pubmed/?term=22872506>`__, Wagner et al., Theory Biosci, 2012.  Also see `this blog post <http://blog.nextgenetics.net/?e=51>`__ explaining the paper in detail.
+
+Computing and Data
+------------------
 
 * `A Quick Guide to Organizing Computational Biology Projects <http://www.ploscompbiol.org/article/info%3Adoi%2F10.1371%2Fjournal.pcbi.1000424>`__, Noble, PLoS Comp Biology, 2009.
+
+* `Willingness to Share Research Data Is Related to the Strength of the Evidence and the Quality of Reporting of Statistical Results <http://software-carpentry.org/blog/2012/05/the-most-important-scientific-result-published-in-the-last-year.html>`__, Wicherts et al., PLoS One, 2011.
+
+* `Got replicability? <http://econjwatch.org/articles/got-replicability-the-journal-of-money-credit-and-banking-archive>`__, McCullough, Economics in Practice, 2007.
 
 Links
 =====
