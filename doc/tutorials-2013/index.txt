@@ -167,6 +167,30 @@ Resources
 Blogs
 -----
 
+* http://www.genomesunzipped.org/
+
+  Genomes Unzipped.
+
 * http://ivory.idyll.org/blog/
 
   Titus's blog.
+
+* http://bcbio.wordpress.com/
+
+  Blue Collar Bioinformatics
+
+* http://massgenomics.org/
+
+  Mass Genomics
+
+* http://blog.nextgenetics.net/
+
+  Next Genetics
+
+* http://gettinggeneticsdone.blogspot.com/
+
+  Getting Genetics Done
+
+* http://omicsomics.blogspot.com/
+
+  Omics! Omics!
