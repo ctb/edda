@@ -15,7 +15,7 @@ As usual, we first need to index the reference genome::
   reference_index=dmel_genome_bowtie2
   bowtie2-build ${reference} ${reference_index}
 
-We also need a list of annotations to go along with the reference genome. This file basically specifies the coordinates of all the coding sequences in the reference (or of any other feature that we might be interested in). It's a text file, so feel free to take a look at the contents if you want. In this case, it's a GTF file, which should be included in the image you're using.
+We also need a list of annotations to go along with the reference genome. This file basically specifies the coordinates of all the coding sequences in the reference (or of any other feature that we might be interested in). It's a text file, so feel free to take a look at the contents if you want. In this case, it's a GTF file, which should be included in the image you're using.::
 
   transcript_annotation=Drosophila_melanogaster.BDGP5.71.gtf
 
@@ -31,7 +31,7 @@ Now we're ready to use tophat. Tophat can map RNA-seq reads to a reference genom
 
 The -p 4 option tells tophat to use multithreading (4 processors). Tophat will "know" that you're dealing with paired-end data because you gave it two sets of reads. The --no-novel-juncs option tells tophat that we won't be looking for any novel splice sites (more on that later).
   
-Tophat places the results in the directory named ${output}, which will contain a number of files. The file that we're interested in for now is accepted_hits.bam, which is the reads that were mapped successfully.
+Tophat places the results in the directory named ${output}, which will contain a number of files. The file that we're interested in for now is accepted_hits.bam, which is the reads that were mapped successfully.::
 
   samtools sort ${output}/accepted_hits.bam ${output}/accepted_hits.sorted
   samtools index ${output}/accepted_hits.sorted.bam

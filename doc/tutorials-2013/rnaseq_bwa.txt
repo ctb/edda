@@ -34,7 +34,7 @@ Now we can use these variable names in our mapping commands. The advantage here 
 
   bwa mem ${reference} ${reads_1} ${reads_2} > ${output}.sam
   
-This command will output a file named vg_1.sam in the current working directory. Next, we want to use SAMTools to convert it to a BAM, and then sort and index it:
+This command will output a file named vg_1.sam in the current working directory. Next, we want to use SAMTools to convert it to a BAM, and then sort and index it::
 
   samtools import ${reference}.fai ${output}.sam ${output}.unsorted.bam
   samtools sort ${output}.unsorted.bam ${output}
