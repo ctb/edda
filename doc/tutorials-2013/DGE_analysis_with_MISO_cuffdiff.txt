@@ -22,7 +22,7 @@ Installation::
     cd ~
     wget -O bowtie2-2.1.0-linux-x86_64.zip http://sourceforge.net/projects/bowtie-bio/files/bowtie2/2.1.0/bowtie2-2.1.0-linux-x86_64.zip/download
     unzip bowtie2-2.1.0-linux-x86_64.zip
-    cp bowtie2 bowtie2-build bowtie2-inspect /usr/local/bin/
+    cp bowtie2 bowtie2-align bowtie2-build bowtie2-inspect /usr/local/bin/
 
 
     # install tophat2
