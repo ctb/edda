@@ -5,7 +5,7 @@ De novo RNA-Seq Assembly
 Trinty and Velvet/Oases are two of the many programs available for de novo RNA-seq assembly.::
     apt-get update
     apt-get -y --force-yes install libbz2-1.0 libbz2-dev libncurses5-dev openjdk-6-jre-headless zlib1g-dev
-    
+
 =============================
 Installing trinity
 =============================
