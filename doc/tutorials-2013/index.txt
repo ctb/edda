@@ -23,7 +23,7 @@ Thursday 6/13	 * 9:15am: lecture, `Assembly. <files/lecture3-assembly.pptx.pdf>`
 		 * Evening: *brew pub in Kalamazoo.*
 Friday 6/14	 * 9:15am: lecture, Interval data in Bioinformatics. (Istvan)
        		 * 10:45am: tutorial, :doc:`interval-analysis-tutorial` (Istvan)
-		 * 1:15pm: lecture/tutorial, Statistics (Ian)
+		 * 1:15pm: lecture/tutorial, `Statistics <files/stats-lecture.pptx.pdf>`__ (Ian)
 		 * 8 Tutorial: :doc:`teach-me-intervals` (Istvan)
 Saturday 6/15	 * 9:15am: lecture, `Pipelines and Automation <files/lecture5-pipelines.pptx.pdf>`__ (Titus)
 	 	 * 10:45am: tutorial: Shell scripts and pipelines.
@@ -61,3 +61,55 @@ Cheat sheet for starting up an EC2 instance
  - m1.large or larger;
  - make sure you are in the US East zone (Virgina) -- see upper right;
  - make sure the security group you use has SSH and HTTPS enabled for inbound;
+
+Papers and References
+=====================
+
+Books
+-----
+
+* `Practical Computing for Biologists <http://practicalcomputing.org/>`__
+
+  This is a highly recommended book for people looking for a systematic
+  presentation on shell scripting, programming, UNIX, etc.
+
+RNAseq
+------
+
+* `Differential gene and transcript expression analysis of RNA-seq
+  experiments with TopHat and Cufflinks
+  <http://www.ncbi.nlm.nih.gov/pubmed/22383036>`__, Trapnell et al.,
+  Nat. Protocols.
+
+  One paper that outlines a pipeline with the tophat, cufflinks, cuffdiffs and
+  some associated R scripts.
+
+* `Statistical design and analysis of RNA sequencing
+  data. <http://www.ncbi.nlm.nih.gov/pubmed/20439781>`__, Auer and
+  Doerge, Genetics, 2010.
+
+Links
+=====
+
+Resources
+---------
+
+* `Biostar <http://biostars.org>`__
+
+  A high quality question & answer Web site.
+
+* `SEQanswers <http://seqanswers.com/>`__
+
+  A discussion and information site for next-generation sequencing.
+
+* `Software Carpentry lessons <http://software-carpentry.org/4_0/index.html>`__
+
+  A large number of open and reusable tutorials on the shell, programming,
+  version control, etc.
+
+Blogs
+-----
+
+* http://ivory.idyll.org/blog/
+
+  Titus's blog.
