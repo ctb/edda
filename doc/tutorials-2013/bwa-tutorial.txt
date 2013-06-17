@@ -92,14 +92,14 @@ hyperlinks (-L), to deal with redirection of the file site (or else
 curl won't work with sourceforge).::
 
   cd /mnt
-  curl -O -L http://sourceforge.net/projects/bio-bwa/files/bwa-0.7.4.tar.bz2
+  wget -O bwa-0.7.5.tar.bz2 http://sourceforge.net/projects/bio-bwa/files/bwa-0.7.5a.tar.bz2/download
 
 Now we want to uncompress the tarball file using "tar". x extracts, v
 is verbose (telling you what it is doing), f skips prompting for each
 individual file, and j tells it to unzip .bz2 files.::
 
-  tar xvfj bwa-0.7.4.tar.bz2
-  cd bwa-0.7.4
+  tar xvfj bwa-0.7.5a.tar.bz2
+  cd bwa-0.7.5a
 
 The make command calls a program that helps to automate the compiling
 process for the program::
