@@ -166,10 +166,11 @@ To get the number of reads, run::
     %% samtools view -c -f 1 -F 12 /mnt/miso-data/bam-data/vg1_005.sorted.bam
     # total number of mapped reads = 106,437,936
 
+    %% cd /mnt/miso-data/
     # plot the graph from two alternative events
     # both graphs will be in sashimi_plot directory
     %% plot.py --plot-event "chr4:848485:848533:-@chr4:844127:844244:-@chr4:823024:823953:-" \
-    ../altevents/4_SE/ sashimi_plot_settings.txt  --output-dir sashimi_plot
+    altevents/4_SE/ sashimi_plot_settings.txt  --output-dir sashimi_plot
 
     %% plot.py --plot-event "chr4:497918:498709:-@chr4:495586:495730:-@chr4:495079:495394:-" \
-    ../altevents/4_SE/ sashimi_plot_settings.txt  --output-dir sashimi_plot
+    altevents/4_SE/ sashimi_plot_settings.txt  --output-dir sashimi_plot
