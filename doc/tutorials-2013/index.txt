@@ -39,12 +39,12 @@ Monday 6/17	 * 9:15am: lecture, mRNAseq I (Ian Dworkin)
 		 3. :doc:`DGE_analysis_with_MISO_cuffdiff`
 		 4. :doc:`transcriptome_de_novo_assembly`
 
-		 * 7:30pm: Computing without Amazon (Michael Crusoe)
+		 * 7:30pm: :doc:`git-koans` (Titus)
 		 * 8-9pm: look busy
 		 * 9pm: firepit
 Tuesday 6/18	 * 9:15am: lecture, mRNAseq II (Ian Dworkin)
        		 * Tutorials 10:45am, 1:15pm as usual; mRNAseq, continued.
-		 * 7:30pm: Pipelines, scripting, and git (Titus)
+		 * 7:30pm: Computing without Amazon (Michael Crusoe)
 		 * 8-11pm: look busy
 Wednesday 6/19	 * 9:15am: Advanced assembly (Rayan)
 	  	 * 10:45am: Preprocessing sequence data (Titus)
