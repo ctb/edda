@@ -43,6 +43,7 @@ Monday 6/17	 * 9:15am: lecture, mRNAseq I (Ian Dworkin)
 		 * 8-9pm: look busy
 		 * 9pm: firepit
 Tuesday 6/18	 * 9:15am: lecture, mRNAseq II (Ian Dworkin)
+		 * Impromptu tutorial: :doc:`seqtk_tools`
        		 * Tutorials 10:45am, 1:15pm as usual; mRNAseq, continued.
 		 * 7:30pm: Computing without Amazon (Michael Crusoe)
 		 * 8-11pm: look busy
@@ -53,7 +54,7 @@ Wednesday 6/19	 * 9:15am: Advanced assembly (Rayan)
 Thursday 6/20	 * 9:15am: lecture, Genome assembly and analysis (Erich Schwarz)
 	 	 * 10:45am: Genome assembly and analysis tools
 		 * 1:15pm: Building gene annotations; posting annotations to UCSC (Likit)
-		 * 7:30pm: tutorial, TBD
+		 * 7:30pm: Sequencing technology Q&A (Nick Beckloff)
 		 * 8-11pm: look busy
 Friday 6/21	 Summative experience.
 ===============  =============================================================
@@ -86,6 +87,7 @@ TAs:
 
 Lecturers:
 
+* Nick Beckloff
 * Rayan Chaikhi
 * Chris Chandler
 * Adina Chuang Howe
@@ -139,6 +141,8 @@ Computing and Data
 * `Willingness to Share Research Data Is Related to the Strength of the Evidence and the Quality of Reporting of Statistical Results <http://software-carpentry.org/blog/2012/05/the-most-important-scientific-result-published-in-the-last-year.html>`__, Wicherts et al., PLoS One, 2011.
 
 * `Got replicability? <http://econjwatch.org/articles/got-replicability-the-journal-of-money-credit-and-banking-archive>`__, McCullough, Economics in Practice, 2007.
+
+Also see this great pair of blog posts on `organizing projects <http://nicercode.github.io/blog/2013-04-05-projects/>`__ and `research workflow <http://carlboettiger.info/2012/05/06/research-workflow.html>`__.
 
 Links
 =====
