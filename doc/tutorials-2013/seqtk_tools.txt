@@ -1,31 +1,53 @@
-SeqTK Tools
-===========
+================================================================
+Using seqtk to trim and process reads at an insanely high speed
+================================================================
 
-seqtk: trim and process reads at insanely high speed - brought to you
-by the Church of Heng Li
-
-https://github.com/lh3/seqtk
-
-For just about all tools the input can be fasta, fastq file, may be
-gzipped or not, will unzip on the fly.
+seqtk was developed by Heng Li and is available from his GitHub page: https://github.com/lh3/seqtk
 
 Installation
 ------------
 
+To obtain the code you will need to have `git` installed and you need to clone the `seqtk` url::
+
     # download with github
     git clone git://github.com/lh3/seqtk.git
+
+Switch to the seqtk directory and make it::
+
     cd seqtk
     make
     cp seqtk /usr/local/bin
 
-We will use e.coli data in snapshot snap-000d346e in this tutorials.
+We will use E.coli data in snapshot snap-000d346e in this tutorials.
 Create a volume from the snapshot and attach it to the instance.::
 
     mkdir /ebs/
     mount /dev/xvdf /ebs
 
+Basic Usage
+-----------
+
+For just about all tools the input can be fasta, fastq file, may be
+gzipped or not, will unzip on the fly.
+
+    # extracts a random sample
+    seqtk sample
+
+    # apply a seed to extract the same reads from two, paired end files
+    seqtk -s 10 sample
+
+    # trim reads with the modified Mott trimming algorithm
+    seqtk trimfq ...
+
+The algorithm is described on this page: `http://www.phrap.org/phredphrap/phred.html`__. Scroll down to the Algorithm section for details.
+
+Beyond this usage there are other interesting features - you can subtract subsequences from file (say you want to extract a certain part of your
+reference genome) using seqtk.
+
 Tools
 -----
+
+Using your Amazon EC2 instance::
 
     cd /mnt
 
@@ -57,11 +79,3 @@ Trim reads with the modified Mott trimming algorithm::
 
     # trim the first 3 bases and the last 5 bases
     seqtk trimfq -b 3 -e 5 /ebs/ecoli/SRR001666_1.fastq.gz > timmed.fq
-
-The algorithm is described on this page, find the section Algorithm for details:
-
-http://www.phrap.org/phredphrap/phred.html
-
-Beyond these there are other interesting features - you can subtract
-subsequences from file (say you want to extract a certain part of your
-reference genome) etc.
