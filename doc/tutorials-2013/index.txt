@@ -57,6 +57,7 @@ Wednesday 6/19	 * 9:15am: Advanced assembly (Rayan)
 Thursday 6/20	 * 9:15am: lecture, Genome assembly and analysis (Erich Schwarz)
 	 	 * 10:45am: Genome assembly and analysis tools
 		 * 1:15pm: Building gene annotations; posting annotations to UCSC (Likit)
+		 * 3pm: Joe Graves, Genome-Wide Convergence with Repeated Evolution in Drosophila melanogaster.
 		 * 7:30pm: Sequencing technology Q&A (Nick Beckloff)
 		 * 8-11pm: look busy
 Friday 6/21	 Summative experience.
