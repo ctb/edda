@@ -1,0 +1,67 @@
+SeqTK Tools
+===========
+
+seqtk: trim and process reads at insanely high speed - brought to you
+by the Church of Heng Li
+
+https://github.com/lh3/seqtk
+
+For just about all tools the input can be fasta, fastq file, may be
+gzipped or not, will unzip on the fly.
+
+Installation
+------------
+
+    # download with github
+    git clone git://github.com/lh3/seqtk.git
+    cd seqtk
+    make
+    cp seqtk /usr/local/bin
+
+We will use e.coli data in snapshot snap-000d346e in this tutorials.
+Create a volume from the snapshot and attach it to the instance.::
+
+    mkdir /ebs/
+    mount /dev/xvdf /ebs
+
+Tools
+-----
+
+    cd /mnt
+
+To see a list of tools::
+
+    seqtk
+
+Extracts a random sample::
+
+    # sample 1000 reads from a fastq file
+    seqtk sample /ebs/ecoli/SRR001666_1.fastq.gz 1000 > SRR001666_1_1000.fastq 
+
+Convert fastq to fasta::
+
+    seqtk seq -A /ebs/ecoli/SRR001666_1.fastq.gz > sample.fa
+
+Apply a seed to extract the same reads from two, paired end files::
+
+    seqtk sample -s 10 /ebs/ecoli/SRR001666_1.fastq.gz 1000 > SRR001666_1_1000.fastq 
+    seqtk sample -s 10 /ebs/ecoli/SRR001666_2.fastq.gz 1000 > SRR001666_2_1000.fastq 
+
+Trim reads with the modified Mott trimming algorithm::
+
+    # trim with default error threshold = 0.05
+    seqtk trimfq /ebs/ecoli/SRR001666_1.fastq.gz > timmed.fq
+
+    # trim with an error threshold = 0.01
+    seqtk trimfq -q 0.01 /ebs/ecoli/SRR001666_1.fastq.gz > timmed.fq
+
+    # trim the first 3 bases and the last 5 bases
+    seqtk trimfq -b 3 -e 5 /ebs/ecoli/SRR001666_1.fastq.gz > timmed.fq
+
+The algorithm is described on this page, find the section Algorithm for details:
+
+http://www.phrap.org/phredphrap/phred.html
+
+Beyond these there are other interesting features - you can subtract
+subsequences from file (say you want to extract a certain part of your
+reference genome) etc.
