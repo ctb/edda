@@ -45,6 +45,7 @@ Monday 6/17	 * 9:15am: lecture, mRNAseq I (Ian Dworkin)
 Tuesday 6/18	 * 9:15am: lecture, mRNAseq II (Ian Dworkin)
 		 * Impromptu tutorial: :doc:`seqtk_tools`
        		 * Tutorials 10:45am, 1:15pm as usual; mRNAseq, continued.
+       	 * Tutorial: :doc:`rnaseq_bwa_counting`; `edgeR code <analyze_edgeR_bwa_transcriptome.R>`__ 
 		 * 7:30pm: Computing without Amazon (Michael Crusoe)
 		 * 8-11pm: look busy
 Wednesday 6/19	 * 9:15am: Advanced assembly (Rayan)
