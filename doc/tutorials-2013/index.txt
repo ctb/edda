@@ -51,8 +51,9 @@ Tuesday 6/18	 * 9:15am: lecture, mRNAseq II (Ian Dworkin)
 		 * 8-11pm: look busy
 Wednesday 6/19	 * 9:15am: Advanced assembly (Rayan)
 	  	 * 10:45am: Preprocessing sequence data (Titus)
-		 * 1:15pm: Variant calling (Likit)
-		 * 3pm: Computing without Amazon (Michael Crusoe)
+		 * 1:15pm: Computing without Amazon (Michael Crusoe)
+		 * 2pm: :doc:`snp_tutorial` (Likit)
+		 * 3-5pm: look busy.
 		 * 7:30pm: BBQ, gin, and firepit social
 Thursday 6/20	 * 9:15am: lecture, Genome assembly and analysis (Erich Schwarz)
 	 	 * 10:45am: Genome assembly and analysis tools
