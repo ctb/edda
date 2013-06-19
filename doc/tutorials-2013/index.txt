@@ -46,13 +46,13 @@ Tuesday 6/18	 * 9:15am: lecture, mRNAseq II (Ian Dworkin)
 		 * Impromptu tutorial: :doc:`seqtk_tools`
        		 * Tutorials 10:45am, 1:15pm as usual; mRNAseq, continued.
 		 * :doc:`rnaseq_bwa_counting` (`edgeR code <analyze_edgeR_bwa_transcriptome.R>`__)
-		 * 7:30pm: Computing without Amazon (Michael Crusoe)
-		 * 8:15pm: Single-cell mRNAseq (Erich Schwarz)
-		 * 9pm: PacBio intro (Tristan De Buysscher)
+		 * 8:30pm: Single-cell mRNAseq (Erich Schwarz)
+		 * 9:15pm: PacBio intro (Tristan De Buysscher)
 		 * 8-11pm: look busy
 Wednesday 6/19	 * 9:15am: Advanced assembly (Rayan)
 	  	 * 10:45am: Preprocessing sequence data (Titus)
 		 * 1:15pm: Variant calling (Likit)
+		 * 3pm: Computing without Amazon (Michael Crusoe)
 		 * 7:30pm: BBQ, gin, and firepit social
 Thursday 6/20	 * 9:15am: lecture, Genome assembly and analysis (Erich Schwarz)
 	 	 * 10:45am: Genome assembly and analysis tools
