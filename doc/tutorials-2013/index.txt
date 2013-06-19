@@ -50,7 +50,7 @@ Tuesday 6/18	 * 9:15am: lecture, mRNAseq II (Ian Dworkin)
 		 * 9:15pm: PacBio intro (Tristan De Buysscher)
 		 * 8-11pm: look busy
 Wednesday 6/19	 * 9:15am: Advanced assembly (Rayan)
-	  	 * 10:45am: Preprocessing sequence data (Titus)
+	  	 * 10:45am: :doc:`kmer-abundance-and-diginorm` and `presentation <files/titus-kmers.pptx.pdf>`__ (Titus)
 		 * 1:15pm: Computing without Amazon (Michael Crusoe)
 		 * 2pm: :doc:`snp_tutorial` (Likit)
 		 * 3-5pm: look busy.
