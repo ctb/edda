@@ -62,11 +62,11 @@ Then click "manage custom track" or "add custom track" if you already have other
 
 .. image:: images/ucsc001.png
 
-Copy and paste this in the "Paste URLs or data:" box::
+Copy and paste the line below in "Paste URLs or data:" box::
 
      track name='bwa mapping' type=bam db=dm3 visibility=squish bigDataUrl=http://$amazon-machine-name/RAL357_full_bwa.sorted.bam
 
-    # name = track name (unique)
+    # name = track name (has to be unique) [default:User Track]
     # type = file type (bam, bed, bigBed, wig, bedWig)
     # db = genome
     # visibility = display mode (full, squish, pack, dense)
@@ -83,6 +83,7 @@ You should see something like this.
 .. image:: images/ucsc003.png
 
 Adding a custom track using a URL is suitable and required for a large file.
-A large file also need to be indexed by a tool downloadable from UCSC genome browser.
+Large files need to be indexed by a tool downloadable from UCSC genome browser.
+
 For a small file, you can upload a file directly from you local computer
 and it doesn't need to be indexed.
