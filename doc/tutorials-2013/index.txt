@@ -31,7 +31,7 @@ Saturday 6/15	 * 9:15am: lecture, `Pipelines and Automation <files/lecture5-pipe
 		 * Evening: BBQ/dinner.
 Sunday 6/16	 Day of rest.  Brunch in the morning;
        		 takeout dinner in evening.
-Monday 6/17	 * 9:15am: lecture, mRNAseq I (Ian Dworkin)
+Monday 6/17	 * 9:15am: `lecture, mRNAseq I <files/NGS2013_RNAseq_1.pptx.pdf>`__ (Ian Dworkin)
        		 * Tutorials 10:45am, 1:15pm as usual; topics:
 
                  1. :doc:`rnaseq_bwa`
@@ -42,20 +42,20 @@ Monday 6/17	 * 9:15am: lecture, mRNAseq I (Ian Dworkin)
 		 * 7:30pm: :doc:`git-koans` (Titus)
 		 * 8-9pm: look busy
 		 * 9pm: firepit
-Tuesday 6/18	 * 9:15am: lecture, mRNAseq II (Ian Dworkin)
+Tuesday 6/18	 * 9:15am: `lecture, mRNAseq II <files/NGS2013_RNAseq_2.pptx.pdf>`__ (Ian Dworkin)
 		 * Impromptu tutorial: :doc:`seqtk_tools`
        		 * Tutorials 10:45am, 1:15pm as usual; mRNAseq, continued.
 		 * :doc:`rnaseq_bwa_counting` (`edgeR code <files/analyze_edgeR_bwa_transcriptome.R>`__)
-		 * 8:30pm: Single-cell mRNAseq (Erich Schwarz)
+		 * 8:30pm: `Single-cell mRNAseq <files/MSU_linker_2013.06.17.pdf>`__ (Erich Schwarz)
 		 * 9:15pm: PacBio intro (Tristan De Buysscher)
 		 * 8-11pm: look busy
-Wednesday 6/19	 * 9:15am: Advanced assembly (Rayan)
+Wednesday 6/19	 * 9:15am: `Advanced assembly <files/rayan-2013-june-18-msu.pdf>`__ (Rayan)
 	  	 * 10:45am: :doc:`kmer-abundance-and-diginorm` and `presentation <files/titus-kmers.pptx.pdf>`__ (Titus)
-		 * 1:15pm: Computing without Amazon (Michael Crusoe)
+		 * 1:15pm: `Computing without Amazon <files/crusoe-amazon-free-analysis.pdf>`__ (Michael Crusoe)
 		 * 2pm: :doc:`snp_tutorial` (Likit)
 		 * 3-5pm: look busy.
 		 * 7:30pm: BBQ, gin, and firepit social
-Thursday 6/20	 * 9:15am: lecture, Genome assembly and analysis (Erich Schwarz)
+Thursday 6/20	 * 9:15am: lecture, `Genome assembly and analysis <files/NGS_Acey_2013.06.20.01.pdf>`__ (Erich Schwarz)
 	 	 * 10:45am: Genome assembly treasure hunt.
 		 * 1:15pm: :doc:`ucsc-genome-browser` (Likit)
 		 * 5pm: Joe Graves, Genome-Wide Convergence with Repeated Evolution in Drosophila melanogaster.
