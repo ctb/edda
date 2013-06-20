@@ -45,7 +45,7 @@ Monday 6/17	 * 9:15am: lecture, mRNAseq I (Ian Dworkin)
 Tuesday 6/18	 * 9:15am: lecture, mRNAseq II (Ian Dworkin)
 		 * Impromptu tutorial: :doc:`seqtk_tools`
        		 * Tutorials 10:45am, 1:15pm as usual; mRNAseq, continued.
-		 * :doc:`rnaseq_bwa_counting` (`edgeR code <analyze_edgeR_bwa_transcriptome.R>`__)
+		 * :doc:`rnaseq_bwa_counting` (`edgeR code <files/analyze_edgeR_bwa_transcriptome.R>`__)
 		 * 8:30pm: Single-cell mRNAseq (Erich Schwarz)
 		 * 9:15pm: PacBio intro (Tristan De Buysscher)
 		 * 8-11pm: look busy
@@ -57,11 +57,13 @@ Wednesday 6/19	 * 9:15am: Advanced assembly (Rayan)
 		 * 7:30pm: BBQ, gin, and firepit social
 Thursday 6/20	 * 9:15am: lecture, Genome assembly and analysis (Erich Schwarz)
 	 	 * 10:45am: Genome assembly treasure hunt.
-		 * 1:15pm: Building gene annotations; posting annotations to UCSC (Likit)
+		 * 1:15pm: :doc:`ucsc-genome-browser` (Likit)
 		 * 5pm: Joe Graves, Genome-Wide Convergence with Repeated Evolution in Drosophila melanogaster.
 		 * 7:30pm: Sequencing technology Q&A (Nick Beckloff)
 		 * 8-11pm: look busy
-Friday 6/21	 Summative experience.
+Friday 6/21	 * 9:15am: meet at classroom with bags; brief lecture.
+       		 * 10am: course post-mortem/analysis
+       		 * 11am: lunch at Frona's Pantry (optional!)
 ===============  =============================================================
 
 Cheat sheet for starting up an EC2 instance
