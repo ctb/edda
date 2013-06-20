@@ -66,7 +66,14 @@ Copy and paste this in the "Paste URLs or data:" box::
 
      track name='bwa mapping' type=bam db=dm3 visibility=squish bigDataUrl=http://$amazon-machine-name/RAL357_full_bwa.sorted.bam
 
-Don't forget to change "$amazon-machine-name" to your amazon machine DNA.
+    # name = track name (unique)
+    # type = file type (bam, bed, bigBed, wig, bedWig)
+    # db = genome
+    # visibility = display mode (full, squish, pack, dense)
+    # bigDataUrl = URL to a data file
+    # description = description [optional]
+
+Don't forget to change "$amazon-machine-name" to your amazon machine DNS.
 
 .. image:: images/ucsc002.png
 
@@ -75,4 +82,7 @@ You should see something like this.
 
 .. image:: images/ucsc003.png
 
-To view gene models and splice junction in BED format see
+Adding a custom track using a URL is suitable and required for a large file.
+A large file also need to be indexed by a tool downloadable from UCSC genome browser.
+For a small file, you can upload a file directly from you local computer
+and it doesn't need to be indexed.
