@@ -47,7 +47,7 @@ Tuesday 6/18	 * 9:15am: `lecture, mRNAseq II <files/NGS2013_RNAseq_2.pptx.pdf>`_
        		 * Tutorials 10:45am, 1:15pm as usual; mRNAseq, continued.
 		 * :doc:`rnaseq_bwa_counting` (`edgeR code <files/analyze_edgeR_bwa_transcriptome.R>`__)
 		 * 8:30pm: `Single-cell mRNAseq <files/MSU_linker_2013.06.17.pdf>`__ (Erich Schwarz)
-		 * 9:15pm: PacBio intro (Tristan De Buysscher)
+		 * 9:15pm: `PacBio intro <files/PacBio_overview_angus_2013.pdf>`__ (Tristan De Buysscher)
 		 * 8-11pm: look busy
 Wednesday 6/19	 * 9:15am: `Advanced assembly <files/rayan-2013-june-18-msu.pdf>`__ (Rayan)
 	  	 * 10:45am: :doc:`kmer-abundance-and-diginorm` and `presentation <files/titus-kmers.pptx.pdf>`__ (Titus)
@@ -59,9 +59,9 @@ Thursday 6/20	 * 9:15am: lecture, `Genome assembly and analysis <files/NGS_Acey_
 	 	 * 10:45am: Genome assembly treasure hunt.
 		 * 1:15pm: :doc:`ucsc-genome-browser` (Likit)
 		 * 5pm: Joe Graves, Genome-Wide Convergence with Repeated Evolution in Drosophila melanogaster.
-		 * 7:30pm: Sequencing technology Q&A (Nick Beckloff)
+		 * 8:30pm: Sequencing technology Q&A (Nick Beckloff)
 		 * 8-11pm: look busy
-Friday 6/21	 * 9:15am: meet at classroom with bags; brief lecture.
+Friday 6/21	 * 9:15am: meet at classroom with bags; `final lecture <files/final-lecture.pptx.pdf>`__.
        		 * 10am: course post-mortem/analysis
        		 * 11am: lunch at Frona's Pantry (optional!)
 ===============  =============================================================
