@@ -2,6 +2,8 @@
 Next-Gen Sequence Analysis Workshop (2013)
 ==========================================
 
+This is the schedule for the `2013 MSU NGS course <http://bioinformatics.msu.edu/ngs-summer-course-2013>`__, which ran from June 10th to June 20th, 2013.  If you're interested in this course in 2014, please see `the 2014 announcement <http://bioinformatics.msu.edu/ngs-summer-course-2014>`__.
+
 ===============  =============================================================
 Day              Schedule
 ===============  =============================================================
@@ -80,7 +82,7 @@ Dramatis personae
 Instructors:
 
 * Istvan Albert
-* C. Titus Brown
+* C Titus Brown
 * Ian Dworkin
 
 TAs:
@@ -128,9 +130,7 @@ RNAseq
 
 * `A comprehensive comparison of RNA-Seq-based transcriptome analysis from reads to differential gene expression and cross-comparison with microarrays: a case study in Saccharomyces cerevisiae. <http://www.ncbi.nlm.nih.gov/pubmed/?term=22965124>`__ Nookaew et al., Nucleic Acids Res. 2012.
 
-* `Challenges and strategies in transcriptome assembly and differential gene expression quantification.
-A comprehensive in silico assessment of
-RNA-seq experiments <http://www.ncbi.nlm.nih.gov/pubmed/?term=22998089>`__ Vijay et al., 2012.
+* `Challenges and strategies in transcriptome assembly and differential gene expression quantification. A comprehensive in silico assessment of RNA-seq experiments <http://www.ncbi.nlm.nih.gov/pubmed/?term=22998089>`__ Vijay et al., 2012.
 
 * `Computational methods for transcriptome annotation and quantification using RNA-seq <http://www.ncbi.nlm.nih.gov/pubmed/21623353>`__, Garber et al., Nat. Methods, 2011.
 
