@@ -1,0 +1,10 @@
+The Eel Pond mRNAseq Tutorial
+=============================
+
+Contents:
+
+.. toctree::
+   :maxdepth: 1
+
+   de-novo-assembly
+
