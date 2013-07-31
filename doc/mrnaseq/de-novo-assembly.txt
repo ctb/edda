@@ -30,6 +30,9 @@ Install screed and khmer::
    git clone https://github.com/ged-lab/khmer.git
    cd khmer
    make
+   
+   echo export PYTHONPATH=/usr/local/share/khmer/python >> ~/.bashrc
+   source ~/.bashrc
 
 Installing blastkit
 -------------------
@@ -39,9 +42,12 @@ Installing some prerequisites::
    pip install pygr
    apt-get -y install lighttpd
 
+and configure them::
+
    cd /etc/lighttpd/conf-enabled
    ln -fs ../conf-available/10-cgi.conf ./
    echo 'cgi.assign = ( ".cgi" => "" )' >> 10-cgi.conf
+   echo 'index-file.names += ( "index.cgi" ) ' >> 10-cgi.conf
 
    /etc/init.d/lighttpd restart
 
@@ -59,7 +65,7 @@ And put in blastkit::
    cd /root
    git clone https://github.com/ctb/blastkit.git -b ec2
    cd blastkit/www
-   ln -fs `pwd` /var/www/blastkit
+   ln -fs $PWD /var/www/blastkit
 
    mkdir files
    chmod a+rxwt files
@@ -136,8 +142,3 @@ query::
    SALSWFGSMFNYPELSFELICSYIFMPFSFMMGVDWQDSFMVAKLIGYKTFFNEFVAYDHLSKLINLRKAAGPKFVNGVQ
    QYMSIRSETIATYALCGFANFGSLGIVIGGLTSIAPSRKRDIASGAMRALIAGTIACFMTACIAGILSDTPVDINCHHVL
    ENGRVLSNTTEVVSCCQNLFNSTVAKGPNDVVPGGNFSLYALKSCCNLLKPPTLNCNWIPNKL
-
-.. rename sequences
-.. add default query name on blastkit
-.. e-mail mccauley
-.. password protect

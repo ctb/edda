@@ -1,10 +1,16 @@
 The Eel Pond mRNAseq Tutorial
 =============================
 
-Contents:
+Intro material:
 
 .. toctree::
    :maxdepth: 1
 
-   de-novo-assembly
+   0-download-and-save
+   1-quality
+   2-diginorm
+   3-big-assembly
+
+..   de-novo-assembly
+..   rsem
 
