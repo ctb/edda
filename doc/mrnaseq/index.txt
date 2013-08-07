@@ -11,6 +11,10 @@ Intro material:
    2-diginorm
    3-big-assembly
 
+   installing-blastkit
+
+   5-building-transcript-families
+
 ..   de-novo-assembly
 ..   rsem
 

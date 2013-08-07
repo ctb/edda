@@ -74,8 +74,8 @@ We can combine the orphaned reads into a single file::
 
    for i in *.se.qc.fq.gz.keep.abundfilt
    do
-      pe_orphans=`basename $i .se.qc.fq.gz.keep.abundfilt`.pe.qc.fq.gz.keep.abundfilt.se
-      newfile=`basename $i .se.qc.fq.gz.keep.abundfilt`.se.qc.keep.abundfilt.fq.gz
+      pe_orphans=$(basename $i .se.qc.fq.gz.keep.abundfilt).pe.qc.fq.gz.keep.abundfilt.se
+      newfile=$(basename $i .se.qc.fq.gz.keep.abundfilt).se.qc.keep.abundfilt.fq.gz
       cat $i $pe_orphans | gzip -c > $newfile
    done
 
@@ -83,12 +83,12 @@ We can also rename the remaining PE reads & compress those files::
 
    for i in *.abundfilt.pe
    do
-      newfile=`basename $i .fq.gz.keep.abundfilt.pe`.keep.abundfilt.fq
+      newfile=$(basename $i .fq.gz.keep.abundfilt.pe).keep.abundfilt.fq
       mv $i $newfile
       gzip $newfile
    done
 
-This leaves you with a whole passle o' files, most of which you want to go
+This leaves you with a whole passel o' files, most of which you want to go
 away!
 
    6Hour_CGATGT_L002_R1_005.pe.qc.fq.gz
@@ -99,7 +99,7 @@ away!
    6Hour_CGATGT_L002_R1_005.se.qc.fq.gz.keep
    6Hour_CGATGT_L002_R1_005.se.qc.fq.gz.keep.abundfilt
 
-And, finally, let's get rid of a lot of the old files ::
+So, finally, let's get rid of a lot of the old files ::
 
    rm *.se.qc.fq.gz.keep.abundfilt
    rm *.pe.qc.fq.gz.keep.abundfilt.se
@@ -114,5 +114,7 @@ You should now have::
 
    6Hour_CGATGT_L002_R1_005.pe.qc.keep.abundfilt.fq.gz
    6Hour_CGATGT_L002_R1_005.se.qc.keep.abundfilt.fq.gz
+
+@CTB what are these?
 
 Save all these files to a new volume, and get ready to assemble!

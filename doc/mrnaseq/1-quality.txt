@@ -2,6 +2,10 @@
 1. Quality Trimming and Filtering Your Sequences
 ================================================
 
+Boot up an m1.xlarge machine from Amazon Web Services; this has about
+15 GB of RAM, and 2 CPUs, and will be enough to complete the assembly
+of the Nematostella data set.
+
 .. note::
 
    This follows the NGS 2013 tutorial,
@@ -33,7 +37,6 @@ Install the bleeding-edge version of khmer::
    echo 'export PYTHONPATH=/usr/local/share/khmer/python' >> ~/.bashrc
    source ~/.bashrc
 
-
 Install Trimmomatic::
 
    cd /root
@@ -64,7 +67,10 @@ Find your data
 --------------
 
 Either load in your own data (as in :doc:`0-download-and-save`) or
-create a volumne from snapshot snap-f5a9dea7 and mount it as /data.
+create a volume from snapshot snap-f5a9dea7 and mount it as /data
+(again, this is the data from `Tulin et al., 2013
+<http://www.evodevojournal.com/content/4/1/16>`__).
+
 Check::
 
    ls /data
@@ -210,8 +216,8 @@ This step can be automated with a 'for' loop at the shell prompt.  Try::
    for i in *.pe.fq.gz *.se.fq.gz
    do
         echo working with $i
-	newfile=`basename $i .fq.gz`
-	gunzip -c $i | fastq_quality_filter -Q33 -q 30 -p 50 | gzip -9c > ${newfile}.qc.fq.gz
+	newfile="$(basename $i .fq.gz)"
+	gunzip -c $i | fastq_quality_filter -Q33 -q 30 -p 50 | gzip -9c > "${newfile}.qc.fq.gz"
    done
 
 What this loop does is:
@@ -302,7 +308,7 @@ compressed.  Let's do some mass renaming::
 
    for i in *.pe.qc.fq.gz.pe
    do
-      newfile=`basename $i .pe.qc.fq.gz.pe`.pe.qc.fq
+      newfile="$(basename $i .pe.qc.fq.gz.pe).pe.qc.fq"
       mv $i $newfile
       gzip $newfile
    done
@@ -311,7 +317,7 @@ and also some mass combining::
 
    for i in *.pe.qc.fq.gz.se
    do
-     otherfile=`basename $i .pe.qc.fq.gz.se`.se.qc.fq.gz
+     otherfile="$(basename $i .pe.qc.fq.gz.se).se.qc.fq.gz"
      gunzip -c $otherfile > combine
      cat $i >> combine
      gzip -c combine > $otherfile
@@ -350,5 +356,5 @@ instead of /data!), then do ::
 which will copy all of the files over from the ./save directory onto the
 '/save' disk.  Then 'umount /save' and voila, you've got a copy of the files!
 
-Next stop: :doc:`2-digital-normalization`.
+Next stop: :doc:`2-diginorm`.
 

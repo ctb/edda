@@ -2,10 +2,19 @@
 0. Downloading and Saving Your Initial Data
 ===========================================
 
+We're going to run transcriptome assembly completely in the cloud,
+because that way (a) you don't need to buy a big computer, and (b)
+I don't have to figure out all the special details of your own
+computer system.
+
+This does mean that the first thing you need to do is get your data
+over to the cloud.  I tend to just store it there in the first place,
+because...
+
 The basics
 ----------
 
-Amazon is happy to rent disk space to you, in addition to compute time.
+...Amazon is happy to rent disk space to you, in addition to compute time.
 They'll rent you disk space in a few different ways, but the way that's
 most useful for us is through what's called Elastic Block Store.  This
 is essentially a hard-disk rental service.
@@ -19,7 +28,7 @@ been created in, which means that you need to be careful to put them
 in the same zone that your instance is running in; and they can't be shared
 amongst people.
 
-Snapshots, the second concept, is the solution to transporting and
+Snapshots, the second concept, are the solution to transporting and
 sharing the data on volumes.  A "snapshot" is essentially a frozen
 copy of your volume; you can copy a volume into a snapshot, and a
 snapshot into a volume.
@@ -73,6 +82,9 @@ Some test data
 --------------
 
 To get started with multfile analysis and assembly, I've provided some
-test data.  It's on snapshot 'snap-f5a9dea7', so go create a volume from
-that and mount it as '/data' to get started.
-
+test mRNAseq data from embryonic stages of *Nematostella vectensis*;
+the source is `this excellent paper
+<http://www.evodevojournal.com/content/4/1/16>`__ by Tulin et al., "A
+quantitative reference transcriptome for Nematostella vectensis".  The
+data is on snapshot 'snap-f5a9dea7', so go create a volume from that
+and mount it as '/data' to get started.
