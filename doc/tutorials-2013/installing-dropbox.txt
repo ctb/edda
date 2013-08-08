@@ -17,6 +17,11 @@ Unpack it::
 
    tar -xvzf dropbox.tar.gz
 
+Make the Dropbox directory on /mnt and link it in::
+
+   mkdir /mnt/Dropbox
+   ln -fs /mnt/Dropbox /root
+
 and then run it::
 
    ~/.dropbox-dist/dropboxd &
