@@ -1,0 +1,11 @@
+=========================================
+1. Adapter trimming and quality filtering
+=========================================
+
+Configure your environment::
+
+   echo 'export PYTHONPATH=$PYTHONPATH:/class/stamps-software/share/khmer/python' >> ~/.bash_login
+   echo 'export PYTHONPATH=$PYTHONPATH:/class/stamps-software/share/khmer/python' >> ~/.bashrc
+   echo 'export PATH=/class/stamps-software/bin:$PATH' >> ~/.bashrc
+   echo 'export PATH=/class/stamps-software/bin:$PATH' >> ~/.bash_login
+

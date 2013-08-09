@@ -1,0 +1,80 @@
+=========================================
+2. Adapter trimming and quality filtering
+=========================================
+
+.. note::
+
+   Activate your virtual environment and make sure you're running in screen! (see :doc:`../mrnaseq/using-screen`)
+
+.. note::
+
+   The finished (QC'ed) files for this are in /class/cbrown/data/SRR49206*.qc.fq.gz
+
+Create a working directory
+==========================
+
+Let's create a place to work::
+
+   cd
+   mkdir assembly
+   cd assembly
+
+Trim and quality filter
+=======================
+
+Grab some Illumina adapters::
+
+   curl -O https://s3.amazonaws.com/public.ged.msu.edu/illuminaClipping.fa
+
+Trim the first data set (~20 minutes)::
+
+   mkdir trim
+   cd trim
+
+   java -jar /class/stamps-software/share/Trimmomatic-0.27/trimmomatic-0.27.jar PE /class/cbrown/data/SRR492065_?.fastq.gz s1_pe s1_se s2_pe s2_se ILLUMINACLIP:../illuminaClipping.fa:2:30:10
+
+   python /class/stamps-software/share/khmer/sandbox/interleave.py s?_pe > combined.fq
+
+   fastq_quality_filter -Q33 -q 30 -p 50 -i combined.fq > combined-trim.fq
+   fastq_quality_filter -Q33 -q 30 -p 50 -i s1_se > s1_se.trim
+   python /class/stamps-software/share/khmer/sandbox/strip-and-split-for-assembly.py combined-trim.fq
+
+   gzip -9c combined-trim.fq.pe > ../SRR492065.pe.qc.fq.gz
+   gzip -9c combined-trim.fq.se s1_se > ../SRR492065.se.qc.fq.gz
+
+   cd ../
+   rm -fr trim
+
+Trim the second data set (~20 minutes)::
+
+   mkdir trim
+   cd trim
+
+   java -jar /class/stamps-software/share/Trimmomatic-0.27/trimmomatic-0.27.jar PE /class/cbrown/data/SRR492066_?.fastq.gz s1_pe s1_se s2_pe s2_se ILLUMINACLIP:../illuminaClipping.fa:2:30:10
+
+   python /class/stamps-software/share/khmer/sandbox/interleave.py s?_pe > combined.fq
+
+   fastq_quality_filter -Q33 -q 30 -p 50 -i combined.fq > combined-trim.fq
+   fastq_quality_filter -Q33 -q 30 -p 50 -i s1_se > s1_se.trim
+   python /class/stamps-software/share/khmer/sandbox/strip-and-split-for-assembly.py combined-trim.fq
+
+   gzip -9c combined-trim.fq.pe > ../SRR492066.pe.qc.fq.gz
+   gzip -9c combined-trim.fq.se s1_se > ../SRR492066.se.qc.fq.gz
+
+   cd ../
+   rm -fr trim
+
+Done!  Now you have four files: SRR492065.pe.qc.fq.gz, SRR492065.se.qc.fq.gz, SRR492066.pe.qc.fq.gz, and SRR492066.se.qc.fq.gz.
+
+The '.pe' files are interleaved paired-end; you can take a look at them like so::
+
+   gunzip -c SRR492065.pe.qc.fq.gz | head
+
+The other two are single-ended files, where the reads have been
+orphaned because we discarded stuff.
+
+All four files are in FASTQ format.
+
+----
+
+Next: :doc:`3-diginorm`

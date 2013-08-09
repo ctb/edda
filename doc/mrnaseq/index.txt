@@ -1,7 +1,7 @@
 The Eel Pond mRNAseq Tutorial
 =============================
 
-Intro material:
+The tutorial:
 
 .. toctree::
    :maxdepth: 1

@@ -1,0 +1,12 @@
+The STAMPS Metagenome Assembly Tutorial
+=======================================
+
+.. toctree::
+   :maxdepth: 1
+
+   1-setup
+   2-quality
+   3-diginorm
+   4-partition
+   5-assemble
+   6-mapping-and-quantitation

@@ -1,0 +1,27 @@
+========
+1. Setup
+========
+
+Configure your environment::
+
+   echo 'export PYTHONPATH=$PYTHONPATH:/class/stamps-software/share/khmer/python' >> ~/.bash_login
+   echo 'export PYTHONPATH=$PYTHONPATH:/class/stamps-software/share/khmer/python' >> ~/.bashrc
+   echo 'export PATH=/class/stamps-software/bin:$PATH' >> ~/.bashrc
+   echo 'export PATH=/class/stamps-software/bin:$PATH' >> ~/.bash_login
+
+   source ~/.bashrc
+
+Create a virtual environment and activate it::
+
+   python -m virtualenv ~/env
+   . ~/env/bin/activate
+
+Install screed in your virtual environment::
+
+   pip install git+https://github.com/ged-lab/screed.git
+
+Also see:  :doc:`../mrnaseq/using-screen`.
+
+----
+
+Next: :doc:`2-quality`.
