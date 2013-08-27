@@ -1,6 +1,9 @@
 The STAMPS Metagenome Assembly Tutorial
 =======================================
 
+**Note:** This tutorial is being updated and maintained over at
+`the khmer protocols <http://khmer-protocols.readthedocs.org>`__.
+
 .. toctree::
    :maxdepth: 1
 

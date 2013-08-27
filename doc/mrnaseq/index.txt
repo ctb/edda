@@ -1,20 +1,4 @@
 The Eel Pond mRNAseq Tutorial
 =============================
 
-The tutorial:
-
-.. toctree::
-   :maxdepth: 1
-
-   0-download-and-save
-   1-quality
-   2-diginorm
-   3-big-assembly
-
-   installing-blastkit
-
-   5-building-transcript-families
-
-..   de-novo-assembly
-..   rsem
-
+This tutorial has moved over to the `khmer protocols <http://khmer-protocols.readthedocs.org/>`__.
