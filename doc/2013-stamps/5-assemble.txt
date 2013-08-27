@@ -24,7 +24,7 @@ distinguished from orphaned reads, so let's split 'em out::
   mkdir group5
   cd group5    
   python /class/stamps-software/share/khmer/sandbox/strip-and-split-for-assembly.py ../kak.group0005.fa.gz
-  python ~/khmer/sandbox/strip-and-split-for-assembly.py ../kak.group0005.fa.gz.sweep3
+  python /class/stamps-software/share/khmer/sandbox/strip-and-split-for-assembly.py ../kak.group0005.fa.gz.sweep3
   mv kak.group0005.fa.gz.sweep3.pe kak.group5.nodn.pe
   mv kak.group0005.fa.gz.sweep3.se kak.group5.nodn.se
 

@@ -1,6 +1,6 @@
-===============================
-5. Building transcript families
-===============================
+============================================================
+5. Building transcript families and annotating the sequences
+============================================================
 
 Install khmer, screed, and BLAST.  (See :doc:`1-quality` and
 :doc:`installing-blastkit`).  I would suggest using an m1.large or
@@ -95,15 +95,6 @@ longer; you probably want to run it in screen::
 
    blastall -i trinity-nematostella.renamed.fa -d mouse.protein.faa -e 1e-3 -p blastx -o nema.x.mouse -a 8 -v 4 -b 4
    blastall -i mouse.protein.faa -d trinity-nematostella.renamed.fa -e 1e-3 -p tblastn -o mouse.x.nema -a 8 -v 4 -b 4
-
-.. note::
-
-   You may need to do::
-
-      cd /usr/local/share/eel-pond
-      git pull origin master
-
-   to update the source code.
 
 Assigning names to sequences
 ============================

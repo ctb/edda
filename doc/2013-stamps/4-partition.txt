@@ -6,7 +6,7 @@
 
    Activate your virtual environment and make sure you're running in screen!
 
-Start with the QC'ed files from :doc:`2-quality` or copy them into a
+Start with the QC'ed files from :doc:`3-diginorm` or copy them into a
 working directory::
 
    cd
@@ -28,7 +28,7 @@ This should take about 15 minutes, and will produce '.part' files.  These
 are now FASTA files that contain partition annotations.  For example, check
 out::
 
-   head SRR492065.pe.kak.qc.fq.gz
+   head SRR492065.pe.kak.qc.fq.gz.part
 
 Extracting the partitions into groups
 =====================================

@@ -46,7 +46,12 @@ And put in blastkit::
    chmod a+rxwt files
    chmod +x /root
 
-and run check.py; it should say everything is OK.
+and run check.py::
+
+   cd /root/blastkit
+   python ./check.py
+
+It should say everything is OK.
 
 Adding the data
 ---------------
