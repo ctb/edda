@@ -1,0 +1,10 @@
+2013 MSU "Zero-Entry" workshop: Computational Science for Biologists
+====================================================================
+
+Titus Brown and Tracy Teal ran this workshop on Sep 23 and Sep 25, 2013,
+at Michigan State University.  The workshop was focused on an introduction
+to computational science, the shell, the cloud, and IPython Notebook.
+
+The materials are here::
+
+   http://2013-msu-zero-entry.readthedocs.org

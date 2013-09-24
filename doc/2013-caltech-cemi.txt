@@ -1,0 +1,10 @@
+2013 Caltech workshop: Center for Environmental Microbial Interactions
+======================================================================
+
+Titus Brown and Chris Welcher ran this workshop from Sep 17, 2013 to
+Sep 20, 2013 at Caltech.  The workshop was focused on microbial data sets.
+
+The materials are available here:
+
+    http://2013-caltech-workshop.readthedocs.org
+

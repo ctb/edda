@@ -32,6 +32,10 @@ Contents:
 
    bioinformatics-courses
 
+   2013-msu-zero-entry
+
+   2013-caltech-cemi
+
    tutorials-2013/index
 
    2013-hmp-assembly-webinar/index

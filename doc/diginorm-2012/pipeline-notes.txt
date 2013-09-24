@@ -26,7 +26,7 @@ Starting up a machine and installing software
 
 First, start up an EC2 instance using starcluster::
 
- % starcluster start -o -s 1 -i m2.xlarge -n ami-999d49f0 pipeline
+ starcluster start -o -s 1 -i m2.xlarge -n ami-999d49f0 pipeline
 
 You can also do this via the AWS console; just use ami-999d49f0, and
 start an instance with 16gb or more of memory.
@@ -37,50 +37,52 @@ notebook.
 
 Now, log in! ::
 
- % starcluster sshmaster pipeline
+ starcluster sshmaster pipeline
 
 (or just ssh in however you would normally do it.)
 
 Once you're logged in, you'll need to install both 'screed' and 'khmer'.
 In this case we're going to use the versions tagged for the paper sub.::
 
- % cd /usr/local/src
+ cd /usr/local/share
 
- % git clone git://github.com/ged-lab/screed.git
- % cd screed
- % git checkout 2012-paper-diginorm
- % python setup.py install
- % cd ..
+ git clone git://github.com/ged-lab/screed.git
+ cd screed
+ git checkout 2012-paper-diginorm
+ python setup.py install
+ cd ..
 
- % git clone git://github.com/ged-lab/khmer.git
- % cd khmer
- % git checkout 2012-paper-diginorm
- % make test
- % cd ..
+ git clone git://github.com/ged-lab/khmer.git
+ cd khmer
+ git checkout 2012-paper-diginorm
+ make test
+ cd ..
 
- % echo export PYTHONPATH=/usr/local/src/khmer/python >> ~/.bashrc
- % echo 'export PATH=$PATH:/usr/local/src/khmer/scripts' >> ~/.bashrc
- % echo 'export PATH=$PATH:/usr/local/src/khmer/sandbox' >> ~/.bashrc
- % source ~/.bashrc
+ echo export PYTHONPATH=/usr/local/share/khmer/python >> ~/.bashrc
+ echo 'export PATH=$PATH:/usr/local/share/khmer/scripts' >> ~/.bashrc
+ echo 'export PATH=$PATH:/usr/local/share/khmer/sandbox' >> ~/.bashrc
+ source ~/.bashrc
 
 OK, now that these are both built, let's install two other things: the
 latest version of ipython notebook (you need 0.13dev, or later)::
 
- % git clone https://github.com/ipython/ipython.git
- % cd ipython
- % python setup.py install
+ git clone https://github.com/ipython/ipython.git
+ cd ipython
+ python setup.py install
+
+ pip install -U pyzmq
 
 and bowtie::
 
- % cd /mnt
+ cd /mnt
 
- % curl -L -O http://sourceforge.net/projects/bowtie-bio/files/bowtie/0.12.7/bowtie-0.12.7-linux-x86_64.zip/download
- % unzip download
- % cp bowtie-0.12.7/bowtie{,-build} /usr/local/bin
+ curl -L -O http://sourceforge.net/projects/bowtie-bio/files/bowtie/0.12.7/bowtie-0.12.7-linux-x86_64.zip/download
+ unzip download
+ cp bowtie-0.12.7/bowtie{,-build} /usr/local/bin
 
 Finally, upgrade the latex install with a few recommended packages::
 
- % apt-get install texlive-latex-recommended
+ apt-get install -y texlive-latex-recommended
 
 OK, now all your software is installed, hurrah!
 
@@ -90,26 +92,26 @@ Running the pipeline
 First, check out the source repository and grab the (...large) initial data
 sets::
 
- % git clone git://github.com/ged-lab/2012-paper-diginorm.git
- % cd 2012-paper-diginorm
+ git clone https://github.com/ged-lab/2012-paper-diginorm.git
+ cd 2012-paper-diginorm
 
- % curl -O https://s3.amazonaws.com/public.ged.msu.edu/2012-paper-diginorm/pipeline-data-new.tar.gz
- % tar xzf pipeline-data-new.tar.gz
+ curl -O https://s3.amazonaws.com/public.ged.msu.edu/2012-paper-diginorm/pipeline-data-new.tar.gz
+ tar xzf pipeline-data-new.tar.gz
 
 Now go into the pipeline directory and run the pipeline.  This will take
 4-8 hours, so you might want to do it in 'screen' (see :doc:`../tutorials-2011/unix_long_jobs`). ::
 
- % cd pipeline
- % make KHMER=/usr/local/src/khmer
+ cd pipeline
+ make KHMER=/usr/local/share/khmer
 
 Once it successfully completes, copy the data over to the ../data/ directory::
 
- % make copydata
+ make copydata
 
 Run the ipython notebook server::
 
- % cd ../notebook
- % ipython notebook --pylab=inline --no-browser --ip=* --port=80 &
+ cd ../notebook
+ ipython notebook --pylab=inline --no-browser --ip=* --port=80 &
 
 Connect into the ipython notebook (it will be running at 'http://<your EC2 hostname>'); if the above command succeeded but you can't connect in, you probably forgot to enable port 80 on your EC2 firewall.
 
@@ -121,9 +123,9 @@ and select 'Run all'.
 
 Now go back to the command line and execute::
 
- % mv *.pdf ../
- % cd ../
- % make
+ mv *.pdf ../
+ cd ../
+ make
 
 and voila, 'diginorm.pdf' will contain the paper with the figures you just
 created.
